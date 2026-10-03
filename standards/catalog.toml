@@ -1,0 +1,385 @@
+# Semantics: standards/catalog.md (paths resolve from the bundle root).
+# Dependencies/resources describe available files, not a recursive reading queue.
+schema_version = 1
+assets = ["templates/PLANS.md", "templates/task.md", "standards/catalog.md", "standards/catalog.toml", "templates/framework/adoption-record.md"]
+templates = {entry = "templates/policy-entry.md", claude-bridge = "templates/claude/policy-bridge.md", cursor-rule = "templates/cursor/rule-route.mdc"}
+
+[[profiles]]
+id = "core"
+source = "standards/core.md"
+required = true
+activities = ["design", "implementation", "test", "review"]
+when = "Changing behavior, architecture, or code structure; read the relevant sections only."
+dependencies = ["work-modes", "verification", "delivery-workflow"]
+
+[[profiles]]
+id = "work-modes"
+source = "standards/work-modes.md"
+required = true
+activities = ["design", "implementation", "test", "review", "documentation", "orchestration", "setup"]
+when = "Selecting work mode, stage boundaries, repository scope, or Git actions."
+
+[[profiles]]
+id = "verification"
+source = "standards/verification.md"
+required = true
+activities = ["implementation", "test", "review", "documentation"]
+when = "Before editing, selecting checks, reviewing, or claiming completion."
+
+[[profiles]]
+id = "delivery-workflow"
+source = "standards/delivery-workflow.md"
+required = true
+activities = ["design", "orchestration"]
+when = "Choosing phases, planning artifacts, or a delivery workflow."
+dependencies = ["superpowers"]
+
+[[profiles]]
+id = "superpowers"
+source = "standards/superpowers.md"
+resources = ["standards/superpowers/compatibility.md"]
+required = true
+activities = ["orchestration"]
+when = "Applying an available Superpowers skill; this policy does not install the plugin."
+dependencies = ["orchestration"]
+
+[[profiles]]
+id = "orchestration"
+source = "standards/orchestration.md"
+required = true
+activities = ["orchestration"]
+when = "Delegating a bounded task under the saved role choices and task authorization."
+dependencies = ["model-configuration"]
+
+[[profiles]]
+id = "model-configuration"
+source = "standards/model-configuration.md"
+resources = [
+  "templates/framework/model-routing.toml",
+  "templates/codex/README.md",
+  "templates/codex/config.toml",
+  "templates/codex/agents/af-implementer.toml",
+  "templates/codex/agents/af-reviewer.toml",
+  "templates/skills/af-model-setup/SKILL.md",
+  "templates/skills/af-model-reassign/SKILL.md",
+]
+required = true
+activities = ["setup"]
+when = "Initial model setup, explicit reassignment, or relevant configuration repair."
+
+[[profiles]]
+id = "python-fastapi"
+source = "standards/python-fastapi.md"
+resources = [
+  "standards/python/structure.md",
+  "standards/python/typing-contracts.md",
+  "standards/python/execution-resources.md",
+  "standards/python/verification.md",
+  "standards/python/examples/domain.md",
+  "standards/python/examples/concurrency.md",
+  "standards/pydantic/validation.md",
+  "standards/pydantic/serialization.md",
+  "standards/pydantic/lifecycle.md",
+  "standards/pydantic/verification.md",
+  "standards/pydantic/examples/boundary.md",
+  "standards/pydantic/examples/patches.md",
+  "standards/fastapi/transport.md",
+  "standards/fastapi/dependencies-lifetime.md",
+  "standards/fastapi/runtime-operations.md",
+  "standards/fastapi/verification.md",
+  "standards/fastapi/examples/http-boundary.md",
+  "standards/fastapi/examples/lifetime.md",
+]
+technologies = ["python", "fastapi", "pydantic"]
+activities = ["design", "implementation", "test", "review"]
+when = "Python work; apply Pydantic and FastAPI sections only where the respective library is used."
+dependencies = ["core"]
+globs = ["**/*.py"]
+
+[[profiles]]
+id = "php-symfony-doctrine"
+source = "standards/php-symfony-doctrine.md"
+resources = [
+  "standards/php/structure.md",
+  "standards/php/types-contracts.md",
+  "standards/php/state-effects.md",
+  "standards/php/verification.md",
+  "standards/php/examples/input-domain.md",
+  "standards/php/examples/resources.md",
+  "standards/symfony/structure-services.md",
+  "standards/symfony/http-validation.md",
+  "standards/symfony/runtime-effects.md",
+  "standards/symfony/verification.md",
+  "standards/symfony/examples/request-boundary.md",
+  "standards/symfony/examples/http-client.md",
+  "standards/doctrine/models-mapping.md",
+  "standards/doctrine/unit-of-work-transactions.md",
+  "standards/doctrine/queries-dbal.md",
+  "standards/doctrine/schema-verification.md",
+  "standards/doctrine/examples/orm-unit-of-work.md",
+  "standards/doctrine/examples/dbal-reservation.md",
+]
+technologies = ["php", "symfony", "doctrine"]
+activities = ["design", "implementation", "test", "review"]
+when = "PHP work; use Symfony and Doctrine sections only for those actual components."
+dependencies = ["core"]
+globs = ["**/*.php"]
+
+[[profiles]]
+id = "go-gin"
+source = "standards/go-gin.md"
+resources = [
+    "standards/go/architecture.md",
+    "standards/go/contracts.md",
+    "standards/go/concurrency.md",
+    "standards/go/resources.md",
+    "standards/go/verification.md",
+    "standards/go/examples/domain.md",
+    "standards/go/examples/dependencies.md",
+    "standards/go/examples/concurrency.md",
+    "standards/gin/handlers-binding.md",
+    "standards/gin/routing-middleware.md",
+    "standards/gin/runtime.md",
+    "standards/gin/verification.md",
+    "standards/gin/examples/binding.md",
+    "standards/gin/examples/middleware.md",
+]
+technologies = ["go", "gin"]
+activities = ["design", "implementation", "test", "review"]
+when = "Go work; apply Gin-specific guidance only where Gin is used."
+dependencies = ["core"]
+globs = ["**/*.go"]
+
+[[profiles]]
+id = "nodejs-typescript"
+source = "standards/nodejs-typescript.md"
+resources = [
+  "standards/javascript/modules-structure.md",
+  "standards/javascript/values-state.md",
+  "standards/javascript/async-effects.md",
+  "standards/javascript/verification-compatibility.md",
+  "standards/javascript/examples/input-state.md",
+  "standards/javascript/examples/async-ownership.md",
+  "standards/nodejs/runtime-composition.md",
+  "standards/nodejs/io-concurrency.md",
+  "standards/nodejs/http-integrations.md",
+  "standards/nodejs/lifecycle-verification.md",
+  "standards/nodejs/examples/bounded-stream.md",
+  "standards/nodejs/examples/graceful-server.md",
+]
+technologies = ["javascript", "nodejs"]
+activities = ["design", "implementation", "test", "review"]
+when = "JavaScript/TypeScript runtime or module work; apply server guidance to server code."
+dependencies = ["core"]
+globs = ["**/*.js", "**/*.mjs", "**/*.cjs", "**/*.ts", "**/*.tsx"]
+
+[[profiles]]
+id = "typescript"
+source = "standards/typescript.md"
+resources = [
+  "standards/typescript/contracts-structure.md",
+  "standards/typescript/validation-state.md",
+  "standards/typescript/composition-effects.md",
+  "standards/typescript/toolchain-verification.md",
+  "standards/typescript/examples/validated-command.md",
+  "standards/typescript/examples/typed-operation.md",
+]
+technologies = ["typescript"]
+activities = ["design", "implementation", "test", "review"]
+when = "TypeScript contracts, validation, or code changes."
+dependencies = ["nodejs-typescript"]
+globs = ["**/*.ts", "**/*.tsx"]
+
+[[profiles]]
+id = "nestjs"
+source = "standards/nestjs.md"
+resources = [
+  "standards/nestjs/modules-providers.md",
+  "standards/nestjs/transport-contracts.md",
+  "standards/nestjs/application-lifecycle.md",
+  "standards/nestjs/verification-operations.md",
+  "standards/nestjs/examples/validated-command.md",
+  "standards/nestjs/examples/provider-lifecycle.md",
+]
+technologies = ["nestjs"]
+activities = ["design", "implementation", "test", "review"]
+when = "NestJS modules, providers, controllers, or validation boundaries."
+dependencies = ["nodejs-typescript", "typescript"]
+globs = ["**/*.ts"]
+
+[[profiles]]
+id = "typeorm"
+source = "standards/typeorm.md"
+resources = [
+  "standards/typeorm/models-mapping.md",
+  "standards/typeorm/transactions-lifetime.md",
+  "standards/typeorm/queries-relations.md",
+  "standards/typeorm/schema-verification.md",
+  "standards/typeorm/nestjs-integration.md",
+  "standards/typeorm/examples/rich-booking.md",
+]
+technologies = ["typeorm"]
+activities = ["design", "implementation", "test", "review"]
+when = "TypeORM is declared or used: rich entities, persistence, queries or migrations; NestJS alone does not select this profile."
+dependencies = ["nodejs-typescript", "typescript"]
+globs = ["**/*.entity.ts", "**/data-source.ts"]
+
+[[profiles]]
+id = "angular"
+source = "standards/angular.md"
+resources = [
+  "standards/angular/architecture.md",
+  "standards/angular/reactivity.md",
+  "standards/angular/change-detection.md",
+  "standards/angular/boundaries.md",
+  "standards/angular/styles.md",
+  "standards/angular/verification.md",
+]
+technologies = ["angular"]
+activities = ["design", "implementation", "test", "review"]
+when = "Angular is declared or used: components, templates, DI, routes, forms, reactivity or styles; TypeScript/HTML alone does not select this profile."
+dependencies = ["typescript"]
+globs = ["**/angular.json", "**/*.component.ts", "**/*.component.html", "**/*.component.scss"]
+
+[[profiles]]
+id = "ngrx"
+source = "standards/ngrx.md"
+resources = [
+  "standards/ngrx/state-architecture.md",
+  "standards/ngrx/store-selectors.md",
+  "standards/ngrx/effects.md",
+  "standards/ngrx/entity-router.md",
+  "standards/ngrx/signal-store.md",
+  "standards/ngrx/verification.md",
+  "standards/ngrx/examples/store-view-model.md",
+  "standards/ngrx/examples/signal-store-request.md",
+]
+technologies = ["ngrx"]
+activities = ["design", "implementation", "test", "review"]
+when = "An NgRx package is used or explicitly selected; read only relevant Store/Effects/Entity/Router Store/Signals/ComponentStore guidance, not from Angular alone."
+dependencies = ["angular"]
+globs = ["**/*.actions.ts", "**/*.effects.ts", "**/*.reducer.ts", "**/*.selectors.ts", "**/*.store.ts"]
+
+[[profiles]]
+id = "nextjs"
+source = "standards/nextjs.md"
+resources = [
+  "standards/react/components-boundaries.md",
+  "standards/react/state-identity.md",
+  "standards/react/effects-integrations.md",
+  "standards/react/forms-contracts.md",
+  "standards/react/verification-compatibility.md",
+  "standards/react/examples/reservation-form.md",
+  "standards/react/examples/latest-result.md",
+  "standards/nextjs-feature-structure.md",
+  "standards/nextjs/routing-composition.md",
+  "standards/nextjs/server-client-security.md",
+  "standards/nextjs/data-cache-mutations.md",
+  "standards/nextjs/rendering-runtime.md",
+  "standards/nextjs/verification-migration.md",
+  "standards/nextjs/examples/authorized-command.md",
+  "standards/nextjs/examples/tagged-read.md",
+]
+technologies = ["nextjs", "react"]
+activities = ["design", "implementation", "test", "review"]
+when = "React components, state, effects or rendering; apply Next.js routes and Server/Client guidance only where Next.js is used."
+dependencies = ["typescript"]
+globs = ["**/*.tsx", "**/*.jsx", "**/*.ts", "**/*.js"]
+
+[[profiles]]
+id = "nextjs-feature-structure"
+source = "standards/nextjs-feature-structure.md"
+technologies = ["nextjs"]
+activities = ["design", "review"]
+when = "Organizing or reviewing frontend feature boundaries; no mandatory restructuring for small fixes."
+dependencies = ["nextjs"]
+
+[[profiles]]
+id = "sqlalchemy"
+source = "standards/sqlalchemy.md"
+resources = [
+  "standards/sqlalchemy/mapping-contracts.md",
+  "standards/sqlalchemy/sessions-transactions.md",
+  "standards/sqlalchemy/queries-loading.md",
+  "standards/sqlalchemy/async-engines.md",
+  "standards/sqlalchemy/migrations-verification.md",
+  "standards/sqlalchemy/examples/transactional-command.md",
+  "standards/sqlalchemy/examples/async-projection.md",
+]
+technologies = ["sqlalchemy"]
+activities = ["design", "implementation", "test", "review"]
+when = "SQLAlchemy Core/ORM mappings, queries, sessions, engines, or persistence integration; not every Python task."
+dependencies = ["python-fastapi"]
+globs = ["**/*.py"]
+
+[[profiles]]
+id = "psycopg"
+source = "standards/psycopg.md"
+resources = [
+  "standards/psycopg/queries-contracts.md",
+  "standards/psycopg/transactions-lifetime.md",
+  "standards/psycopg/async-pooling.md",
+  "standards/psycopg/compatibility-verification.md",
+  "standards/psycopg/examples/typed-query.md",
+  "standards/psycopg/examples/owned-transaction.md",
+]
+technologies = ["psycopg"]
+activities = ["design", "implementation", "test", "review"]
+when = "Psycopg 3 SQL, adaptation, connection, transaction, async or pool integration; not every Python/PostgreSQL task."
+dependencies = ["python-fastapi", "postgresql"]
+globs = ["**/*.py"]
+
+[[profiles]]
+id = "postgresql"
+source = "standards/postgresql.md"
+resources = [
+  "standards/postgresql/examples/atomic-reservation.md",
+  "standards/postgresql/examples/online-constraint.md",
+  "standards/postgresql/migrations-verification.md",
+  "standards/postgresql/queries-performance.md",
+  "standards/postgresql/schema-contracts.md",
+  "standards/postgresql/security-operations.md",
+  "standards/postgresql/transactions-concurrency.md",
+]
+technologies = ["postgresql"]
+activities = ["design", "implementation", "test", "review"]
+when = "PostgreSQL schema, query, transaction, or persistence changes."
+dependencies = ["core"]
+globs = ["**/*.sql"]
+
+[[profiles]]
+id = "docker"
+source = "standards/docker.md"
+resources = [
+  "standards/docker/build-context.md",
+  "standards/docker/runtime-lifetime.md",
+  "standards/docker/compose-integration.md",
+  "standards/docker/development-production.md",
+  "standards/docker/verification-compatibility.md",
+  "standards/docker/examples/build-secret.md",
+  "standards/docker/examples/compose-contract.md",
+  "standards/docker/examples/development-production.md",
+]
+technologies = ["docker"]
+activities = ["design", "implementation", "test", "review"]
+when = "Changing container builds or their runtime contract; an ordinary code edit does not require an image build."
+dependencies = ["core"]
+globs = ["**/Dockerfile", "**/Dockerfile.*", "**/*.dockerfile", "**/.dockerignore", "**/compose.yaml", "**/compose.yml", "**/compose.*.yaml", "**/compose.*.yml", "**/docker-compose.yml", "**/docker-compose.yaml", "**/docker-compose.*.yml", "**/docker-compose.*.yaml"]
+
+[[profiles]]
+id = "unreal-engine"
+source = "standards/unreal-engine.md"
+resources = [
+  "standards/unreal-engine/cpp-lifetime.md",
+  "standards/unreal-engine/gameplay-blueprints.md",
+  "standards/unreal-engine/build-assets.md",
+  "standards/unreal-engine/mcp-editor.md",
+  "standards/unreal-engine/verification.md",
+  "standards/unreal-engine/runtime-performance.md",
+  "standards/unreal-engine/skills.md",
+]
+technologies = ["unreal-engine"]
+activities = ["design", "implementation", "test", "review", "setup"]
+when = "Declared or evidenced Unreal project/plugin work; read only task-relevant sections. Generic C++ or Python files alone do not select Unreal; source-only work does not require MCP."
+dependencies = ["core"]
+globs = ["**/*.uproject", "**/*.uplugin"]

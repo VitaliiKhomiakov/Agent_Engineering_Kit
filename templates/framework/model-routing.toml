@@ -1,0 +1,28 @@
+# Framework selection example, NOT a native Codex configuration file.
+# All values below are suggestions until the workspace user selects them.
+# Contract: standards/model-configuration.md, relative to the bundle root.
+schema_version = 2
+status = "unconfigured"
+scope = "workspace"
+client = "codex"
+max_subagents = 2
+
+[orchestration]
+mode = "delegated"
+allowed_edges = ["orchestrator->implementer"]
+
+[roles.orchestrator]
+enabled = true
+model = "gpt-6-astra"
+reasoning_effort = "high"
+
+[roles.implementer]
+enabled = true
+model = "gpt-5.6-sol"
+reasoning_effort = "high"
+
+# Optional role: its suggested pair does not enable it or authorize invocation.
+[roles.reviewer]
+enabled = false
+model = "gpt-6-astra"
+reasoning_effort = "high"
