@@ -2,7 +2,7 @@
 
 Date: 2026-09-27. Status: Tasks 1–4 complete; library integration delivered; target pilot not run.
 
-**Goal:** Provide a repeatable agent-guided import of AgentsFramework into new and
+**Goal:** Provide a repeatable agent-guided import of Agent_Engineering_Kit into new and
 existing projects, replacing conflicting old process rules while preserving local contracts.
 **Architecture:** Keep MIGRATION as the procedure owner; add a thin integration skill
 and a provenance/recovery record template. Reuse catalog selection, entry templates,

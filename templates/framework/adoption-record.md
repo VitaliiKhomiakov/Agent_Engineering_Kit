@@ -1,4 +1,4 @@
-# AgentsFramework adoption record
+# Agent_Engineering_Kit adoption record
 
 <!-- Inactive template. Adapt to target .agents-framework/adoption.md only during
 authorized application. Preparation keeps the proposed record outside the target.

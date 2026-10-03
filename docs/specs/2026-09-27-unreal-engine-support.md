@@ -4,7 +4,7 @@ Date: 2026-09-27. Status: approved by the user; implementation pending.
 
 The user authorized this specification after the
 [Unreal engineering and MCP research](../research/2026-09-27-unreal-engine-engineering-and-mcp.md).
-It defines the next technology addition to AgentsFramework. The
+It defines the next technology addition to Agent_Engineering_Kit. The
 [project-rule integration plan](../plans/2026-09-27-project-rule-integration.md)
 remains deferred until that addition is implemented and checked.
 This document owns the support requirements. The

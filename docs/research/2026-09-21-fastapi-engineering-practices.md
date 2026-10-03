@@ -31,7 +31,7 @@ anchors the request decoding, direct-response, and cleanup-stack observations.
 
 ## Coverage and recommendation strength
 
-**R** means a requirement inherited from AgentsFramework's
+**R** means a requirement inherited from Agent_Engineering_Kit's
 [core policy](../../standards/core.md), including boundaries, strict typing,
 invariants, effect ownership, and public disclosure. **D** is a recommended
 default with alternatives; **O** is an optional technique for a stated problem.

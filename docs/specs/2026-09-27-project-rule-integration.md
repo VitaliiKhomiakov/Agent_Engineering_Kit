@@ -13,7 +13,7 @@ permission. Later authorization and completed prerequisites are recorded in the 
 
 ## Outcome and scope
 
-An agent imports selected AgentsFramework rules into a new or existing project,
+An agent imports selected Agent_Engineering_Kit rules into a new or existing project,
 reconciles old active instructions, preserves project contracts and can repeat or
 update the import without overwriting independent work. The result is a coherent
 set of target-project instructions with routes for reading detail when needed.

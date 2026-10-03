@@ -4,7 +4,7 @@ Use this procedure for authorized model setup, explicit reassignment, or a relev
 configuration conflict. Ordinary tasks reuse a valid saved selection or work inline
 in the current session when no selection exists. The current agent edits reviewed
 native settings; these instructions require no separate
-AgentsFramework application, launcher, account or model service.
+Agent_Engineering_Kit application, launcher, account or model service.
 
 ## Scope and source of truth
 

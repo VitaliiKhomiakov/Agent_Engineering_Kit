@@ -1,6 +1,6 @@
-# AgentsFramework Architecture
+# Agent_Engineering_Kit Architecture
 
-AgentsFramework is a source framework of engineering rules and configurable agent
+Agent_Engineering_Kit is a source framework of engineering rules and configurable agent
 role templates imported into new or existing projects. It separates durable constraints, project facts, model
 routing, and task procedures. Select guidance by language, framework, database,
 and technology while retaining shared responsibility and verification rules.

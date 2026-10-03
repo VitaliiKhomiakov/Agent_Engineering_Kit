@@ -12,7 +12,7 @@ activate configuration or establish end-to-end subscription/runtime behavior.
 
 ## User requirements
 
-AgentsFramework should adopt development rules in new and existing projects,
+Agent_Engineering_Kit should adopt development rules in new and existing projects,
 selecting relevant architecture, design, coding, testing, and review guidance
 for their languages, frameworks, databases, and other technologies. Model
 orchestration is a central part of adoption.

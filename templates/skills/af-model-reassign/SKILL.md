@@ -1,12 +1,12 @@
 ---
 name: af-model-reassign
-description: Use when the user requests changing saved AgentsFramework model pairs, client, role enablement, delegation mode, edges or concurrency.
+description: Use when the user requests changing saved Agent_Engineering_Kit model pairs, client, role enablement, delegation mode, edges or concurrency.
 ---
 
 # Reassign workspace models
 
 Change the requested role assignments without restarting project onboarding.
-This skill belongs to the AgentsFramework workspace layout.
+This skill belongs to the Agent_Engineering_Kit workspace layout.
 
 Read the [model configuration contract](../../../standards/model-configuration.md),
 especially native target mapping, active-session limits, and reassignment.

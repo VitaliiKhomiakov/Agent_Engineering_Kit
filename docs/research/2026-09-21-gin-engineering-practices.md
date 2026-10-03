@@ -20,7 +20,7 @@ gin-contrib middleware documentation. The tagged module was also downloaded
 through the public Go proxy with checksum verification for executable checks.
 Tutorial snippets illustrate an API; they are not a complete production policy.
 
-**Strength:** R = AgentsFramework requirement protecting an affected contract,
+**Strength:** R = Agent_Engineering_Kit requirement protecting an affected contract,
 trust boundary, or resource; D = recommended default; O = optional technique
 with a present use case. R is a project-policy decision justified below, not a
 claim that Gin imposes our architecture. Existing-project exceptions and supported

@@ -19,7 +19,7 @@
 > authorization below for delegation and checkpoints.
 
 **Goal:** build a researched, practical engineering knowledge base for every
-language, framework, and technology already covered or recognized by AgentsFramework.
+language, framework, and technology already covered or recognized by Agent_Engineering_Kit.
 Short code examples illustrate the resulting practices; they do not define the
 scope of the research or substitute for architecture and engineering guidance.
 

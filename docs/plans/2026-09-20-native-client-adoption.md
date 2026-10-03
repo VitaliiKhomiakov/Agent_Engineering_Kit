@@ -34,7 +34,7 @@ configuration, Claude/Cursor Markdown/YAML agents and supported settings. The ap
 core uses Python 3.11+, standard-library TOML/process interfaces, and Pydantic 2;
 the versioned contract records the package layout and native integration limits.
 
-**Spec:** [AgentsFramework product specification](../specs/2026-09-20-agents-framework.md).
+**Spec:** [Agent_Engineering_Kit product specification](../specs/2026-09-20-agents-framework.md).
 This plan owns delivery progress; [MIGRATION.md](../../MIGRATION.md) owns the
 separate procedure for adopting the framework in a target project.
 

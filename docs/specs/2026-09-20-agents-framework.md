@@ -1,11 +1,11 @@
-# AgentsFramework scope: rules, instructions and native templates
+# Agent_Engineering_Kit scope: rules, instructions and native templates
 
 **Status: current stage completed and accepted by the user on 2026-09-22.**
 This specification records the accepted baseline of the current part. The user
 confirmed the retained rules/templates and the removal of the additional application.
 
 Originally recorded 2026-09-20; scope corrected by explicit user instruction on
-2026-09-22. AgentsFramework is a reusable engineering and agent-orchestration
+2026-09-22. Agent_Engineering_Kit is a reusable engineering and agent-orchestration
 rule library. The additional Python application, adapters, CLI, monitor, tests,
 schemas and packaging were removed. Their [delivery record](../plans/2026-09-20-native-client-adoption.md)
 is archived history, not a pending implementation plan.

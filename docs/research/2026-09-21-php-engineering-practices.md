@@ -37,7 +37,7 @@ scripts. The plan retains artifact/version/hash evidence.
 
 ## Coverage and strength
 
-**R** is an AgentsFramework requirement inherited from
+**R** is an Agent_Engineering_Kit requirement inherited from
 [core](../../standards/core.md) or the existing PHP profile: named contracts,
 owned invariants/effects, explicit dependencies, or reliable PSR-4 conventions.
 **D** is a recommended default with a meaningful alternative; **O** is an optional

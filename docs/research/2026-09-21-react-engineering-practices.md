@@ -29,7 +29,7 @@ All linked primary sources were checked on the research date. Recommendations us
 - **D — recommended default:** a useful starting choice under a stated condition.
 - **O — optional technique:** adopt only for an actual problem and acknowledge costs.
 
-React's API contracts and AgentsFramework policy are distinct. Capability-oriented
+React's API contracts and Agent_Engineering_Kit policy are distinct. Capability-oriented
 modules, named interfaces and check proportionality are project choices; React does
 not prescribe a business-layer stack, FSD, an ORM, a query cache or a DI container.
 Web React DOM is the execution target; React Native rendering/platform behavior is

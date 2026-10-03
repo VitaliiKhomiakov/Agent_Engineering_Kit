@@ -38,7 +38,7 @@ way to mix model generations. [Migration](https://docs.pydantic.dev/latest/migra
 
 ## Coverage and strength
 
-**R** means an AgentsFramework requirement justified by existing contract,
+**R** means an Agent_Engineering_Kit requirement justified by existing contract,
 strict-typing, invariant, effect, or disclosure policy in
 [core](../../standards/core.md). **D** is a recommended default with a meaningful
 alternative; **O** is an optional technique whose stated problem must exist.

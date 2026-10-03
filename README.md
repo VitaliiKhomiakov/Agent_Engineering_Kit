@@ -1,8 +1,8 @@
-# AgentsFramework
+# Agent_Engineering_Kit
 
 **Engineering standards, project instructions, and workflows for AI coding agents.**
 
-AgentsFramework is a reusable library for guiding coding agents in Codex, Claude
+Agent_Engineering_Kit is a reusable library for guiding coding agents in Codex, Claude
 Code, and Cursor. It brings together architecture and coding rules, proportionate
 verification, project documentation templates, and configurable agent roles.
 Adopt the resources that match your project's stack in a new or existing workspace.
@@ -41,7 +41,7 @@ skill directly from the source; global skill installation is unnecessary.
 
 To preview adoption, replace the placeholders in this request:
 
-> Read `templates/skills/af-integrate-project/SKILL.md` from the AgentsFramework
+> Read `templates/skills/af-integrate-project/SKILL.md` from the Agent_Engineering_Kit
 > source at `<framework-path>`. For the project at `<project-path>` using
 > `<client>`, prepare an import of the applicable rules. Show the proposed file
 > changes and conflict resolutions. Leave the target project untouched.
@@ -52,7 +52,7 @@ It creates no files or adoption record in the target project.
 
 To apply a reviewed proposal:
 
-> Apply the prepared AgentsFramework import to `<project-path>` for `<client>`
+> Apply the prepared Agent_Engineering_Kit import to `<project-path>` for `<client>`
 > within the reviewed scope. Preserve unrelated changes and existing model choices,
 > and follow the agreed checkpoints.
 
@@ -236,7 +236,7 @@ the intended model or reasoning effort is active.
 ## Repository map
 
 ```text
-AgentsFramework/
+Agent_Engineering_Kit/
 ├── README.md                  # Overview and adoption entry point
 ├── ARCHITECTURE.md            # Design of this rules library
 ├── MIGRATION.md               # Preparation, import, updates, and recovery

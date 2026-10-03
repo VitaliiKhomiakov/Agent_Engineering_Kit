@@ -13,7 +13,7 @@ skills as optional; the alternatives below remain research context.
 
 ## Intent, evidence and version boundary
 
-AgentsFramework must guide AI work in new and existing Unreal projects: use engine
+Agent_Engineering_Kit must guide AI work in new and existing Unreal projects: use engine
 idioms, operate editor tools correctly, load relevant rules on demand, and select
 sufficient verification without speculative guards, excessive tests or repeated
 checks. Support must remain importable instructions rather than an Unreal plugin,

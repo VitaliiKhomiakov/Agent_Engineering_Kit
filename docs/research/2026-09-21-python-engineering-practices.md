@@ -39,7 +39,7 @@ to copy an old documentation version's deployment defaults.
 
 ## Coverage and recommendation strength
 
-**R** is an AgentsFramework requirement justified by its existing typed-boundary,
+**R** is an Agent_Engineering_Kit requirement justified by its existing typed-boundary,
 invariant, contract, or resource-ownership policy. **D** is a recommended default
 with a simpler alternative or a documented project-specific reason to vary it.
 **O** is an optional technique for the stated condition. Neither a standard

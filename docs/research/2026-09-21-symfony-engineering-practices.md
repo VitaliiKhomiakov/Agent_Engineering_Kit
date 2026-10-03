@@ -14,7 +14,7 @@ independent live business rules, and an explicit domain/Doctrine model choice.
 K07 explains the Symfony mechanisms and their limitations. PHP essentials and all
 six PHP resources are preserved; Doctrine domain-placement guidance remains for
 K08. No application scaffold, ORM, queue, authentication system or new production
-dependency is selected for AgentsFramework by this documentation stage.
+dependency is selected for Agent_Engineering_Kit by this documentation stage.
 
 | Observed evidence | Applicability and limit |
 | --- | --- |

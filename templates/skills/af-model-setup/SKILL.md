@@ -1,6 +1,6 @@
 ---
 name: af-model-setup
-description: Use when the user requests AgentsFramework model setup or an authorized delegation requires missing workspace role choices.
+description: Use when the user requests Agent_Engineering_Kit model setup or an authorized delegation requires missing workspace role choices.
 ---
 
 # Set up workspace models
@@ -8,7 +8,7 @@ description: Use when the user requests AgentsFramework model setup or an author
 Establish explicit workspace choices for the client, enabled roles and delegation.
 Missing configuration alone does not trigger this skill: ordinary work can continue
 inline in the current session. This skill is part of the
-AgentsFramework workspace layout, not a standalone global installer.
+Agent_Engineering_Kit workspace layout, not a standalone global installer.
 
 Read the [model setup contract](../../../standards/model-configuration.md) for
 first-use behavior, persistence, native target mapping, and execution limits.

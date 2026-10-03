@@ -1,4 +1,4 @@
-# Adopting AgentsFramework in a project
+# Adopting Agent_Engineering_Kit in a project
 
 The goal is to align instructions and development with the target standard
 without losing required behavior. An audit records facts; it does not declare
@@ -8,7 +8,7 @@ specific company or existing project.
 This document owns adoption of instructions, selected engineering rules, skills
 and native configuration templates. The [scope](docs/specs/2026-09-20-agents-framework.md)
 is a rules framework. Apply reviewed changes through the current agent or normal
-file editing; no AgentsFramework application or installer is required.
+file editing; no Agent_Engineering_Kit application or installer is required.
 Import selected resources from this source library into the target project and
 adapt its entry routes. Active AGENTS/PLANS files in the source repository are not
 a prerequisite; check instruction loading in the target project. Preserve shared

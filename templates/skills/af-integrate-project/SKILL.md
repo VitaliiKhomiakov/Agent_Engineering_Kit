@@ -1,6 +1,6 @@
 ---
 name: af-integrate-project
-description: Use when the user explicitly requests preparing, importing or updating AgentsFramework rules in a new or existing project. Ordinary coding, a general audit or missing instruction/model files alone do not trigger it.
+description: Use when the user explicitly requests preparing, importing or updating Agent_Engineering_Kit rules in a new or existing project. Ordinary coding, a general audit or missing instruction/model files alone do not trigger it.
 ---
 
 # Integrate project rules

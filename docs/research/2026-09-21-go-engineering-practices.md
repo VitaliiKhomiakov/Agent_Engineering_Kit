@@ -17,7 +17,7 @@ and the cost of introducing an abstraction.
 
 Sources below are the language specification, Go-maintained documentation and
 source, and the original Repository catalog entry. Ecosystem facts are evidence;
-the choice to turn them into conditional adoption instructions is AgentsFramework
+the choice to turn them into conditional adoption instructions is Agent_Engineering_Kit
 policy. The original examples in the profile are applications of that policy,
 not excerpts from the documentation or claims that Go prescribes DDD.
 
