@@ -16,7 +16,7 @@ current decision. This table is a route, not a checklist to load in full.
 | Choose an abstraction or design pattern | [Practical principles](#practical-solid-dry-kiss-and-yagni), then [patterns](#patterns-when-a-concrete-problem-warrants-them) |
 | Add a branch, guard, fallback or retry | [Simple control flow](#simple-control-flow) |
 | Grow or decompose code | [Size and cohesion](#size-and-cohesion); the affected [function](#small-methods-and-functions) or [module](#splitting-classes-and-modules) guidance |
-| Rename after decomposition | [Names and roles](#names-and-roles-after-decomposition) |
+| Name a component or change its responsibility | [Names and evolving responsibilities](#names-and-evolving-responsibilities) |
 | Resolve a version or API question | [Versions and documentation](#versions-and-documentation) |
 | Select checks or claim completion | [Verification](verification.md), [completion](#sufficient-evidence-and-completion) |
 | Select stages, mode or Git actions | [Delivery](delivery-workflow.md), [work modes](work-modes.md) |
@@ -192,8 +192,18 @@ documentation or compress code to evade a threshold.
 | Function/method over 50 lines | Examine responsibilities, nesting, and meaningful extraction opportunities |
 | Class over 400 lines | Examine cohesion and independent reasons to change |
 | File over 500 lines | Examine module composition and independently meaningful parts |
-| Class/file around 600–700 lines | Plan and split affected independent responsibilities before further growth |
-| New or substantially rewritten behavior file/class over 700 lines | Split it into cohesive components |
+| Class/file around 600–700 lines | Review cohesion before further growth and split affected independent responsibilities |
+| New or substantially rewritten behavior file/class over 700 lines | Complete a documented cohesion review; split independent responsibilities or justify retaining a cohesive component under the exception below |
+
+Retaining an oversized cohesive component requires a concrete rationale in the
+existing task or architecture decision: its single purpose, considered extraction
+boundaries, why splitting would worsen cohesion, coupling or readability, and the
+condition for reassessment. A line count alone does not justify artificial wrappers
+or fragmentation. Reassess when changed responsibility or further growth invalidates
+the rationale. An exception cannot excuse mixed independent responsibilities,
+concealed size or weaker checks, and does not override an explicit project size
+gate. This is part of the normal scoped review, not a separate approval workflow
+or exception ledger.
 
 Do not manually split generated/vendor code or large static datasets to meet
 these limits; record their origin and placement. A small legacy fix does not
@@ -244,35 +254,74 @@ useful only when it improves these boundaries or readability.
    contracts with the existing relevant checks. Add coverage only for a material
    gap, not for every extracted private method or newly created class.
 
-Near 600–700 lines, split affected independent responsibilities before adding
-more behavior. For a small fix in a large legacy class, keep the change bounded
-and report the broader split separately when it is unnecessary for that fix.
+Apply the [size and cohesion policy](#size-and-cohesion) before further growth:
+extract affected independent responsibilities and document any applicable cohesive
+exception rather than splitting mechanically. For a small fix in a large legacy
+class, keep the change bounded and report the broader split separately when it
+is unnecessary for that fix.
 Do not hide size in partial classes, mixins, inheritance, or a catch-all helper
 while preserving the same tangled responsibilities. Use those mechanisms only
 when they express an actual language or domain relationship.
 
-## Names and roles after decomposition
+<a id="names-and-roles-after-decomposition"></a>
 
-- Name classes and methods for their current domain purpose and role. Rename
-  during an authorized split when an old umbrella name becomes misleading;
-  avoid unrelated project-wide naming cleanup.
+## Names and evolving responsibilities
+
+- Name components for their current cohesive responsibility, business intent,
+  and actual role. Apply this when creating or changing classes, interfaces,
+  methods, functions, modules, and packages in every language. Infrastructure
+  components can express a technical capability; do not invent a business name
+  for a technical responsibility.
+- Do not derive a service name automatically from an entity, table, or list of
+  dependencies. Use the business operation or capability it owns. An entity name
+  remains appropriate when it accurately describes the contract, such as
+  `OrderRepository`; entity-based names are not inherently wrong.
+- One cohesive use case may involve several entities or coordinate several domain
+  areas. Entity count does not determine responsibility count. Across independent
+  domain contexts, coordinate through explicit contracts and preserve each owner's
+  rules, invariants, and state. A business-process name does not authorize absorbing
+  those responsibilities into one service.
+- Reassess the name when responsibility expands, narrows, or changes, even without
+  decomposition. Rename a component whose old name no longer describes its cohesive
+  purpose. Growth in line count alone does not require renaming. If independent
+  responsibilities have accumulated, separate them rather than hiding them behind
+  a broader name. After extraction, reassess both the extracted components and
+  the remaining owner. Keep changes within the authorized task; avoid unrelated
+  project-wide naming cleanup.
 - An application service coordinates a defined use case; a domain service owns
   a domain operation that has no natural entity owner. A processor performs a
   defined transformation; a preprocessor prepares input; a resolver selects a value or
   implementation; a factory owns creation rules; a repository abstracts relevant
-  persistence operations. A manager must have a specific responsibility. These
-  are available roles, not a list of classes to create for every feature.
+  persistence operations. A manager must have a specific responsibility. Role
+  suffixes such as `Service`, `Resolver`, or `Manager` do not replace a meaningful
+  purpose in the name. These are available roles, not mandatory suffixes or a list
+  of classes to create for every feature. Preserve framework-defined roles where
+  they apply.
 - Prefer composition and explicit collaborators for independent responsibilities.
   Introduce inheritance only for a valid substitutable relationship, not as a
   container for shared fragments. Avoid vague `Utils`, `Common`, and `Base` owners
   for unrelated business rules.
-- Check relevant references before renaming: callers, exports, DI registrations,
+- Check and update affected names and references during a rename: related
+  interfaces, files/packages, callers, exports, DI registrations,
   reflection/configuration, and serialized or persisted identifiers when used.
   Preserve public contracts or plan an explicit compatibility change. A language
   symbol rename alone does not prove all runtime references were updated.
-- Apply the language profile when choosing files and packages. Related Python
-  classes can share a cohesive module; Go can use functions and focused structs.
-  Splitting a responsibility does not require adding a class in every language.
+- Apply language and framework conventions for casing, suffixes, files, and
+  packages without replacing the shared responsibility-based naming principle.
+  Related Python classes can share a cohesive module; Go can use functions and
+  focused structs. Splitting a responsibility does not require adding a class
+  in every language.
+
+For example, `CheckoutService` or `PlaceOrder` can coordinate a cart, an order,
+inventory reservation, and payment through their owners' contracts. A
+`FulfillmentStrategyResolver` names the selection it performs, not every entity
+it consults. Choose the form that fits the actual role and project conventions.
+
+An `InvoiceSender` that evolves into a cohesive invoice-issuance workflow can
+become `InvoiceIssuingService`, delegating issuance steps to the appropriate
+collaborators. If it instead accumulates unrelated tax calculation, debt collection,
+and reporting responsibilities, separate those owners; renaming it `BillingManager`
+does not resolve their lack of cohesion.
 
 For example, a `DocumentManager` mixing submission, recognition, persistence,
 and rendering can be split around those existing responsibilities. A remaining

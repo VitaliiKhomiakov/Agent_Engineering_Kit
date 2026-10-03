@@ -118,7 +118,8 @@ separation.
 
 Unreal uses an engine and editor model: lifecycle, reflection, garbage collection,
 assets, unsaved editor state, and cooking affect how the shared principles apply.
-Its seven topic sections are selected by task. Blueprint-only work does not require
+Its topic resources are listed in [the catalog](standards/catalog.toml) and read
+by task. Blueprint-only work does not require
 C++, source changes do not require MCP, and backend service patterns are not
 mandatory gameplay architecture. Blender-to-Unreal work verifies the relevant
 import result in the engine. See the [Unreal profile](standards/unreal-engine.md)

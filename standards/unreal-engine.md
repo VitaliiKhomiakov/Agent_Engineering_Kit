@@ -36,7 +36,8 @@ defaults merely because part of the project is written in C++ or Python.
 ## Read for the task
 
 Read only the relevant rows/sections; stop when applicable rules are known.
-The seven resources are a portable bundle, not a list to preload.
+All resources declared for `unreal-engine` in [the catalog](catalog.toml) form
+the portable bundle; their availability does not require preloading them.
 
 | Task condition | Read |
 | --- | --- |

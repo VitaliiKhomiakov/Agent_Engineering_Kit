@@ -101,8 +101,9 @@ its name or bundled dependencies do not require adding a language or framework.
 
 Unreal descriptor globs are applicability hints, not a detector or a requirement
 to touch the descriptor before selecting the profile. A declared target stack or
-the actual project context also selects it. Keep all seven resources available;
-route by task, including subsection routes for concurrency/networking/performance.
+the actual project context also selects it. Keep every resource declared for
+`unreal-engine` in [the catalog](catalog.toml) available; route by task, including
+subsection routes for concurrency/networking/performance.
 An independently opened target uses its reachable local entry and selected copies.
 
 Angular/NgRx globs are hints too: modern suffix-free Angular files still select

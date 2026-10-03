@@ -7,10 +7,12 @@ The [shared verification policy](../verification.md) owns check depth and review
 
 For a UI change, verify the changed behavior and an appropriate visual rendering.
 For a form change, check material input and error paths; for a routing or
-Server/Client boundary change, check the relevant build and navigation. Browser
-E2E is required for an affected critical use case or mandatory gate, not for every
-component or spacing change.
-
+Server/Client boundary change, check the relevant build and navigation. Select
+browser E2E when its additional coverage establishes a material changed behavior
+or risk that cheaper checks cannot establish, or when a mandatory project/CI gate
+requires it. A change's membership in a critical journey alone does not require
+rerunning that entire journey. A pure pricing calculation can use focused behavior
+checks when no browser contract changes; preserve explicit E2E gates in either case.
 
 Prefer role/label/text queries and user-visible outcomes over component internals,
 private state, full-tree snapshots or render-count quotas. Check relevant stale
@@ -21,8 +23,10 @@ style; it is not mandatory when the project already has suitable tooling.
 
 DOM emulation checks semantic structure and interactions, not layout, real keyboard
 navigation, screen readers, focus rendering or browser networking. Use actual
-browser/visual verification for affected presentation or critical journeys. Keep
-JSX/build resolution, strict type checks and applicable Hooks lint in the evidence.
+browser/visual verification when the changed contract depends on those behaviors,
+including focus, navigation and hydration. A scoped browser check need not become
+a full end-to-end suite. Keep JSX/build resolution, strict type checks and
+applicable Hooks lint in the evidence.
 Use `act` through supported testing helpers for pending UI updates. React 19
 deprecates react-test-renderer and moves `act` to React; do not adopt a new test
 suite that depends on unsupported internals.

@@ -25,6 +25,9 @@ Keep transport entry points thin, validate external input and use strict typed b
 Engine-managed gameplay follows its selected profile's lifecycle and composition;
 do not force backend layers or custom DI constructors onto engine-created objects.
 Use [core task routes](standards/core.md#read-by-task) for detailed engineering decisions.
+Name components by cohesive responsibility and intent, not automatically by entity.
+When creating a component or changing its responsibility, read
+[naming and renaming rules](standards/core.md#names-and-evolving-responsibilities).
 Before edits preserve original contents/absence and user work. Reuse valid coverage;
 add tests for material uncovered behavior. Batch code and functional checks at phase
 completion (or completion of a bounded unphased change). Intermediate checks need

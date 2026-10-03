@@ -293,7 +293,8 @@ For Unreal, follow `standards/unreal-engine.md`: Blueprint-only work excludes
 unneeded C++ details, source-only work does not require MCP, and Python editor
 scripting selects relevant Python guidance without unused backend frameworks.
 Generic C++ files alone do not select Unreal. Preserve reachable copies of the
-entry and all six resources; the mandatory workflow needs no personal skill path.
+entry and every resource declared for `unreal-engine` in
+[the catalog](standards/catalog.toml); the mandatory workflow needs no personal skill path.
 Inline planning alone does not require delegation or model setup.
 
 For several projects, also fill the root

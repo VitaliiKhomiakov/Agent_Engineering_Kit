@@ -289,8 +289,9 @@ Common scope, invariants, permission and evidence rules remain binding.
 
 Profiles are constraints, not automatically triggered skills. The
 `unreal-engine` profile keeps its complete mandatory editor workflow in portable
-rules; a compatible installed skill is optional. Its six resources are available
-as a bundle and read by task, without forcing MCP setup for source-only work.
+rules; a compatible installed skill is optional. All resources declared for
+`unreal-engine` in [the catalog](standards/catalog.toml) are available as a bundle
+and read by task, without forcing MCP setup for source-only work.
 No local engine/provider availability follows from selecting the profile.
 Skills describe concrete procedures. The current catalog distinguishes implemented
 instruction-only templates from conceptual procedures:

@@ -78,8 +78,12 @@ of an untrusted write request.
 Check the actual Pydantic, pydantic-core, Python, checker, framework, and optional
 package versions. This stage researched/executed **Pydantic 2.13.4**, whose installed
 metadata requires **pydantic-core 2.46.4** and Python **>=3.9**. The examples target
-this pair and Python 3.11+; the workspace's own minimum remains 3.11. Do not pin or
-upgrade pydantic-core independently of the supported Pydantic dependency set.
+this pair and Python 3.11+; these are example compatibility limits, not the target
+project's Python floor. Preserve its declared support range and actual deployed
+interpreter under the [Python compatibility policy](../python/verification.md#version-sensitive-decisions).
+Adopting this profile does not raise that range or make a 3.11-only example
+compatible with an older interpreter. Do not pin or upgrade pydantic-core
+independently of the supported Pydantic dependency set.
 
 | Compatibility trigger | What to verify |
 | --- | --- |

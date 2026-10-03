@@ -43,9 +43,13 @@ checkout/worktree separately; edit/check in that mapping without duplicating tas
   custom DI constructors. Apply SOLID/DRY/KISS/YAGNI practically.
 - Branches, guards and fallbacks need a current rule or plausible failure. Preserve
   necessary validation/invariants; introduce helper interfaces only for a concrete contract.
+- Name components by cohesive responsibility and intent, not automatically by entity.
+  When creating a component or changing its responsibility, read
+  `standards/core.md#names-and-evolving-responsibilities` for naming and renaming rules.
 - TypeScript/Python require strict typing and named boundary contracts, without
-  `any`/`Any` or diagnostic bypasses. Keep responsibilities focused; near 600–700
-  lines split before growth, without turning a local fix into a rewrite.
+  `any`/`Any` or diagnostic bypasses. Keep responsibilities focused; apply
+  `standards/core.md#size-and-cohesion` before substantial growth, including its
+  documented cohesive exceptions, without turning a local fix into a rewrite.
 - Before the first write, preserve original contents or absence, including user edits;
   retain that stage baseline through review/handoff. Git HEAD alone is insufficient.
 - Reuse valid coverage and check evidence. Add tests for material uncovered behavior;
