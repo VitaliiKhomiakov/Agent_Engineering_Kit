@@ -1,7 +1,7 @@
 # Python: modules, construction, and dependencies
 
 Read when changing module ownership, imports, construction, package layout, or
-dependencies. Return to the [Python entry](../python-fastapi.md).
+dependencies. Return to the [Python entry](../python.md).
 
 ## Cohesive modules
 

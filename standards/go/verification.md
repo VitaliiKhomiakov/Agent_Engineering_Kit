@@ -1,6 +1,6 @@
 # Go: verification, security, and performance
 
-Read when choosing checks for changed Go behavior, reviewing an exposed boundary, or investigating performance. Return to the [Go entry](../go-gin.md).
+Read when choosing checks for changed Go behavior, reviewing an exposed boundary, or investigating performance. Return to the [Go entry](../go.md).
 
 
 - At changed trust boundaries, review input/resource bounds and exposure of

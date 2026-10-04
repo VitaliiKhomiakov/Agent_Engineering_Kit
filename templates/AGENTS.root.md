@@ -86,9 +86,10 @@ checkout/worktree separately; edit/check in that mapping without duplicating tas
 
 - Entering a project: applicable AGENTS and relevant passport sections.
 - Design/implementation/refactoring: task routes in `.agents-framework/standards/core.md` and the actual
-  language/framework profile. JavaScript uses `.agents-framework/standards/nodejs-typescript.md`;
-  Node.js sections require that host. TypeScript additionally uses `.agents-framework/standards/typescript.md`.
-  React uses `.agents-framework/standards/nextjs.md`; Next.js sections require Next.js. Python alone does
+  language/framework profile. JavaScript uses `.agents-framework/standards/javascript.md`;
+  Node.js work additionally uses `.agents-framework/standards/nodejs.md`. TypeScript additionally uses `.agents-framework/standards/typescript.md`.
+  React uses `.agents-framework/standards/react.md`; Next.js additionally uses
+  `.agents-framework/standards/nextjs-framework.md` only where that framework is used. Python alone does
   not select FastAPI/Pydantic. Read database, driver and container profiles only if used.
 - Unreal project/plugin work: `.agents-framework/standards/unreal-engine.md`, then task-relevant
   sections. Generic C++ alone does not select Unreal; Blueprint-only work need not

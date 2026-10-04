@@ -4,6 +4,7 @@ Read when changing execution, streams, middleware/security, deployment, or
 performance. Apply only the parts exposed by the task. General concurrency,
 timeouts, retries, and cancellation remain owned by
 [Python execution](../python/execution-resources.md).
+Return to the [FastAPI entry](../fastapi.md).
 
 ## Execution and resource budgets
 

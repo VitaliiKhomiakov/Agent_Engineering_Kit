@@ -1,7 +1,7 @@
 # Gin: route assembly and middleware
 
 Read for route registration, middleware order, request gates, recovery, or shared
-response handling. Return to the [Go/Gin entry](../go-gin.md).
+response handling. Return to the [Gin entry](../gin.md).
 
 ## Construct the route tree once
 

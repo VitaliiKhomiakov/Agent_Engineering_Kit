@@ -1,7 +1,7 @@
 # Python: execution, state, and resource lifetime
 
 Read when changing async work, threads/processes, shared state, resource handling,
-transactions, or external calls. Return to the [Python entry](../python-fastapi.md).
+transactions, or external calls. Return to the [Python entry](../python.md).
 
 ## Choose the execution model for the work
 

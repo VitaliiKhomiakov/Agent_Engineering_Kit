@@ -1,7 +1,7 @@
 # Pydantic: checks, exposure, performance, and migration
 
 Read when choosing model checks, changing exposed validation/serialization, or
-upgrading Pydantic and its integrations. Return to the [entry](../python-fastapi.md).
+upgrading Pydantic and its integrations. Return to the [Pydantic entry](../pydantic.md).
 Use the shared [verification policy](../verification.md) to choose check depth.
 
 ## Test the contract that changed
@@ -97,8 +97,8 @@ independently of the supported Pydantic dependency set.
 Keep migration bounded to the authorized contract, including public formats and
 callers. `pydantic.v1` can be a staged compatibility tool, not permission to create
 an indefinite dual model hierarchy. No migration is triggered by adopting this
-profile. FastAPI integration belongs to its conditional sections in the
-[Python entry](../python-fastapi.md); SQLAlchemy and psycopg have separate profiles
+profile. FastAPI integration belongs to the separate
+[FastAPI entry](../fastapi.md), applied only where FastAPI is used; SQLAlchemy and psycopg have separate profiles
 selected only when those dependencies are present or explicitly requested.
 
 Sources: [mypy integration](https://docs.pydantic.dev/latest/integrations/mypy/),

@@ -3,6 +3,7 @@
 Read when changing dependency wiring, `yield`, lifespan, transactions, streaming
 resources, or background work. General resource/concurrency rules remain in
 [Python execution](../python/execution-resources.md). Checked: FastAPI 0.138.0.
+Return to the [FastAPI entry](../fastapi.md).
 
 ## Dependency ownership
 

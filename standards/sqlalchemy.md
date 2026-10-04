@@ -1,7 +1,7 @@
 # SQLAlchemy
 
 Apply only where SQLAlchemy is used or this profile is explicitly selected.
-Use the [Python rules](python-fastapi.md) and [core boundaries](core.md).
+Use the [Python rules](python.md) and [core boundaries](core.md).
 Establish the SQLAlchemy, Python, driver, database and migration-tool versions;
 ORM presence does not identify the database or authorize a dependency upgrade.
 

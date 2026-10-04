@@ -1,7 +1,7 @@
 # psycopg
 
 Apply to Psycopg 3 (`psycopg`), not automatically to legacy `psycopg2`.
-Use the [Python](python-fastapi.md) and [PostgreSQL](postgresql.md) rules.
+Use the [Python](python.md) and [PostgreSQL](postgresql.md) rules.
 Record the driver/implementation, libpq, Python, server and optional pool versions;
 a driver dependency identifies its integration, not the deployed server version.
 

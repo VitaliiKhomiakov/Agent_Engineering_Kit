@@ -6,8 +6,8 @@ The [shared verification policy](../verification.md) owns check proportionality;
 
 ## Verify the changed contract
 
-Generate framework route types before relying on `tsc` for helpers/contracts. Run
-the project's strict type/lint checks and relevant production build after changes
+When using TypeScript, generate framework route types before relying on `tsc`
+for helpers/contracts. Run the project's applicable type/lint checks and relevant production build after changes
 to routes, server/client imports, caching or runtime configuration. A build can
 prerender data and use external assets: isolate fixture dependencies intentionally.
 Do not hide diagnostics with `ignoreBuildErrors`, casts or disabled lint rules.

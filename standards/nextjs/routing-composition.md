@@ -1,12 +1,12 @@
 # Next.js routing and application composition
 
 Read for routes, layouts, parameter contracts, navigation or module ownership.
-The [entry](../nextjs.md) selects guidance; [feature structure](../nextjs-feature-structure.md)
+The [entry](../nextjs-framework.md) selects guidance; [feature structure](../nextjs-feature-structure.md)
 owns the project's compact capability organization and import directions.
 
 ## Router and version first
 
-Record the versions of Next.js, React, and TypeScript; the App or Pages Router;
+Record Next.js, React and, when used, TypeScript versions; the App or Pages Router;
 the server runtime; and the approaches to styling, forms, and state management.
 Do not apply App Router requirements to the Pages Router or upgrade the stack to
 match a documentation example. The project selects its state, UI, CSS, and lint libraries.

@@ -3,8 +3,9 @@
 Read for Node startup, configuration, modules/packages, dependency assembly or
 direct TypeScript execution. Shared module cohesion and language contracts remain
 in [JavaScript structure](../javascript/modules-structure.md); strict typing remains
-in [TypeScript](../typescript.md). These rules apply to services, workers and CLI
+in [TypeScript](../typescript.md) when TypeScript is used. These rules apply to services, workers and CLI
 programs as relevant, not to every browser module in a package-managed project.
+Return to the [Node.js entry](../nodejs.md).
 
 ## Server execution and responsibility
 

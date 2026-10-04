@@ -1,7 +1,7 @@
 # JavaScript values, contracts and state
 
 Read when changing external data, JSDoc, coercion, JSON, object ownership or
-business invariants. Apply the [entry's typed-boundary obligations](../nodejs-typescript.md#typed-boundaries).
+business invariants. Apply the [entry's typed-boundary obligations](../javascript.md#typed-boundaries).
 The [input/state example](examples/input-state.md) is optional.
 
 ## From external representation to an owned contract

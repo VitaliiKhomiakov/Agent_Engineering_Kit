@@ -62,7 +62,7 @@ for Next.js use of that name for the Pages Router.
 
 A one-off cohesive UI may belong to a route. Introduce a separate module when it
 has a clear responsibility, not to meet a layer count. Verify React Server/Client
-boundaries against the [Next.js profile](nextjs.md) regardless of directory structure.
+boundaries against the [Next.js profile](nextjs-framework.md) regardless of directory structure.
 
 ## Router adapters and execution contracts
 

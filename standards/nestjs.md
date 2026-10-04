@@ -1,6 +1,6 @@
 # NestJS
 
-Use with the [common standard](core.md), [Node.js/JavaScript entry](nodejs-typescript.md)
+Use with the [common standard](core.md), [Node.js entry](nodejs.md)
 and mandatory [TypeScript profile](typescript.md). Read only sections relevant to
 the task and stop when its applicable rules are known. Examples and research are
 optional; do not load all links recursively.

@@ -1,7 +1,7 @@
 # Pydantic: model lifetime and integration boundaries
 
 Read when models are mutated, copied, reconstructed, reused across tasks, or
-mapped from persistence/SDK objects. Return to the [entry](../python-fastapi.md).
+mapped from persistence/SDK objects. Return to the [Pydantic entry](../pydantic.md).
 
 ## Validation is a boundary event
 

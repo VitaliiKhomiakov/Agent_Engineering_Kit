@@ -2,7 +2,7 @@
 
 Read for request cancellation, asynchronous work, server startup/shutdown,
 proxy trust, uploads, or deployment-facing changes. Return to the
-[Go/Gin entry](../go-gin.md).
+[Gin entry](../gin.md).
 
 ## Request state and external work
 

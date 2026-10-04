@@ -88,5 +88,5 @@ adopt abstractions only when they clarify the actual boundary.
 
 Keep HTTP/SDK retries, secrets, timeouts, parsing and protocol-error translation
 in the integration owner. Do not claim a database transaction makes a remote call
-atomic. Doctrine mapping/domain decisions stay with the existing combined profile
-and later ORM research; this language section does not prescribe an ORM or mapper.
+atomic. When Doctrine is used, its separate [profile](../doctrine.md) owns
+mapping/domain decisions; this language section does not prescribe an ORM or mapper.

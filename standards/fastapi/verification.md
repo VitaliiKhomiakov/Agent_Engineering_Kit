@@ -4,6 +4,7 @@ Read when testing, reviewing, moving files, or upgrading the HTTP stack. Follow
 the shared [verification policy](../verification.md); do not turn a small change
 into a mandatory end-to-end suite or introduce another test framework to move a
 class. [Python verification](../python/verification.md) owns analyzer conventions.
+Return to the [FastAPI entry](../fastapi.md).
 
 ## Behavior and test isolation
 

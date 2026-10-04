@@ -74,7 +74,7 @@ constraints, atomic operations, idempotency and durable handoff belong to the
 actual adapter/use case. Do not add a generic repository for every entity solely
 to obtain a type parameter.
 
-The [JavaScript entry](../nodejs-typescript.md) owns shared language/effect policy;
+The [JavaScript entry](../javascript.md) owns shared language/effect policy;
 TypeScript contracts describe operations without extending their runtime guarantees.
 For a host/framework change, read its relevant profile and verify its actual API.
 

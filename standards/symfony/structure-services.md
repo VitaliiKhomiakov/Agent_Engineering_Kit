@@ -25,8 +25,8 @@ sufficient; no bus or universal handler base is required.
 Preserve named operation contracts without passing Request, RequestStack,
 EntityManager, the container, or serialized arrays into an independent business
 core. Transport attributes and serialization groups belong where their coupling
-is intended. Do not duplicate identical DTOs only to cross directories. Existing
-[domain/Doctrine placement](../doctrine/models-mapping.md#domain-model-placement)
+is intended. Do not duplicate identical DTOs only to cross directories. When
+Doctrine ORM is used, [domain/Doctrine placement](../doctrine/models-mapping.md#domain-model-placement)
 remains a separate architecture choice; a framework convention does not decide it.
 
 An AbstractController is a convenient framework base, not a requirement for a

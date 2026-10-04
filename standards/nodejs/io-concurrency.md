@@ -4,6 +4,7 @@ Read for streams, file operations, CPU work, workers, event callbacks or concurr
 limits. [Shared async rules](../javascript/async-effects.md) own promise sequencing
 and general cancellation semantics. The optional [bounded stream example](examples/bounded-stream.md)
 shows byte limits, pipeline failure and abort with actual Node streams.
+Return to the [Node.js entry](../nodejs.md).
 
 ## Capacity follows the resource
 

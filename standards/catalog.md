@@ -76,6 +76,40 @@ task progress and model assignments retain their existing owners. The source
 library's `MIGRATION.md` owns comparison and recovery; resolve that procedure from
 the identified accessible source when needed, without assuming it was copied.
 
+## Independent and legacy selections
+
+For new bundles, select the language plus the hosts, frameworks and libraries
+actually used. Entries route to their existing topic directories; short entries
+and detailed topics have different responsibilities. TypeScript adds shared static
+contracts to JavaScript without selecting Node server guidance. Select it alongside
+React, Next.js or Node.js for TypeScript code; NestJS and Angular already depend on
+it under this library's policy. Host selection follows the actual task/runtime.
+
+| Intended selection | Profile IDs |
+| --- | --- |
+| PHP; optional Symfony or Doctrine | `php`; add `symfony` and/or `doctrine` when used |
+| Go; optional Gin | `go`; add `gin` when used |
+| Python; validation or HTTP framework | `python`; add `pydantic` or `fastapi` when used |
+| Browser JavaScript or TypeScript | `javascript` or `typescript` |
+| Node.js JavaScript or TypeScript | `nodejs`; add `typescript` when used |
+| React JavaScript or TypeScript, without Next.js | `react`; add `typescript` when used |
+| Next.js JavaScript or TypeScript | `nextjs-framework`; add `typescript` when used and `nodejs` for Node host work |
+| Angular or NestJS; optional packages | `angular` or `nestjs`; add `ngrx` or `typeorm` only when used |
+
+Dependencies supply shared bases automatically; explicitly selecting the same
+base again does not duplicate its files. Examples retain their stated language
+and version requirements; a TypeScript example does not convert a JavaScript task.
+
+The stable IDs `php-symfony-doctrine`, `go-gin`, `python-fastapi`,
+`nodejs-typescript` and `nextjs` remain compatibility aggregates with their old
+paths, anchors and resource availability. In particular, `nodejs-typescript`
+still does not select TypeScript automatically, while old `nextjs` retains its
+React/TypeScript/Node resource set. The independent Next.js ID is
+`nextjs-framework`; `nextjs-feature-structure` now selects that narrower profile.
+Do not reinterpret an old ID as a new narrow selection. A reviewed selection
+change during adoption follows the source library's MIGRATION repeat/update
+procedure; a smaller closure is not permission to delete previously managed files.
+
 ## Read for the current task
 
 1. Identify the changed behavior, actual language/framework and applicable project
@@ -93,7 +127,7 @@ its name or bundled dependencies do not require adding a language or framework.
 | Task | Relevant reading | Not selected merely by the bundle |
 | --- | --- | --- |
 | Python-only fix, without FastAPI or Pydantic | Common rules and Python entry/sections for the affected behavior | FastAPI, Pydantic, SQLAlchemy or database instructions |
-| JavaScript React change, without Next.js or TypeScript | Common rules, shared JavaScript guidance and React sections in `nextjs` | TypeScript obligations, Next.js routes or Node.js server guidance |
+| JavaScript React change, without Next.js or TypeScript | Common rules, shared JavaScript guidance and the `react` entry/topics | TypeScript obligations, Next.js routes or Node.js server guidance |
 | Substantive inline plan with an existing configured session selection | Adopted planning policy, relevant delivery/design rules and the selected skill's adaptations | Delegation and model setup merely because they are dependencies of delivery/Superpowers |
 | Blueprint-only Unreal asset change | `unreal-engine` entry, affected gameplay/assets and verification sections; editor procedure when operating that provider | C++ details, networking or mandatory MCP installation |
 | Source-only Unreal change | `unreal-engine` entry and affected C++/build sections | Editor setup or an external skill merely to edit source |

@@ -1,6 +1,6 @@
 # Go: persistence and external resources
 
-Read when changing database access, transactions, HTTP integrations, or resource lifetimes. Return to the [Go entry](../go-gin.md).
+Read when changing database access, transactions, HTTP integrations, or resource lifetimes. Return to the [Go entry](../go.md).
 
 
 - Where `database/sql` is used, reuse `sql.DB` as the connection pool. Size it

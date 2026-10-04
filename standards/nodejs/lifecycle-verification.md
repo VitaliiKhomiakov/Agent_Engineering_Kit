@@ -4,6 +4,7 @@ Read for signals, shutdown, resource cleanup, diagnostics, security verification
 or runtime upgrades. The optional [HTTP shutdown example](examples/graceful-server.md)
 distinguishes open connections from application tasks. Apply the shared
 [verification policy](../verification.md) to choose sufficient checks.
+Return to the [Node.js entry](../nodejs.md).
 
 ## Start, drain and release
 

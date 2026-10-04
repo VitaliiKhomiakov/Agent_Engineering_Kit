@@ -4,6 +4,7 @@ Read for HTTP servers/clients, body limits, deadlines, persistence or external
 effects in Node. Use the selected framework's transport facilities where present;
 this is not a requirement to replace them with `node:http`. Shared validation and
 domain-state rules remain in [values/state](../javascript/values-state.md).
+Return to the [Node.js entry](../nodejs.md).
 
 ## Incoming boundaries
 

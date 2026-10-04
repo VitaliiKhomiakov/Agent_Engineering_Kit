@@ -2,7 +2,7 @@
 
 Read when choosing a model/adapter, defining fields, changing accepted input, or
 writing validators. Applies where Pydantic is used; return to the
-[Python/Pydantic entry](../python-fastapi.md). Guidance targets Pydantic 2;
+[Pydantic entry](../pydantic.md). Guidance targets Pydantic 2;
 check the installed version before adopting an API or changing a contract.
 
 ## Choose the boundary and simplest model

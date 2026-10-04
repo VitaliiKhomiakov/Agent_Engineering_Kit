@@ -24,8 +24,9 @@ Keep autoloaded files free of output, network calls, and hidden bootstrap effect
 Put HTTP/CLI/queue parsing in adapters, application coordination behind them,
 and independent state rules in the business owner. Persistence and SDK adapters
 translate their external formats. A small script or read model need not acquire
-an entity/service/repository hierarchy. Preserve the chosen domain/ORM approach
-in the [model placement rules](../doctrine/models-mapping.md#domain-model-placement).
+an entity/service/repository hierarchy. When Doctrine ORM is used, preserve the
+chosen approach under its [model placement rules](../doctrine/models-mapping.md#domain-model-placement).
+Other persistence tools retain their own mapping and domain contracts.
 
 ## Construction and useful abstraction
 

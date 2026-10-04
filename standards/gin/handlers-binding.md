@@ -1,7 +1,7 @@
 # Gin: handlers, binding, and HTTP contracts
 
 Read for Gin handlers, input sources, validation, or response/error contracts.
-Return to the [Go/Gin entry](../go-gin.md). Requirements protect the affected
+Return to the [Gin entry](../gin.md). Requirements protect the affected
 contract; defaults below allow a concrete project exception.
 
 ## Transport and application boundary

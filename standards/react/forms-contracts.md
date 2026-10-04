@@ -1,8 +1,9 @@
 # React forms, commands and user-visible contracts
 
 Read for form ownership, external data, mutation outcomes or accessible interaction.
-Shared [TypeScript](../typescript.md) and [core](../core.md) rules own runtime
-validation and independent business invariants.
+Shared [JavaScript validation](../javascript/values-state.md) and [core](../core.md)
+rules own runtime validation and independent business invariants. Apply
+[TypeScript contracts](../typescript.md) only when TypeScript is used.
 
 - Client-side form validation helps the user; the server validates the contract
   and operation eligibility again. A TypeScript `type`/`interface` or `as`

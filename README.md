@@ -98,12 +98,12 @@ React does not imply Next.js or TypeScript, and Angular does not imply NgRx.
 | Area | Entry points |
 | --- | --- |
 | Common engineering | [Core standard](standards/core.md), [delivery workflow](standards/delivery-workflow.md), [verification](standards/verification.md) |
-| Python | [Python / FastAPI / Pydantic](standards/python-fastapi.md), [SQLAlchemy](standards/sqlalchemy.md), [Psycopg](standards/psycopg.md) |
-| PHP | [PHP / Symfony / Doctrine](standards/php-symfony-doctrine.md) |
-| Go | [Go / Gin](standards/go-gin.md) |
-| JavaScript and TypeScript | [JavaScript / Node.js](standards/nodejs-typescript.md), [TypeScript](standards/typescript.md) |
+| Python | [Python](standards/python.md), [Pydantic](standards/pydantic.md), [FastAPI](standards/fastapi.md), [SQLAlchemy](standards/sqlalchemy.md), [Psycopg](standards/psycopg.md) |
+| PHP | [PHP](standards/php.md), [Symfony](standards/symfony.md), [Doctrine](standards/doctrine.md) |
+| Go | [Go](standards/go.md), [Gin](standards/gin.md) |
+| JavaScript and TypeScript | [JavaScript](standards/javascript.md), [Node.js](standards/nodejs.md), [TypeScript](standards/typescript.md) |
 | NestJS and TypeORM | [NestJS](standards/nestjs.md), [TypeORM](standards/typeorm.md) |
-| React and Next.js | [React / Next.js](standards/nextjs.md), [feature structure](standards/nextjs-feature-structure.md) |
+| React and Next.js | [React](standards/react.md), [Next.js](standards/nextjs-framework.md), [feature structure](standards/nextjs-feature-structure.md) |
 | Angular and NgRx | [Angular](standards/angular.md), [NgRx](standards/ngrx.md) |
 | Database and containers | [PostgreSQL](standards/postgresql.md), [Docker](standards/docker.md), [development and production environments](standards/docker/development-production.md) |
 | Unreal Engine | [Unreal Engine](standards/unreal-engine.md), [optional Unreal / Blender / MCP skills](standards/unreal-engine/skills.md) |
@@ -113,6 +113,11 @@ The [catalog guide](standards/catalog.md) distinguishes **bundling** from
 files remain available in an adopted bundle. The task, actual stack, and `when`
 conditions determine what the agent reads. Availability does not require loading
 every profile, example, research note, or historical plan into each session.
+
+For new imports, select the language and the hosts, frameworks or libraries
+actually used. TypeScript composes with React, Next.js, Node.js, NestJS, Angular
+and other technologies through one shared profile. The five older combined IDs
+remain compatibility aggregates; see [profile selection](standards/catalog.md#independent-and-legacy-selections).
 
 These profiles contain opinionated project standards. Numeric size limits,
 layering preferences, and testing policies are local engineering choices;

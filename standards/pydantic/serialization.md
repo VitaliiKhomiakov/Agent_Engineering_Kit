@@ -1,7 +1,7 @@
 # Pydantic: serialization, aliases, and schemas
 
 Read when changing response fields, wire names, partial updates, union selection,
-or generated schemas. Return to the [entry](../python-fastapi.md).
+or generated schemas. Return to the [Pydantic entry](../pydantic.md).
 
 ## Public output is an explicit contract
 

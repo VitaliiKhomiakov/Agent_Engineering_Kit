@@ -1,7 +1,7 @@
 # JavaScript modules and structure
 
 Read when changing imports/exports, file placement, construction, dependencies or
-callback ownership. Apply the [entry](../nodejs-typescript.md) and [common
+callback ownership. Apply the [entry](../javascript.md) and [common
 responsibility rules](../core.md); the project chooses its actual module tree.
 
 ## Cohesion and boundaries

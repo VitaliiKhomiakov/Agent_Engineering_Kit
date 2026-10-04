@@ -1,8 +1,8 @@
 # TypeScript: strict types and interfaces
 
 Apply this common TypeScript profile with the [common rules](core.md), regardless
-of runtime. The [JavaScript entry](nodejs-typescript.md) owns shared language
-and effect rules; apply its Node.js sections only when code runs in that host.
+of runtime. The [JavaScript entry](javascript.md) owns shared language
+and effect rules; select [Node.js](nodejs.md) only for work in that host.
 NestJS, Next.js and [Angular](angular.md) add their own relevant requirements
 only when the respective framework is used. Angular selects [NgRx](ngrx.md)
 only when an NgRx package is used or explicitly chosen.

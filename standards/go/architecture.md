@@ -1,6 +1,6 @@
 # Go: architecture and patterns
 
-Read when changing packages, dependency structure, construction, or module/toolchain requirements. Return to the [Go entry](../go-gin.md).
+Read when changing packages, dependency structure, construction, or module/toolchain requirements. Return to the [Go entry](../go.md).
 
 ## Versions and modules
 

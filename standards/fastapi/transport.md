@@ -4,6 +4,7 @@ Read when changing HTTP routes, request/response models, domain calls, or errors
 Use the installed versions; the checked baseline is FastAPI 0.138.0 with Pydantic
 V2. [Common policy](../core.md) owns design and strict-typing requirements;
 [Pydantic validation](../pydantic/validation.md) owns model-level semantics.
+Return to the [FastAPI entry](../fastapi.md).
 
 ## Organization and construction
 

@@ -1,6 +1,6 @@
 # Go: types, domain contracts, and errors
 
-Read when changing public types, state transitions, validation, receivers, or error behavior. Return to the [Go entry](../go-gin.md).
+Read when changing public types, state transitions, validation, receivers, or error behavior. Return to the [Go entry](../go.md).
 
 ## Types, state, and construction
 

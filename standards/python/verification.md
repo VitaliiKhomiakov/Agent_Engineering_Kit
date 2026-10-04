@@ -2,7 +2,7 @@
 
 Read when choosing Python checks or changing security-sensitive boundaries,
 performance, interpreter versions, or dependencies. Return to the
-[Python entry](../python-fastapi.md). The shared
+[Python entry](../python.md). The shared
 [verification policy](../verification.md) owns testing/review scope.
 
 ## Match checks to changed behavior

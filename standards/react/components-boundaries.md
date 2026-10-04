@@ -1,7 +1,7 @@
 # React components and dependency boundaries
 
 Read for component decomposition, Hook extraction, props or module ownership.
-The [entry](../nextjs.md) owns selection; [core](../core.md) owns shared architecture.
+The [entry](../react.md) owns selection; [core](../core.md) owns shared architecture.
 
 ## Cohesive owners
 
@@ -23,7 +23,7 @@ may use a class or the project's supported boundary component. Do not invent a
 base component, generic Hook engine or frontend Repository for a single call.
 
 Colocate a capability's UI, state and API adapter where their ownership is clear.
-A framework-neutral example is `features/reserve/{ReservationForm.tsx, contract.ts,
+A framework-neutral TypeScript example is `features/reserve/{ReservationForm.tsx, contract.ts,
 reservation-api.ts}`; these are possible owners, not required folders. Route-local
 UI can stay local. Framework route conventions apply only to the chosen framework.
 In Next.js, the existing [feature structure](../nextjs-feature-structure.md) owns
@@ -31,8 +31,9 @@ import directions. React itself mandates no FSD layers or route directory.
 
 ## Props, Hooks and assembly
 
-Use named interfaces for public props/dependencies under [TypeScript](../typescript.md).
-Express real variants with unions rather than unrelated Boolean flags. Prefer a
+When using [TypeScript](../typescript.md), use named interfaces for public
+props/dependencies and express real variants with unions rather than unrelated
+Boolean flags. JavaScript uses explicit contracts under its shared language rules. Prefer a
 small explicit callback such as `reserve(command)` to passing an entire SDK/client
 through the tree. Do not duplicate transport models just to cross a component.
 

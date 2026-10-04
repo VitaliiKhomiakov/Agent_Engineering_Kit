@@ -2,7 +2,7 @@
 
 Read when choosing checks for changed Gin behavior, upgrading dependencies,
 changing a JSON codec/build tag, or investigating performance. Return to the
-[Go/Gin entry](../go-gin.md). The shared [verification policy](../verification.md)
+[Gin entry](../gin.md). The shared [verification policy](../verification.md)
 owns test depth and review; this file identifies Gin-specific failure modes.
 
 ## Check observable HTTP behavior

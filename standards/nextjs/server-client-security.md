@@ -1,7 +1,8 @@
 # Next.js server/client and trust boundaries
 
 Read for RSC/client imports, public data, sessions, Server Actions or privileged work.
-[Core](../core.md) and [TypeScript](../typescript.md) own shared invariants and typing.
+[Core](../core.md) owns shared invariants; [TypeScript](../typescript.md) owns
+static typing requirements only when TypeScript is used.
 
 ## Execution and data exposure
 

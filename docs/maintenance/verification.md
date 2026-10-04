@@ -14,6 +14,7 @@ python3 tools/check_instruction_artifacts.py
 python3 tools/check_instruction_artifacts.py AGENTS.md standards/core.md
 python3 tools/check_instruction_artifacts.py docs/maintenance/verification.md
 python3 -m unittest discover -s tests -p 'test_instruction_artifacts.py'
+python3 -m unittest discover -s tests -p 'test_profile_selection.py'
 git diff --check
 ```
 
@@ -133,12 +134,17 @@ Checked against the official [Python 3.11 TOML API](https://docs.python.org/3.11
 on 2026-10-04. The syntax subset above defines the tool's limits, not a claim of
 complete renderer equivalence.
 
-When modifying the checker or tests, run their focused unittest suite and the
+Profile-selection tests exercise the real catalog's independent/combined stacks,
+excluded optional technologies and retained legacy resource paths/heading anchors.
+Run their relevant scenarios when changing profile dependencies, resources or
+compatibility entries. Prepared target bundles still need their own reference checks.
+
+When modifying the checker or tests, run their focused unittest suites and the
 [strict Python analyzer](../../standards/python/typing-contracts.md#strict-static-contracts).
 The checked analyzer baseline is mypy 2.1.0, installed outside the repository:
 
 ```sh
-python -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tests/test_instruction_artifacts.py
+python -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --explicit-package-bases --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tests/test_instruction_artifacts.py tests/test_profile_selection.py
 ```
 
 ## Reproduce an affected executable example

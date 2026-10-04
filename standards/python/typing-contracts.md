@@ -1,7 +1,7 @@
 # Python: typing, validation, state, and errors
 
 Read when changing public signatures, data contracts, external input, domain
-state, or error behavior. Return to the [Python entry](../python-fastapi.md).
+state, or error behavior. Return to the [Python entry](../python.md).
 
 ## Strict static contracts
 

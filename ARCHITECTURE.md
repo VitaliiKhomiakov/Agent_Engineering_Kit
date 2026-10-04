@@ -24,7 +24,9 @@ The [repository map](README.md#repository-map) shows the source layout.
 `tools/check_instruction_artifacts.py` is a read-only, standard-library Python
 checker for catalog resources, supported local links, fences, TOML and policy
 settings. `tests/test_instruction_artifacts.py` exercises it against disposable
-instruction bundles. These are maintenance tools, not an adoption runtime.
+instruction bundles; `tests/test_profile_selection.py` checks independent and
+combined profile resources and legacy entry compatibility. These are maintenance
+tools, not an adoption runtime.
 [Maintenance verification](docs/maintenance/verification.md) owns their commands,
 supported syntax, evidence limits and executable-example reproduction.
 
@@ -232,7 +234,10 @@ The [catalog guide](standards/catalog.md) defines rule IDs, applicability and
 bundle dependencies. Dependencies and shared `required` profiles keep resources
 available; their presence does not require reading them for every task. Use the
 actual stack, task conditions and profile routes to choose sections. The catalog
-is an index, not an installer.
+is an index, not an installer. Independent language, host and framework entries
+route to their topic directories; old combined IDs remain compatibility selections.
+TypeScript has one shared owner across participating frameworks and hosts; see
+[catalog selection](standards/catalog.md#independent-and-legacy-selections).
 Use the adoption record for source/content identity and accepted local exceptions;
 entry/passport provenance points there. Review diffs when
 updating copies and preserve independent edits. Native role configuration and

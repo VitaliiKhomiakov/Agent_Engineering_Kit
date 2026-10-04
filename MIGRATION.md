@@ -183,6 +183,16 @@ reconciles the mapping, actual files and pending checks; an already verified unc
 relocation is a no-op, while identical bytes in a partial operation still need its
 pending checks. Do not recopy, bulk rollback or advance accepted state on assumption.
 
+## Selecting profiles
+
+Use the [catalog selection contract](standards/catalog.md#independent-and-legacy-selections)
+for independent language, host and framework profiles and retained legacy IDs.
+For new imports, select the actual stack. For updates, preserve the recorded
+selection unless changing it is explicitly in scope; narrower profiles are not an
+automatic migration or retirement request. Preview affected routes, newly needed
+resources and previously managed paths under [Repeat and update](#repeat-and-update).
+Keep accepted snapshots and local edits; that procedure owns reconciliation.
+
 ## Prepare and apply
 
 For policy settings, follow the [configuration contract](standards/policy-configuration.md).

@@ -3,6 +3,8 @@
 Apply with the [common rules](core.md) and [TypeScript profile](typescript.md).
 Select this profile when TypeORM is declared or used, with or without NestJS.
 Nest supports other persistence tools; its presence alone does not select TypeORM.
+Select [Node.js](nodejs.md) only for actual Node host work; TypeORM also supports
+non-Node hosts, subject to the installed version and driver.
 Read only the task's sections; examples and research are optional.
 
 ## Essential contract

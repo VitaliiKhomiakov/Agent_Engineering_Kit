@@ -1,6 +1,6 @@
 # Go: cancellation and concurrency
 
-Read when adding or changing goroutines, channels, shared state, cancellation, or shutdown. Return to the [Go entry](../go-gin.md).
+Read when adding or changing goroutines, channels, shared state, cancellation, or shutdown. Return to the [Go entry](../go.md).
 
 
 - Pass `context.Context` explicitly, conventionally first, across operations
