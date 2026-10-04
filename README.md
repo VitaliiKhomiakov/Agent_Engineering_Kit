@@ -8,7 +8,8 @@ verification, project documentation templates, and configurable agent roles.
 Adopt the resources that match your project's stack in a new or existing workspace.
 
 The library consists of Markdown instructions, a TOML catalog, and inactive
-configuration and skill templates. Adoption happens through an agent following
+configuration and skill templates. A Python checker and its tests support source
+maintenance. Adoption happens through an agent following
 [the integration procedure](MIGRATION.md); no package installation, dedicated CLI,
 or application runtime is required.
 
@@ -257,28 +258,35 @@ the intended model or reasoning effort is active.
 
 ```text
 Agent_Engineering_Kit/
-├── AGENTS.md                  # Instructions for maintaining this source library
-├── README.md                  # Overview and adoption entry point
-├── ARCHITECTURE.md            # Design of this rules library
-├── MIGRATION.md               # Preparation, import, updates, and recovery
+├── AGENTS.md                      # Instructions for maintaining this source library
+├── README.md                      # Overview and adoption entry point
+├── ARCHITECTURE.md                # Design of this rules library
+├── MIGRATION.md                   # Preparation, import, updates, and recovery
 ├── standards/
-│   ├── catalog.toml           # Profiles, dependencies, resources, and templates
-│   ├── catalog.md             # Bundle selection and conditional reading semantics
-│   └── ...                    # Shared policies, stack profiles, topics, and examples
+│   ├── catalog.toml               # Profiles, dependencies, resources, and templates
+│   ├── catalog.md                 # Bundle selection and conditional reading semantics
+│   └── ...                        # Shared policies, stack profiles, topics, and examples
 ├── templates/
-│   ├── AGENTS.root.md         # Short workspace entry
-│   ├── AGENTS.project.md      # Project-local addition
-│   ├── PLANS.md               # Planning policy
-│   ├── codex/                 # Inactive native configuration and role examples
-│   ├── claude/                # Policy bridge
-│   ├── cursor/                # Rule route
-│   ├── framework/             # Adoption record and model routing templates
-│   └── skills/                # Integration, model setup, and reassignment procedures
-├── examples/                  # Illustrative workspace architecture
+│   ├── AGENTS.root.md             # Short workspace entry
+│   ├── AGENTS.project.md          # Project-local addition
+│   ├── policy-entry.md            # Shared policy entry
+│   ├── PLANS.md                   # Planning policy
+│   ├── task.md                    # Task contract
+│   ├── workspace-architecture.md  # Cross-project map
+│   ├── project-architecture.md    # Project passport
+│   ├── codex/                     # Inactive native configuration and role examples
+│   ├── claude/                    # Policy bridge
+│   ├── cursor/                    # Rule route
+│   ├── framework/                 # Adoption record and model routing templates
+│   └── skills/                    # Integration, model setup, and reassignment procedures
+├── examples/                      # Illustrative workspace architecture
+├── tools/                         # Read-only instruction artifact checker
+├── tests/                         # Regression tests for the maintenance checker
 └── docs/
-    ├── specs/                 # Scope and design decisions
-    ├── plans/                 # Implementation and verification records
-    └── research/              # Sources, version context, and evidence limits
+    ├── maintenance/               # Checker usage and executable-example reproduction
+    ├── specs/                     # Scope and design decisions
+    ├── plans/                     # Implementation and verification records
+    └── research/                  # Sources, version context, and evidence limits
 ```
 
 The root [ARCHITECTURE.md](ARCHITECTURE.md) describes this library, and
@@ -289,9 +297,10 @@ in each target workspace independently.
 
 ## Status and verification limits
 
-The recorded library work is complete for the instruction-framework refinement,
-project integration procedure, Unreal support, and Angular/NgRx profiles. The
-library is prepared for a scoped pilot in a selected target project.
+Recorded library work covers instruction-framework refinement, project integration,
+technology profiles, maintenance checks, policy settings, and contained adoption.
+The records below distinguish implemented changes, review status, and checks from
+the remaining target-client pilot.
 
 | Evidence | Scope |
 | --- | --- |
@@ -300,6 +309,8 @@ library is prepared for a scoped pilot in a selected target project.
 | [Project integration](docs/plans/2026-09-27-project-rule-integration.md) | Recorded preparation, import, update, and recovery acceptance checks |
 | [Unreal support](docs/plans/2026-09-27-unreal-engine-support.md) | Profile, template, and routing checks; engine/editor execution remains unverified |
 | [Angular and NgRx](docs/plans/2026-09-29-angular-ngrx-rules.md) | Profile/catalog consistency and documented checks for conditional applicability |
+| [Technology instruction audit](docs/plans/2026-10-03-technology-instruction-audit.md) | Stages 0–5 complete: example corrections, conditional guidance, source-maintenance entry and checker; the real-agent pilot remains outstanding |
+| [Contained adoption, policy settings and orchestration](docs/plans/2026-10-04-contained-adoption-layout.md) | Recorded source and bundle checks; stage C implementation and verification are complete but await user review in the record; consuming-project migration remains pending |
 | [Superpowers compatibility](standards/superpowers/compatibility.md) | Bounded local-source checks for 6.4.2; historical 6.4.1 results are retained separately |
 
 These records establish the stated library checks. They do not establish
@@ -318,5 +329,6 @@ When changing the library, run `python3 tools/check_instruction_artifacts.py`
 See [maintenance verification](docs/maintenance/verification.md) for scoped commands,
 checker tests, syntax limits and example reproduction. Also review affected YAML
 and instruction consistency. Validate executable examples with
-the relevant stack when their behavior changes. There is no standalone framework
-application or application test suite in this repository.
+the relevant stack when their behavior changes. The `tests/` directory verifies
+the maintenance checker; the repository has no standalone framework application
+or application test suite.

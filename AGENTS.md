@@ -1,7 +1,8 @@
 # Agent_Engineering_Kit maintenance
 
 This repository is a reusable library of engineering instructions for AI coding
-agents. Maintain its Markdown rules, TOML catalog, templates, examples and evidence.
+agents. Maintain its Markdown rules, TOML catalog, templates, examples, evidence
+and artifact-checking tools/tests.
 The application stacks described here are reference subjects, not this repository's
 runtime dependencies. Root [ARCHITECTURE.md](ARCHITECTURE.md) describes the library.
 
@@ -13,6 +14,8 @@ runtime dependencies. Root [ARCHITECTURE.md](ARCHITECTURE.md) describes the libr
 | `standards/catalog.toml` | Bundle inventory and profile dependencies |
 | `templates/` | Inactive target-project instructions, configuration and skills |
 | `examples/` | Illustrative workspace architecture |
+| `tools/`, `tests/` | Instruction artifact checker and its regression tests |
+| `docs/maintenance/` | Maintenance commands, checker limits and example reproduction |
 | `docs/plans/`, `docs/specs/` | Task progress and design decisions |
 | `docs/research/` | Dated sources, tested versions and evidence limits |
 

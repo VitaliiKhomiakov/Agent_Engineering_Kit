@@ -18,7 +18,25 @@ AGENTS files, specs, and skills are evidence of current state, not normative
 architecture. The standard comes from user requirements, verified technology
 capabilities, and explicit decisions.
 
+## Source maintenance
+
+The [repository map](README.md#repository-map) shows the source layout.
+`tools/check_instruction_artifacts.py` is a read-only, standard-library Python
+checker for catalog resources, supported local links, fences, TOML and policy
+settings. `tests/test_instruction_artifacts.py` exercises it against disposable
+instruction bundles. These are maintenance tools, not an adoption runtime.
+[Maintenance verification](docs/maintenance/verification.md) owns their commands,
+supported syntax, evidence limits and executable-example reproduction.
+
+Root [AGENTS.md](AGENTS.md) governs work on this source library. Root
+`ARCHITECTURE.md` describes the library; target workspace and project maps remain
+inactive templates. There is no active root `PLANS.md` or native client
+configuration installed here. Dated plans, specifications and research retain
+their original evidence scope; current procedures live in their policy owners.
+
 ## Components and loading
+
+The following components describe an adopted target workspace.
 
 | Component | Content | When to read it |
 | --- | --- | --- |
@@ -42,12 +60,12 @@ documented contract. Native role examples remain limited to Codex. A Markdown li
 does not mean the client has read a file; an instruction route or selected skill
 must direct it to the relevant resource.
 
-Distinguish the source library from each target project's adopted instructions.
-Active root AGENTS/PLANS files for maintaining this library are independent of
-whether its resources can be imported or are loaded in a target project. Validate
-adoption there. Imported shared rules retain the core limits on speculative guards
-and the verification policy's limits on redundant tests; connect them through the
-target entry routes and reconcile existing mandatory checks and local contracts.
+Distinguish source maintenance instructions from each target project's adopted
+instructions. The source maintenance entry does not establish whether resources
+are loaded in a target project. Validate adoption there. Imported shared rules
+retain the core limits on speculative guards and the verification policy's limits
+on redundant tests; connect them through the target entry routes and reconcile
+existing mandatory checks and local contracts.
 
 Agent-facing documentation, profiles, and templates use English as their
 canonical language. A user-facing README may remain in Russian and must not be
