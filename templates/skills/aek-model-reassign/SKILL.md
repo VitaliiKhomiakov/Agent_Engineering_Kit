@@ -1,5 +1,5 @@
 ---
-name: af-model-reassign
+name: aek-model-reassign
 description: Use when the user requests changing saved Agent_Engineering_Kit model pairs, client, role enablement, delegation mode, edges or concurrency.
 ---
 
@@ -12,12 +12,12 @@ Read the [model configuration contract](../../../standards/model-configuration.m
 especially native target mapping, active-session limits, and reassignment.
 That link is relative to this inactive source/bundle template. Before native
 installation, rebase it to the adopted contract: at Codex
-`.agents/skills/af-model-reassign/SKILL.md`, the default contained route is
+`.agents/skills/aek-model-reassign/SKILL.md`, the default contained route is
 `../../../.agents-framework/standards/model-configuration.md`. Use the recorded
 bundle for a flat or custom layout; resolve independently of the process cwd.
 
 - Load the selection version and relevant native settings. For an absent or known
-  unconfigured record, use `af-model-setup` with the choices already supplied. Read
+  unconfigured record, use `aek-model-setup` with the choices already supplied. Read
   v1 without inventing enablement/edges; clarify an unknown schema before editing.
 - Extract the requested changes, preserving unspecified choices. Validate enabled
   pairs, mode, graph and ceiling; reuse known v1 choices during authorized migration.

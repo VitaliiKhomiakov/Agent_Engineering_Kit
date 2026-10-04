@@ -60,8 +60,8 @@ resources = [
   "templates/codex/config.toml",
   "templates/codex/agents/af-implementer.toml",
   "templates/codex/agents/af-reviewer.toml",
-  "templates/skills/af-model-setup/SKILL.md",
-  "templates/skills/af-model-reassign/SKILL.md",
+  "templates/skills/aek-model-setup/SKILL.md",
+  "templates/skills/aek-model-reassign/SKILL.md",
 ]
 required = true
 activities = ["setup"]

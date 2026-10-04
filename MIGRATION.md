@@ -51,7 +51,7 @@ task-store relocation, other-client setup, global settings or plugin-cache edits
 
 ### Integration entry and location
 
-Use [af-integrate-project](templates/skills/af-integrate-project/SKILL.md) for an
+Use [aek-integrate-project](templates/skills/aek-integrate-project/SKILL.md) for an
 explicit framework preparation/import/update request. General audits, ordinary
 coding and missing instruction/model files alone do not trigger it. The skill
 routes into this document; it replaces the former conceptual migration entry.
@@ -59,7 +59,7 @@ routes into this document; it replaces the former conceptual migration entry.
 Before installation, the agent can read the template from an accessible framework
 source named in the request. No global installation is needed. For an authorized
 Codex project installation, the proposed layout is
-`.agents/skills/af-integrate-project/SKILL.md`; verify discovery in the actual
+`.agents/skills/aek-integrate-project/SKILL.md`; verify discovery in the actual
 client/version separately. Other clients require a verified native skill mapping;
 until then source-based reading is available without claiming native discovery.
 
@@ -73,6 +73,26 @@ alone is not a self-contained copy of the migration library. Resolve source-rela
 references there and target-relative references against the named target root.
 Adapt entry routes to the actual installed skill or accessible source location;
 check independent repository opening and any selected role's reachable route.
+
+### Skill names and existing installations
+
+Project skills use the `aek-` prefix for Agent Engineering Kit. The former names
+in historical records refer to the same procedures before this rename:
+
+| Former name | Current name |
+| --- | --- |
+| `af-integrate-project` | `aek-integrate-project` |
+| `af-model-setup` | `aek-model-setup` |
+| `af-model-reassign` | `aek-model-reassign` |
+
+New imports use the current directory and matching skill `name`. During an
+authorized update, reconcile an adopted old skill with its recorded accepted
+contents and local edits under [repeat and update](#repeat-and-update). Update
+its directory, metadata and callers together; retire the managed old entry only
+after the replacement is reachable. Do not install duplicate old/new aliases or
+rename unrelated skills by prefix. Existing target installations are not changed
+by this source rename. Bundle paths and native agent role names retain their
+existing contracts; the skill prefix does not rename `.agents-framework/` or `af-<role>`.
 
 ## Layout and path contract
 
@@ -254,7 +274,7 @@ second progress record for a target import.
 ### Model-selection step
 
 Every full integration accounts for the selected client and model choices through
-`af-model-setup` ([inactive source template](templates/skills/af-model-setup/SKILL.md)).
+`aek-model-setup` ([inactive source template](templates/skills/aek-model-setup/SKILL.md)).
 Pass the adoption intent, preparation/application mode, prior choices, actual
 source/target roots and authorized write scope. This is a required decision step,
 not mandatory delegation, template-default assignment or permission to change a
@@ -266,8 +286,8 @@ running session. Source-library maintenance and ordinary coding do not trigger i
 | Missing/incomplete selection | Reuse supplied choices; the setup contract resolves material missing client, mode and pairs, plus edges/ceiling when delegated. Await necessary answers before dependent writes/spawns; report unresolved while pending. |
 | Explicit user deferral | Record the decision in the canonical adoption task and summarize deferred in the outcome. Preserve existing files/known choices; rules may proceed independently. Deferral is not configured state or delegation permission. |
 | Preparation only | Read the setup skill/contract to prepare exact changes and unresolved choices. Leave target routing/native files and skills untouched; no pilot or session switch. |
-| Ordinary rules update | Check/reuse relevant existing choices or retain an explicit prior deferral. Do not restart onboarding or change assignments; newly requested setup follows `af-model-setup`. Report missing unselected setup as unresolved, not an invented deferral. |
-| Requested reassignment/client change | Use `af-model-reassign` ([source template](templates/skills/af-model-reassign/SKILL.md)); preserve unrelated choices. |
+| Ordinary rules update | Check/reuse relevant existing choices or retain an explicit prior deferral. Do not restart onboarding or change assignments; newly requested setup follows `aek-model-setup`. Report missing unselected setup as unresolved, not an invented deferral. |
+| Requested reassignment/client change | Use `aek-model-reassign` ([source template](templates/skills/aek-model-reassign/SKILL.md)); preserve unrelated choices. |
 | Skill unavailable | Follow the reachable [model-configuration contract](standards/model-configuration.md) and disclose the fallback. If that owner is also inaccessible, report unresolved and continue only independent authorized adoption work. |
 | Unknown schema, unsupported pair, conflict or partial write | Follow the model owner's conflict/recovery rules; preserve known choices. Report unresolved/partial, without substitution, invented deferral or successful-activation claims. |
 
@@ -299,7 +319,7 @@ Record both source/template identity and the accepted adapted target result. A
 revision alone is insufficient for locally modified source files; identify the
 selected contents. Preserve retrievable comparison/recovery snapshots as needed;
 a hash proves equality but cannot supply missing merge or restoration contents.
-Ownership covers only recorded files/portions, never every `af-` name or all fields
+Ownership covers only recorded files/portions, never every framework-prefixed name or all fields
 of a shared native file. Record source removals and proposed ownership changes in
 the preview. Losing access to the record does not grant ownership of target files.
 
@@ -585,13 +605,13 @@ uncommitted work. If OpenSpec is selected, also verify its resolved artifact pat
 task tracking, and navigation links; do not assume Markdown relocates CLI outputs.
 
 The integration entry is the inactive
-[af-integrate-project template](templates/skills/af-integrate-project/SKILL.md).
+[aek-integrate-project template](templates/skills/aek-integrate-project/SKILL.md).
 Two separate instruction-only model skills also exist:
-[af-model-setup](templates/skills/af-model-setup/SKILL.md) and
-[af-model-reassign](templates/skills/af-model-reassign/SKILL.md). Install only the
+[aek-model-setup](templates/skills/aek-model-setup/SKILL.md) and
+[aek-model-reassign](templates/skills/aek-model-reassign/SKILL.md). Install only the
 procedures the target workspace needs; copying a template or its unconfigured
-example is not consent to model assignments. Only `af-design-change` and
-`af-deliver-phase` remain conceptual here.
+example is not consent to model assignments. Only `aek-design-change` and
+`aek-deliver-phase` remain conceptual here.
 
 Use a verified native mapping for the selected client.
 Codex role targets are TOML; Claude Code and Cursor role targets are Markdown with YAML

@@ -34,7 +34,7 @@ the source bytes. Preserve the last accepted state during an incomplete update.
 | --- | --- | --- | --- |
 | `<target-relative path; whole file or explicit fields/section>` | `<source-relative path + content identity; adaptation reference>` | `<accepted snapshot + hash, or hash with its limitations>` | `<snapshot reference or absent>` |
 
-List only explicitly adopted files or portions. An `af-` name does not establish
+List only explicitly adopted files or portions. A framework-prefixed name does not establish
 ownership. For shared native files identify the owned fields/section and preserve
 the rest. Source removals require a prepared decision, not automatic deletion.
 Snapshots needed for comparison/recovery must remain retrievable; hashes prove

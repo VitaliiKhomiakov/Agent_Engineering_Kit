@@ -52,7 +52,7 @@ $routes
 
 ## Planning, skills and roles
 
-Explicit framework import/update/preparation uses `af-integrate-project` at
+Explicit framework import/update/preparation uses `aek-integrate-project` at
 `<actual installed or accessible source skill path>`. Read `.agents-framework/adoption.md`
 for import/update/recovery only; ordinary work or missing files does not start integration.
 Keep applicable local constraints in their operational owners.

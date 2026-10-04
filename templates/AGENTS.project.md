@@ -20,7 +20,7 @@ provenance route below; a link to an undiscovered parent is insufficient.
 - Material local contract: `<transaction, compatibility, or isolation requirement>`.
 - Adoption: `<reachable .agents-framework/adoption.md for this target>` owns provenance
   and accepted exception decisions; retain their applicable operational constraints here.
-- Explicit framework import/update/preparation: `af-integrate-project` at
+- Explicit framework import/update/preparation: `aek-integrate-project` at
   `<reachable installed or source skill path>`; only then read adoption provenance.
   Recovery also reads the record; ordinary coding and missing files do not trigger import.
 

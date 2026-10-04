@@ -1,5 +1,5 @@
 ---
-name: af-model-setup
+name: aek-model-setup
 description: Use when full Agent_Engineering_Kit integration reaches model selection, the user requests model setup, or authorized delegation requires missing workspace role choices.
 ---
 
@@ -14,14 +14,14 @@ Read the [model setup contract](../../../standards/model-configuration.md) for
 first-use behavior, persistence, native target mapping, and execution limits.
 That link is relative to this inactive source/bundle template. Before native
 installation, rebase it to the adopted contract: at Codex
-`.agents/skills/af-model-setup/SKILL.md`, the default contained route is
+`.agents/skills/aek-model-setup/SKILL.md`, the default contained route is
 `../../../.agents-framework/standards/model-configuration.md`. Use the recorded
 bundle for a flat or custom layout; resolve independently of the process cwd.
 
 - Resolve the workspace, record version and relevant native settings. For v1,
   preserve known choices; clarify unknown versions before editing or delegation.
 - If a configured selection supplies the task's required choices and is consistent,
-  return to the task; do not ask again. Route an explicit change to `af-model-reassign`.
+  return to the task; do not ask again. Route an explicit change to `aek-model-reassign`.
 - For integration, honor the supplied preparation/application intent and source
   `MIGRATION.md` model-step outcome contract. Preparation produces an exact proposal
   without target writes, skill installation or activation. An explicit deferral

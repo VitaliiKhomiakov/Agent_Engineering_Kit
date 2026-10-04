@@ -66,7 +66,7 @@ preserve one canonical store and record it separately from each execution checko
 - Unreal project/plugin work: [Unreal](.agents-framework/standards/unreal-engine.md) task routes. Generic C++ alone does not
   select it; Blueprint-only work needs no C++ detail and source-only work needs no MCP setup.
 - Planning/stages: `PLANS.md`, the canonical task and [delivery rules](.agents-framework/standards/delivery-workflow.md).
-- Explicit framework import/update/preparation: `af-integrate-project` at
+- Explicit framework import/update/preparation: `aek-integrate-project` at
   `<actual installed skill or accessible source skill path>`. Read `.agents-framework/adoption.md`
   only for import/update/recovery; ordinary work or missing files does not start integration.
 - Superpowers: [local adaptations](.agents-framework/standards/superpowers.md), then the triggered skill; helpers are conditional.

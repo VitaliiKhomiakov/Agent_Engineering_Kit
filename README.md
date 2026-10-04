@@ -42,7 +42,7 @@ skill directly from the source; global skill installation is unnecessary.
 
 To preview adoption, replace the placeholders in this request:
 
-> Read `templates/skills/af-integrate-project/SKILL.md` from the Agent_Engineering_Kit
+> Read `templates/skills/aek-integrate-project/SKILL.md` from the Agent_Engineering_Kit
 > source at `<framework-path>`. For the project at `<project-path>` using
 > `<client>`, prepare an import of the applicable rules. Show the proposed file
 > changes and conflict resolutions. Leave the target project untouched.
@@ -61,7 +61,7 @@ An explicit import request can already authorize the relevant changes; the
 procedure reuses that authorization. Model setup and a live client pilot have
 separate scopes.
 
-The [integration skill](templates/skills/af-integrate-project/SKILL.md) follows
+The [integration skill](templates/skills/aek-integrate-project/SKILL.md) follows
 [MIGRATION.md](MIGRATION.md), which defines the full procedure:
 
 1. Inspect the actual stack, active instructions, local contracts, and client
@@ -216,8 +216,8 @@ reassignment.
   may be used, within the saved limit. A disabled reviewer is not replaced by an
   unnamed worker.
 
-Use the [setup skill](templates/skills/af-model-setup/SKILL.md) or
-[reassignment skill](templates/skills/af-model-reassign/SKILL.md) for the respective
+Use the [setup skill](templates/skills/aek-model-setup/SKILL.md) or
+[reassignment skill](templates/skills/aek-model-reassign/SKILL.md) for the respective
 operation, following the [orchestration policy](standards/orchestration.md).
 Values in the [routing template](templates/framework/model-routing.toml) are
 unconfigured examples. Saved choices must be reconciled with supported native

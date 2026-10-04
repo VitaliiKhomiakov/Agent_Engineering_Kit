@@ -130,9 +130,9 @@ native configuration only for a relevant assignment or observed conflict.
 | Situation | Action |
 | --- | --- |
 | Missing/unconfigured record; task can run inline | Use the current session and relevant engineering rules. No mandatory questionnaire, profile write or delegation; this is not a saved model assignment |
-| User requests model setup | Use `af-model-setup` or this procedure if the skill is unavailable |
-| Full integration reaches its model-selection step | Use `af-model-setup` to check/reuse or prepare authorized setup; apply only within the selected adoption intent. Source `MIGRATION.md` owns preparation, explicit deferral and unresolved outcomes |
-| User requests a change to saved choices | Use `af-model-reassign`; preserve other choices |
+| User requests model setup | Use `aek-model-setup` or this procedure if the skill is unavailable |
+| Full integration reaches its model-selection step | Use `aek-model-setup` to check/reuse or prepare authorized setup; apply only within the selected adoption intent. Source `MIGRATION.md` owns preparation, explicit deferral and unresolved outcomes |
+| User requests a change to saved choices | Use `aek-model-reassign`; preserve other choices |
 | A required delegated role has missing choices | Resolve only necessary choices before spawning; continue independent inline work |
 | Configured selection is consistent | Reuse it; no repeated onboarding after a task, conversation or compaction |
 | Pair is unsupported or active settings conflict | Report it and resolve the assignment before dependent work; no silent substitution or claim of conformity |
@@ -295,7 +295,7 @@ restart tasks, change models or infer missing effort telemetry.
 
 ## Reassignment
 
-`af-model-reassign` applies requested pairs, role enablement, mode, edges or ceiling
+`aek-model-reassign` applies requested pairs, role enablement, mode, edges or ceiling
 changes to existing choices. A client switch requires reconciling that client's
 native targets within the granted scope; it never translates model IDs or efforts.
 Preserve other pairs, scheme, checkpoints, required checks and permissions.
