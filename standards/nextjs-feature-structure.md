@@ -37,8 +37,10 @@ Dependency rules for our variant:
 
 - `app` composes use cases; features do not import app.
 - A feature uses its own code plus public contracts from entities and shared.
-  Features do not import each other's internals. Compose a shared use case above
-  them or give it an explicit contract; cycles and hidden dependencies are forbidden.
+  It does not import another feature, including public entries and type-only imports.
+  Compose interacting features in `app`; when one needs a capability from another,
+  define the required contract in the consuming feature and supply its implementation
+  from that composition point. Cycles and hidden dependencies are forbidden.
 - Entities do not depend on features or routes. Shared does not know business modules.
 - Create a separate entity only when the model has a real shared owner; do not
   move a type used by one feature there merely to fill a layer.
@@ -48,6 +50,14 @@ Dependency rules for our variant:
   independent user action, responsibility, or reuse, not for every function and button.
 - A module's public interface must preserve the Server/Client split. A barrel
   `index.ts` is optional and does not permit mixing execution environments.
+
+For example, a Client Component in `app/(shop)/checkout/_components/` may import
+both `features/cart/client` and `features/place-order/client`, then supply the
+cart capability through a callback matching the contract owned by `place-order`.
+An import from `features/place-order/` to `features/cart/client` (or its internal
+`model/`) is forbidden, even without a cycle. This composition stays within the
+client boundary; it does not make an ordinary callback serializable across the
+Server/Client boundary. These import directions are our policy, not a Next.js requirement.
 
 ## Migrating from an existing structure
 
