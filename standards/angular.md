@@ -35,13 +35,19 @@ an older application or authorize converting its NgModules or state model.
 
 | Task touches | Read |
 | --- | --- |
-| Features, components, services, DI scope, standalone/NgModules | [Architecture and composition](angular/architecture.md) |
+| Folder structure, application sections, nested domains or feature ownership | [Feature ownership](angular/architecture.md#feature-ownership) |
+| Pages, components, layouts or allowed imports | [Presentation roles](angular/architecture.md#pages-components-and-layouts) and [dependency direction](angular/architecture.md#dependency-direction) |
+| Services or provider scope | [Services, stores and DI](angular/architecture.md#services-stores-and-dependency-injection) |
+| Standalone or NgModule composition | [Standalone and NgModules](angular/architecture.md#standalone-and-ngmodules) |
 | Local state, signals, Observable ownership, subscriptions or HTTP races | [Reactivity and state](angular/reactivity.md) |
 | OnPush, zoneless, rendering cost, tracking or lazy views | [Change detection and performance](angular/change-detection.md) |
 | Route state, forms, validation, HTTP contracts or security | [Routes, forms and boundaries](angular/boundaries.md) |
 | Component styles, global tokens, themes or encapsulation | [Styles](angular/styles.md) |
 | Builds, tests, SSR, compatibility or performance evidence | [Verification](angular/verification.md) |
 | NgRx is used or explicitly selected | [NgRx entry](ngrx.md), then only the relevant package sections |
+
+Optional example: [application structure and state placement](angular/examples/application-structure.md).
+Its NgRx sections apply only when that library is selected.
 
 ## Basis
 

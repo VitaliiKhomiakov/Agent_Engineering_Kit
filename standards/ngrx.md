@@ -26,7 +26,9 @@ Read only relevant package sections; examples and research are optional.
 
 | Task touches | Read |
 | --- | --- |
-| Library selection, feature ownership, providers, lifecycle or state shape | [State architecture](ngrx/state-architecture.md) |
+| Library selection or state shape | [State architecture](ngrx/state-architecture.md) |
+| Root Store wiring, flat feature Store files or component-local stores | [Store placement](ngrx/state-architecture.md#store-placement) |
+| Eager/lazy registration, providers or lifecycle | [Providers and feature boundaries](ngrx/state-architecture.md#providers-and-feature-boundaries) |
 | Store actions/reducers, selectors, memoization or `selectSignal` | [Store and selectors](ngrx/store-selectors.md) |
 | Effects, concurrency, errors, retries or external synchronization | [Effects and async workflows](ngrx/effects.md) |
 | Normalized Entity collections or Router Store | [Entity and Router Store](ngrx/entity-router.md), relevant subsection only |

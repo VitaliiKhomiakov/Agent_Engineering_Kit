@@ -60,8 +60,8 @@ design document or progress ledger is required under the repository planning pol
 
 - Source workspace/checkout: `/home/vitalii/Documents/Local_Projects/Agent_Engineering_Kit`.
   This document is the canonical task owner. Preserve all earlier audit changes.
-- Observed target: `/home/vitalii/Documents/Local_Projects/angular-login-registration-example-with-ngrx-store`.
-  Development is active there. Inspection was read-only; do not run its tests,
+- Observed target: an external consuming project; its local path is omitted.
+  Development was active there at inspection time. Inspection was read-only; do not run its tests,
   change entries, relocate files or write its task store as part of source work.
 - Use the current source checkout, inline; no staging, commits, worktrees,
   delegation, native-client setup or changes to installed plugin caches.

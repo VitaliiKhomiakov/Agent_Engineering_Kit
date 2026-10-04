@@ -326,6 +326,7 @@ resources = [
   "standards/angular/boundaries.md",
   "standards/angular/styles.md",
   "standards/angular/verification.md",
+  "standards/angular/examples/application-structure.md",
 ]
 technologies = ["angular"]
 activities = ["design", "implementation", "test", "review"]

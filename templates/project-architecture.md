@@ -113,11 +113,19 @@ preserve from behavior intentionally being corrected.
 - Angular, when present: `<resolved Angular/CLI/TypeScript/RxJS versions,
   standalone/NgModule composition, ZoneJS/zoneless providers, change detection,
   CSR/SSR/hydration, feature/public boundaries, form and styling choices>`.
+  Record the section names and access policies, including the project-chosen
+  name of any authenticated section; do not assume it is named `core`. Map section
+  routes/layouts, simple pages, nested domains, presentation components and shared
+  infrastructure to their actual paths and public import contracts.
   Record local/route/application state owners, injector lifetime and explicit
   reset behavior; distinguish URL state, drafts, canonical entities and derivations.
   With NgRx, record used package versions, Store/Effects versus SignalStore or
-  existing ComponentStore, root/feature registrations, selectors/computed values,
-  request concurrency and stale-result policy, cache keys/invalidation, Entity
+  existing ComponentStore. For classic Store, record the root provider entry,
+  eager/lazy feature registration locations and feature Store file owners.
+  For SignalStore or ComponentStore, record store paths and root/route/component
+  provider scope; do not introduce classic Store wiring for those packages alone.
+  Record applicable selectors/computed values, request concurrency and stale-result
+  policy, cache keys/invalidation, Entity
   query membership and Router Store serializer/timing only where used.
 - Related class/type grouping: `<profile or justified exception>`.
 - TypeScript/Python: `<checker/version, strict settings, no any/Any, checked scope,
