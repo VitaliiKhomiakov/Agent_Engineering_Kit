@@ -67,6 +67,8 @@ The [integration skill](templates/skills/af-integrate-project/SKILL.md) follows
    capabilities. For a new project, record the intended architecture as proposed.
 2. Select profiles from the [catalog](standards/catalog.toml), including shared
    required policies and the selected profiles' dependencies and resources.
+   New imports put `standards/` and inactive `templates/` under `.agents-framework/`;
+   root project documents and active native files retain their agreed locations.
 3. Adapt entry and architecture templates. Reconcile conflicting instructions
    in the files the client actually loads while preserving required project checks.
 4. Apply the authorized changes, retaining originals and accounting for edits
@@ -79,6 +81,12 @@ contents, exceptions, and recovery information. Updates compare these with local
 changes. Read this record for import, update, or recovery; task progress and model
 assignments retain their own documents. Keep the framework source accessible for
 future updates.
+
+The source library layout stays unchanged. Existing flat imports remain supported;
+an ordinary update does not relocate them. For a selected move, follow the
+[layout and relocation contract](MIGRATION.md#layout-and-path-contract), preserving
+local edits and immutable old accepted snapshots. Portable optional source routes
+use known URLs or labelled source paths through provenance, not author-machine links.
 
 ## Choose rules by the actual stack
 
@@ -146,11 +154,19 @@ behavior and its risks while retaining mandatory project and CI gates. Documenta
 changes normally need artifact checks; executable examples or behavior changes may
 need focused tests.
 
-By default, checks run together at the end of a coherent phase. Earlier checks are
+Checks run together at the boundary selected by `verification.timing` under
+[policy configuration](standards/policy-configuration.md). Earlier checks are
 appropriate for reproducing a bug, resolving a concrete uncertainty, validating a
 risky dependency, selected TDD, or a required gate. After a fix, rerun affected
 checks and reuse results whose inputs remain valid. Keep summaries compact and
 retain detailed failure logs separately.
+
+Shared [policy defaults](standards/policy-defaults.toml) own cadence/review choices,
+size-review thresholds and soft instruction-length ranges. An adopted project may
+provide sparse overrides at `.agents-framework/policy.toml`; absence needs no setup.
+The checker validates schema and merged constraints. These settings preserve
+mandatory checks, acceptance and permissions; they are not model configuration or
+limits on test/review counts.
 
 ### Architecture and plans with clear ownership
 
@@ -200,6 +216,9 @@ operation, following the [orchestration policy](standards/orchestration.md).
 Values in the [routing template](templates/framework/model-routing.toml) are
 unconfigured examples. Saved choices must be reconciled with supported native
 settings; writing a file does not switch an already-running model.
+Full integration includes a required [model-selection decision](MIGRATION.md#model-selection-step):
+reuse consistent choices, prepare authorized setup, retain an explicit deferral
+or report an unresolved step. Ordinary coding does not trigger this workflow.
 
 ### Superpowers integration
 
@@ -238,6 +257,7 @@ the intended model or reasoning effort is active.
 
 ```text
 Agent_Engineering_Kit/
+├── AGENTS.md                  # Instructions for maintaining this source library
 ├── README.md                  # Overview and adoption entry point
 ├── ARCHITECTURE.md            # Design of this rules library
 ├── MIGRATION.md               # Preparation, import, updates, and recovery
@@ -261,10 +281,11 @@ Agent_Engineering_Kit/
     └── research/              # Sources, version context, and evidence limits
 ```
 
-The root [ARCHITECTURE.md](ARCHITECTURE.md) describes this library. Target-project
-entry and planning files are supplied as templates; active root `AGENTS.md` and
-`PLANS.md` files are not installed here. Target adoption is verified in each target
-workspace independently.
+The root [ARCHITECTURE.md](ARCHITECTURE.md) describes this library, and
+[AGENTS.md](AGENTS.md) guides agents maintaining its source. Target-project entry
+and planning files remain inactive templates; no root `PLANS.md` or client
+configuration is installed by this maintenance entry. Target adoption is verified
+in each target workspace independently.
 
 ## Status and verification limits
 
@@ -292,7 +313,10 @@ a small inline task, justified delegation if selected, checkpoints, and resumpti
 from canonical task documents. Compare efficiency only on comparable tasks with
 the same model and reasoning effort.
 
-When changing the library, check affected links, Markdown structure, relevant
-TOML/YAML syntax, and instruction consistency. Validate executable examples with
+When changing the library, run `python3 tools/check_instruction_artifacts.py`
+(Python 3.11+, standard library only) for catalog, local-link, fence and TOML checks.
+See [maintenance verification](docs/maintenance/verification.md) for scoped commands,
+checker tests, syntax limits and example reproduction. Also review affected YAML
+and instruction consistency. Validate executable examples with
 the relevant stack when their behavior changes. There is no standalone framework
 application or application test suite in this repository.

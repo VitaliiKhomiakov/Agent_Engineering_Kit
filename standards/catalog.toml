@@ -1,7 +1,7 @@
 # Semantics: standards/catalog.md (paths resolve from the bundle root).
 # Dependencies/resources describe available files, not a recursive reading queue.
 schema_version = 1
-assets = ["templates/PLANS.md", "templates/task.md", "standards/catalog.md", "standards/catalog.toml", "templates/framework/adoption-record.md"]
+assets = ["templates/PLANS.md", "templates/task.md", "standards/catalog.md", "standards/catalog.toml", "templates/framework/adoption-record.md", "standards/policy-defaults.toml", "standards/policy-configuration.md"]
 templates = {entry = "templates/policy-entry.md", claude-bridge = "templates/claude/policy-bridge.md", cursor-rule = "templates/cursor/rule-route.mdc"}
 
 [[profiles]]
@@ -65,7 +65,7 @@ resources = [
 ]
 required = true
 activities = ["setup"]
-when = "Initial model setup, explicit reassignment, or relevant configuration repair."
+when = "Integration model selection/reuse, authorized setup, explicit reassignment, or relevant configuration repair."
 
 [[profiles]]
 id = "python-fastapi"

@@ -16,6 +16,13 @@ SQL at the adapter boundary. The transaction internal to one save does not inclu
 an earlier read, another repository call or a remote request. TypeORM does not
 guarantee that two loads of one row return the same JavaScript object.
 
+For `save` updates, omitted/`undefined` properties are skipped; assigning undefined
+does not clear a stored value. A permitted clear operation must persist explicit
+`null` to a nullable column through the named domain/adapter contract. Reload to
+verify the stored result, including unchanged omission and rejected null for a
+required column. `invalidWhereValuesBehavior` governs filters, not this write
+contract. Verify other update/upsert APIs and drivers separately.
+
 For a multi-step atomic operation, use `dataSource.transaction(async manager => ...)`
 or an explicitly owned QueryRunner transaction. Every participating read/write
 must use that manager: obtain repositories with `manager.getRepository(Entity)`;

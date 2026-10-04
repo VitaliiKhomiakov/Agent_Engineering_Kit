@@ -22,8 +22,20 @@ transaction simply because most fixture DDL works there.
 
 ## Compatibility is a concrete matrix
 
-Record Python, SQLAlchemy, driver, database and analyzer versions. The researched
-stable baseline is 2.0.54; 2.1.0rc2 is prerelease and is not adopted automatically.
+Record Python, SQLAlchemy, driver, database and analyzer versions. The tested
+historical baseline is 2.0.54 on Python 3.12.3. On **2026-10-04**, the official
+[2.1 changelog](https://docs.sqlalchemy.org/en/21/changelog/changelog_21.html)
+lists 2.1.3 as released; this update is source-reviewed, not a 2.1 runtime test.
+
+| Target | Decision |
+| --- | --- |
+| Existing 2.0 application, including Python 3.10 | Preserve its compatible pins and support policy. SQLAlchemy 2.0 supports that interpreter; the library's 3.11-syntax examples were executed on 3.12 only. No 2.1 requirement is imposed. |
+| Selected 2.1 application | Requires Python 3.11+. Review changed [autoflush](sessions-transactions.md), [async dependencies/driver selection](async-engines.md) and [mapped-dataclass defaults](mapping-contracts.md) for affected code. |
+
+Retain the example pins. An actual 2.1 adoption needs checks on its supported
+driver/backend and relevant pending-write, async startup and mapped-default paths;
+the historical 2.0 runs do not establish that compatibility.
+
 For 1.4 migration, use the official staged migration path/deprecation diagnostics,
 then test on the target 2.0 runtime. Removing legacy engine.execute, implicit
 library autocommit or old statement argument shapes can change transaction/result
@@ -33,9 +45,8 @@ merely for style. A local change does not authorize a project-wide conversion.
 Use native 2.0 typed mappings. The legacy SQLAlchemy mypy plugin is deprecated and
 only supported through mypy 1.10.1; it is not the strategy for current analyzers.
 Conflicting third-party stubs can hide native typing. Check generated constructors
-and typed results without Any/cast/ignore bypasses. Prerelease 2.1 has further changes
-in defaults, dataclass behavior and dependencies; do not mix its examples into a 2.0
-project. Review dialect/driver notes too, not just the ORM version string.
+and typed results without Any/cast/ignore bypasses. Do not mix 2.1-only recipes into
+a 2.0 project. Review dialect/driver notes too, not just the ORM version string.
 
 ## Evidence for the affected boundary
 

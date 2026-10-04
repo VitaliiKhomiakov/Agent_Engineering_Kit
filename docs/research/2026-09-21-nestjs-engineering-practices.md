@@ -213,3 +213,40 @@ the exact tested code/configuration. The [plan](../plans/2026-09-21-engineering-
 records commands, scoped baselines, delivery checks and limitations. The one-report
 file sink demonstrates lifecycle ownership, not atomic publication, crash durability
 or a general persistence adapter. K13 React is the next user checkpoint.
+
+## 2026-10-03 follow-up: NEST-01
+
+The [validated command](../../standards/nestjs/examples/validated-command.md) now
+requires each `lines` element to be an object, alongside recursive validation.
+The pinned [nested validator](https://github.com/typestack/class-validator#validating-nested-objects)
+supports multiple array dimensions;
+[IsObject](https://raw.githubusercontent.com/typestack/class-validator/v0.15.1/src/decorator/typechecker/IsObject.ts)
+rejects arrays and null. The transport topic owns the short shape caveat.
+
+Executed before the fix: `{ "lines": [[]] }` and
+`{ "lines": [[{ "quantity": 1 }]] }` both returned 500 through the real configured
+Nest/Fastify pipeline. Stock and sequence remained unchanged. The new corpus
+failed against the original DTO. After adding `@IsObject({ each: true })`, all
+five existing tests passed with seventeen invalid representations, including both
+new shapes; the subsequent five-unit reservation returned receipt 1, remaining 0.
+`npm run check`, `npm run lint`, `npm run build` and `npm test` all exited 0.
+
+Execution: Node 24.21.0; Nest 12.0.4, Fastify 5.12.5, class-validator 0.15.1,
+class-transformer 0.5.1, native TS 7.0.2, compatibility TS package 6.0.2,
+ESLint 10.11.0 and typescript-eslint 8.70.0. Dependencies were installed in a
+fresh temporary directory with install scripts disabled; the resolved lock is
+retained. No fixture dependency pin changed. Evidence and lock:
+`/tmp/aek-maint-stage1-h090d9fo/nest/`. The final named blocks match the tested
+files. Injection proves the in-process boundary, not real networking, concurrent
+storage or a legacy Nest version. Earlier dated results above remain historical.
+
+## 2026-10-04 follow-up: NEST-02
+
+Source review of the official [Nest 12 testing migration guidance](https://docs.nestjs.com/migration-guide#testing-stack)
+confirmed its Node 24.9+ requirement for Jest loading the ESM-only packages, with
+`ERR_REQUIRE_ASYNC_MODULE` documented on older runtimes. The
+[verification topic](../../standards/nestjs/verification-operations.md#existing-projects-and-version-changes)
+now scopes this caveat to that combination and retains separate runtime/CLI checks.
+No consuming application was migrated and no Jest suite was run in this follow-up.
+The earlier Node-runner fixture evidence remains unchanged; it does not prove Jest
+compatibility. No runner replacement or dependency installation was performed.

@@ -8,13 +8,24 @@ the selected scheme needs them, following [orchestration](../../standards/orches
 During setup, adapt these inactive examples to the workspace's confirmed model
 selection. The templates do not change this session or any existing project.
 See [model configuration](../../standards/model-configuration.md) for the mapping,
-conditional setup, legacy handling, reassignment, and actual-runtime checks.
+integration selection/reuse, authorized setup, legacy handling, reassignment and
+actual-runtime checks. Source `MIGRATION.md`, "Model-selection step", owns the
+required integration decision, including explicit deferral; ordinary coding does
+not trigger setup merely because configuration is absent.
 
 | File | Target location | Purpose |
 | --- | --- | --- |
 | [config.toml](config.toml) | `.codex/config.toml` | Main model, worker defaults, concurrency ceiling |
 | [af-implementer.toml](agents/af-implementer.toml) | `.codex/agents/af-implementer.toml` | Bounded implementation using the selected model/effort |
 | [af-reviewer.toml](agents/af-reviewer.toml) | `.codex/agents/af-reviewer.toml` | Independent review when justified |
+
+Native destinations remain relative to the target instruction root. The examples'
+developer-instruction paths use `.agents-framework/standards/...` from that root;
+adapt this prefix for a recorded flat/custom bundle, not from the TOML directory
+or current cwd. Inactive copies stay under the bundle's `templates/codex/` and
+do not activate roles. Parse installed TOML and inspect these path literals
+separately: Markdown link validation cannot check developer instructions.
+Source `MIGRATION.md`, "Adapting installation routes", owns the relocation rules.
 
 The shown Astra/Sol high values are suggestions, not fixed routing rules.
 The framework example starts unconfigured, with a suggested enabled implementer,
@@ -46,6 +57,13 @@ Standalone custom roles require `name`, `description`, and `developer_instructio
 Set model and effort together and update role files as well as defaults during
 reassignment. The examples inherit permissions; the reviewer's no-edit instruction
 is behavioral guidance, not an independently configured filesystem sandbox.
+During authorized setup, consider supported role restrictions under
+[the role-scope contract](../../standards/model-configuration.md#role-scope-and-native-restrictions).
+Verify effective parent/session overrides before claiming enforcement. Send checks
+requiring writes to an authorized executor; a planner's assigned draft needs its
+own explicit write scope. Read-only access does not isolate concurrent filesystem
+changes. The [dated comparison](../../docs/research/2026-10-04-orchestration-capabilities.md)
+is optional source evidence for capability questions, not a mandatory imported file.
 
 Parse TOML and compare the intended/native assignments. Then verify actual model
 and effort through supported client controls; a file change or successful parser

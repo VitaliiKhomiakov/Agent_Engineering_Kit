@@ -136,3 +136,20 @@ affected; template compilation alone is not evidence of their behavior.
 
 Catalog/resource/link checks and the accountable scoped review are recorded in
 the plan. No universal performance improvement is claimed without profiling.
+
+## 2026-10-04 follow-up: ANG-01
+
+The [zoneless forms guidance](https://angular.dev/guide/zoneless#reactive-forms-in-zoneless-applications)
+identifies a missing notification boundary for programmatic Reactive Forms updates.
+The forms topic now owns that caveat, with a short route from change detection.
+[AbstractControl](https://angular.dev/api/forms/AbstractControl) documents form/status
+events and emission suppression; owned subscriptions retain the existing reactivity
+policy. The verification topic describes hydration/reset, array/validation UI
+updates, suppressed events and cleanup through production notification paths.
+
+This is a source/consistency review. No compatible zoneless forms fixture is
+present in the library; the historical temporary harness is no longer available
+and its recorded cases covered stores, not form DOM updates. No runner, dependency
+or forms migration was added. The prescribed future component checks use supported
+stabilization without per-update forced change detection. No new Angular rendering,
+subscription cleanup or version-matrix execution is claimed.

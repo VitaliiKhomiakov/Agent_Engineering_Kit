@@ -18,6 +18,15 @@ Read when changing database access, transactions, HTTP integrations, or resource
   codes according to the remote API: a non-2xx response is not itself a transport
   error. Choose finite request budgets and bounded input/output handling where
   required; account for streaming and long-running operations explicitly.
+- For HTTP/1 connection reuse, consume the required body within its budgets and
+  close it. Unread bytes can prevent reuse; keeping the same Client is not proof
+  of reusing its TCP connection. Check the supported Go version and RoundTripper:
+  newer Transport implementations may attempt a bounded read after close, but
+  close alone is no universal reuse guarantee. Any explicit drain needs both
+  byte and time limits. Rejecting oversized/stalled content may properly sacrifice
+  reuse; do not drain unbounded input just to save a connection or apply this
+  HTTP/1 rule indiscriminately to HTTP/2. When reuse is required, observe it with
+  `httptrace` or server connection accounting on the target transport.
 - For servers, set appropriate header/body limits, timeouts, and graceful
   shutdown behavior from the service contract. Do not prescribe one timeout
   value for every endpoint or assume a header limit bounds the body.

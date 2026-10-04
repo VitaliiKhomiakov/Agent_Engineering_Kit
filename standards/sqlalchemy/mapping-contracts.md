@@ -27,6 +27,13 @@ appropriate. Dataclass mapping does not add validation or make entities immutabl
 SQLAlchemy's dataclass integration has feature limits. Do not use legacy stubs or
 the deprecated mypy plugin to erase errors in modern mappings.
 
+For a 2.1 mapped-dataclass target, omitted defaults can be supplied through
+descriptors without populating `__dict__`; do not infer assignment from a readable
+default. Unlike 2.0, `mapped_column(default=...)` and `insert_default=...` cannot
+be combined. Choose constructor/default access versus insert-time generation
+deliberately, and check omitted relationships against explicit `None` when a
+foreign-key value or merge is involved. Preserve 2.0 semantics in 2.0 code.
+
 Map nullable/exact numeric/time/JSON values according to the actual dialect and driver.
 Enforce durable uniqueness, foreign keys and required values in the database.
 `@validates` observes ordinary attribute assignment, not every load or arbitrary SQL
@@ -55,6 +62,7 @@ conflict-resolution policy. Do not expose session-bound graphs as a public contr
 
 Basis: [declarative tables](https://docs.sqlalchemy.org/en/20/orm/declarative_tables.html),
 [dataclass mapping](https://docs.sqlalchemy.org/en/20/orm/dataclasses.html),
+[2.1 dataclass changes](https://docs.sqlalchemy.org/en/21/changelog/migration_21.html#orm-mapped-dataclasses-no-longer-populate-implicit-default-collection-based-default-factory-in-dict),
 [attribute validation](https://docs.sqlalchemy.org/en/20/orm/mapped_attributes.html),
 [cascades](https://docs.sqlalchemy.org/en/20/orm/cascades.html),
 [mutation tracking](https://docs.sqlalchemy.org/en/20/orm/extensions/mutable.html), and

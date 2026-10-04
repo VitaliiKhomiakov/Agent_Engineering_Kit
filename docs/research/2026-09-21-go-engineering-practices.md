@@ -230,3 +230,18 @@ than a language-wide prohibition.
 Actual commands, results, baseline, and remaining verification limits are recorded
 once in the [K01 plan record](../plans/2026-09-21-engineering-practices.md#k01-working-scope).
 The next topic is Gin after the user's K01 checkpoint.
+
+## 2026-10-04 follow-up: GO-01
+
+The resource topic distinguishes body closure from HTTP/1 connection reuse.
+The [Go 1.26.1 Client.Do source](https://raw.githubusercontent.com/golang/go/go1.26.1/src/net/http/client.go)
+warns about unread bodies; the [current Client.Do contract](https://pkg.go.dev/net/http#Client.Do)
+also describes a limited asynchronous read on close by Transport. Therefore the
+rule depends on the supported runtime/transport and promises neither universal
+close-only reuse nor universal loss of reuse after early close.
+
+Static review covered bounded successful consumption, oversized content and a
+stalled peer. Byte/time budgets may take priority over retaining a connection;
+no unbounded drain or HTTP/2 generalization was added. If reuse is an actual
+adapter requirement, the instruction calls for transport observations. No Go
+code changed and no new network/reuse measurement was executed.

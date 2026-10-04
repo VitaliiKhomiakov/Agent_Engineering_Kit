@@ -11,7 +11,8 @@ The [entry](../nextjs.md) owns selection; [core](../core.md) owns shared archite
 - Small private UI components and their props may share a file. An independent
   component, complex hook, API adapter, and input schema have different
   responsibilities and move apart as they grow or become reusable.
-- When a component grows beyond roughly 250 lines, reconsider whether it mixes UI,
+- When a component grows beyond `size.react_component_review_lines`, resolved
+  through [policy configuration](../policy-configuration.md), reconsider whether it mixes UI,
   requests, state, and transformations. This is a signal in our standard, not a
   React rule. The common size limits still apply. Moving the entire component into
   a large hook is not successful decomposition.

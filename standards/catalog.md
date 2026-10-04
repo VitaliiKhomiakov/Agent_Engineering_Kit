@@ -7,8 +7,14 @@ applicable profile's task table. This guide defines the existing
 
 ## Field meanings
 
-Paths in the TOML catalog resolve from the framework or adopted bundle root,
-not from the `standards/` directory containing the catalog.
+Paths in the TOML catalog resolve from the bundle root, not from the `standards/`
+directory containing the catalog or necessarily the project root. The source
+library root is its bundle root; a new target defaults to `.agents-framework/`.
+Thus `standards/core.md` keeps its catalog value and becomes target
+`.agents-framework/standards/core.md`. Schema 1 and existing IDs stay unchanged.
+Source `MIGRATION.md`, section "Layout and path contract", owns placement and
+relocation; resolve it through the identified source. Existing flat imports stay
+flat until relocation is explicitly selected and reconciled.
 
 | Field | Meaning |
 | --- | --- |
@@ -28,8 +34,8 @@ not from the `standards/` directory containing the catalog.
 Select profiles for the actual project stack and intended work. Include shared
 `required` and selected profiles with their transitive dependencies, sources and
 resources, shared assets and needed templates. Keep each file once when it
-appears through several routes. Preserve these IDs and relative paths, or adapt
-references consistently when adopting another layout.
+appears through several routes. Preserve these IDs and bundle-relative paths;
+change the bundle's placement without prefixing catalog values.
 
 Check reachable references from the adopted entry and copied documents. Templates
 may resolve links from their intended installed location; validate that location
@@ -47,7 +53,9 @@ setup. Ordinary imports can remain inline without this setup.
 
 Optional source research and historical plans are not bundle dependencies. When
 omitting them, adapt their links in copied documents to clearly labelled source
-references or an actually reachable source location. Keep the rule/procedure
+references resolved through adoption provenance, or an actually known source URL
+with content identity where available. A local author-machine Markdown link is
+not portable, even when reachable during preparation. Keep the rule/procedure
 complete without those archives; do not silently leave a required route broken or
 recursively copy history just to satisfy an optional evidence link. Treat these
 reference adaptations as part of the accepted imported content.

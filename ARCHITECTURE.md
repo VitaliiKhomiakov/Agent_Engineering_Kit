@@ -26,9 +26,11 @@ capabilities, and explicit decisions.
 | Workspace `ARCHITECTURE.md` | Service roles, versions or passport links, relationships, and contract owners | When selecting a project or changing more than one project |
 | Workspace `PLANS.md` | When to save a plan, its minimum content, progress, and stopping rules | When creating or resuming a substantive staged task |
 | Project passport | Actual stack, target architecture, gaps, and local commands | Relevant sections for the affected project |
-| `standards/` | Common, language, framework, database/technology rules, and processes | By stack and work type; never the entire directory by default |
-| `.agents-framework/model-routing.toml` | Selected client, enabled roles, pairs, permitted delegation edges and concurrency | Check once if present; setup details only for authorized setup, necessary delegation choices or a relevant conflict |
+| Bundle `standards/` (target default `.agents-framework/standards/`) | Common, language, framework, database/technology rules, and processes | By stack and work type; never the entire directory by default |
+| `.agents-framework/model-routing.toml` | Selected client, enabled roles, pairs, permitted delegation edges and concurrency | Check once if present; setup details for full integration's selection step, authorized setup, necessary delegation choices or a relevant conflict |
 | `.agents-framework/adoption.md` | Import source, selection, managed paths, accepted contents/exceptions and recovery references | Only framework import, update or recovery |
+| Bundle `standards/policy-defaults.toml` and `policy-configuration.md` | Default values and their schema/loading contract | Relevant cadence, review, size or instruction-length decisions |
+| Optional `.agents-framework/policy.toml` | Sparse project overrides, resolved from the instruction root | With relevant defaults; absence requires no setup |
 | Client-native skill directory | Installed procedures with narrow triggers; current templates target Codex | Metadata during discovery; instructions when selected |
 | Current change spec or plan | Outcome, boundaries, criteria, and stages | For the corresponding task |
 | `.codex/agents/`, `.claude/agents/`, or `.cursor/agents/` | Named roles in the selected client's native format | When creating the corresponding agent |
@@ -63,10 +65,13 @@ workspace/
   ARCHITECTURE.md                   # Project and interaction map
   PLANS.md                          # Conditional planning policy
   docs/plans/                       # New plain plans or navigation to canonical native tasks
-  standards/                        # Versioned copy of selected rules
   .agents-framework/
+    standards/                      # Selected rules; catalog paths stay bundle-relative
+    templates/                      # Inactive resources; not native installations
     model-routing.toml              # Framework state; not native client config
     adoption.md                     # Import provenance; not task progress or model choices
+    policy.toml                     # Optional sparse overrides; not copied by default
+    accepted/                       # Immutable accepted contents under recorded names
   .agents/skills/                   # Codex procedures when selected
   .codex/
     config.toml                     # Native Codex settings when used
@@ -92,6 +97,10 @@ workspace/
 Preserve real directory names; the example does not require moving repositories
 under `projects-or-repositories`. For one project, the root passport can combine
 the workspace map and project description. Do not maintain two identical documents.
+The source layout remains `standards/` and `templates/` at its root. Existing flat
+imports retain their recorded layout until a relocation is selected. The
+[adoption procedure](MIGRATION.md#layout-and-path-contract) owns root/bundle bases,
+installation routes and safe relocation; the catalog retains its schema and IDs.
 
 Use the [workspace architecture template](templates/workspace-architecture.md)
 for cross-project responsibilities, runtime interactions, contracts, and data
@@ -141,7 +150,7 @@ authorized application preserves originals and reconciles intervening edits firs
 | Imported provenance, owned scope and accepted contents/exceptions | Target adoption record, adapted from the available template |
 | Actual commands, gates, versions and product contracts | Target local entry/passport/check document; preserve accepted exceptions |
 | Adoption decisions, permission, progress and evidence | Existing canonical adoption task; keep its native store and single progress owner |
-| Saved model choices and activation | Model-configuration contract and native client; import alone triggers no setup |
+| Saved model choices and activation | MIGRATION owns the required integration selection step; model configuration and the native client own setup/reuse and activation within authorization |
 
 Replace conflicting generic process rules in the sources actually loaded; preserve
 required local contracts with reachable owners before retiring old content. A rule
@@ -298,7 +307,7 @@ instruction-only templates from conceptual procedures:
 
 | Name | Narrow trigger | Status and resources |
 | --- | --- | --- |
-| `af-model-setup` | Explicit model setup or missing choices required by authorized delegation | Existing [template](templates/skills/af-model-setup/SKILL.md); absence of a record alone does not trigger it |
+| `af-model-setup` | Full integration's model-selection step, explicit setup or missing choices required by authorized delegation | Existing [template](templates/skills/af-model-setup/SKILL.md); absence of a record alone does not trigger it |
 | `af-model-reassign` | Explicit change to saved client, roles, pairs or delegation choices | Existing [template](templates/skills/af-model-reassign/SKILL.md); not installed automatically |
 | `af-integrate-project` | Explicit framework preparation/import/update request | Existing [template](templates/skills/af-integrate-project/SKILL.md); routes to MIGRATION; ordinary coding or missing files do not trigger it |
 | `af-design-change` | An architectural boundary, public contract, or complex behavior changes | Conceptual; would use affected architecture, profiles, and a task template |
@@ -339,8 +348,10 @@ model's tokenizer when a comparison matters; byte, character, and word counts ar
 not token counts. No specific savings claim is made here. See
 [OpenAI: Understanding and counting tokens](https://help.openai.com/en/articles/4936856-understanding-and-counting-tokens).
 
-As a working guideline, keep a root AGENTS file near 40–70 substantive lines and
-a local addition near 10–25. These are signals, not quotas or token guarantees.
+Use the resolved `instructions.root_guideline_lines` and
+`instructions.local_guideline_lines` from [policy configuration](standards/policy-configuration.md)
+as soft substantive-line ranges for root entries and local additions.
+These are signals, not quotas or token guarantees.
 Never remove a critical rule merely to meet them. Increasing
 `project_doc_max_bytes` is not a context-saving strategy.
 

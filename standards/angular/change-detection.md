@@ -36,6 +36,8 @@ zoneless correctness; views still need supported change notifications.
 
 Do not rely on arbitrary timers, promises or third-party callbacks causing
 zoneless rendering. Route their results into signals/AsyncPipe or mark the view.
+Programmatic Reactive Forms updates need that bridge too; see the
+[forms notification contract](boundaries.md#forms-and-component-contracts).
 For SSR async work outside tracked framework APIs, use the version's pending-task
 contract so serialization waits for required work. In ZoneJS applications, isolate
 measured high-frequency external work with `runOutsideAngular` where appropriate,

@@ -145,7 +145,7 @@ export default tseslint.config(
 
 ```ts
 import { Type } from 'class-transformer';
-import { ArrayMaxSize, ArrayMinSize, IsArray, IsInt, Max, Min, ValidateNested } from 'class-validator';
+import { ArrayMaxSize, ArrayMinSize, IsArray, IsInt, IsObject, Max, Min, ValidateNested } from 'class-validator';
 
 export class QuantityLineDto {
   @IsInt()
@@ -158,6 +158,7 @@ export class ReserveDto {
   @IsArray()
   @ArrayMinSize(1)
   @ArrayMaxSize(3)
+  @IsObject({ each: true })
   @ValidateNested({ each: true })
   @Type(() => QuantityLineDto)
   declare lines: QuantityLineDto[];
@@ -321,6 +322,7 @@ await test('rejects malformed, extra and coerced fields before changing inventor
   const app = await createApplication();
   const invalid: readonly unknown[] = [
     {}, { lines: null }, { lines: [] }, { lines: {} }, { lines: [null] },
+    { lines: [[]] }, { lines: [[{ quantity: 1 }]] },
     { lines: [{}] }, { lines: [{ quantity: '2' }] }, { lines: [{ quantity: true }] },
     { lines: [{ quantity: null }] }, { lines: [{ quantity: 0 }] }, { lines: [{ quantity: 1.5 }] },
     { lines: [{ quantity: 11 }] }, { lines: [{ quantity: 1, extra: 'x' }] },
@@ -367,7 +369,7 @@ await test('direct callers retain the business invariant without an HTTP pipe', 
 
 ## Evidence and limits
 
-Five tests passed: accepted nested input and final public fields; fifteen invalid
+On 2026-09-21, five tests passed: accepted nested input and final public fields; fifteen invalid
 representations rejected before mutation; state-dependent refusal followed by a
 successful unchanged-stock reservation; adapter byte limit; and the direct-call
 domain invariant. `createApplication` is shared setup, so the tests use its actual
@@ -386,3 +388,10 @@ manifest-only installation can resolve newer transitive versions. The old Node
 patch is an execution baseline, not a deployment recommendation. The
 [plan](../../../docs/plans/2026-09-21-engineering-practices.md#k12-result-and-verification)
 records actual checks, versions and exact Markdown/source equality.
+
+Rechecked on 2026-10-03 for NEST-01: both added nested-array shapes reproduced
+HTTP 500 before the fix. With per-item `@IsObject`, all seventeen invalid inputs
+return 400 and the following valid request still receives receipt 1 with zero
+stock remaining. All five tests, strict TS, typed lint and build passed on Node
+24.21.0 with the same pinned dependencies. See the dated
+[follow-up evidence](../../../docs/research/2026-09-21-nestjs-engineering-practices.md#2026-10-03-follow-up-nest-01).

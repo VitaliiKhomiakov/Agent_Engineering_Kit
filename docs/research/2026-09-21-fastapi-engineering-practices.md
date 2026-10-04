@@ -200,3 +200,34 @@ reading compliance. The [practice plan](../plans/2026-09-21-engineering-practice
 records exact commands, catalog/delivery checks, scoped baseline evidence, and the
 user-review checkpoint. No live service, benchmark, or external installation is
 claimed.
+
+## 2026-10-03 follow-up: PY-01
+
+The [lifetime example](../../standards/fastapi/examples/lifetime.md) now maps
+HTTPX errors while buffering `/snapshot`: timeouts to safe 504 and other request
+errors to safe 502. [HTTPX's exception hierarchy](https://www.python-httpx.org/exceptions/)
+distinguishes receive-time failures; opening a streaming response does not finish
+consumption. The dependency still owns closure; cancellation is not caught.
+A failure after `/feed` starts remains a propagated stream failure, since an
+already started response cannot be replaced with a new error status/body.
+
+Before the fix, the new test produced two errors: 200 upstream headers and a
+bounded partial chunk followed by ReadTimeout or ReadError escaped the handler.
+After the fix, `python -W default -m unittest -v test_feed_http` passed all eight
+tests (including both new subcases). Both return only the safe JSON error, close
+the stream, and close the client at lifespan exit. Existing successful streaming,
+reuse, non-200 refusal, injected opening timeout, late stream failure, snapshot
+size bound and missing-lifespan cases remain. Strict mypy passed both modules
+with `disallow_any_explicit`, `disallow_any_unimported`, and the Pydantic plugin
+(`init_typed`, `init_forbid_extra`, `warn_required_dynamic_aliases`). No global
+suppression or all-expression-Any claim was added.
+
+Execution: Python 3.12.3, FastAPI 0.138.0, Starlette 1.3.1, HTTPX 0.28.1,
+AnyIO 4.14.0, Pydantic 2.13.4/core 2.46.4 and mypy 2.1.0 in a temporary venv.
+The TestClient thread/portal stalled in the restricted sandbox; the same local
+transport tests completed outside it with a 30-second process bound. Starlette's
+existing HTTPX deprecation warning remained visible. No network request is made
+by the tests; injected exceptions do not establish real timeout, cancellation,
+backpressure or server-shutdown behavior. The final two named blocks match the
+tested files. Logs, mypy configuration and resolved requirements:
+`/tmp/aek-maint-stage1-h090d9fo/fastapi/`. Earlier dated evidence is unchanged.

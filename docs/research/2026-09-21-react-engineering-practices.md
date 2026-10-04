@@ -265,3 +265,32 @@ browser visual/E2E, screen reader, real API/database, SSR/hydration/RSC, Compile
 optimistic mutation, external-store runtime or performance benchmark was run.
 Synthetic client bundles establish portable routes, not actual agent reading
 compliance or token savings. P3–P7 remain planned; stop for user review before K14.
+
+## 2026-10-03 follow-up: REACT-01
+
+The [latest-result example](../../standards/react/examples/latest-result.md) records
+the service owner in loading state and conditionally resets its own state when
+that owner changes during rendering. This follows React's
+[prop-change adjustment guidance](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes):
+the guard converges, and requests remain in the Effect. Query remounting and
+setup-specific publication guards remain intact.
+
+Before the fix, both added A → pending B → pending A cases failed because the
+first A's stored row or alert became visible again. After the fix they remain
+loading, ignore obsolete B success/rejection, and show only the new A completion.
+The test compares absence as a Boolean: a first red run comparing a live DOM
+node directly with null was killed (exit 137) before reporting those assertions;
+the Boolean assertion produced the two expected, readable failures without changing the scenario.
+An explicit synchronous-port-failure test also passed; that promise in the example
+previously had no dedicated test. `npm run check`, `npm run lint`, `npm run build`
+and `npm run test:latest` all exited 0; eight latest-result cases passed.
+
+Execution: Node 24.21.0, React/React DOM 19.3.0, native TS 7.0.2, compatibility
+TS package 6.0.2, ESLint 10.11.0, typescript-eslint 8.70.0, Hooks plugin 7.1.1,
+Testing Library 16.3.3 and jsdom 30.1.0. The form example supplied the unchanged
+shared configuration and fixture files for static checks/build; its runtime tests
+were not rerun. Final named blocks match tested files. Dependencies were installed
+with scripts disabled; pins were not upgraded, and the resolved lock is retained
+at `/tmp/aek-maint-stage1-h090d9fo/react/` alongside logs. This establishes DOM
+rendering and Effect semantics, not browser layout, SSR/hydration, networking or
+a React version matrix. Earlier dated evidence above remains historical.

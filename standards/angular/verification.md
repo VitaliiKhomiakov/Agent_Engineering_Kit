@@ -35,6 +35,12 @@ has no equivalent notification. Test under the configured scheduling mode and
 use the runner's supported async stabilization. Read NgRx's
 [verification section](../ngrx/verification.md) only when those packages are used.
 
+For affected zoneless Reactive Forms, hydrate/reset programmatically and change a
+FormArray or complete async validation. After supported stabilization, assert the
+bound values, errors/validity and repeated controls reflect the update through
+the production notification path. Include deliberately suppressed form events
+when used, and verify an owned notification subscription stops after destruction.
+
 ## SSR and hydration, when present
 
 Keep browser-only APIs behind the actual browser/render lifecycle. Server and

@@ -202,3 +202,25 @@ RLS/TLS deployment, external pooler, actual driver-call/COMMIT cancellation, unc
 commit recovery, crash/failover, performance benchmark or native assistant adherence.
 No result establishes universal driver behavior or production readiness. K17–K19 and
 native adoption P3–P7 remain planned. Review is inline under the workspace adaptation.
+
+## 2026-10-04 follow-up: DB-01
+
+The entry now labels 2.0.54 as historical execution evidence and routes to a
+2.0/2.1 decision in migrations/verification. Sources checked across October 3–4:
+[2.1 release status](https://docs.sqlalchemy.org/en/21/changelog/changelog_21.html),
+[2.0 Python support](https://docs.sqlalchemy.org/en/20/intro.html#supported-platforms),
+[2.1 migration](https://docs.sqlalchemy.org/en/21/changelog/migration_21.html) and
+[async installation](https://docs.sqlalchemy.org/en/21/orm/extensions/asyncio.html).
+The migration guide supplies the changed autoflush, PostgreSQL driver and mapped
+Dataclass contracts. The general 2.1 Session Basics page still describes the
+older ORM-only execution trigger; the explicit migration delta takes precedence
+for this source-reviewed warning. Source-code retrieval was unavailable in this
+session, so no claim of independently executed 2.1 behavior is made.
+
+Static scenario review: an existing Python 3.10/2.0 project retains compatible
+pins; a selected 2.1 project follows its own Python/dependency requirements.
+Pending writes before textual SELECT route to sessions; async startup/driver
+selection to engines; omitted dataclass defaults/relationships to mapping.
+The topic files own details, avoiding an expanded entry checklist. No example
+pin or code changed. No 2.1 install, database run, Python 3.10 runtime or migration
+was executed. Historical results above remain unchanged.

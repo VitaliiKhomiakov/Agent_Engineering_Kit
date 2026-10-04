@@ -12,6 +12,12 @@ private viewing session, intentionally clearing its state. This reset would be
 wrong for a child draft that must survive input changes; use an explicit state
 owner and input-keyed results for that case.
 
+Loading state records its service owner too. A guarded reset during rendering
+discards the preceding owner's settled state, so A → pending B → pending A cannot
+revive the first A result or error. This follows React's
+[prop-change state adjustment](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes);
+the guard converges after one reset and does no I/O. Requests remain Effect-owned.
+
 Each setup owns an AbortController and a publication guard. Even a port that ignores
 abort cannot publish after its setup is retired. Both synchronous throws and rejected
 promises become a safe current error, while obsolete failures stay handled. The
@@ -48,7 +54,7 @@ export interface LatestResultProps {
   readonly query: string;
   readonly service: SearchPort;
 }
-type SearchState = { readonly kind: 'loading' }
+type SearchState = { readonly kind: 'loading'; readonly service: SearchPort }
   | { readonly kind: 'ready'; readonly service: SearchPort; readonly rows: readonly string[] }
   | { readonly kind: 'failed'; readonly service: SearchPort };
 
@@ -58,7 +64,8 @@ export function LatestResult({ query, service }: LatestResultProps): ReactElemen
 }
 
 function ResultSession({ query, service }: LatestResultProps): ReactElement {
-  const [state, setState] = useState<SearchState>({ kind: 'loading' });
+  const [state, setState] = useState<SearchState>({ kind: 'loading', service });
+  if (state.service !== service) setState({ kind: 'loading', service });
   useEffect(() => {
     let active = true;
     const controller = new AbortController();
@@ -213,15 +220,67 @@ await test('replacing the integration hides the previous owner data before settl
   });
   assert.ok(screen.getByText('second owner'));
 });
+
+for (const firstOutcome of ['ready', 'failed'] as const) {
+  await test(`returning to a previous service cannot revive its ${firstOutcome} state`, async () => {
+    const first = new SearchFixture();
+    const second = new SearchFixture();
+    const view = render(<LatestResult query="same" service={first} />);
+    await act(async () => {
+      if (firstOutcome === 'ready') first.current().result.resolve(['old A row']);
+      else first.current().result.reject(new Error('old A failure'));
+      await Promise.allSettled([first.current().result.promise]);
+    });
+    if (firstOutcome === 'ready') assert.ok(screen.getByText('old A row'));
+    else assert.ok(screen.getByRole('alert'));
+    view.rerender(<LatestResult query="same" service={second} />);
+    const obsolete = second.current();
+    view.rerender(<LatestResult query="same" service={first} />);
+    assert.ok(obsolete.signal.aborted);
+    assert.equal(screen.queryByText('old A row') === null, true);
+    assert.equal(screen.queryByRole('alert') === null, true);
+    assert.ok(screen.getByText('Loading same…'));
+    await act(async () => {
+      if (firstOutcome === 'ready') obsolete.result.resolve(['obsolete B row']);
+      else obsolete.result.reject(new Error('obsolete B failure'));
+      await Promise.allSettled([obsolete.result.promise]);
+    });
+    assert.equal(screen.queryByRole('list') === null, true);
+    assert.equal(screen.queryByRole('alert') === null, true);
+    assert.ok(screen.getByText('Loading same…'));
+    await act(async () => {
+      first.current().result.resolve(['new A row']);
+      await first.current().result.promise;
+    });
+    assert.ok(screen.getByText('new A row'));
+    assert.equal(screen.queryByText('old A row') === null, true);
+    assert.equal(screen.queryByText('obsolete B row') === null, true);
+  });
+}
+
+await test('synchronous port failure becomes a safe current error', () => {
+  const service: SearchPort = {
+    search() { throw new Error('private synchronous failure'); },
+  };
+  render(<LatestResult query="broken" service={service} />);
+  assert.equal(screen.getByRole('alert').textContent, 'Search failed for broken.');
+  assert.equal(screen.queryByText(/private/) === null, true);
+});
 ```
 
 ## Observed evidence and limits
 
-Five cases passed: obsolete success/failure, immediate input reset with empty/current
+On 2026-09-21, five cases passed: obsolete success/failure, immediate input reset with empty/current
 error states, same-input Strict Mode cleanup, unmount/late rejection, and replacement
 of the integration owner. The final case reproduced stale owner data with the
 identity check removed, then passed with the fix. Strict TS, typed/Hooks lint and
-emitted JS execution passed on the exact blocks above.
+emitted JS execution passed on the then-current blocks.
+
+On 2026-10-03, the A → B → A regression failed for both stored success and stored
+failure before the owner-change reset. All eight cases now pass, including those
+two regressions and an explicit synchronous-port-failure case. Strict TS,
+typed/Hooks lint and build passed on Node 24.21.0 with the original pinned setup.
+See the dated [follow-up evidence](../../../docs/research/2026-09-21-react-engineering-practices.md#2026-10-03-follow-up-react-01).
 
 Strict Mode replay is observed in this development/root fixture, not a universal
 request-count promise. The fake intentionally ignores cancellation to challenge the

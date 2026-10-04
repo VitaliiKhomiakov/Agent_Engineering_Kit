@@ -42,8 +42,8 @@ Reuse supplied facts; ask only for material gaps needed by the affected step:
 | Intent | Prepare only, initial import or update; new/existing project context, applicable stack and permitted paths/actions |
 | Existing task | Canonical adoption task/store, current stage, granted permissions and checkpoints; preserve existing model choices |
 
-The source library, target instruction root, execution checkout and canonical task
-store are separate roles even when some paths coincide. Read source procedures
+The source library, target instruction root, bundle root, execution checkout and
+canonical task store are separate roles even when some paths coincide. Read source procedures
 directly when the target has no installed entry; this does not establish native
 skill discovery. Source AGENTS/PLANS installation is not required. Limit changes
 to selected targets; import grants no application-code changes, dependency upgrades,
@@ -63,8 +63,10 @@ Codex project installation, the proposed layout is
 client/version separately. Other clients require a verified native skill mapping;
 until then source-based reading is available without claiming native discovery.
 
-At the source template location, the skill resolves the framework root three
-directories above its folder. In an installed target it resolves source identity
+At the source template location, the skill may resolve the framework root three
+directories above its folder only after verifying both `MIGRATION.md` and
+`standards/catalog.toml` there. An inactive adopted copy is not the full source.
+In an adopted bundle or native installation it resolves source identity
 from the request or `.agents-framework/adoption.md`, not a relative walk to the
 target root. Keep that source accessible for future updates; an installed skill
 alone is not a self-contained copy of the migration library. Resolve source-relative
@@ -72,7 +74,130 @@ references there and target-relative references against the named target root.
 Adapt entry routes to the actual installed skill or accessible source location;
 check independent repository opening and any selected role's reachable route.
 
+## Layout and path contract
+
+For a new adoption, place imported `standards/` and inactive `templates/` under
+target `.agents-framework/`. The source library keeps its existing layout.
+Root `AGENTS.md`, `ARCHITECTURE.md` and `PLANS.md` retain their project purpose and
+agreed locations. Create the target entry from a template; never export the source
+library's maintenance `AGENTS.md`. Keep the canonical task store where it is.
+Native settings, active roles and skills remain in the selected client's supported
+directories; the bundle directory does not replace native discovery locations.
+
+| Path category | Resolution base |
+| --- | --- |
+| Source procedures and template/content identities | Identified accessible source checkout |
+| Catalog assets, sources, resources and template values | Bundle root: source root here; `.agents-framework/` in a new target |
+| Root entry and native role instruction paths | Target instruction root, with the actual bundle prefix |
+| Ordinary topic and inactive template Markdown links | Containing file directory |
+| Managed paths, relocation mappings and accepted snapshot names | Target instruction root, including any bundle prefix |
+| Canonical tasks | Existing task-store contract, independently of bundle and checkout |
+
+Record the bundle directory explicitly in adoption metadata. Catalog schema 1,
+IDs and bundle-relative paths stay unchanged: `standards/core.md` denotes target
+`.agents-framework/standards/core.md` for the default contained layout. Existing
+flat adoptions remain supported. An update preserves their layout unless relocation
+is selected; a record without a bundle field requires reconciliation with its
+recorded paths and actual files, not an inferred move. Adoption and optional model
+routing remain target-root-relative `.agents-framework/adoption.md` and
+`.agents-framework/model-routing.toml`, including for a flat bundle.
+
+### Adapting installation routes
+
+Resolve each path from its final context; do not replace every `standards/` string.
+Preserve the relative topology of bundled standards and templates. Review Markdown
+links, code-span paths, TOML developer instructions and native imports separately.
+
+| Resource | Source/inactive context | Installed context |
+| --- | --- | --- |
+| `AGENTS.root.md`, `policy-entry.md`, `PLANS.md` | Source templates describe root-installed paths; the source checker maps their `.agents-framework/` prefix virtually. When retained inactive in a target bundle, rebase Markdown links to their containing file; there is no virtual target mapping. | Resolve from the actual root entry, using `.agents-framework/standards/...` and `.agents-framework/templates/...` by default. A nested or alternate entry needs its own base. |
+| Task template and helper routes | Retain source-relative links inside the inactive bundle. | Rebase to the installed `PLANS.md` and bundle from the existing canonical task location; a plan at `docs/plans/` usually needs `../../`. Native stores can differ. |
+| Model setup/reassignment skills | `../../../standards/model-configuration.md` remains relative to each inactive skill folder. | For Codex `.agents/skills/<skill>/SKILL.md`, use `../../../.agents-framework/standards/model-configuration.md` for the contained layout, or the reconciled flat route. |
+| Integration skill | Source-relative discovery requires both source procedure and catalog. | Resolve the full source through the request/provenance, independently of the inactive or native skill folder. Source unavailability blocks dependent import/update work, not ordinary work using reachable local rules. |
+| Native role examples | Developer-instruction paths describe the intended target instruction root, not the TOML folder. | Adapt their bundle prefix from the supplied instruction root; retain native configuration and model values unless separately authorized. |
+| Claude bridge and Cursor route | Inactive examples only; an `@` import is not a Markdown link. | Root `CLAUDE.md` may keep `@AGENTS.md`; verify that root entry separately. Fill the Cursor rule's instructions from its real location and selected native contract. |
+
+Adapt planning-policy code-span routes as well as links. An inactive copy of
+`PLANS.md` is not the active root policy. Independently opened child repositories
+need a reachable local entry, selected rules and canonical task route within their
+supported discovery boundary; merely linking to an undiscovered parent is insufficient.
+Check installed copies separately, even if their inactive originals passed.
+
+Optional omitted research/history and inapplicable cross-profile routes use a
+known source URL with revision/content identity where available, or labelled
+non-link source paths resolved through adoption provenance (for example,
+`Source reference: docs/research/<record>.md; source identity in adoption.md`).
+Do not invent a remote URL or leave author-machine `/home/...`, `/Users/...` or
+`file://` Markdown links in portable instructions. A local source checkout recorded
+as provenance may be useful on this machine; it is not a portable guarantee.
+Required operational routes remain local, reachable and checked. Missing required
+resources require completing the selected closure or reconciling scope, never
+turning a required route into an optional source reference to pass a check.
+
+Use the source checker with `--root <target> --profile <selected-id>` for flat
+bundles; add `--bundle-dir .agents-framework` for contained bundles. Select each
+applicable profile. Its selected scan includes root Markdown, selected resources,
+present catalog templates and the adoption record. Explicit file arguments replace
+the body scan while retaining catalog checks; include native installed Markdown/TOML
+paths separately. See source `docs/maintenance/verification.md` for syntax limits.
+
+### Relocating an existing import
+
+Relocation is a selected adoption operation, not a side effect of a rules update.
+Prefer a placement-only stage before a separately reviewed source-content update.
+Use the comparison and recovery rules below with an explicit old/new mapping:
+
+1. Establish owned old paths/sections from the accepted record. Preserve the old
+   accepted snapshot under its original target-relative names and content identity.
+   Map each owned old path to its destination; include root/native route edits and
+   provenance even when those files do not move. Inspect both endpoints, including
+   absence, symlinks, path containment and unrelated destination content. A shared
+   `standards/` or `templates/` directory does not establish ownership of its children.
+2. Compare **B** at the old accepted name, **C** at the current old path, and **N**
+   adapted for the new location. For placement-only work, derive N from C with only
+   necessary route changes; retain local adaptations. For a combined authorized
+   update, use the three-way comparison below. A rename or matching source version
+   does not prove C equals B. Missing B limits merge evidence; retain C, disclose the
+   gap and reconcile it explicitly before dependent moves, never manufacture a base.
+3. Preview creates, route changes and individual retirements. A destination collision,
+   including an existing identical file without recorded ownership, requires scope
+   reconciliation; never overwrite or acquire ownership silently. Resolve overlapping
+   content/semantic edits and removed resources before dependent writes. Preserve
+   both endpoints, root entries and adoption metadata in the operation baseline.
+4. Immediately before each write or retirement, compare current contents/absence
+   with the preview or this operation's known result. Reconcile intervening edits.
+   Create and check new resources first, then switch active routes once all resources
+   they require exist. Retire only authorized owned old files after confirming their
+   current contents and reachable replacements; never recursively delete shared dirs.
+5. Verify the resulting selected bundle and all affected installed routes. Write a
+   new accepted snapshot with new target-relative names and the mapping only after
+   the agreed checks succeed. Preserve earlier accepted snapshots unchanged; do not
+   rename them or rewrite historical accepted hashes. The new accepted record must
+   distinguish imported/adapted contents from preserved local changes.
+
+On interruption, retain the old accepted base and record actual written, switched,
+retired and pending paths using the partial-operation procedure. Do not assume all
+routes switched together. Recovery compares each path with this operation's result
+before restoration, preserving edits made since it began. A repeated invocation
+reconciles the mapping, actual files and pending checks; an already verified unchanged
+relocation is a no-op, while identical bytes in a partial operation still need its
+pending checks. Do not recopy, bulk rollback or advance accepted state on assumption.
+
 ## Prepare and apply
+
+For policy settings, follow the [configuration contract](standards/policy-configuration.md).
+New bundles include its complete defaults and schema owner as shared catalog assets.
+Preserve any existing target-root-relative `.agents-framework/policy.toml` as a
+project override, including for a flat bundle; create no active override merely
+because templates were copied. Use defaults without a questionnaire when no
+override exists. Preview any requested setting change as a reviewed project-policy
+change under the existing authorization and checkpoint, preserving local ownership.
+Record legacy absence for old catalogs until an authorized policy update; report
+incomplete or invalid configuration instead of guessing values or repairing it silently.
+Check schema and merged values as well as TOML syntax, including when an artifact
+check selects only particular Markdown bodies. Account for model selection through
+the [required integration step](#model-selection-step); model configuration retains
+ownership of assignments and native settings.
 
 Phases 1–2 below supply the inventory and selection; phase 3 supplies entry and
 native mapping details. Read only the sections needed by the requested operation.
@@ -84,7 +209,8 @@ They form one procedure for both new and existing projects.
    Keep optional research outside required reading. Produce a reviewable change set:
    source identity, profiles, target/client, path-by-path create/update/retire actions,
    proposed content or diff, conflict decisions, retained contracts and check scope.
-   Mark unresolved material decisions and the paths they block.
+   Include the model-selection outcome or proposal below. Mark unresolved material
+   decisions and the paths they block.
 2. **Respect intent.** Preparation only leaves target files untouched, including
    directories, configuration and adoption records. Present the preview in the
    response or agreed storage outside the target. An explicit import may already
@@ -108,11 +234,45 @@ They form one procedure for both new and existing projects.
    application test suite. Report verified files separately from observed client
    discovery/adherence. An unavailable client or unsupported mapping limits that
    claim and does not justify inventing a native setting or running a pilot.
+   Report the model-step outcome separately from rule import and runtime activation.
 
 Updates also need comparison with the last accepted import and current local edits;
 the current source alone is not a safe replacement baseline. The canonical adoption
 task owns decisions, authorization and progress; the source library plan is not a
 second progress record for a target import.
+
+### Model-selection step
+
+Every full integration accounts for the selected client and model choices through
+`af-model-setup` ([inactive source template](templates/skills/af-model-setup/SKILL.md)).
+Pass the adoption intent, preparation/application mode, prior choices, actual
+source/target roots and authorized write scope. This is a required decision step,
+not mandatory delegation, template-default assignment or permission to change a
+running session. Source-library maintenance and ordinary coding do not trigger it.
+
+| Situation | Integration action and outcome |
+| --- | --- |
+| Existing consistent selection, including single-agent mode | Check/reuse relevant routing/native agreement; report checked/reused without writes or repeated questions. |
+| Missing/incomplete selection | Reuse supplied choices; the setup contract resolves material missing client, mode and pairs, plus edges/ceiling when delegated. Await necessary answers before dependent writes/spawns; report unresolved while pending. |
+| Explicit user deferral | Record the decision in the canonical adoption task and summarize deferred in the outcome. Preserve existing files/known choices; rules may proceed independently. Deferral is not configured state or delegation permission. |
+| Preparation only | Read the setup skill/contract to prepare exact changes and unresolved choices. Leave target routing/native files and skills untouched; no pilot or session switch. |
+| Ordinary rules update | Check/reuse relevant existing choices or retain an explicit prior deferral. Do not restart onboarding or change assignments; newly requested setup follows `af-model-setup`. Report missing unselected setup as unresolved, not an invented deferral. |
+| Requested reassignment/client change | Use `af-model-reassign` ([source template](templates/skills/af-model-reassign/SKILL.md)); preserve unrelated choices. |
+| Skill unavailable | Follow the reachable [model-configuration contract](standards/model-configuration.md) and disclose the fallback. If that owner is also inaccessible, report unresolved and continue only independent authorized adoption work. |
+| Unknown schema, unsupported pair, conflict or partial write | Follow the model owner's conflict/recovery rules; preserve known choices. Report unresolved/partial, without substitution, invented deferral or successful-activation claims. |
+
+The [model contract](standards/model-configuration.md#first-use-behavior) owns setup,
+reuse, native mapping and repair; this procedure owns the integration trigger and
+reported outcome. Reuse already granted setup/application permission, compare the
+concrete proposed changes and apply within that scope. Importing rules or invoking
+a skill alone grants no additional native/global writes or worker launches.
+Explicit deferral completes the integration decision, not model configuration.
+
+The adoption record summarizes checked/reused, configured, deferred or unresolved
+and points to the canonical decision and existing routing/native owners. Do not
+copy model tables into it or add another routing status/checklist. Saved agreement
+and observed runtime activation remain separate; an overall verified claim must
+state its scope and any unresolved model step.
 
 ## Adoption record and ownership
 
@@ -317,30 +477,12 @@ Select the execution mode, completion criteria, and risk-based verification
 matrix. Do not copy “always run all CI” or “never add tests” from old instructions.
 Existing mandatory gates change only through an explicit decision.
 
-Only when model setup is part of authorized adoption or required by authorized
-delegation, define workspace model routing through
-[the model configuration contract](standards/model-configuration.md). Store the
-selection in `.agents-framework/model-routing.toml`, which is framework state and
-not native client configuration. Version-2 examples begin `unconfigured`; copying
-them is not consent. When model setup is part of the authorized adoption, reuse
-explicit choices and ask once for missing client, mode, enabled pairs, edges and
-ceiling. An ordinary task without configured selection can run inline in the
-current session without onboarding or delegation. Keep task order separate from
-allowed spawn edges. Enabled specialist names use `af-<role>`; assignments come
-from explicit choices and supported models, not universal IDs. Native examples
-cover implementer and optional reviewer; only enabled roles are installed.
-
-Preserve v1 choices and unknown fields; migrate only during authorized setup or
-reassignment after resolving material gaps. Clarify unknown schemas before editing.
-For single-agent mode, use only the coordinator, no edges and a zero framework
-ceiling. Reconcile disabled managed role definitions as well as enabled pairs;
-preserve unrelated roles/settings. Report controls that remain instruction policy
-and distinguish saved agreement from actual model activation.
-
-Prefer strong models for design/planning/architecture/review when the user wants
-them, with separate coding/testing choices. Validate each selected effort and
-model against the client/account. Catalog refresh must not change assignments.
-Preserve required task ownership and checks when optional roles are disabled.
+Complete the [model-selection step](#model-selection-step) for this integration.
+The [model configuration contract](standards/model-configuration.md) owns the
+record at `.agents-framework/model-routing.toml`, role enablement, explicit pairs,
+native mapping, legacy handling and repair. Preserve existing choices and required
+responsibilities; copied examples are not assignments. Ordinary inline planning
+remains free of setup, delegation and repeated questionnaires.
 
 Ready for review when the target standard has no internal contradictions and
 large architecture changes are divided into verifiable stages.
@@ -380,15 +522,21 @@ project map and conditional routes to passports and profiles. Reduce nested AGEN
 files to local constraints and links, or remove them from the chain after preserving
 their required content. Use the [project template](templates/AGENTS.project.md)
 when a local addition is necessary.
+Use the resolved `instructions.root_guideline_lines` and
+`instructions.local_guideline_lines` as soft substantive-line ranges. Preserve
+critical contracts even outside these ranges; they are not truncation limits or
+token guarantees. Keep the policy route reachable from each installed entry.
 
-Retain the entries' verification default: batch code checks and functional
-acceptance at phase completion, with intermediate checks only for concrete reasons
+Retain the entries' verification contract: batch code checks and functional
+acceptance at the configured phase/task boundary, with intermediate checks only for concrete reasons
 under [verification](standards/verification.md#what-to-run-and-when). Preserve required
 project/CI gates, reuse valid results and carry the [compact output policy](standards/verification.md#compact-check-output)
 into target routes and role handoffs. Reconcile loaded demands for tests after every
 step, automatic full suites or repeated fresh runs under the conflict policy,
 including applicable [Superpowers adaptations](standards/superpowers.md#explicit-adaptations).
 Verify these rules survive entry adaptation for independently opened projects.
+Required gates and acceptance at human checkpoints remain binding with either
+timing setting. Neither a settings update nor an item marker repeats valid evidence.
 
 Use the selected client's supported native entry points and imports. Keep shared
 policy reachable from each supported launch scope, track derived-file provenance,

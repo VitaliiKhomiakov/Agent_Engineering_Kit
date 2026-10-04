@@ -11,11 +11,14 @@ and managed scope; the canonical adoption task owns decisions and progress.
 ## Identity and agreement
 
 - Target instruction root and selected projects: `<actual roots>`
+- Bundle directory: `<target-root-relative directory; .agents-framework for a new import, . for a retained flat import>`
 - Client/version: `<selected client; unknown version stays unknown>`
 - Canonical adoption task: `<reachable location; no copied task ledger>`
 - State: `<prepared | applied but unverified | verified | partial>`
 - Candidate source: `<accessible location + revision or selected-content manifest>`
 - Candidate profiles and layout: `<IDs, target routes and any adapted locations>`
+- Policy configuration: `<defaults/contract content identity or legacy absence; optional project override path and owned scope, if present; no duplicate values>`
+- Model-selection outcome: `<checked/reused | configured | explicitly deferred | unresolved; canonical decision and existing routing/native owner references, with scope/activation limits; no duplicate assignments>`
 - Last accepted import: `<source identity, selection/layout and snapshot/manifest reference; none on first import>`
 - Recovery material: `<external location and operation reference; available/missing>`
 - Verification: `<scope, evidence reference, relevant state; client pilot observed or not run>`
@@ -37,6 +40,23 @@ the rest. Source removals require a prepared decision, not automatic deletion.
 Snapshots needed for comparison/recovery must remain retrievable; hashes prove
 equality but cannot reconstruct missing contents. Do not hash this record into
 itself; preserve its prior contents/absence in the external operation snapshot.
+
+## Relocation mapping, only when selected
+
+Source `MIGRATION.md`, "Relocating an existing import", owns the procedure. This
+record is documentation, not an installed runtime schema. Reconcile older records
+without a bundle field against their recorded paths and actual files before edits.
+
+| Owned old path/scope | Proposed new path/scope | Prior accepted reference B | Current contents C and candidate N | Destination baseline and agreed action |
+| --- | --- | --- | --- | --- |
+| `<target-relative old path or unchanged root/native entry>` | `<target-relative new path>` | `<immutable snapshot under its original name>` | `<identities and local/adaptation conflict decision>` | `<contents or absent; create/update/retain/retire>` |
+
+Preserve previous accepted snapshots, names and hashes unchanged. Following
+successful checks, record a separate new accepted snapshot and the old/new mapping;
+do not reinterpret an old snapshot as evidence for relocated or updated contents.
+Include root entries and this record in baseline protection. Operation evidence
+identifies actual partial writes and later edits; a proposed mapping alone does
+not prove that a move, route switch or retirement succeeded.
 
 ## Accepted exceptions
 

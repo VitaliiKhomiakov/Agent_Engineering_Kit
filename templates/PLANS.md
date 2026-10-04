@@ -1,8 +1,11 @@
 # Planning rules
 
 Template: install as PLANS.md at the workspace root.
-Default paths below are relative to that root. This file defines how to plan; task-specific
-decisions and progress belong in the corresponding task document.
+Default paths below are relative to that root, with imported resources under
+`.agents-framework/`. Rebase for the recorded bundle and actual entry location;
+links in an inactive bundled copy resolve from its containing file. This file
+defines how to plan; task-specific decisions and progress belong in the
+corresponding task document.
 
 ## Language
 
@@ -11,7 +14,7 @@ bullets, native planning artifacts and their progress/handoff records, unless th
 user explicitly requests a different artifact language. Present questions, review
 explanations, progress updates and results to the user in the user's response
 language. A plan's English text does not switch the conversation language.
-Apply the [language policy](../standards/core.md#reasoning-and-communication-language);
+Apply the [language policy](.agents-framework/standards/core.md#reasoning-and-communication-language);
 resolve this link to the adopted policy when installing this template.
 
 ## When to save a plan
@@ -86,15 +89,48 @@ what changed, criteria met or outstanding, checks with results and applicable co
 state, blockers, and the proposed next stage. Keep a concise state, not full logs
 or a transcript; do not rewrite the plan after every edit.
 
+For substantive Markdown plans, give independently actionable items stable IDs
+and unchecked/completed markers. Preserve existing IDs; adding an item does not
+renumber completed work. Update an item's marker when its own acceptance conditions
+are met, before moving to the next item or handing off. Do not postpone all updates
+until the stage ends. Keep the current item and stage status explicit.
+
+- `[x]` means the item's stated outcome is achieved. If its acceptance includes
+  tests, keep it unchecked until those tests pass. Separate implementation and
+  verification items may close separately when their own criteria permit it.
+- In-progress and blocked items remain `[ ]`; record their state and a concise
+  reason separately. Reopen a completed item if new evidence invalidates it, with
+  the reason recorded; retain still-valid evidence for other items.
+- Mark cancelled or superseded scope explicitly with its reason; cancellation
+  does not count as completed implementation. At each checkpoint, align markers,
+  current status, acceptance evidence and remaining work.
+- On resumption, reconcile the canonical state with relevant current evidence;
+  do not repeat completed work merely because a new session began. Native stores
+  retain their supported markers/status operations and single progress owner;
+  do not mirror them in a second editable checklist or invent CLI operations.
+
+Item completion is neither a permission checkpoint nor a trigger for extra tests
+or reviews. Verification timing and evidence reuse retain their existing owner.
+A trivial edit still needs no persistent plan. These progress rules are binding
+planning semantics, not a configurable policy switch.
+
+The coordinator normally owns updates to the shared canonical checklist, using
+worker evidence after reconciling it with the current task. Concurrent workers
+report outcomes; they do not edit that checklist together. A delegated planner
+may own a specifically assigned draft. Record that ownership and explicitly hand
+it back before another writer updates it; preserve one canonical artifact and
+the native store's supported operations. Simultaneous completion reports are
+reconciled and recorded sequentially, without losing either result.
+
 At the human checkpoint, mark the stage awaiting user review; a completed stage
 is not a completed task. A plan records authorization and never grants it.
 
 | Decision | Detailed owner |
 | --- | --- |
-| Stage structure and delivery technique | `standards/delivery-workflow.md` |
-| Execution mode, checkpoint exceptions and Git actions | `standards/work-modes.md` |
-| Baseline, checks, scoped review and evidence reuse | `standards/verification.md` |
-| Saved model choices or delegation | `standards/model-configuration.md`, `standards/orchestration.md` when applicable |
-| Applying a selected skill | `standards/superpowers.md`; helper detail only when needed |
+| Stage structure and delivery technique | `.agents-framework/standards/delivery-workflow.md` |
+| Execution mode, checkpoint exceptions and Git actions | `.agents-framework/standards/work-modes.md` |
+| Baseline, checks, scoped review and evidence reuse | `.agents-framework/standards/verification.md` |
+| Saved model choices or delegation | `.agents-framework/standards/model-configuration.md`, `.agents-framework/standards/orchestration.md` when applicable |
+| Applying a selected skill | `.agents-framework/standards/superpowers.md`; helper detail only when needed |
 
 Reuse already established rules within the stage instead of reloading them per edit.

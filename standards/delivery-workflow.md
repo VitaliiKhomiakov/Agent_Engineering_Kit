@@ -20,6 +20,9 @@ the adopted native format. When selecting skills, read [Superpowers integration]
 Resume an existing task in its canonical store; workspace navigation carries no
 second checklist. Name that store separately from the implementation checkout in
 the handoff. Relocation is a separate requested migration, not a delivery prerequisite.
+Use the adopted planning policy's [progress semantics](../templates/PLANS.md#progress-and-stopping)
+for stable item IDs, completion markers and resumption; an item update does not
+introduce another check/review cycle or permission checkpoint.
 
 If a specification is wrong, resolve the affected decision and update criteria
 and implementation with the reason recorded. Distinguish current behavior,
@@ -31,11 +34,11 @@ stages or read historical plans without a concrete dependency.
 | Technique | Suitable work | Evidence |
 | --- | --- | --- |
 | Direct edit | Documentation, wording, configuration, or a clear local change | Artifact checks; relevant behavior checks when needed |
-| Phased delivery | A feature, integration, or architectural migration | Checks on each coherent phase and affected integration |
-| TDD within a phase | A reproducible bug, domain rule, algorithm, or complex branching | Focused Red–Green–Refactor and phase-level evidence |
+| Phased delivery | A feature, integration, or architectural migration | Changed behavior and affected integration checked at the selected verification boundary |
+| TDD within a phase | A reproducible bug, domain rule, algorithm, or complex branching | Focused Red–Green–Refactor, with wider checks at the selected verification boundary |
 
 Spec-Driven Development defines expected behavior; TDD defines implementation
-order; phase verification gathers wider evidence. These can be combined.
+order; boundary verification gathers wider evidence. These can be combined.
 Superpowers Subagent-Driven Development is a different use of the abbreviation SDD.
 Neither phased delivery nor TDD grants automatic progression, worktrees, or commits.
 
@@ -47,15 +50,22 @@ practical. Name its affected area, dependencies, criteria, and necessary checks.
 An entire backend with testing deferred until later is too broad; each edit is too small.
 Necessary tests belong to the implementation phase.
 
-Default to one cycle of code checks and functional verification at the end of
-each phase; a bounded unphased change has the same completion boundary. Internal
-steps do not each trigger that cycle. Intermediate checks need a concrete reason
+Use `verification.timing` through the verification owner to select the phase/task
+batching boundary. Required phase gates and human-checkpoint acceptance stay binding;
+a bounded unphased change has the same completion boundary in either setting. Internal
+steps and item markers do not each trigger a cycle. Intermediate checks need a concrete reason
 under [verification timing](verification.md#what-to-run-and-when), including selected
 TDD or a required gate. Define acceptance and necessary checks before implementation;
 reuse valid evidence and rerun affected checks after repairs. Keep summaries compact
 under the [output policy](verification.md#compact-check-output).
 
 ## Phase completion
+
+For an internal phase whose checks are deferred under authorized `task_end`
+progression, record implementation progress and pending criteria without claiming
+verified completion. Apply the checks and accountable review below at the selected
+boundary. A human stage checkpoint still requires its acceptance evidence under
+[verification timing](verification.md#what-to-run-and-when).
 
 1. Capture the pre-stage state under [verification](verification.md#before-implementation),
    then complete the assigned scope and selected checks.

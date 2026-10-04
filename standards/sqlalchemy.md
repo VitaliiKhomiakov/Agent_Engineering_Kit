@@ -38,8 +38,10 @@ Examples are optional, not additional automatic instruction routes.
 
 ## Basis and compatibility
 
-Research checked **SQLAlchemy 2.0.54** on **2026-09-21**; 2.1.0rc2 is prerelease.
+The tested historical baseline is **SQLAlchemy 2.0.54**, checked **2026-09-21**.
 Examples ran on Python 3.12.3 and PostgreSQL 16.15 with the recorded drivers.
+The **2026-10-04** source review covers released 2.1 separately; use the
+[version decision](sqlalchemy/migrations-verification.md#compatibility-is-a-concrete-matrix).
 Preserve existing 1.4/2.0 project constraints and authorize migrations separately.
 Evidence: framework source `docs/research/2026-09-21-sqlalchemy-engineering-practices.md`
 (optional research, not a required installed rule).

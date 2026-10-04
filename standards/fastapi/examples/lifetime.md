@@ -76,10 +76,15 @@ def create_app(transport: httpx.AsyncBaseTransport) -> FastAPI:
         upstream: Annotated[httpx.Response, Depends(open_feed, scope="function")],
     ) -> PlainTextResponse:
         body = bytearray()
-        async for chunk in upstream.aiter_bytes():
-            if len(body) + len(chunk) > 1024:
-                raise HTTPException(502, "Feed snapshot too large")
-            body.extend(chunk)
+        try:
+            async for chunk in upstream.aiter_bytes():
+                if len(body) + len(chunk) > 1024:
+                    raise HTTPException(502, "Feed snapshot too large")
+                body.extend(chunk)
+        except httpx.TimeoutException as exc:
+            raise HTTPException(504, "Feed timed out") from exc
+        except httpx.RequestError as exc:
+            raise HTTPException(502, "Feed unavailable") from exc
         return PlainTextResponse(bytes(body))
 
     return app
@@ -98,10 +103,12 @@ from feed_http import create_app
 
 
 class RecordedStream(httpx.AsyncByteStream):
-    def __init__(self, events: list[str], body: bytes, fail: bool) -> None:
+    def __init__(
+        self, events: list[str], body: bytes, read_error: httpx.RequestError | None,
+    ) -> None:
         self.events = events
         self.body = body
-        self.fail = fail
+        self.read_error = read_error
         self.closed = False
 
     async def __aiter__(self) -> AsyncIterator[bytes]:
@@ -109,8 +116,8 @@ class RecordedStream(httpx.AsyncByteStream):
             raise RuntimeError("stream used after close")
         self.events.append("read")
         yield self.body
-        if self.fail:
-            raise httpx.ReadError("private streaming failure")
+        if self.read_error is not None:
+            raise self.read_error
 
     async def aclose(self) -> None:
         self.closed = True
@@ -120,12 +127,12 @@ class RecordedStream(httpx.AsyncByteStream):
 class RecordedTransport(httpx.AsyncBaseTransport):
     def __init__(
         self, status: int = 200, body: bytes = b"one\ntwo\n",
-        fail_read: bool = False, timeout: bool = False,
+        read_error: httpx.RequestError | None = None, timeout: bool = False,
     ) -> None:
         self.events: list[str] = []
         self.status = status
         self.body = body
-        self.fail_read = fail_read
+        self.read_error = read_error
         self.timeout = timeout
 
     async def handle_async_request(self, request: httpx.Request) -> httpx.Response:
@@ -134,7 +141,7 @@ class RecordedTransport(httpx.AsyncBaseTransport):
             raise httpx.ReadTimeout("private timeout", request=request)
         return httpx.Response(
             self.status,
-            stream=RecordedStream(self.events, self.body, self.fail_read),
+            stream=RecordedStream(self.events, self.body, self.read_error),
         )
 
     async def aclose(self) -> None:
@@ -181,12 +188,31 @@ class FeedTests(unittest.TestCase):
         self.assertEqual(transport.events, ["request", "client-close"])
 
     def test_stream_failure_propagates_and_releases_resource(self) -> None:
-        transport = RecordedTransport(fail_read=True)
+        transport = RecordedTransport(read_error=httpx.ReadError("private streaming failure"))
         with TestClient(create_app(transport)) as client:
             with self.assertRaises(httpx.ReadError):
                 client.get("/feed")
             self.assertEqual(transport.events, ["request", "read", "stream-close"])
         self.assertEqual(transport.events[-1], "client-close")
+
+    def test_snapshot_body_failures_are_safe_gateway_errors_and_close(self) -> None:
+        cases = (
+            (httpx.ReadTimeout("private read timeout"), 504, "Feed timed out"),
+            (httpx.ReadError("private read failure"), 502, "Feed unavailable"),
+        )
+        for error, status, detail in cases:
+            with self.subTest(error=type(error).__name__):
+                transport = RecordedTransport(body=b"partial", read_error=error)
+                with TestClient(create_app(transport)) as client:
+                    response = client.get("/snapshot")
+                    self.assertEqual(response.status_code, status)
+                    self.assertEqual(response.json(), {"detail": detail})
+                    self.assertNotIn("partial", response.text)
+                    self.assertNotIn("private", response.text)
+                    self.assertEqual(
+                        transport.events, ["request", "read", "stream-close"]
+                    )
+                self.assertEqual(transport.events[-1], "client-close")
 
     def test_snapshot_bound_rejects_without_leaking_stream(self) -> None:
         transport = RecordedTransport(body=b"x" * 1025)
@@ -214,6 +240,12 @@ analyzer over both modules. Actual results are in the
 Starlette TestClient supports HTTPX with a visible deprecation warning in favor of
 HTTPX2; no dependency migration is implied by this example.
 
+Rechecked on 2026-10-03 for PY-01 on the same pinned runtime stack: eight tests
+passed, including both body-read failure subcases, and both modules passed strict
+mypy 2.1.0 with the Pydantic plugin. The
+[follow-up evidence](../../../docs/research/2026-09-21-fastapi-engineering-practices.md#2026-10-03-follow-up-py-01)
+records the failing reproduction and execution limits.
+
 The decorators document `text/plain`; the streaming handler supplies its own
 StreamingResponse, so it still owns its actual bytes and headers.
 The custom transport supplies deterministic lifecycle evidence. It does not
@@ -224,8 +256,13 @@ Choose deadlines/limits from the integration contract; the small values here
 illustrate separate ownership and budgets.
 
 The snapshot bounds its accumulation after receiving each chunk; it is not a
-limit on allocation inside the transport. The streaming route assumes a trusted,
-bounded feed and fixed text media type, with no retries or durable effects. A
+limit on allocation inside the transport. It maps body-read timeouts/failures
+before returning any response; successful upstream headers do not guarantee body
+consumption succeeds. The dependency still owns cleanup. Once `/feed` starts
+sending its response, a read failure cannot replace that response with a new
+502/504 JSON error; it propagates while the dependency releases the upstream.
+The streaming route assumes a trusted, bounded feed and fixed text media type,
+with no retries or durable effects. A
 production stream may need total duration/byte limits and disconnect handling.
 These buffered in-process tests establish consumption/cleanup and failure
 semantics, not network backpressure, cancellation, or graceful server shutdown.

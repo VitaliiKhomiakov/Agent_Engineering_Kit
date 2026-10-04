@@ -67,6 +67,15 @@ that does not authorize converting the application's sources or assume every
 host enables it. The standalone type-strip mode in Node does not supply Nest's
 legacy decorator metadata. Check actual emitted imports and runtime registrations.
 
+For **Nest 12 with Jest**, the
+[migration guide's testing section](https://docs.nestjs.com/migration-guide#testing-stack)
+(checked 2026-10-04) requires Node **24.9+** for Jest to load the ESM-only Nest
+packages; older runtimes can fail with `ERR_REQUIRE_ASYNC_MODULE`. This test-runtime
+floor does not replace separate application, CLI or package compatibility checks.
+On an affected migration, run the retained Jest command and application checks on
+the selected compatible runtime. Do not apply this floor to older Nest majors or
+the existing Node-runner examples, or replace a runner solely because defaults changed.
+
 Consult versioned documentation for existing majors. For 12, specifically assess
 new schema-based pipe/serializer APIs, lifecycle ordering and optional-injection
 inheritance when affected. Do not extrapolate current documentation or generator

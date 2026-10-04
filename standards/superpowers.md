@@ -55,6 +55,8 @@ instructions. Actual tool schemas determine available capabilities.
   Preserve the goal, design reference, Global Constraints and interfaces needed by
   dependent tasks. Use logical stages and code only to settle ambiguity; review
   concrete failure scenarios without a fixed count or an automatic new test suite.
+  Follow the adopted planning policy's [item markers and resumption rules](../templates/PLANS.md#progress-and-stopping)
+  in the canonical task; skill helper bookkeeping does not create a second progress owner.
 - **Progression and Git:** read [work modes](work-modes.md) for the selected mode.
   Its checkpoint and authorization rules replace continuous execution, mandatory
   plan/spec/task commits, worktree setup, and branch-finishing defaults.
@@ -62,8 +64,9 @@ instructions. Actual tool schemas determine available capabilities.
   progression or Git writes. A recorded `Ruling` cannot grant either permission
   or settle a missing material user decision.
 - **Tests, review, and retries:** read the relevant [verification sections](verification.md).
-  Default to a verification cycle at phase completion, with intermediate checks
-  only for the reasons defined there. This replaces universal TDD, full-suite
+  Resolve relevant cadence/review/reset settings through [policy configuration](policy-configuration.md)
+  and apply the verification owner's conditions, required gates and evidence reuse.
+  Intermediate checks still need the reasons defined there. This replaces universal TDD, full-suite
   completion demands, fresh-test requirements, automatic extra spec/quality or
   final reviewers, and fixed repair-round caps. Required project/CI gates and
   material in-scope defects remain binding. Keep check output compact and pass
@@ -76,6 +79,10 @@ instructions. Actual tool schemas determine available capabilities.
 - **Delegation and models:** read [orchestration](orchestration.md) when delegating.
   Saved model/effort pairs (including the user's `high`), fresh context, bounded
   ownership, and the concurrency ceiling replace a skill's suggested tiers or escalation.
+  Its [delegation contract](orchestration.md#delegation-contract) owns the reason,
+  sufficient task context and evidence return; use its lifecycle for continuation
+  and late results. Skill helpers do not require a new worker per item or correction,
+  whole-history handoff, repeated discovery or another review of still-valid results.
 
 ## Plans and helper compatibility
 

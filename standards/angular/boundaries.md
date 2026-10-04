@@ -35,6 +35,14 @@ do not patch every form keystroke into a canonical server entity. Avoid feedback
 loops between store hydration and `valueChanges`; distinguish accepted server
 state from unsaved edits and define when a new record resets the form.
 
+In zoneless Reactive Forms, programmatic `setValue`, `patchValue`, reset or
+`FormArray` changes do not themselves schedule component rendering. When the
+template reads form values, validity/errors or array structure, connect the
+relevant form events to a template-consumed signal, `AsyncPipe`, or an owned
+subscription calling `markForCheck`. Include status changes for async validation;
+`emitEvent: false` needs a separate notification path. Bind subscription lifetime
+to the component as in [reactivity](reactivity.md); keep the existing forms API.
+
 Inputs are data contracts; outputs express user intent. Use typed `input`/`output`
 APIs where supported, while preserving decorator-based components in older code.
 Use `model` only for an intentional two-way control contract, not to expose store
@@ -52,6 +60,20 @@ contracts. Return Observable results; state/effects own subscription and outcome
 Interceptors handle cross-cutting transport work, not feature state transitions.
 Do not attach credentials to arbitrary third-party hosts or retry every mutation.
 
+For cookie-authenticated mutations, verify both halves of
+[HttpClient XSRF protection](https://angular.dev/best-practices/security#httpclient-xsrfcsrf-security):
+the backend provisions a JavaScript-readable XSRF token cookie and validates the
+token on protected requests; Angular supplies the corresponding request header.
+Keep the authentication cookie's protection separate from the readable token.
+Align configured cookie/header names and check the installed version's request
+method and URL/origin eligibility. Current documentation (checked 2026-10-04)
+includes relative and same-origin mutation URLs, excluding GET/HEAD; do not assume
+absolute same-origin support on older versions. Keep read methods free of mutations.
+Verify eligible requests carry the token, the server rejects missing/invalid tokens,
+and unrelated origins receive neither leaked tokens nor application credentials.
+Do not disable protection merely to silence integration failures. Public reads and
+explicit bearer-only APIs do not acquire a cookie mechanism from this guidance.
+
 Never use `bypassSecurityTrust*` as a general solution for user HTML/URLs. Prefer
 Angular bindings and avoid unsanitized direct DOM insertion. Client bundles and
 environment files are public; do not place server secrets there. API authorization
@@ -60,6 +82,7 @@ must recheck the current user, resource and operation independently of UI state.
 Basis: [route state](https://angular.dev/guide/routing/read-route-state),
 [guards](https://angular.dev/guide/routing/route-guards),
 [typed forms](https://angular.dev/guide/forms/typed-forms),
+[zoneless forms](https://angular.dev/guide/zoneless#reactive-forms-in-zoneless-applications),
 [Signal Forms](https://angular.dev/guide/forms/signals/overview),
 [HTTP](https://angular.dev/guide/http/making-requests) and
 [security](https://angular.dev/best-practices/security).

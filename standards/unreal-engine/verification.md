@@ -12,6 +12,9 @@ sufficient checks in the existing task record. A block is a checkable outcome:
 one completed Blueprint interaction, a prop group placed in a room, or an asset
 prepared in Blender and imported into Unreal. Do not define it as an arbitrary
 number of calls or postpone all verification until an entire game is finished.
+Select the phase/task verification boundary under the shared
+[timing policy](../verification.md#what-to-run-and-when); the block cadence below
+applies at that boundary, retaining required intermediate checks.
 
 1. Establish the relevant context and recoverable baseline once.
 2. Finish the related edits using known schemas and returned identifiers. Read

@@ -2,6 +2,9 @@
 
 Apply these rules to the changed behavior and its material risks. They define
 sufficient evidence, not a quota of tests, commands, tokens, or review comments.
+Resolve the relevant `verification.*` and `review.independent` settings through
+[policy configuration](policy-configuration.md). This document owns check selection,
+required gates, evidence reuse and acceptance; settings do not waive them.
 
 ## Before implementation
 
@@ -55,21 +58,27 @@ do not reproduce the same assertions at every level without a reason.
 | Authorization, isolation, money, concurrency | Material permitted/forbidden cases and integration behavior | Risk can be high even with a tiny diff |
 | UI or routing | Affected interaction and relevant build/render checks | Critical journey or Server/Client boundary changes |
 
-By default, batch code checks and functional verification into one verification
-cycle at the end of a small, coherent [phase](delivery-workflow.md#phase-boundaries).
-A bounded task without phases uses its completed change as that boundary. Select
+Batch code checks and functional verification at the boundary selected by
+`verification.timing`: `phase_end` uses a small, coherent
+[phase](delivery-workflow.md#phase-boundaries); `task_end` uses the planned task
+boundary. A bounded task without phases uses its completed change in either case.
+Required intermediate gates and the acceptance checks needed for a human stage
+checkpoint remain binding; task-end batching cannot postpone them past that checkpoint. Select
 the necessary checks from acceptance criteria before implementation; do not run
 them after every edit, file or internal task merely because that step finished.
-Write needed tests within the phase; batching execution does not postpone test
-design or functional acceptance to a later phase.
+Design and write needed tests within the implementation phase; execute them at the
+selected boundary unless an earlier check is required above. With authorized
+progression across internal phases, `task_end` may batch their functional checks
+at task completion. Pending evidence is not acceptance: keep criteria and item
+markers requiring those results open under the adopted planning policy.
 
-Before the phase ends, run the smallest relevant check only to reproduce a bug,
+Before the selected boundary, run the smallest relevant check only to reproduce a bug,
 resolve a concrete uncertainty, validate a risky contract before dependent work,
 follow selected TDD, or meet a required project/CI gate. Briefly state the reason
 in the working update. In TDD, use the focused Red–Green–Refactor cycle; a normal
 red step is not a failed repair attempt. These exceptions do not require a full suite.
 
-At the phase boundary, cover the changed behavior and affected interactions using
+At the selected boundary, cover the changed behavior and affected interactions using
 the cheapest reliable checks. Compilation, linting and type checks alone do not
 prove functional acceptance. Use relevant domain, API, integration or UI scenarios
 for behavioral changes; E2E is needed only where its additional coverage matters
@@ -152,11 +161,14 @@ Stop expanding once that question is answered. Do not traverse all imports,
 map the whole call graph, or audit neighboring features by default. Explain a
 non-obvious scope expansion briefly in the existing review notes.
 
-Perform one accountable review of the completed change or phase, combining
-acceptance criteria, correctness, architecture, and evidence. Routine work can
-be reviewed by the coordinator; an independent reviewer is for material risk,
-complexity, or an explicit request. Do not spawn separate specification, style,
-security, and quality reviewers for every small task.
+Perform one accountable review of the completed scope, combining acceptance,
+correctness, architecture and evidence. Coordinator review remains required.
+Apply `review.independent`: `risk_based` uses material risk/complexity or an explicit
+request; `on_request` uses an explicit request or binding project requirement.
+Neither setting grants delegation, changes saved roles or overrides actual
+capabilities. Report an unavailable required independent review rather than claiming
+it happened; continue independent authorized work. Do not add a duplicate pass or
+separate specification, style, security and quality reviewers for every small task.
 
 A blocking finding identifies a location, a plausible failure scenario or
 violated requirement, and its consequence. A missing test is a finding when
@@ -210,10 +222,12 @@ material in-scope finding remains unresolved. Report incidental findings separat
 Report a missing or blocked required check honestly; never label it successful or
 waive it to fit a process limit.
 
-Two unsuccessful attempts at the same problem without new evidence trigger a
-diagnostic reset with the coordinator: summarize facts, rejected hypotheses, and
-the next discriminating observation. This is a guard against repetition, not a
-limit on meaningful investigation, necessary fixes, or legitimate TDD cycles.
+At `verification.diagnostic_reset_after_stalled_attempts` consecutive unsuccessful
+attempts on the same problem without new evidence, perform a diagnostic reset
+with the coordinator: summarize facts, rejected hypotheses and the next
+discriminating observation. Legitimate TDD red steps do not count. This is a guard
+against repetition, not a fix-round cap, acceptance waiver or limit on meaningful
+investigation and necessary repairs.
 Do not expand scope to unrelated cleanup after the completion criteria are met.
 
 ## Source and policy boundary

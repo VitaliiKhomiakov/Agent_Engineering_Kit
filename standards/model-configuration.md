@@ -1,7 +1,9 @@
 # Workspace model setup and reassignment
 
-Use this procedure for authorized model setup, explicit reassignment, or a relevant
-configuration conflict. Ordinary tasks reuse a valid saved selection or work inline
+Use this procedure for the model-selection step during full integration, authorized
+model setup, explicit reassignment, or a relevant configuration conflict. Source
+`MIGRATION.md`, "Model-selection step", owns the integration trigger/outcomes;
+resolve it through the identified source or adoption provenance. Ordinary tasks reuse a valid saved selection or work inline
 in the current session when no selection exists. The current agent edits reviewed
 native settings; these instructions require no separate
 Agent_Engineering_Kit application, launcher, account or model service.
@@ -18,6 +20,13 @@ instruction-level record;
 native clients do not interpret it. The inactive [example](../templates/framework/model-routing.toml)
 uses `schema_version = 2` to label its documented layout. It starts unconfigured;
 its sample model IDs are suggestions, not assignments or evidence of availability.
+
+The routing record and native destinations below resolve from the target
+instruction root regardless of the bundle location. Relative links to inactive
+templates resolve from this document. Before installing skills or native role
+instructions, adapt their routes to the actual bundle and destination; source
+`MIGRATION.md`, "Adapting installation routes", owns that path contract. Moving
+inactive resources neither moves native configuration nor changes assignments.
 
 [Orchestration](orchestration.md) owns responsibilities, delegation relationships,
 task order and checkpoints. Record additional chosen roles and scheme decisions
@@ -122,6 +131,7 @@ native configuration only for a relevant assignment or observed conflict.
 | --- | --- |
 | Missing/unconfigured record; task can run inline | Use the current session and relevant engineering rules. No mandatory questionnaire, profile write or delegation; this is not a saved model assignment |
 | User requests model setup | Use `af-model-setup` or this procedure if the skill is unavailable |
+| Full integration reaches its model-selection step | Use `af-model-setup` to check/reuse or prepare authorized setup; apply only within the selected adoption intent. Source `MIGRATION.md` owns preparation, explicit deferral and unresolved outcomes |
 | User requests a change to saved choices | Use `af-model-reassign`; preserve other choices |
 | A required delegated role has missing choices | Resolve only necessary choices before spawning; continue independent inline work |
 | Configured selection is consistent | Reuse it; no repeated onboarding after a task, conversation or compaction |
@@ -131,7 +141,11 @@ Using the current session without a configured selection does not authorize a
 native configuration write. Existing explicit choices take precedence over examples.
 An unconfigured status after a partial update does not revoke known choices or
 excuse a reported assignment conflict; resolve it before dependent work.
-For authorized setup or repair:
+For preparation, perform the inspection and exact proposal below without target
+writes or activation. An explicit integration deferral stays in the canonical
+adoption task/outcome; it does not introduce another routing status. If required
+choices, capabilities or permissions are missing, report unresolved rather than
+silently treating absence as deferral. For authorized setup or repair:
 
 1. Inspect relevant existing role/default settings and instruction discovery.
 2. Reuse explicit choices already supplied. Ask one bundled question for missing
@@ -168,6 +182,34 @@ policy; do not invent keys or claim native enforcement. Single-agent mode prohib
 delegation even if no native switch is available. Describe this limit explicitly.
 Saved agreement compares enabled role overrides and relevant defaults/controls;
 disabled retained pairs do not need to match worker defaults.
+
+## Role scope and native restrictions
+
+A reviewer or explorer's no-edit instructions define behavioral scope; they do
+not establish a filesystem/tool boundary. During authorized native setup, use
+supported restrictions for the selected role and verify the effective controls,
+including parent/session overrides. Preserve necessary read access to the task,
+baseline and evidence. If enforcement is unavailable or cannot be verified, report
+the limitation; do not describe the role as sandboxed or silently broaden its task.
+
+Prefer read-only tools for review/exploration where supported. Merely removing an
+Edit tool is insufficient when shell, MCP or other tools can still write. A check
+that writes caches, artifacts or fixtures goes to an authorized executor, which
+returns its evidence; do not loosen reviewer permissions to run it. Read-only
+access also does not isolate a reviewer from concurrent changes: review a stable
+scope under the [worker lifecycle](orchestration.md#worker-lifecycle-and-continuations).
+
+A planner assigned a draft may write only that authorized artifact; it is not a
+read-only explorer and does not gain implementation rights. Follow the adopted
+`PLANS.md` ownership rules ([inactive source template](../templates/PLANS.md#progress-and-stopping)) for handback.
+Role enablement, write scope and native enforcement are separate decisions.
+
+Codex documents per-agent `sandbox_mode`; Claude Code provides `tools`,
+`disallowedTools` and `permissionMode`; Cursor documents `readonly`. These are
+client-specific controls, not interchangeable guarantees. Check the installed
+schema and effective permissions before using them. For a capability question,
+consult the dated [client comparison](../docs/research/2026-10-04-orchestration-capabilities.md);
+it is optional source evidence, not a required imported resource or runtime proof.
 
 ## Mapping to native Codex files
 

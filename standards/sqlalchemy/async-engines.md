@@ -11,6 +11,13 @@ async engine. SQLAlchemy is not the database driver, and async syntax alone does
 make a synchronous driver nonblocking. Use Core/Session synchronous paths for a
 synchronous service; adopt async only for a supported workload and driver.
 
+For 2.1 asyncio use, declare `sqlalchemy[asyncio]`: base installation no longer
+includes greenlet. In 2.0 its automatic installation is platform-dependent; the
+extra explicitly requests it. Keep the selected async database driver as well.
+For PostgreSQL, bare `postgresql://` selects psycopg2 in 2.0 and psycopg 3 in 2.1.
+Use `postgresql+psycopg2://`, `postgresql+psycopg://` or the chosen async-driver URL
+to preserve an intentional driver choice; check it against the engine mode.
+
 Budget pool_size, overflow, checkout timeout and connection count across processes/
 replicas. Validate options against the selected pool; not all engines use QueuePool.
 Pre-ping can identify stale connections at checkout but cannot repair a failed
@@ -57,5 +64,7 @@ Use the selected database profile for actual role/RLS/operational rules when app
 
 Basis: [engines](https://docs.sqlalchemy.org/en/20/core/engines.html),
 [pooling/disconnects/forking](https://docs.sqlalchemy.org/en/20/core/pooling.html),
-[async contracts](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html), and
-[dialects](https://docs.sqlalchemy.org/en/20/dialects/index.html).
+[async contracts](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html),
+[dialects](https://docs.sqlalchemy.org/en/20/dialects/index.html),
+[2.1 asyncio installation](https://docs.sqlalchemy.org/en/21/orm/extensions/asyncio.html), and
+[PostgreSQL driver change](https://docs.sqlalchemy.org/en/21/changelog/migration_21.html#default-postgresql-driver-changed-to-psycopg-psycopg-3).

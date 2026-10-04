@@ -60,6 +60,10 @@ constraints give separate guarantees. Decimal/bigint driver values need an exact
 representation; avoid implicit conversion to unsafe JavaScript numbers. Define
 timestamp timezone/precision and transformer round trips explicitly.
 
+If the domain permits clearing a value, model null explicitly in its typed storage
+contract and nullable column; optional/undefined alone is not a clear operation.
+Keep intent methods and follow the [save semantics](transactions-lifetime.md#explicit-persistence-and-ownership).
+
 Do not expose an entity as an API response by default. Build a projection with the
 intended fields; private keyword, `select: false` and serializer annotations alone
 are not a public-output security contract. Listeners/subscribers can handle bounded

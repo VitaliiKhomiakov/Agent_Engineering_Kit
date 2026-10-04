@@ -1,0 +1,22 @@
+# Operational defaults. Semantics and loading: standards/policy-configuration.md.
+# Paths in this comment are bundle-relative. Project overrides are optional.
+schema_version = 1
+
+[verification]
+timing = "phase_end"
+diagnostic_reset_after_stalled_attempts = 2
+
+[review]
+independent = "risk_based"
+
+[size]
+function_review_lines = 50
+class_review_lines = 400
+file_review_lines = 500
+growth_review_from_lines = 600
+documented_review_above_lines = 700
+react_component_review_lines = 250
+
+[instructions]
+root_guideline_lines = [40, 70]
+local_guideline_lines = [10, 25]

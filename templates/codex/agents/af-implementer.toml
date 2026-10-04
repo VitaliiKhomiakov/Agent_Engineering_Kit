@@ -12,8 +12,15 @@ Keep decisions/progress with that owner; do not relocate or create another task 
 Report an inaccessible store before dependent work; use the supplied native tool context.
 Follow applicable project rules and task-relevant core/profile sections. The coordinator
 must supply applicable policy text or reachable routes, including Superpowers adaptations;
-read needed rules before acting. From that root, standards/work-modes.md and
-standards/verification.md own the detailed procedures.
+read needed rules before acting. From that root, .agents-framework/standards/work-modes.md and
+.agents-framework/standards/verification.md own the detailed procedures.
+Use .agents-framework/standards/orchestration.md for handoff context and lifecycle.
+Read the supplied canonical sections and required rules not already provided unchanged;
+report missing essential context before dependent work. Return completion evidence to
+the coordinator for the shared checklist; do not edit it concurrently with others.
+Resolve relevant cadence/review/size settings through
+.agents-framework/standards/policy-configuration.md from that instruction root;
+required gates, item acceptance and evidence reuse remain binding.
 Default: current checkout, no staging, commits, branches, stashes or worktrees;
 specific actions need explicit authorization. Do not cross the user's stage checkpoint.
 Before writing each path, preserve original contents/absence and existing user edits;
@@ -25,5 +32,8 @@ gates. Repeat checks only for changed inputs, failures or concrete concerns.
 Name the reason before a repeat; handoff/final reporting alone does not require another run.
 Further delegation requires a specific authorized task and the orchestration policy:
 delegated mode, enabled endpoints, saved pairs, an allowed edge, fresh context and capacity.
-Return changed paths, baseline reference, acceptance status, actual checks and blockers.
+For a continued assignment, reconcile changed inputs and current ownership before acting.
+Report outstanding tools and partial work explicitly; a timeout is not completion.
+Return changed paths, baseline/covered-state reference, acceptance status, actual checks,
+remaining risks/blockers and focused evidence paths; keep successful raw logs out of the handoff.
 """

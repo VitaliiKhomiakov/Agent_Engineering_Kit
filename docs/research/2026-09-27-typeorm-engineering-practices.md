@@ -88,3 +88,18 @@ Pre-edit contents/absence for this combined TypeORM/Docker task were saved at
 `/tmp/af-typeorm-docker-gty94pab/before` with its `manifest.json`. The checkout has
 no usable Git metadata; review uses those scoped copies and all listed new files.
 This temporary evidence location is session-local, not a portable dependency.
+
+## 2026-10-04 follow-up: ORM-01
+
+Source review of the [repository API](https://typeorm.io/docs/working-with-entity-manager/repository-api/)
+confirms that `save` skips undefined properties. The
+[WHERE-value policy](https://typeorm.io/docs/data-source/null-and-undefined-handling/)
+concerns criteria and does not select a write-time clear operation. Transactions
+owns that distinction; mapping supplies a short nullable-contract route.
+
+Reviewed three acceptance scenarios: omission retains the stored value, an
+intentional nullable clear persists SQL NULL, and a required column rejects null.
+They are checks for an affected adapter, not newly executed results. The guidance
+preserves intent methods and does not generalize `save` semantics to every
+update/upsert or driver. No example, entity, schema, dependency or database was
+changed; the earlier 0.3.27 harness evidence does not establish these new scenarios.

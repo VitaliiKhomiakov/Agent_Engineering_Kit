@@ -21,6 +21,12 @@ for deliberate object assembly, not a substitute for constraints. Commit flushes
 pending changes even when autoflush is disabled. Report success only after commit
 has completed, including errors raised while leaving its context manager.
 
+With autoflush enabled, 2.0 distinguishes ORM-enabled execution from a plain
+textual statement. In 2.1, `Session.execute()` also autoflushes before Core/textual
+statements, including `text("SELECT ...")`; pending writes can fail before that
+SELECT runs. This concerns Session execution, not an independent Core Connection.
+Explicit autoflush controls remain available; they do not suppress commit's flush.
+
 A failed flush requires rollback before further use of that Session; let the owner
 unwind or explicitly recover. Do not catch an integrity error and continue in an
 aborted transaction. Close and rollback are distinct obligations. By default commit
@@ -61,4 +67,5 @@ request key there is not a complete idempotency protocol.
 
 Basis: [session basics](https://docs.sqlalchemy.org/en/20/orm/session_basics.html),
 [transaction/savepoint contracts](https://docs.sqlalchemy.org/en/20/orm/session_transaction.html),
-and [version counters](https://docs.sqlalchemy.org/en/20/orm/versioning.html).
+[version counters](https://docs.sqlalchemy.org/en/20/orm/versioning.html), and
+[2.1 autoflush changes](https://docs.sqlalchemy.org/en/21/changelog/migration_21.html#session-autoflush-behavior-simplified-to-be-unconditional).

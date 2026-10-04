@@ -6,6 +6,10 @@ native artifact navigation and progress; do not duplicate a canonical specificat
 Remove unused optional sections. The fields below capture task decisions, not a new process.
 When adopting this template at a different location, resolve its reference links
 against the installed policy; template-relative paths do not select a task store.
+For a task at `docs/plans/<task>.md`, the root policy route is `../../PLANS.md`
+and the default helper route is
+`../../.agents-framework/standards/superpowers/compatibility.md`. Resolve other
+native stores from their actual location instead of moving them to fit this example.
 
 - User outcome: `<observable behavior>`.
 - Scope: `<what changes and required compatibility>`.
@@ -35,12 +39,31 @@ against the installed policy; template-relative paths do not select a task store
 | `<1>` | `<complete scenario/contract>` | `<files/module>` | `<condition or none>` | `<command/inspection and risk covered>` |
 
 Current authorized stage: `<stage>`.
+Current item: `<stable item ID — in progress / blocked, with reason when needed>`.
 Status: `<planned / in progress / awaiting user review / blocked / complete>`.
 Next human checkpoint: `<after this stage, unless automatic progression is explicit>`.
-Independent reviewer: `<only when risk/complexity or user instruction warrants it>`.
+Independent reviewer: `<under the adopted review preference or explicit requirement; within permissions>`.
 Review scope: `<task changes/baseline and concrete affected-contract questions>`.
 Pre-stage baseline: `<saved contents/prior absence or reproducible references for
 affected paths, checkout identity, and existing local edits; capture before writing>`.
+
+Give independent actionable items stable IDs under the adopted planning policy.
+Example only: replace these sample outcomes with the task's actual items. Here,
+implementation and verification have separate acceptance conditions; if an item's
+own acceptance includes tests, it remains unchecked until those tests pass.
+
+```markdown
+- [x] S1.1. Implement the agreed behavior.
+- [ ] S1.2. Verify the required scenarios.
+
+Current item: S1.2 — in progress.
+Stage status: in progress.
+```
+
+Update the existing item when its criteria are met, before the next item/handoff;
+keep blocked items unchecked and explain reopened or cancelled scope. Preserve a
+native task store's own status operations instead of copying this sample into a
+competing progress list. The adopted `PLANS.md` owns the complete marker semantics.
 
 ## Stage handoff
 
@@ -57,7 +80,8 @@ Keep a short current state record. Stage completion does not complete the whole 
 
 Remove this section for inline work. For Superpowers task extraction, use numbered
 `Task N` headings below, with one independently assignable scope per heading.
-The coordinator supplies a fresh scoped handoff under `standards/orchestration.md`,
+The coordinator supplies a fresh scoped handoff under the bundle's
+`standards/orchestration.md` (bundle-relative, not task-relative),
 including Global Constraints and permissions. For extraction, read the conditional
 [helper reference](../standards/superpowers/compatibility.md); do not duplicate the full spec.
 
@@ -68,6 +92,6 @@ including Global Constraints and permissions. For extraction, read the condition
 - Working directory: `<mapped implementation checkout; absolute canonical task and baseline references>`.
 - Interfaces: `<consumed/produced contracts and dependencies>`.
 - Acceptance: `<observable scenarios or references to the relevant criteria>`.
-- [ ] `<Implementation step; exact code only where needed to settle ambiguity>`.
-- [ ] `<Necessary verification, command/inspection, expected outcome>`.
-- [ ] Record changed paths, actual evidence, and remaining concerns; return to coordinator.
+- [ ] T1.1. `<Implementation step; exact code only where needed to settle ambiguity>`.
+- [ ] T1.2. `<Necessary verification, command/inspection, expected outcome>`.
+- [ ] T1.3. Record changed paths, actual evidence, and remaining concerns; return to coordinator.
