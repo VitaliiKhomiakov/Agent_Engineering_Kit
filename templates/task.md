@@ -63,7 +63,8 @@ Stage status: in progress.
 Update the existing item when its criteria are met, before the next item/handoff;
 keep blocked items unchecked and explain reopened or cancelled scope. Preserve a
 native task store's own status operations instead of copying this sample into a
-competing progress list. The adopted `PLANS.md` owns the complete marker semantics.
+competing progress list. The adopted `PLANS.md` owns the complete marker semantics
+and user-facing progress summaries.
 
 ## Stage handoff
 

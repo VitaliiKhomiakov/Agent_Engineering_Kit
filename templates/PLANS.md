@@ -94,6 +94,8 @@ and unchecked/completed markers. Preserve existing IDs; adding an item does not
 renumber completed work. Update an item's marker when its own acceptance conditions
 are met, before moving to the next item or handing off. Do not postpone all updates
 until the stage ends. Keep the current item and stage status explicit.
+Use the task's existing ID convention; no fixed prefix, numbering scheme or
+technology-specific label is required.
 
 - `[x]` means the item's stated outcome is achieved. If its acceptance includes
   tests, keep it unchecked until those tests pass. Separate implementation and
@@ -108,6 +110,18 @@ until the stage ends. Keep the current item and stage status explicit.
   do not repeat completed work merely because a new session began. Native stores
   retain their supported markers/status operations and single progress owner;
   do not mirror them in a second editable checklist or invent CLI operations.
+
+For work with a canonical plan, make progress visible in user-facing messages.
+At the start or resumption, identify the current item by its ID, short description
+and marker/status, linking to the plan when available. After recording item
+changes, summarize the changed IDs, markers/statuses and outcomes in the next
+normal progress update; related changes may share one update. At a checkpoint
+or handoff, identify remaining work, blockers or the review being awaited.
+Use `[ ]` / `[x]` for Markdown plans and the supported statuses for native tasks;
+explain in-progress or blocked states briefly. Derive these summaries from the
+canonical record, in the user's response language. They are views of that record,
+not a second editable checklist. Do not repeat the full plan, announce every tool
+call or create extra permission checkpoints solely to display progress.
 
 Item completion is neither a permission checkpoint nor a trigger for extra tests
 or reviews. Verification timing and evidence reuse retain their existing owner.
