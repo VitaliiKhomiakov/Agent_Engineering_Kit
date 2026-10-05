@@ -18,7 +18,22 @@ Blueprint guidance; Markdown instructions, TOML catalog and inactive client temp
 **Spec:** The scope, finding register and acceptance criteria in this document form
 the specification. No separate design artifact is necessary for this audit.
 
-**Date:** 2026-10-03. **Status:** Stages 0–5 complete, including all three user-selected refinements (2026-10-04). Only the separately scoped stage 6 real-agent pilot remains outstanding.
+**Date:** 2026-10-03. **Status:** Awaiting user review / pilot scope selection.
+Stages 0–5 are complete, including all three user-selected refinements (2026-10-04).
+Only the separately scoped stage 6 real-agent pilot remains outstanding.
+
+**Current execution:** No implementation item is active. Stage 5 is complete.
+The next pending item is QA-02.1: select and record the pilot target, client/version
+and permitted scope before authorizing stage 6 execution. Installation alone does
+not satisfy the pilot's behavioral acceptance criteria.
+
+**Next human checkpoint:** Agree the stage 6 pilot scope and authorization.
+Its execution record remains in `docs/plans/2026-09-20-native-client-adoption.md`;
+this audit retains only its finding-level acceptance and summary.
+
+**2026-10-05 adoption outcome:** Successful instruction installation and file
+verification. Model setup was explicitly deferred; stage 6 runtime behavior remains
+unverified. Target identity and detailed adoption evidence stay outside this plan.
 
 **Assessment:** The library is detailed and generally technically sound. It does
 not need wholesale rewriting. The audit identifies **13 future-work items**:
@@ -37,13 +52,18 @@ below are acceptance gates for those items, not three additional audit defects.
 
 - User request: audit the project's languages and technologies using Superpowers,
   verify against online documentation/best practices, and record all findings for
-  future implementation. The latest request authorizes reviewing/correcting this
-  plan and starting implementation using Superpowers. The source-library entry
-  and instruction-size gates are part of that scope.
+  future implementation. Subsequent requests authorized stages 0–5 using
+  Superpowers, including the source-library entry and instruction-size gates.
+  The 2026-10-06 request authorizes the plan-record corrections, a commit and
+  push; it does not start the separate stage 6 pilot.
 - Execute inline in the current checkout under `standards/superpowers.md` and
-  the direct-mode stage checkpoints in `standards/work-modes.md`. Current stage:
-  5 (SYM-01, NEST-02, ANG-02), explicitly selected by the user; report before the separately scoped stage 6 pilot. No commits, staging,
-  worktrees, delegation, target adoption or client-configuration changes.
+  the direct-mode stage checkpoints in `standards/work-modes.md`. No implementation
+  stage is active; stages 0–5 are complete and stage 6 awaits scope selection.
+  Git writes were not authorized for the historical implementation stages.
+  The 2026-10-06 correction permits staging this plan, committing it with the
+  preserved adoption note, and pushing `main` to `origin`. No worktrees,
+  delegation, target adoption or client-configuration changes are authorized
+  by this correction.
 - Workspace and execution checkout: `/home/vitalii/Documents/Local_Projects/Agent_Engineering_Kit`.
 - Canonical plan/progress owner: `docs/plans/2026-10-03-technology-instruction-audit.md`.
 - Baseline: `94ab312667ad8b5d0c0025fcf1dda64e54f57365`; working tree was clean.
@@ -53,9 +73,9 @@ below are acceptance gates for those items, not three additional audit defects.
 - Existing `docs/plans/` location and English artifact conventions are preserved;
   user-facing communication is Russian.
 - Do not upgrade consuming projects, rewrite historical verification claims,
-  activate templates, install agents, deploy, or perform Git integration as a
-  consequence of this plan. Change only the current stage's files; the historical
-  audit changed no standards.
+  activate templates, install agents or deploy as a consequence of this plan.
+  Git writes require the explicit grants recorded above. Change only the
+  authorized scope's files; the historical audit changed no standards.
 - Preserve conditional reading, supported target versions, existing verification
   gates and the distinction between bundled resources and active instructions.
 - An absent generic language profile is not a defect: this audit covers the
@@ -162,25 +182,25 @@ trust-rule and checker routes once those targets exist. Do not insert dangling
 links or a command for a not-yet-created tool. The source-maintenance `AGENTS.md`
 is not a catalog asset for automatic export into consuming projects.
 
-- [x] Write a concise purpose and repository map for `standards/`, `templates/`,
+- [x] MAINT-01.1. Write a concise purpose and repository map for `standards/`, `templates/`,
   `examples/` and `docs/`. Identify the catalog as bundle metadata and distinguish
   shared policies, technology topics, inactive templates and historical evidence.
-- [x] Add task-based routes: catalog/route changes to the catalog contract;
+- [x] MAINT-01.2. Add task-based routes: catalog/route changes to the catalog contract;
   technology-rule changes to the affected profile/topic and applicable official
   versioned sources; planning to `templates/PLANS.md` and the relevant canonical
   plan; Superpowers use to its local policy. Do not require reading all profiles,
   research records or historical plans at session start.
-- [x] State the essential maintenance constraints briefly: preserve unrelated
+- [x] MAINT-01.3. State the essential maintenance constraints briefly: preserve unrelated
   work and supported versions; keep factual claims separate from local policy;
   retain historical evidence; maintain one rule owner; choose scoped artifact
   or executable-example checks by the change. Preserve English artifacts and
   user-language responses under the existing language policy. Route detailed
   permissions, work modes and verification to their existing owners, without
   inventing onboarding, delegated roles or approval steps.
-- [x] Update `README.md` to distinguish this active maintenance entry from
+- [x] MAINT-01.4. Update `README.md` to distinguish this active maintenance entry from
   inactive target templates; retain the true status of root `PLANS.md` and
   client configuration. Creating this file does not activate those resources.
-- [x] Verify links and Markdown, check G1–G3, and walk through four decisions:
+- [x] MAINT-01.5. Verify links and Markdown, check G1–G3, and walk through four decisions:
   a prose correction selects artifact checks; a Nest example fix selects its
   relevant fixture; a catalog change validates the selected bundle contract;
   a planning-only task changes the canonical plan without installing templates
@@ -215,13 +235,13 @@ writes triggered by textual queries or assume the wrong driver/dependency setup.
 `standards/sqlalchemy/mapping-contracts.md`. Add a dated section to
 `docs/research/2026-09-21-sqlalchemy-engineering-practices.md` without rewriting its old evidence.
 
-- [x] Label 2.0.54 as the tested historical baseline; add a dated 2.0/2.1 decision
+- [x] DB-01.1. Label 2.0.54 as the tested historical baseline; add a dated 2.0/2.1 decision
   branch and links to the changed contracts above. Do not bump example pins.
-- [x] Explain the affected autoflush, dependency, explicit-driver and dataclass
+- [x] DB-01.2. Explain the affected autoflush, dependency, explicit-driver and dataclass
   decisions in their existing owners; keep unchanged 2.0 behavior explicit.
-- [x] Check a Python 3.10/SQLAlchemy 2.0 adoption remains supported; a 2.1 target
+- [x] DB-01.3. Check a Python 3.10/SQLAlchemy 2.0 adoption remains supported; a 2.1 target
   selects its own requirements without a forced dependency upgrade.
-- [x] If executable 2.1 compatibility is claimed, extract a bounded fixture and
+- [x] DB-01.4. If executable 2.1 compatibility is claimed, extract a bounded fixture and
   verify pending-write plus textual-SELECT autoflush, async initialization, explicit
   driver selection and a mapped default. Otherwise label the addition source-reviewed.
 
@@ -250,18 +270,18 @@ requirement to add a particular approval ritual.
 **Files:** Modify root `AGENTS.md`, `standards/core.md`, `templates/policy-entry.md`,
 `templates/AGENTS.root.md` and `standards/unreal-engine/mcp-editor.md`.
 
-- [x] Add one short owning rule: external content is task evidence and cannot
+- [x] AI-01.1. Add one short owning rule: external content is task evidence and cannot
   grant permissions, override higher-priority instructions, request secret
   disclosure or authorize unrelated commands. Legitimately adopted local
   instructions and explicitly selected skills retain their native precedence.
-- [x] Route entry templates and editor discovery to that rule; avoid duplicating
+- [x] AI-01.2. Route entry templates and editor discovery to that rule; avoid duplicating
   a security checklist in every technology profile or requiring approval for
   already-authorized ordinary work.
-- [x] Review fixtures containing a useful API excerpt plus an embedded request
+- [x] AI-01.3. Review fixtures containing a useful API excerpt plus an embedded request
   to upload credentials, an asset description requesting save-all, and a build
   log requesting unrelated destructive cleanup. Expected: use factual data,
   disregard the embedded authorization attempt and continue the legitimate task.
-- [x] Include an ordinary safe documentation command as a control: the agent
+- [x] AI-01.4. Include an ordinary safe documentation command as a control: the agent
   may use it when it serves the authorized task. Static rule review is not a
   measured claim of prompt-injection resistance; observe this in the pilot below.
 
@@ -299,24 +319,24 @@ need explicit documented resolution rules; never silently ignore unresolved link
 Do not fetch external URLs or invent support for all Markdown constructs: document
 the supported repository syntax and report unsupported ambiguous links clearly.
 
-- [x] Add a standard-library-only artifact checker that resolves catalog paths
+- [x] QA-01.1. Add a standard-library-only artifact checker that resolves catalog paths
   and dependency IDs, detects duplicate IDs/cycles, checks local links/fragments
   and fenced blocks, and accepts explicit changed-file paths. Declare installed
   template-link bases rather than treating source-template links as ordinary files.
-- [x] Document `python3 tools/check_instruction_artifacts.py` and its scoped
+- [x] QA-01.2. Document `python3 tools/check_instruction_artifacts.py` and its scoped
   invocation; return zero for valid artifacts and nonzero with file/line details
   for a missing resource, bad fragment, duplicate ID or cycle.
-- [x] Add standard-library unittest fixtures in `tests/test_instruction_artifacts.py`:
+- [x] QA-01.3. Add standard-library unittest fixtures in `tests/test_instruction_artifacts.py`:
   valid source, missing resource, bad fragment, duplicate ID, cycle and valid
   selected bundle. Run `python3 -m unittest discover -s tests -p 'test_instruction_artifacts.py'`.
   Verify those failures in temporary copies plus a valid selected bundle
   containing deliberately omitted optional source research. The checker must
   respect `standards/catalog.md`, not force full-history bundling.
-- [x] Document extraction/reproduction commands for examples touched by the
+- [x] QA-01.4. Document extraction/reproduction commands for examples touched by the
   defect tasks and retain required manifests/configuration. Distinguish syntax,
   type, mocked integration and real-backend evidence. Do not build an all-stack
   runtime suite merely to edit wording.
-- [x] Define maintenance triggers: changed API contract, supported-version change,
+- [x] QA-01.5. Define maintenance triggers: changed API contract, supported-version change,
   broken source link or a reported issue. Record checked date/version and source
   separately from runtime-tested versions; avoid automatic "latest" upgrades.
 
@@ -334,18 +354,18 @@ but do not answer whether an AI agent consistently selects and follows them.
 update `README.md` evidence links only after recording actual results. Do not
 create a competing pilot ledger.
 
-- [ ] Select one real target checkout and client/version with its established
+- [ ] QA-02.1. Select one real target checkout and client/version with its established
   permissions; treat this as a separate future execution stage. This audit has
   not selected or modified a target.
-- [ ] Exercise a small declared stack through concrete tasks: plain Python must
+- [ ] QA-02.2. Exercise a small declared stack through concrete tasks: plain Python must
   not pull in FastAPI; JavaScript React must not impose TypeScript/Next.js; an
   adopted instruction must lead to the relevant topic instead of loading all
   resources. Use only scenarios supported by the selected target, with disposable
   bundles for the other routing cases.
-- [ ] Observe a bounded change, applicable checks, preservation of user edits,
+- [ ] QA-02.3. Observe a bounded change, applicable checks, preservation of user edits,
   checkpoint/resumption and the canonical plan owner. Include AI-01's trust
   scenarios in an isolated fixture if the client supports them.
-- [ ] Record client/model settings, selected instructions, task outcome and
+- [ ] QA-02.4. Record client/model settings, selected instructions, task outcome and
   failures/limits. Report observed adherence; do not infer hidden reasoning or
   claim universal compliance or token savings from one successful run.
 
@@ -374,16 +394,16 @@ from the example's control flow; a cleanup `finally` cannot translate the except
 **Files:** Modify `standards/fastapi/examples/lifetime.md`; append new evidence to
 `docs/research/2026-09-21-fastapi-engineering-practices.md` after verification.
 
-- [x] Add snapshot regressions for 200 headers followed by `ReadTimeout`, and
+- [x] PY-01.1. Add snapshot regressions for 200 headers followed by `ReadTimeout`, and
   for a bounded first chunk followed by `ReadError`. Expect safe 504/502, no
   private message or partial success, upstream closure and lifespan client closure.
-- [x] Translate only the applicable HTTPX timeout/request errors around buffered
+- [x] PY-01.2. Translate only the applicable HTTPX timeout/request errors around buffered
   body consumption before returning `PlainTextResponse`; preserve cancellation
   and the existing one-owner cleanup.
-- [x] Explain why a failure after `/feed` starts cannot be repaired by replacing
+- [x] PY-01.3. Explain why a failure after `/feed` starts cannot be repaired by replacing
   its status with a new HTTP error. Retain stream-failure cleanup and oversized
   snapshot refusal checks.
-- [x] Extract the existing named files and run their documented strict type and
+- [x] PY-01.4. Extract the existing named files and run their documented strict type and
   test commands on the pinned compatible stack; record actual results and versions.
 
 ### GO-01 — Clarify response consumption versus HTTP connection reuse
@@ -407,13 +427,13 @@ actual runtime/transport rather than promise universal close-only behavior.
 **Files:** Modify `standards/go/resources.md`; append the caveat's source/date to
 `docs/research/2026-09-21-go-engineering-practices.md`.
 
-- [x] Add a short HTTP/1-specific note: consume required content and close the
+- [x] GO-01.1. Add a short HTTP/1-specific note: consume required content and close the
   body; account for unread bytes and supported transport behavior when reuse
   matters. Any explicit drain needs a byte/time budget.
-- [x] Explain that rejecting oversized/stalled content can properly sacrifice
+- [x] GO-01.2. Explain that rejecting oversized/stalled content can properly sacrifice
   connection reuse. Do not prescribe unbounded `io.Copy(io.Discard, ...)` or
   transfer HTTP/1 assumptions to every HTTP/2 transport.
-- [x] Review bounded-success and oversized/stalled-refusal scenarios. If a
+- [x] GO-01.3. Review bounded-success and oversized/stalled-refusal scenarios. If a
   consuming adapter requires connection reuse, observe it using `httptrace` or
   server connection accounting on its supported runtime; prose alone proves no
   reuse behavior and needs no new universal test suite.
@@ -447,15 +467,15 @@ explains the unrecognized-error outcome.
 `standards/nestjs/transport-contracts.md`; append actual verification evidence to
 `docs/research/2026-09-21-nestjs-engineering-practices.md`.
 
-- [x] Extend the existing invalid-input corpus with `{"lines":[[]]}` and
+- [x] NEST-01.1. Extend the existing invalid-input corpus with `{"lines":[[]]}` and
   `{"lines":[[{"quantity":1}]]}`. Both must return 400 before reservation;
   a subsequent valid five-unit request retains the original receipt sequence
   and reaches the expected remaining stock zero.
-- [x] Add `@IsObject({ each: true })` and its import alongside nested validation.
+- [x] NEST-01.2. Add `@IsObject({ each: true })` and its import alongside nested validation.
   Explain that recursive validation does not establish array dimensionality.
-- [x] Preserve existing primitive/null, extra-field, size and valid cases. Do not
+- [x] NEST-01.3. Preserve existing primitive/null, extra-field, size and valid cases. Do not
   mask the boundary bug by translating every domain `RangeError` to HTTP 400.
-- [x] In the extracted pinned example, run `npm run check`, `npm run lint`,
+- [x] NEST-01.4. In the extracted pinned example, run `npm run check`, `npm run lint`,
   `npm run build` and `npm test`; record the real Fastify-pipeline result before
   changing any reported historical test counts.
 
@@ -477,12 +497,12 @@ an optional value can therefore leave old data stored after a seemingly successf
 `standards/typeorm/models-mapping.md`; add dated evidence to
 `docs/research/2026-09-27-typeorm-engineering-practices.md`.
 
-- [x] Explain omission/undefined versus SQL NULL under `save`; intentional clearing
+- [x] ORM-01.1. Explain omission/undefined versus SQL NULL under `save`; intentional clearing
   needs an explicit nullable model/adapter contract and a stored reload check.
   `invalidWhereValuesBehavior` controls filtering, not this write behavior.
-- [x] Preserve intent methods and avoid a generic setter/patch API. Do not extend
+- [x] ORM-01.2. Preserve intent methods and avoid a generic setter/patch API. Do not extend
   the statement indiscriminately to every update/upsert method or driver.
-- [x] When implementing a behavioral fixture, verify a previously non-null value
+- [x] ORM-01.3. When implementing a behavioral fixture, verify a previously non-null value
   becomes SQL NULL through the intended clear operation, an omitted property stays
   unchanged, and forbidden null still fails on a non-nullable column. A prose-only
   change can use a source/consistency check with that runtime limit stated.
@@ -503,10 +523,10 @@ traversal. Creating a child DTO and validating its constraints are separate mech
 
 **Files:** Modify `standards/symfony/http-validation.md` only if this refinement is selected.
 
-- [x] Add a conditional note covering nested element-type extraction, child
+- [x] SYM-01.1. Add a conditional note covering nested element-type extraction, child
   traversal such as `Assert\Valid`, and separate container shape/size limits.
   Link version-applicable prerequisites rather than adding dependencies universally.
-- [x] Verify the explanation against valid child mapping, child constraint failure,
+- [x] SYM-01.2. Verify the explanation against valid child mapping, child constraint failure,
   malformed children and an oversized collection. Use an existing real payload
   test if a consuming project is changed; scalar-only projects gain no packages.
 
@@ -526,10 +546,10 @@ runtime requirements must not be conflated.
 **Files:** Optionally modify `standards/nestjs/verification-operations.md` and its
 dated research note.
 
-- [x] Add a Nest-12-and-Jest-specific caveat with a checked date/source. Preserve
+- [x] NEST-02.1. Add a Nest-12-and-Jest-specific caveat with a checked date/source. Preserve
   older Nest majors and Node-runner examples; no blanket Node upgrade or runner
   replacement follows from this note.
-- [x] Document the affected-migration requirement to execute the retained Jest
+- [x] NEST-02.2. Document the affected-migration requirement to execute the retained Jest
   command and application checks on the chosen compatible runtime, recording the
   decision independently. No consuming-project migration is part of this stage.
 
@@ -557,16 +577,16 @@ retention and replacement cleanup. The extracted guard produced
 **Files:** Modify `standards/react/examples/latest-result.md`; append new verified
 results to `docs/research/2026-09-21-react-engineering-practices.md`.
 
-- [x] Add a deferred-request regression: resolve first A, switch to B without
+- [x] REACT-01.1. Add a deferred-request regression: resolve first A, switch to B without
   settling it, switch back to A, and assert loading with neither old row nor old
   alert. Resolve/reject B afterward; it must not alter the view. Only the new A
   completion may supply the current result.
-- [x] Track the service owner for loading as well as settled state; use a guarded
+- [x] REACT-01.2. Track the service owner for loading as well as settled state; use a guarded
   render-time owner-change reset following React's
   [prop-change state adjustment guidance](https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).
   Keep the query remount and setup-specific publication guard. An Effect-only
   loading reset is insufficient for the immediate-hiding contract.
-- [x] Run `npm run check`, `npm run lint`, `npm run build` and
+- [x] REACT-01.3. Run `npm run check`, `npm run lint`, `npm run build` and
   `npm run test:latest` in the example's pinned setup. Retain query-reset,
   synchronous-failure and Strict Mode cleanup scenarios; record actual results.
 
@@ -591,14 +611,14 @@ bound validity/errors or list structure stale.
 `standards/angular/change-detection.md` and `standards/angular/verification.md`;
 append dated evidence to `docs/research/2026-09-29-angular-ngrx-engineering-practices.md`.
 
-- [x] Add the form-specific caveat in the forms owner and a short cross-reference
+- [x] ANG-01.1. Add the form-specific caveat in the forms owner and a short cross-reference
   from change detection. Use template-read signals, AsyncPipe or an owned
   form-event subscription with `markForCheck` according to the actual integration.
   Preserve existing Reactive Forms and version/provider choices.
-- [x] Add the acceptance scenario to verification: programmatic hydration/reset
+- [x] ANG-01.2. Add the acceptance scenario to verification: programmatic hydration/reset
   and FormArray or async-validation updates must refresh bound UI through the
   production notification path after supported stabilization.
-- [x] For the instruction-only change, verify source applicability and the scenario
+- [x] ANG-01.3. For the instruction-only change, verify source applicability and the scenario
   description; report it as source-reviewed. If a compatible existing zoneless
   fixture is available or a behavioral example is added within scope, run the
   scenario and verify subscription cleanup after destruction. Do not force
@@ -623,11 +643,11 @@ URL/origin eligibility must match the installed version.
 **Files:** Optionally modify the transport/trust section of
 `standards/angular/boundaries.md`.
 
-- [x] For cookie-authenticated mutations, require checking installed XSRF
+- [x] ANG-02.1. For cookie-authenticated mutations, require checking installed XSRF
   configuration, URL/origin eligibility and server enforcement. Do not disable
   the mechanism merely to suppress integration errors or assume current absolute
   same-origin support in older releases.
-- [x] Require affected-application checks that eligible requests carry the configured
+- [x] ANG-02.2. Require affected-application checks that eligible requests carry the configured
   token, invalid/missing tokens are rejected, and unrelated origins receive no
   credentials/token leakage. Public reads and explicit bearer-only APIs do not
   acquire a new cookie mechanism.
@@ -730,11 +750,11 @@ this plan as authorization for automatic commits, client configuration or deploy
   one short source-maintenance entry and a scoped README adjustment. No new
   architecture, repeated design approval or additional implementation plan is needed.
 
-- [x] Inventory the catalog and establish the baseline.
-- [x] Check standards paths, local references, fences and dependency cycles.
-- [x] Complete technology source review and consolidate findings.
-- [x] Save all findings with sources, exact owners and acceptance criteria.
-- [x] Review plan coverage, dependency order and evidence boundaries.
+- [x] AUDIT.1. Inventory the catalog and establish the baseline.
+- [x] AUDIT.2. Check standards paths, local references, fences and dependency cycles.
+- [x] AUDIT.3. Complete technology source review and consolidate findings.
+- [x] AUDIT.4. Save all findings with sources, exact owners and acceptance criteria.
+- [x] AUDIT.5. Review plan coverage, dependency order and evidence boundaries.
 
 Acceptance for this audit is the completed finding register, 22-technology source
 matrix and implementable future checklist. Artifact verification checks this plan's
@@ -855,8 +875,10 @@ artifact counts above describe the pre-extension plan.
 - Next stage: 3 — AI-01, the external-content trust boundary and short entry routes.
   The direct-mode checkpoint applies before that stage. No stage 3 work has begun.
 
-Current implementation: **stages 0–3 complete, awaiting user review**.
-Stages 4 onward and any target-client pilot have not started.
+Historical checkpoint after stage 3 (superseded by the stage 4 and 5 results below):
+**stages 0–3 complete, awaiting user review**. At that checkpoint, stages 4 onward
+and any target-client pilot had not started. The current state is recorded at
+this document's beginning.
 
 ## Temporary artifact cleanup — 2026-10-04
 
@@ -1043,3 +1065,23 @@ All source-library implementation stages are complete. QA-02 remains a separate
 real-agent pilot requiring a selected project/client and its permitted scope;
 it has not started. No Git integration was performed. After recording and checking
 this result, the exact stage temporary directory is removed as the user requested.
+
+## Plan-record reconciliation — 2026-10-06
+
+The user authorized correcting this plan, committing and pushing the result.
+The pre-edit plan, including the existing 2026-10-05 adoption note, is retained
+in `/tmp/aek-plan-status-ruyjw_ri/2026-10-03-technology-instruction-audit.md`;
+`head.txt` in that directory records the checkout baseline.
+
+Added 53 stable item IDs while preserving all 56 checkbox states and their
+acceptance text, including the existing G1–G3 IDs. Labelled the superseded
+stage 3 checkpoint as historical and reconciled the current status and
+authorization. QA-02.1–QA-02.4 remain pending; no pilot execution or new
+technology/runtime verification is claimed.
+
+Verification: the scoped artifact checker reported zero errors; `git diff --check`
+passed. A comparison with the saved pre-edit plan confirmed unchanged checkbox
+states and item text, 53 unique new IDs and preservation of the adoption note.
+Scoped diff review covered the status, historical checkpoint and authorization
+changes. These results concern this record correction, not a rerun of earlier
+implementation checks. The next substantive step remains pilot scope selection.
