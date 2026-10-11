@@ -94,6 +94,52 @@ rename unrelated skills by prefix. Existing target installations are not changed
 by this source rename. Bundle paths and native agent role names retain their
 existing contracts; the skill prefix does not rename `.agents-framework/` or `af-<role>`.
 
+<a id="optional-project-design-skill"></a>
+
+### Optional project task skills
+
+Select `project-workflows` separately from the target's technology profiles when
+adopting `aek-design-feature`, `aek-implement-feature` or `aek-review-changes`.
+The [project-skill contract](standards/project-skills.md) owns their triggers, local
+inputs and outputs; this procedure still owns installation and updates. Bundle
+availability does not require installing all three native entries.
+
+List selected and deliberately uninstalled entries in the adoption preview. For
+each selected name, record the inactive template and native destination separately,
+the local guide resolved from that destination, and the managed scope/evidence
+reference. The [record template](templates/framework/adoption-record.md#native-task-skill-mapping-when-selected)
+provides this mapping without a second set of accepted-content hashes. Do not
+install a whole native skill directory merely because its resources are bundled.
+
+Preview the selected skill name, source/content identity, native destination and
+adapted reference alongside the bundle paths. For Codex, the project destination
+is `.agents/skills/<selected-skill>/SKILL.md`; the source template remains
+inactive inside the bundle. Record both paths and their adapted contents in the
+existing adoption record's managed scope. Reconcile any existing same-name skill
+under the ownership and B/C/N rules below; name equality does not establish ownership.
+If a same-name local skill is unowned, preserve it while preparing an explicit
+coexistence, adaptation or replacement decision. Do not leave competing active
+definitions as an accidental result of import. Backups belong outside discovery.
+
+From the native skill folder, rebase its guide link to the actual installed
+`standards/project-skills.md`. With a contained bundle use
+`../../../.agents-framework/standards/project-skills.md`. Keep required guide and
+policy references local, and fill the active entry's native-skill path. Omit the
+optional workflow route when its profile is not selected. Independently opened
+children need their own reachable selected entry/resources; do not rely on parent
+discovery. Ordinary design, implementation and review must work without the source
+checkout or adoption record.
+
+Check the selected bundle and explicitly check the installed native file outside
+that scan. Validate skill metadata separately, then record discovery/use in the
+actual client/version. Preparation and static checks do not prove activation.
+Other clients retain direct-reference use until their native mapping is separately
+verified. Preserve snapshots outside discovery and apply the existing recovery
+procedure; adding these skills introduces no separate installer or model-setup step.
+Dropping a native selection, finding a deleted managed entry or losing its accepted
+base uses the same explicit update decision as any managed file; neither the
+profile's resource list nor a missing file is permission to restore or delete it.
+
 ## Layout and path contract
 
 For a new adoption, place imported `standards/` and inactive `templates/` under
@@ -133,6 +179,7 @@ links, code-span paths, TOML developer instructions and native imports separatel
 | `AGENTS.root.md`, `policy-entry.md`, `PLANS.md` | Source templates describe root-installed paths; the source checker maps their `.agents-framework/` prefix virtually. When retained inactive in a target bundle, rebase Markdown links to their containing file; there is no virtual target mapping. | Resolve from the actual root entry, using `.agents-framework/standards/...` and `.agents-framework/templates/...` by default. A nested or alternate entry needs its own base. |
 | Task template and helper routes | Retain source-relative links inside the inactive bundle. | Rebase to the installed `PLANS.md` and bundle from the existing canonical task location; a plan at `docs/plans/` usually needs `../../`. Native stores can differ. |
 | Model setup/reassignment skills | `../../../standards/model-configuration.md` remains relative to each inactive skill folder. | For Codex `.agents/skills/<skill>/SKILL.md`, use `../../../.agents-framework/standards/model-configuration.md` for the contained layout, or the reconciled flat route. |
+| Project task skills | `../../../standards/project-skills.md` resolves inside each source or inactive bundle template. | Rebase from each native folder to the actual guide; contained Codex uses `../../../.agents-framework/standards/project-skills.md`. Keep operational references local. |
 | Integration skill | Source-relative discovery requires both source procedure and catalog. | Resolve the full source through the request/provenance, independently of the inactive or native skill folder. Source unavailability blocks dependent import/update work, not ordinary work using reachable local rules. |
 | Native role examples | Developer-instruction paths describe the intended target instruction root, not the TOML folder. | Adapt their bundle prefix from the supplied instruction root; retain native configuration and model values unless separately authorized. |
 | Claude bridge and Cursor route | Inactive examples only; an `@` import is not a Markdown link. | Root `CLAUDE.md` may keep `@AGENTS.md`; verify that root entry separately. Fill the Cursor rule's instructions from its real location and selected native contract. |
@@ -610,8 +657,11 @@ Two separate instruction-only model skills also exist:
 [aek-model-setup](templates/skills/aek-model-setup/SKILL.md) and
 [aek-model-reassign](templates/skills/aek-model-reassign/SKILL.md). Install only the
 procedures the target workspace needs; copying a template or its unconfigured
-example is not consent to model assignments. Only `aek-design-change` and
-`aek-deliver-phase` remain conceptual here.
+example is not consent to model assignments. The optional design, implementation
+and review entries use the [project-task adoption route](#optional-project-task-skills).
+The former conceptual names `aek-design-change` and `aek-deliver-phase` are not
+additional templates or native aliases; their responsibilities are covered by
+`aek-design-feature` and `aek-implement-feature`.
 
 Use a verified native mapping for the selected client.
 Codex role targets are TOML; Claude Code and Cursor role targets are Markdown with YAML

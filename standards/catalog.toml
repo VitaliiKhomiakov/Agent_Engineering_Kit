@@ -68,6 +68,18 @@ activities = ["setup"]
 when = "Integration model selection/reuse, authorized setup, explicit reassignment, or relevant configuration repair."
 
 [[profiles]]
+id = "project-workflows"
+source = "standards/project-skills.md"
+resources = [
+  "templates/skills/aek-design-feature/SKILL.md",
+  "templates/skills/aek-implement-feature/SKILL.md",
+  "templates/skills/aek-review-changes/SKILL.md",
+]
+activities = ["design", "implementation", "review"]
+when = "Selecting or using adopted AEK consumer-project design, implementation or review task skills."
+dependencies = ["core"]
+
+[[profiles]]
 id = "python-fastapi"
 source = "standards/python-fastapi.md"
 technologies = ["python", "fastapi", "pydantic"]

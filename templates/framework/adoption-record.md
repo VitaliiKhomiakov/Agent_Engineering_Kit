@@ -17,6 +17,7 @@ and managed scope; the canonical adoption task owns decisions and progress.
 - State: `<prepared | applied but unverified | verified | partial>`
 - Candidate source: `<accessible location + revision or selected-content manifest>`
 - Candidate profiles and layout: `<IDs, target routes and any adapted locations>`
+- Selected native task skills: `<names or none; mapping below; bundle availability is separate>`
 - Policy configuration: `<defaults/contract content identity or legacy absence; optional project override path and owned scope, if present; no duplicate values>`
 - Model-selection outcome: `<checked/reused | configured | explicitly deferred | unresolved; canonical decision and existing routing/native owner references, with scope/activation limits; no duplicate assignments>`
 - Last accepted import: `<source identity, selection/layout and snapshot/manifest reference; none on first import>`
@@ -40,6 +41,19 @@ the rest. Source removals require a prepared decision, not automatic deletion.
 Snapshots needed for comparison/recovery must remain retrievable; hashes prove
 equality but cannot reconstruct missing contents. Do not hash this record into
 itself; preserve its prior contents/absence in the external operation snapshot.
+
+## Native task-skill mapping, when selected
+
+| Skill | Inactive bundle template | Selected native destination or not installed | Adapted local guide | Managed-scope/evidence reference |
+| --- | --- | --- | --- | --- |
+| `<selected name>` | `<bundle-relative template resolved from recorded bundle directory>` | `<target-relative native path; not installed when only bundled>` | `<reference resolved from native folder>` | `<managed-path row and file/discovery/use evidence; not observed stays not observed>` |
+
+Map selected native entries separately from bundled templates. Do not count an
+inactive copy as a second installation or infer ownership from a matching name.
+Native destinations share the managed-path comparison/recovery rules; do not keep
+another copy of their accepted hashes here. If selection drops an entry or a
+managed path is intentionally absent, reference the explicit retain/retire/restore
+decision in the canonical adoption task. Omission from this table grants no deletion.
 
 ## Relocation mapping, only when selected
 
@@ -72,6 +86,7 @@ and native configuration. Do not duplicate them or maintain a task checklist her
 
 - Attempted source/selection and operation evidence: `<canonical task reference>`
 - File outcome and recovery evidence: `<reference identifying written, untouched and uncertain paths>`
+- Comparison and intervening edits: `<prior contents/absence, operation-written identity and current-state differences; include record and native files>`
 - Unresolved differences: `<reference or concise limits>`
 
 Confirm these statements against actual files when resuming. An old record, even

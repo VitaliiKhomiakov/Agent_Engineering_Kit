@@ -37,6 +37,7 @@ by their headings; follow further references only for the requested operation.
 | Any import/preparation | MIGRATION: Import inputs and boundaries; Prepare and apply; Execution rule for the migration |
 | New/existing target and conflict inventory | MIGRATION: New and existing projects; Phase 1; Resolving active conflicts; relevant Phase 2 profile choices |
 | Bundle and target entries | MIGRATION: Layout and path contract; `standards/catalog.md`, selected catalog profiles and relevant Phase 3 instruction restructuring |
+| Selected project task skills | MIGRATION: Optional project task skills; Adapting installation routes; selected templates and native mappings in the adoption record |
 | Model selection/reuse | MIGRATION: Model-selection step; `aek-model-setup` or `aek-model-reassign` as selected there; source `standards/model-configuration.md` owns actual settings |
 | Proposed/applied record | MIGRATION: Adoption record and ownership; `templates/framework/adoption-record.md` |
 | Repeat/update or selected relocation | MIGRATION: Repeat and update; Relocating an existing import; current record and actual managed target contents |
@@ -58,3 +59,6 @@ Report prepared/applied/unchanged/partial scope, evidence, unresolved decisions 
 the next agreed checkpoint, including the model-step outcome and its owner references.
 Distinguish valid files and saved choices from observed client discovery/activation.
 Neither source-based reading nor copying this skill proves native activation.
+For task skills, report the selected native subset separately from available
+bundle templates. Include those native paths in comparison, before-write protection
+and explicit installed-file checks; a same-name local skill is not owned by default.

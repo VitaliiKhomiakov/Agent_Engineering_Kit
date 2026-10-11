@@ -228,6 +228,21 @@ or report an unresolved step. Ordinary coding does not trigger this workflow.
 
 ### Superpowers integration
 
+For consumer-project work, the optional `project-workflows` profile supplies
+[aek-design-feature](templates/skills/aek-design-feature/SKILL.md),
+[aek-implement-feature](templates/skills/aek-implement-feature/SKILL.md) and
+[aek-review-changes](templates/skills/aek-review-changes/SKILL.md) through one
+[local reference/output contract](standards/project-skills.md). They select the
+project's relevant technical rules for the current operation while preserving
+direct routes and its existing task/procedure. They select no technology or model.
+Install selected entries through the [existing adoption procedure](MIGRATION.md#optional-project-task-skills).
+Native support is established per client/version; a copied template alone is not
+evidence of activation. [Dated Codex CLI 0.162.1 observations](docs/research/2026-10-11-project-skills-behavior.md#client-support-and-stage-disposition)
+cover discovery and bounded use of all three entries. Superpowers composition was
+checked through an explicit route to installed 6.4.2 procedures; automatic plugin
+discovery was not established in that private CLI runtime. Other clients retain
+their documented static/direct-reference limits; real consumer adoption is separate.
+
 [The Superpowers policy](standards/superpowers.md) maps skills to relevant tasks
 and adapts their workflows to the project's checkpoints, Git permissions, model
 choices, planning locations, and verification policy. Installing the plugin alone
@@ -245,7 +260,7 @@ discovery and supported settings in the selected client and version during adopt
 
 | Client | Included resources |
 | --- | --- |
-| Codex | `AGENTS.md` templates, [native configuration and role examples](templates/codex/README.md), integration and model-selection skills |
+| Codex | `AGENTS.md` templates, [native configuration and role examples](templates/codex/README.md), integration/model-selection skills and optional project-task templates |
 | Claude Code | A [policy bridge template](templates/claude/policy-bridge.md) and adoption guidance for native instruction/configuration mapping |
 | Cursor | A [rule route template](templates/cursor/rule-route.mdc) and adoption guidance for native rules, role discovery, and configuration mapping |
 
@@ -283,7 +298,7 @@ Agent_Engineering_Kit/
 │   ├── claude/                    # Policy bridge
 │   ├── cursor/                    # Rule route
 │   ├── framework/                 # Adoption record and model routing templates
-│   └── skills/                    # Integration, model setup, and reassignment procedures
+│   └── skills/                    # Integration, model procedures, and optional project tasks
 ├── examples/                      # Illustrative workspace architecture
 ├── tools/                         # Read-only instruction artifact checker
 ├── tests/                         # Regression tests for the maintenance checker

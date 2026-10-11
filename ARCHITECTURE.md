@@ -325,16 +325,22 @@ rules; a compatible installed skill is optional. All resources declared for
 `unreal-engine` in [the catalog](standards/catalog.toml) are available as a bundle
 and read by task, without forcing MCP setup for source-only work.
 No local engine/provider availability follows from selecting the profile.
-Skills describe concrete procedures. The current catalog distinguishes implemented
-instruction-only templates from conceptual procedures:
+Skills describe concrete procedures. The current catalog supplies these inactive
+instruction-only templates; native installation and behavioral evidence are separate:
 
 | Name | Narrow trigger | Status and resources |
 | --- | --- | --- |
 | `aek-model-setup` | Full integration's model-selection step, explicit setup or missing choices required by authorized delegation | Existing [template](templates/skills/aek-model-setup/SKILL.md); absence of a record alone does not trigger it |
 | `aek-model-reassign` | Explicit change to saved client, roles, pairs or delegation choices | Existing [template](templates/skills/aek-model-reassign/SKILL.md); not installed automatically |
 | `aek-integrate-project` | Explicit framework preparation/import/update request | Existing [template](templates/skills/aek-integrate-project/SKILL.md); routes to MIGRATION; ordinary coding or missing files do not trigger it |
-| `aek-design-change` | An architectural boundary, public contract, or complex behavior changes | Conceptual; would use affected architecture, profiles, and a task template |
-| `aek-deliver-phase` | User authorizes execution of a defined plan stage | Conceptual; would use the stage contract, selected profiles, work mode, and verification process |
+| `aek-design-feature` | Designing a capability or material architecture/public-contract change with adopted AEK rules | Optional `project-workflows` [contract](standards/project-skills.md) and [template](templates/skills/aek-design-feature/SKILL.md); source availability is separate from native installation/use |
+| `aek-implement-feature` | Authorized code change with sufficient design/criteria, including a settled small fix | Optional `project-workflows` [template](templates/skills/aek-implement-feature/SKILL.md); selects relevant technical rules within the existing delivery procedure |
+| `aek-review-changes` | Requested or applicable completion review of changed code/contracts | Optional `project-workflows` [template](templates/skills/aek-review-changes/SKILL.md); located findings and coverage limits under the existing review policy |
+
+The conceptual `aek-deliver-phase` is subsumed by the implementation entry, not
+supplied as another skill or native alias. [Observed behavior and client limits](docs/research/2026-10-11-project-skills-behavior.md#client-support-and-stage-disposition)
+cover all three task entries in bounded Codex CLI 0.162.1 fixtures. Static validity,
+native discovery, actual task behavior and consumer adoption remain separate claims.
 
 An instruction-only template is inactive for native discovery until adopted through
 the selected client's supported mechanism. An agent can explicitly read the source

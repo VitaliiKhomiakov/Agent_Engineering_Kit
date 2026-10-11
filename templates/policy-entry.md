@@ -52,6 +52,11 @@ $routes
 
 ## Planning, skills and roles
 
+If `project-workflows` is selected, use the appropriate design, implementation or
+review entry through the [project-skill contract](.agents-framework/standards/project-skills.md).
+Selected native entries: `<actual installed task skill paths>`; list only those installed.
+Remove this optional route when that profile is omitted; direct rules remain usable.
+
 Explicit framework import/update/preparation uses `aek-integrate-project` at
 `<actual installed or accessible source skill path>`. Read `.agents-framework/adoption.md`
 for import/update/recovery only; ordinary work or missing files does not start integration.

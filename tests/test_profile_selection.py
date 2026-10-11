@@ -81,6 +81,26 @@ class ProfileSelectionChecks(unittest.TestCase):
         self.assert_topics(paths, {"php"}, {"symfony", "doctrine", "go", "gin"})
         self.assertNotIn("standards/php-symfony-doctrine.md", paths)
 
+    def test_project_workflows_add_only_task_resources(self) -> None:
+        expected = {"standards/project-skills.md",
+                    "templates/skills/aek-design-feature/SKILL.md",
+                    "templates/skills/aek-implement-feature/SKILL.md",
+                    "templates/skills/aek-review-changes/SKILL.md"}
+        self.assertEqual(self.selected("project-workflows") - self.selected("core"), expected)
+
+    def test_project_workflows_preserve_selected_stack_closures(self) -> None:
+        additions = {"standards/project-skills.md",
+                     "templates/skills/aek-design-feature/SKILL.md",
+                     "templates/skills/aek-implement-feature/SKILL.md",
+                     "templates/skills/aek-review-changes/SKILL.md"}
+        for selection in (("fastapi",), ("react", "typescript"), ("angular",),
+                          ("ngrx",), ("go",), ("unreal-engine",)):
+            with self.subTest(selection=selection):
+                original = self.selected(*selection)
+                self.assertTrue(original.isdisjoint(additions))
+                self.assertEqual(self.selected(*selection, "project-workflows"),
+                                 original | additions)
+
     def test_unchanged_controls_do_not_select_application_stacks(self) -> None:
         controls = {"postgresql", "docker", "unreal-engine"}
         for profile in controls:

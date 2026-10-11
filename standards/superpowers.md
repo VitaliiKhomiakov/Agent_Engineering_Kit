@@ -39,6 +39,17 @@ the current stage, and permissions to workers; a bare link is not a loaded polic
 Read the selected skill itself; this table is not a substitute for its applicable
 instructions. Actual tool schemas determine available capabilities.
 
+## Composition with project task entries
+
+When an adopted AEK project task skill is selected, it supplies local technical
+reference selection and the design, implementation or review result boundary.
+Use the applicable Superpowers procedure once through the adaptations below;
+reuse a procedure already satisfied in the task. Do not start another plan,
+approval or review cycle merely because both entries are available. An AEK review
+entry does not itself dispatch an independent reviewer, and an implementation
+entry does not select delegated execution. This policy does not invoke an AEK
+entry in return or require the optional project-workflows profile.
+
 ## Explicit adaptations
 
 - **Language:** apply the [reasoning and communication policy](core.md#reasoning-and-communication-language)
