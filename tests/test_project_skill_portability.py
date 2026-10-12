@@ -14,6 +14,7 @@ from tools.check_instruction_artifacts import Checker
 
 
 SKILLS = ("aek-design-feature", "aek-review-changes")
+ROLE_FILES = ("af-architect.toml", "af-implementer.toml", "af-reviewer.toml")
 TASK = ".work/items/feature.md"
 # Reviewed conditional host/framework links; never treat every missing route as optional.
 OPTIONAL_STACK_ROUTES = frozenset({
@@ -99,8 +100,9 @@ def portable_candidate(profiles: tuple[str, ...], bundle_dir: str) -> dict[str, 
             source, destination, bundle, selected, source.read_text()).encode()
     # Separate syntax fixtures: reference resolution only, not client activation.
     result["CLAUDE.md"] = (ROOT / "templates/claude/policy-bridge.md").read_bytes()
-    result[".codex/agents/af-reviewer.toml"] = (ROOT / "templates/codex/agents/af-reviewer.toml").read_text().replace(
-        ".agents-framework/standards/", prefix + "standards/").encode()
+    for filename in ROLE_FILES:
+        result[f".codex/agents/{filename}"] = (ROOT / "templates/codex/agents" / filename).read_text().replace(
+            ".agents-framework/standards/", prefix + "standards/").encode()
     return result
 
 
@@ -117,7 +119,7 @@ class ProjectSkillPortabilityChecks(unittest.TestCase):
         for profile in (*profiles, "project-workflows"):
             args.extend(("--profile", profile))
         native = [f".agents/skills/{name}/SKILL.md" for name in SKILLS]
-        for paths in ([], [*native, ".codex/agents/af-reviewer.toml"]):
+        for paths in ([], [*native, *(f".codex/agents/{name}" for name in ROLE_FILES)]):
             result = subprocess.run([*args, *paths], cwd=self.workspace, capture_output=True,
                                     text=True, timeout=20, check=False)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
@@ -162,12 +164,15 @@ class ProjectSkillPortabilityChecks(unittest.TestCase):
                 self.assertGreaterEqual(len(routes), 6)
                 for route in routes:
                     self.assertIn(route, candidate)
-                role = tomllib.loads(candidate[".codex/agents/af-reviewer.toml"].decode())
-                original = tomllib.loads((ROOT / "templates/codex/agents/af-reviewer.toml").read_text())
-                self.assertEqual(role["model"], original["model"])
-                self.assertEqual(role["model_reasoning_effort"], original["model_reasoning_effort"])
-                for route in re.findall(r"[\w./-]*standards/[\w/-]+\.md", str(role["developer_instructions"])):
-                    self.assertIn(route, candidate)
+                for filename in ROLE_FILES:
+                    role = tomllib.loads(candidate[f".codex/agents/{filename}"].decode())
+                    original = tomllib.loads((ROOT / "templates/codex/agents" / filename).read_text())
+                    for key in original.keys() - {"developer_instructions"}:
+                        self.assertEqual(role[key], original[key], (filename, key))
+                    role_routes = re.findall(r"[\w./-]*standards/[\w/-]+\.md", str(role["developer_instructions"]))
+                    self.assertTrue(role_routes, filename)
+                    for route in role_routes:
+                        self.assertIn(route, candidate, filename)
                 entry = candidate["AGENTS.md"].decode()
                 self.assertNotIn("<actual", entry)
                 self.assertNotIn("$routes", entry)

@@ -18,6 +18,11 @@ coordinator; inactive native templates provide starting points for configuration
 
 ## Responsibilities
 
+An agent role is a reusable specialization; a subagent is a delegated instance.
+Use the selected native role when supported, or its explicit pair and instructions
+under the [model mapping](model-configuration.md#mapping-to-native-codex-files).
+Specialization does not require a separate client session or another settings system.
+
 | Role | Work | Output |
 | --- | --- | --- |
 | Orchestrator | Coordination, risk, delegation, progression, routine review | Bounded contract and accountable decisions |
@@ -31,6 +36,10 @@ coordinator; inactive native templates provide starting points for configuration
 The coordinator's routine review is not an independent second opinion.
 Responsibilities may remain with the coordinator in a small task;
 separate architect/planner/test roles are independently configurable when useful.
+The architect can return enough implementation steps for its bounded design without
+requiring a planner. The coordinator records that read-only role's result in the
+canonical task. Use optional design/review skills only when selected through the
+adopted project entry; otherwise follow the existing direct procedure owners.
 Use the [delegation contract](#delegation-contract) to decide whether a handoff is justified.
 In selected single-agent
 mode, the coordinator owns these responsibilities; specialists are disabled,

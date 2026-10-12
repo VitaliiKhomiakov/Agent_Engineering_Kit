@@ -26,7 +26,10 @@ checker for catalog resources, supported local links, fences, TOML and policy
 settings. `tests/test_instruction_artifacts.py` exercises it against disposable
 instruction bundles; `tests/test_profile_selection.py` checks independent and
 combined profile resources and legacy entry compatibility. These are maintenance
-tools, not an adoption runtime.
+tools, not an adoption runtime. `tools/check_model_routing.py` separately checks
+saved routing and project-local Codex agreement for configured schema 2;
+`tests/test_model_routing.py` covers its conflict and unsupported-input boundaries.
+It does not resolve native precedence or prove model execution.
 [Maintenance verification](docs/maintenance/verification.md) owns their commands,
 supported syntax, evidence limits and executable-example reproduction.
 
@@ -57,7 +60,7 @@ The following components describe an adopted target workspace.
 
 In this repository, `standards/` contains the target rules and `templates/`
 contains inactive templates. The schema-v2 routing template illustrates the
-coordinator, implementer and optional disabled reviewer; other roles use the same
+coordinator, implementer and optional disabled architect/reviewer; other roles use the same
 documented contract. Native role examples remain limited to Codex. A Markdown link
 does not mean the client has read a file; an instruction route or selected skill
 must direct it to the relevant resource.
@@ -275,7 +278,8 @@ onboarding after a new conversation or ordinary task. The target roles
 include orchestrator, architect, planner, explorer, implementer, test runner,
 and reviewer. Specialist native names use `af-<role>`; only the selected roles
 are installed. Their pairs come from saved choices, not framework-wide IDs.
-The existing `af-implementer` and `af-reviewer` templates are a limited baseline.
+The `af-architect`, `af-implementer` and `af-reviewer` templates provide the
+initial specializations; design and review remain conditional on task needs.
 
 Version 2 explicitly represents single-agent or delegated mode. Disabled roles
 cannot be invoked through native definitions or anonymous worker defaults. Version 1

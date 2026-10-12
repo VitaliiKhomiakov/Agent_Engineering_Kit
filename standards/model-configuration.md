@@ -55,6 +55,9 @@ A configured record contains all these fields for its enabled selection. Disable
 roles may retain a prior pair but cannot be invoked; an omitted specialist is not
 enabled. Role IDs correspond to the named responsibilities in the saved record;
 native specialists use `af-<id>`. There is no framework-wide model whitelist.
+Each enabled specialization has its own explicit pair, even when several roles
+use the same model. Reuse the same setup/reassignment procedure for custom agents
+and their delegated instances; do not create a second model-selection record.
 The target `.agents-framework/adoption.md` owns adopted source/content identity
 and accepted exception decisions. Entries/passports point there for provenance
 and retain applicable operational constraints. This model-selection record owns
@@ -69,7 +72,8 @@ edge permits a justified task handoff; it does not require spawning that role or
 authorize work beyond the task. Task order, corrections and checkpoints stay in
 the task plan.
 
-The linked template illustrates delegated mode with an optional disabled reviewer.
+The linked template illustrates delegated mode with optional disabled architect
+and reviewer roles.
 This alternative illustrates single-agent mode; its pair is also a suggestion,
 not evidence of selection or availability:
 
@@ -185,7 +189,7 @@ disabled retained pairs do not need to match worker defaults.
 
 ## Role scope and native restrictions
 
-A reviewer or explorer's no-edit instructions define behavioral scope; they do
+An architect, reviewer or explorer's no-edit instructions define behavioral scope; they do
 not establish a filesystem/tool boundary. During authorized native setup, use
 supported restrictions for the selected role and verify the effective controls,
 including parent/session overrides. Preserve necessary read access to the task,
@@ -220,7 +224,7 @@ keys against the installed client's schema before adoption:
 - Worker defaults and concurrency: supported `[agents]` fields, including
   `max_concurrent_threads_per_session` where available, excluding the main agent.
 - Enabled specialists: `.codex/agents/af-<role>.toml`, their explicit pair and
-  role instructions. The retained examples cover implementer and reviewer.
+  role instructions. The retained examples cover architect, implementer and reviewer.
 
 For selected single-agent mode, use supported `agents.enabled = false`; do not
 translate the framework's zero ceiling into an assumed-valid native thread limit.
@@ -310,6 +314,12 @@ reachable instruction paths. Check disabled-role retirement separately. Native
 loading can be verified during explicitly authorized target-project adoption;
 external calls and installation are separate from maintaining this rule library.
 No hook or background monitor is installed by these instructions.
+
+Source maintenance also provides `tools/check_model_routing.py` for a bounded,
+read-only comparison of configured version 2 records and project-local Codex
+files. Its commands and exclusions are in source `docs/maintenance/verification.md`,
+"Offline model-routing agreement". It is not a required imported resource or
+native loader; a pass does not resolve overrides, capabilities or runtime evidence.
 
 - [Codex custom agents](https://learn.chatgpt.com/docs/agent-configuration/subagents#custom-agents)
   and [configuration](https://learn.chatgpt.com/docs/config-file/config-reference).

@@ -336,6 +336,14 @@ source/target roots and authorized write scope. This is a required decision step
 not mandatory delegation, template-default assignment or permission to change a
 running session. Source-library maintenance and ordinary coding do not trigger it.
 
+Include the selected specializations in this same step: architect, implementer
+and reviewer use the existing per-role model/effort contract. For a new project
+or first integration, prepare only the chosen roles and their native settings.
+For an existing configured project, preserve saved choices; a newly available
+role template is not a request to enable it. Explicitly adding a role follows
+setup/reassignment for its pair, incoming edge and affected managed native files.
+Keep unselected examples inactive in the bundle, outside native agent discovery.
+
 | Situation | Integration action and outcome |
 | --- | --- |
 | Existing consistent selection, including single-agent mode | Check/reuse relevant routing/native agreement; report checked/reused without writes or repeated questions. |

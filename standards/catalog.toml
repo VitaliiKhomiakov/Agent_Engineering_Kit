@@ -58,6 +58,7 @@ resources = [
   "templates/framework/model-routing.toml",
   "templates/codex/README.md",
   "templates/codex/config.toml",
+  "templates/codex/agents/af-architect.toml",
   "templates/codex/agents/af-implementer.toml",
   "templates/codex/agents/af-reviewer.toml",
   "templates/skills/aek-model-setup/SKILL.md",

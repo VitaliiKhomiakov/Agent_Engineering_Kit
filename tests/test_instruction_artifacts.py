@@ -81,6 +81,53 @@ class ArtifactChecks(unittest.TestCase):
         result = self.run_checker()
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_indented_list_content_is_not_silently_treated_as_code(self) -> None:
+        for marker in ("1.", "-", "10)"):
+            for indentation in ("    ", "\t"):
+                with self.subTest(marker=marker, indentation=indentation):
+                    self.write("standards/python.md", f"{marker} Required policies:\n\n"
+                               f"{indentation}- [Policy](missing.md)\n")
+                    self.assert_failure(self.run_checker(), "unsupported indented list content")
+
+    def test_quoted_fences_fail_before_inline_code_removal(self) -> None:
+        for marker in ("```", "~~~", "````"):
+            for quote in ("> ", "> > "):
+                with self.subTest(marker=marker, quote=quote):
+                    self.write("standards/python.md", f"{quote}{marker}md\n{quote}example\n{quote}{marker}\n")
+                    self.assert_failure(self.run_checker(), "unsupported Markdown link/fence syntax")
+
+    def test_indented_fence_in_list_cannot_hide_following_links(self) -> None:
+        for fence in ("```", "~~~"):
+            for indent in ("  ", "   "):
+                with self.subTest(fence=fence, indent=indent):
+                    self.write("standards/python.md", "- Required policies:\n\n"
+                               f"{indent}{fence}text\n{indent}sample\n{indent}{fence}\n\n"
+                               "    - [Policy](missing.md)\n")
+                    result = self.run_checker()
+                    self.assert_failure(result, "unsupported indented list content")
+                    self.assertIn("standards/python.md:3:", result.stdout)
+
+    def test_fences_outside_list_context_keep_code_excluded(self) -> None:
+        for prefix, indent in (("- List\n\n", ""),
+                               ("- List\n\nParagraph\n\n", "  "), ("", "   ")):
+            with self.subTest(prefix=prefix, indent=indent):
+                self.write("standards/python.md", f"{prefix}{indent}```md\n"
+                           f"{indent}[Sample](missing.md)\n{indent}```\n\n"
+                           "    [Another sample](missing.md)\n")
+                result = self.run_checker()
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_real_code_blocks_still_exclude_examples(self) -> None:
+        self.write("standards/python.md", "Example:\n\n    [Sample](missing.md)\n\n"
+                   "```md\n> ```md\n> [Sample](missing.md)\n> ```\n```\n")
+        result = self.run_checker()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_outdented_paragraph_ends_list_context(self) -> None:
+        self.write("standards/python.md", "- List\n\nParagraph\n\n    [Sample](missing.md)\n")
+        result = self.run_checker()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_missing_catalog_resource_fails_even_with_explicit_paths(self) -> None:
         (self.root / "standards/details.md").unlink()
         result = self.run_checker("standards/core.md")

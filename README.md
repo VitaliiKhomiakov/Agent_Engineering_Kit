@@ -8,7 +8,7 @@ verification, project documentation templates, and configurable agent roles.
 Adopt the resources that match your project's stack in a new or existing workspace.
 
 The library consists of Markdown instructions, a TOML catalog, and inactive
-configuration and skill templates. A Python checker and its tests support source
+configuration and skill templates. Read-only Python checkers and tests support source
 maintenance. Adoption happens through an agent following
 [the integration procedure](MIGRATION.md); no package installation, dedicated CLI,
 or application runtime is required.
@@ -297,8 +297,8 @@ Agent_Engineering_Kit/
 │   ├── framework/                 # Adoption record and model routing templates
 │   └── skills/                    # Integration, model procedures, and optional project tasks
 ├── examples/                      # Illustrative workspace architecture
-├── tools/                         # Read-only instruction artifact checker
-├── tests/                         # Regression tests for the maintenance checker
+├── tools/                         # Read-only artifact and saved-routing checkers
+├── tests/                         # Maintenance and adoption-fixture regression tests
 └── docs/
     ├── maintenance/               # Checker usage and executable-example reproduction
     ├── specs/                     # Scope and design decisions

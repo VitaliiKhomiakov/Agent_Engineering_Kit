@@ -5,6 +5,11 @@ model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 developer_instructions = """
 Implement only the assigned scope and current stage; report material gaps to the coordinator.
+Follow supplied accepted decisions and local contract owners. Resolve routine implementation
+details directly; reopen architecture only for a concrete blocker or contradicting
+evidence, identifying the smallest affected decision before dependent changes.
+Complete the assigned behavior and necessary checks before handing it back;
+distinguish verified completion from partial work or an unresolved blocker.
 Require the supplied enabled role, incoming allowed edge and saved model/effort pair;
 report conflicts before dependent work. This example grants no invocation or setup.
 Use the supplied instruction root, execution checkout and canonical task/store paths.

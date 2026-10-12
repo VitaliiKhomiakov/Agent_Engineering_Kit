@@ -136,6 +136,8 @@ def markdown(path: Path, text: str) -> Document:
     visible_lines: list[str] = []
     fence = ""
     opening = 0
+    list_context = False
+    previous_blank = True
     for number, line in enumerate(text.splitlines(), 1):
         visible_lines.append("")
         marker = FENCE.match(line)
@@ -144,9 +146,28 @@ def markdown(path: Path, text: str) -> Document:
                 fence = ""
             continue
         if marker:
+            # A possibly nested fence must not erase unsupported list content
+            # silently; container-relative indentation is outside this parser.
+            if list_context and line.startswith(" "):
+                issues.append(Diagnostic(path, number, "unsupported indented list content; use a flat list"))
             fence, opening = marker[1], number
+            list_context = False
             continue
+        # Indentation alone cannot distinguish list content from code. Keep the
+        # ambiguous list block explicit until this parser supports its containers.
+        if re.match(r"^ {0,3}(?:[-+*]|\d{1,9}[.)])[ \t]+", line):
+            list_context = True
+        elif line.strip() and not line.startswith((" ", "\t")) and (
+            previous_blank or re.match(r"^(?:#{1,6}\s|>)", line)
+        ):
+            list_context = False
+        previous_blank = not line.strip()
         if line.startswith(("    ", "\t")):
+            if list_context and line.strip():
+                issues.append(Diagnostic(path, number, "unsupported indented list content; use a flat list"))
+            continue
+        if re.match(r"^ {0,3}(?:>[ \t]*)+(?:`{3,}|~{3,})", line):
+            issues.append(Diagnostic(path, number, "unsupported Markdown link/fence syntax"))
             continue
         heading = re.match(r"^ {0,3}#{1,6}\s+(.+?)\s*#*\s*$", line)
         if heading:

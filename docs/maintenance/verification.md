@@ -17,6 +17,7 @@ python3 -m unittest discover -s tests -p 'test_instruction_artifacts.py'
 python3 -m unittest discover -s tests -p 'test_profile_selection.py'
 python3 -m unittest discover -s tests -p 'test_project_skill_adoption.py'
 python3 -m unittest discover -s tests -p 'test_project_skill_portability.py'
+python3 -m unittest discover -s tests -p 'test_model_routing.py'
 git diff --check
 ```
 
@@ -105,7 +106,15 @@ installed entry files explicitly when they are outside catalog resources.
   inline code are excluded from link checks.
 - Reference-link definitions/uses, HTML hyperlink tags, quoted fences and
   unmatched inline-link syntax produce an unsupported-syntax diagnostic. This is
-  a bounded repository checker, not a CommonMark renderer: multiline code spans,
+  also true of content indented by four spaces or a tab inside a list: list
+  containers are not parsed, so these lines must not silently count as code.
+  An opening fence indented by one to three spaces while list context is active
+  is also rejected before that context is reset. This conservative check does not
+  resolve container-relative indentation; use a top-level fence or an outdented
+  paragraph to end list context before a standalone indented fence.
+  Flatten such lists before relying on this checker. Standalone indented code
+  remains excluded. Quoted fences are detected before stripping inline code.
+  A bounded repository checker is not a CommonMark renderer: multiline code spans,
   complex heading markup, escaped delimiters, Setext headings and other Markdown
   extensions need manual review or a tested parser extension before relying on
   their results. Bare paths in code spans are instructions, not checked links.
@@ -159,8 +168,59 @@ When modifying the checker or tests, run their focused unittest suites and the
 The checked analyzer baseline is mypy 2.1.0, installed outside the repository:
 
 ```sh
-python -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --explicit-package-bases --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tests/test_instruction_artifacts.py tests/test_profile_selection.py tests/test_project_skill_adoption.py tests/test_project_skill_portability.py
+python -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --explicit-package-bases --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tools/check_model_routing.py tests/test_instruction_artifacts.py tests/test_model_routing.py tests/test_profile_selection.py tests/test_project_skill_adoption.py tests/test_project_skill_portability.py
 ```
+
+## Offline model-routing agreement
+
+The separate standard-library checker implements a bounded check of the
+[model configuration contract](../../standards/model-configuration.md#routing-format-version-2).
+Run it against an already prepared target instruction root:
+
+```sh
+python3 tools/check_model_routing.py --root /tmp/prepared-target
+python3 tools/check_model_routing.py --root /tmp/prepared-target --default-role implementer
+```
+
+It reads `.agents-framework/model-routing.toml`, `.codex/config.toml` and
+`.codex/agents/*.toml` from that root, regardless of the bundle layout. It checks
+configured schema 2, explicit enabled pairs, role flags, mode/ceiling invariants,
+edge endpoints, duplicate/self edges, cycles and reachable parents. Enabled roles
+without an incoming edge remain unspawnable by policy; the checker does not grant
+them an edge. Native checks compare the coordinator, enabled specialist overrides,
+delegation switch and active concurrency ceiling. Required role metadata must be
+nonempty. Disabled recorded definitions and duplicate recorded native names fail.
+Role IDs supported by this filename mapping contain letters, digits, `_` or `-`.
+Symlink escapes outside the instruction root fail.
+
+Worker defaults have no implicit mapping in the framework contract. Pass
+`--default-role` only when the intended default is an explicitly selected enabled
+specialist. Otherwise the output states that defaults were not compared. In
+single-agent mode, inactive positive native limits/defaults need not match zero.
+Unrelated custom roles/settings are not acquired or removed. All role TOML must
+parse and supply names for collision inspection; custom role semantics are not
+validated. The command never writes files or activates templates.
+
+Exit 0 means these selected project-local fields agree, 1 reports invalid input
+or a conflict, and 2 means invalid arguments or agreement not evaluated (including
+unconfigured/legacy/unknown schemas and unsupported native clients or ID mappings).
+Incomplete configured records fail; no missing pair is inferred from defaults.
+The source template is deliberately unconfigured and must not be activated to
+make this command pass. Use disposable configured fixtures for source maintenance.
+
+This is not a full native schema validator or effective-configuration resolver.
+Global/managed/profile/environment/CLI overrides, alternate registration paths,
+trust/loading, account model availability, supported efforts, nesting, permission
+enforcement and runtime telemetry need separate evidence. Allowed edges remain
+instruction policy. A passing result cannot certify provider execution or retire
+definitions outside the inspected project directory. Claude Code and Cursor have
+no semantic adapter in this tool. Native field mappings follow the dated
+[Codex evidence](../research/2026-10-12-specialized-agent-instructions.md);
+recheck the installed client contract when that mapping changes.
+
+The [disposable update/recovery exercise](../research/2026-10-13-update-recovery-check.md)
+records manual file outcomes under the migration procedure. It is separate from
+automated fixture tests and does not establish an executable update engine.
 
 ## Reproduce an affected executable example
 
