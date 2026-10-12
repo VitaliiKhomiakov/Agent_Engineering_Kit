@@ -85,7 +85,7 @@ def prepare_design_fixture(target: Path, *, workflow: bool = True,
         f".agents/skills/{name}/SKILL.md" for name in native_skills))
     entry = entry.replace("Remove this optional route when that profile is omitted; direct rules remain usable.\n", "")
     if not workflow:
-        entry = re.sub(r"If `project-workflows` is selected,.*?\n\n", "", entry, flags=re.DOTALL)
+        entry = re.sub(r"If `project-workflows` is explicitly selected,.*?\n\n", "", entry, flags=re.DOTALL)
     entry = adapt_document(entry_source, target / "AGENTS.md", bundle, selected, entry)
     (target / "AGENTS.md").write_text(entry.replace("$routes", routes), encoding="utf-8")
     plans_source = ROOT / "templates/PLANS.md"
@@ -162,7 +162,7 @@ class ProjectSkillAdoptionChecks(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_all_task_entries_resolve_from_their_actual_native_paths(self) -> None:
-        names = ("aek-design-feature", "aek-implement-feature", "aek-review-changes")
+        names = ("aek-design-feature", "aek-review-changes")
         shutil.rmtree(self.root)
         prepare_design_fixture(self.root, native_skills=names)
         paths = tuple(f".agents/skills/{name}/SKILL.md" for name in names)
@@ -172,6 +172,9 @@ class ProjectSkillAdoptionChecks(unittest.TestCase):
         entry = (self.root / "AGENTS.md").read_text(encoding="utf-8")
         for path in paths:
             self.assertIn(path, entry)
+        self.assertFalse((self.root / ".agents-framework/templates/skills/aek-implement-feature").exists())
+        self.assertFalse((self.root / ".agents/skills/aek-implement-feature").exists())
+        self.assertNotIn("aek-implement-feature", entry)
 
     def test_native_review_selection_does_not_install_other_bundle_skills(self) -> None:
         shutil.rmtree(self.root)
@@ -181,10 +184,10 @@ class ProjectSkillAdoptionChecks(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         entry = (self.root / "AGENTS.md").read_text(encoding="utf-8")
         self.assertIn(native, entry)
-        for name in ("aek-design-feature", "aek-implement-feature"):
-            self.assertFalse((self.root / ".agents/skills" / name).exists())
-            self.assertNotIn(f".agents/skills/{name}/SKILL.md", entry)
-            self.assertTrue((self.root / ".agents-framework/templates/skills" / name / "SKILL.md").is_file())
+        name = "aek-design-feature"
+        self.assertFalse((self.root / ".agents/skills" / name).exists())
+        self.assertNotIn(f".agents/skills/{name}/SKILL.md", entry)
+        self.assertTrue((self.root / ".agents-framework/templates/skills" / name / "SKILL.md").is_file())
 
 
 if __name__ == "__main__":

@@ -9,13 +9,6 @@ Produce a technical design grounded in the affected project's owners and selecte
 engineering standards. Use the [project-skill contract](../../../standards/project-skills.md)
 for local input resolution, procedure composition and the design result.
 
-That link is relative to this inactive source/bundle template. During native
-installation, rebase it from the final skill folder to the adopted guide. For
-Codex `.agents/skills/aek-design-feature/SKILL.md` with a contained bundle it is
-`../../../.agents-framework/standards/project-skills.md`. Flat/custom layouts use
-their actual bundle placement; resolve independently of the process cwd. Ordinary
-design uses reachable project resources and does not need the AEK source checkout.
-
 1. Reuse the requested outcome, existing design decisions and canonical task.
    Read the affected project entry/passport and enough implementation to identify
    current owners, contracts, versions and accepted exceptions. Resolve only

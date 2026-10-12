@@ -18,14 +18,13 @@ redundant tests, while reconciling existing local contracts and required checks.
 ## New and existing projects
 
 For an existing project, follow inventory, target decisions and scoped instruction
-changes. A separately authorized bounded pilot establishes observed client behavior
-before further rollout. Preserve required behavior and independent user work.
+changes. Preserve required behavior and independent user work.
 
 For a new project, inventory the chosen workspace/client and any parent rules,
 record the intended stack and architecture, and prepare selected entry points.
 Label intended architecture as proposed, not observed. Skip legacy-code remediation
 where there is no existing code. Change native settings only within authorized scope;
-verify actual discovery and any selected roles during an authorized pilot.
+use the selected client's supported discovery and role configuration mechanisms.
 Neither path requires a Git repository at the workspace root.
 
 ## Import inputs and boundaries
@@ -99,10 +98,19 @@ existing contracts; the skill prefix does not rename `.agents-framework/` or `af
 ### Optional project task skills
 
 Select `project-workflows` separately from the target's technology profiles when
-adopting `aek-design-feature`, `aek-implement-feature` or `aek-review-changes`.
+adopting `aek-design-feature` or `aek-review-changes`. Both are optional and
+selected explicitly.
 The [project-skill contract](standards/project-skills.md) owns their triggers, local
 inputs and outputs; this procedure still owns installation and updates. Bundle
-availability does not require installing all three native entries.
+availability does not require installing both native entries. Implementation uses
+the ordinary core/delivery routes without this profile or a task skill.
+
+`aek-implement-feature` is retired from the current source bundle. During an
+authorized update of an existing adoption, preview retirement of any previously
+managed bundled/native copy and its entry route through the B/C/N reconciliation
+below. Preserve local changes and unowned same-name skills; catalog removal alone
+does not authorize deleting consumer files. Store any retained historical copy
+outside native discovery. No consumer update is performed by a source-library edit.
 
 List selected and deliberately uninstalled entries in the adoption preview. For
 each selected name, record the inactive template and native destination separately,
@@ -131,8 +139,9 @@ discovery. Ordinary design, implementation and review must work without the sour
 checkout or adoption record.
 
 Check the selected bundle and explicitly check the installed native file outside
-that scan. Validate skill metadata separately, then record discovery/use in the
-actual client/version. Preparation and static checks do not prove activation.
+that scan. Validate skill metadata separately. Record any available client
+discovery/use evidence with its client/version; preparation and static checks do
+not prove activation.
 Other clients retain direct-reference use until their native mapping is separately
 verified. Preserve snapshots outside discovery and apply the existing recovery
 procedure; adding these skills introduces no separate installer or model-setup step.
@@ -310,7 +319,7 @@ They form one procedure for both new and existing projects.
    evidence under the verification policy; copying instructions alone requires no
    application test suite. Report verified files separately from observed client
    discovery/adherence. An unavailable client or unsupported mapping limits that
-   claim and does not justify inventing a native setting or running a pilot.
+   claim and does not justify inventing a native setting.
    Report the model-step outcome separately from rule import and runtime activation.
 
 Updates also need comparison with the last accepted import and current local edits;
@@ -332,7 +341,7 @@ running session. Source-library maintenance and ordinary coding do not trigger i
 | Existing consistent selection, including single-agent mode | Check/reuse relevant routing/native agreement; report checked/reused without writes or repeated questions. |
 | Missing/incomplete selection | Reuse supplied choices; the setup contract resolves material missing client, mode and pairs, plus edges/ceiling when delegated. Await necessary answers before dependent writes/spawns; report unresolved while pending. |
 | Explicit user deferral | Record the decision in the canonical adoption task and summarize deferred in the outcome. Preserve existing files/known choices; rules may proceed independently. Deferral is not configured state or delegation permission. |
-| Preparation only | Read the setup skill/contract to prepare exact changes and unresolved choices. Leave target routing/native files and skills untouched; no pilot or session switch. |
+| Preparation only | Read the setup skill/contract to prepare exact changes and unresolved choices. Leave target routing/native files and skills untouched; no session switch. |
 | Ordinary rules update | Check/reuse relevant existing choices or retain an explicit prior deferral. Do not restart onboarding or change assignments; newly requested setup follows `aek-model-setup`. Report missing unselected setup as unresolved, not an invented deferral. |
 | Requested reassignment/client change | Use `aek-model-reassign` ([source template](templates/skills/aek-model-reassign/SKILL.md)); preserve unrelated choices. |
 | Skill unavailable | Follow the reachable [model-configuration contract](standards/model-configuration.md) and disclose the fallback. If that owner is also inaccessible, report unresolved and continue only independent authorized adoption work. |
@@ -480,8 +489,8 @@ For old architectural decisions, state whether requirements confirm them, they
 are temporary compromises, or they need replacement. Do not infer best practice
 from frequently repeated poor code. Existing projects remain audit evidence.
 
-Ready for review when relevant active sources, conflicts, known versions and any
-requested pilot scope are recorded, with capability gaps explicit. Product tests
+Ready for review when relevant active sources, conflicts and known versions
+are recorded, with capability gaps explicit. Product tests
 are unnecessary merely to produce this inventory.
 
 ### Resolving active conflicts
@@ -590,9 +599,6 @@ that do not inherit the entry, including Superpowers handoffs.
 
 Check that prepared/applied entries contain the rule, planning instructions retain
 English for specifications and plans, and their references resolve.
-During an authorized client pilot, check observable response language, including
-progress updates and an explicit request to switch languages. File inspection does
-not establish client adherence or prove the language of hidden reasoning.
 
 Create a short root AGENTS from the [template](templates/AGENTS.root.md). Add the
 project map and conditional routes to passports and profiles. Reduce nested AGENTS
@@ -647,8 +653,7 @@ selected installed version, and route from root instructions to its workflow
 adaptations. Read the [compatibility reference](standards/superpowers/compatibility.md)
 only for helpers in use or a version-contract question; do not preload it into
 ordinary tasks. Pass applicable adaptations explicitly to delegated roles.
-During the bounded pilot, check stage stopping and review of actual
-uncommitted work. If OpenSpec is selected, also verify its resolved artifact paths,
+If OpenSpec is selected, verify its resolved artifact paths,
 task tracking, and navigation links; do not assume Markdown relocates CLI outputs.
 
 The integration entry is the inactive
@@ -657,11 +662,11 @@ Two separate instruction-only model skills also exist:
 [aek-model-setup](templates/skills/aek-model-setup/SKILL.md) and
 [aek-model-reassign](templates/skills/aek-model-reassign/SKILL.md). Install only the
 procedures the target workspace needs; copying a template or its unconfigured
-example is not consent to model assignments. The optional design, implementation
-and review entries use the [project-task adoption route](#optional-project-task-skills).
+example is not consent to model assignments. The optional design and review
+entries use the [project-task adoption route](#optional-project-task-skills).
 The former conceptual names `aek-design-change` and `aek-deliver-phase` are not
 additional templates or native aliases; their responsibilities are covered by
-`aek-design-feature` and `aek-implement-feature`.
+`aek-design-feature` and ordinary core/delivery routes, respectively.
 
 Use a verified native mapping for the selected client.
 Codex role targets are TOML; Claude Code and Cursor role targets are Markdown with YAML
@@ -675,62 +680,21 @@ For Cursor, verify native coordinator selection as described by
 settings in project `.cursor/cli.json` or change global defaults during adoption.
 
 When adding skills, validate their format with the supported validator, check
-their links, and verify trigger precision: a relevant task selects the procedure
-without making a nearby simple task run the whole process. Validate generated
+their links, and review trigger precision and scope. Validate generated
 TOML, Markdown/YAML, and native settings against the selected client before
-activating roles. Do not run a broad benchmark
-without a concrete need.
+activating roles.
 
 File preparation/application is ready for review when its applicable checks pass
-and unresolved decisions or partial writes are explicit. During an authorized
-pilot, verify that a new session from the normal root discovers the intended
-instructions and selected skills, and entering a nested project selects its profile.
-Verify discovery separately when a repository is commonly opened on its own.
+and unresolved decisions or partial writes are explicit. Check entry locations
+and reference paths for the normal root and independently opened repositories.
 
-## Phase 4: bounded pilot
+## Phase 4: adoption handoff
 
-This phase requires an actual target/client and authorized execution. A verified
-file bundle or completion of library maintenance does not itself authorize it.
-
-Run a small real task in the selected project: a known bug, a bounded feature, or
-one independent migration step. Do not rewrite the project during initial adoption.
-The coordinator works inline or delegates through the configured enabled role/edge;
-it performs accountable review or uses an enabled reviewer when risk warrants independence.
-Use only the specialist roles justified by the task and selected scheme.
-
-If native settings were changed, inspect available main/subagent model and effort
-information and active overrides. Check instruction discovery and checkpoint
-behavior during the first authorized ordinary task. Saved files do not establish
-execution evidence; keep unavailable native information unknown.
-
-Use only the selected client. Another client's setup, reassignment, resumption
-or monitoring needs its own relevant scope; do not turn instruction adoption
-into a mandatory multi-client test campaign. Maintaining this library alone
-does not authorize external model calls or installation into a target project.
-
-Also exercise a short request. The agent should recover only the necessary
-context, select sufficient checks, and finish without scope expansion. Do not add
-artificial tests for class counts or line counts.
-
-| Measure | Interpretation |
-| --- | --- |
-| Aggregate tokens for all agents, when the client reports them | The main chat alone does not represent all work |
-| Time to a reviewable result | Include tool and environment waits |
-| Required context and files read | AGENTS byte size is only one component |
-| Checks and repetitions | A TDD repeat may be useful; an unexplained full rerun is a candidate for removal |
-| Added tests and their purpose | Each test should expose a material defect or contract violation |
-| Result quality | Criteria are met, contracts preserved, and regression risk assessed |
-
-Use several comparable tasks for comparison. Compare old and new instructions
-under the same saved model and effort first, then assess other configured routing
-choices separately. Account for environment and cache conditions. Without reliable
-data, make no percentage savings claim and do not conflate token use, price, and
-subscription limits.
-
-Ready for review when the instructions work in the client, the pilot meets its
-acceptance criteria, and remaining cost drivers are understood.
-Record exact tested client versions and remaining capability limits. A settings
-parser or saved profile alone is not proof of runtime assignment or pilot success.
+Record selected profiles, managed files, retained local constraints and unresolved
+configuration choices in the existing adoption record. Report the file/reference
+checks actually performed and any activation step the selected client requires.
+Instruction adoption is complete within its agreed scope after these checks and
+record updates.
 
 ## Phase 5: architecture improvements and rollout
 
@@ -744,8 +708,8 @@ risk-based checks. Migrating AGENTS files does not repair application code.
 
 Move the verified standard to another project only after the user authorizes that
 stage. Adapt the stack profile, versions, contract map, commands, model routing,
-and exceptions. Do not copy the pilot's factual architecture into another language.
-Record the framework version and project exceptions.
+and exceptions. Do not copy another project's factual architecture into a different
+stack. Record the framework version and project exceptions.
 
 If a rule change regresses behavior, revert that specific change while preserving
 independent user work. Do not hard-reset the repository.

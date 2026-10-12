@@ -13,7 +13,7 @@ framework; [engineering practices](docs/plans/2026-09-21-engineering-practices.m
 records the completed research. The former Python application was removed at
 the user's request; it is not required for instruction adoption.
 
-Existing local projects are audit subjects and migration pilots. Their code,
+Existing local projects are audit subjects and adoption targets. Their code,
 AGENTS files, specs, and skills are evidence of current state, not normative
 architecture. The standard comes from user requirements, verified technology
 capabilities, and explicit decisions.
@@ -177,8 +177,7 @@ required local contracts with reachable owners before retiring old content. A ru
 outside the authorized scope remains an explicit unresolved conflict. Reconciliation
 does not change native precedence. Neither importing instructions nor selecting a
 profile authorizes code remediation, version upgrades or edits to other projects.
-File verification and observed client discovery/adherence are distinct results;
-a target pilot needs its own execution scope.
+Native activation follows the selected client's supported mechanisms.
 
 The [adoption-record template](templates/framework/adoption-record.md) is inactive
 until adapted in an authorized target. It identifies managed scope and references
@@ -326,7 +325,7 @@ rules; a compatible installed skill is optional. All resources declared for
 and read by task, without forcing MCP setup for source-only work.
 No local engine/provider availability follows from selecting the profile.
 Skills describe concrete procedures. The current catalog supplies these inactive
-instruction-only templates; native installation and behavioral evidence are separate:
+instruction-only templates; native installation is a separate adoption step:
 
 | Name | Narrow trigger | Status and resources |
 | --- | --- | --- |
@@ -334,13 +333,12 @@ instruction-only templates; native installation and behavioral evidence are sepa
 | `aek-model-reassign` | Explicit change to saved client, roles, pairs or delegation choices | Existing [template](templates/skills/aek-model-reassign/SKILL.md); not installed automatically |
 | `aek-integrate-project` | Explicit framework preparation/import/update request | Existing [template](templates/skills/aek-integrate-project/SKILL.md); routes to MIGRATION; ordinary coding or missing files do not trigger it |
 | `aek-design-feature` | Designing a capability or material architecture/public-contract change with adopted AEK rules | Optional `project-workflows` [contract](standards/project-skills.md) and [template](templates/skills/aek-design-feature/SKILL.md); source availability is separate from native installation/use |
-| `aek-implement-feature` | Authorized code change with sufficient design/criteria, including a settled small fix | Optional `project-workflows` [template](templates/skills/aek-implement-feature/SKILL.md); selects relevant technical rules within the existing delivery procedure |
 | `aek-review-changes` | Requested or applicable completion review of changed code/contracts | Optional `project-workflows` [template](templates/skills/aek-review-changes/SKILL.md); located findings and coverage limits under the existing review policy |
 
-The conceptual `aek-deliver-phase` is subsumed by the implementation entry, not
-supplied as another skill or native alias. [Observed behavior and client limits](docs/research/2026-10-11-project-skills-behavior.md#client-support-and-stage-disposition)
-cover all three task entries in bounded Codex CLI 0.162.1 fixtures. Static validity,
-native discovery, actual task behavior and consumer adoption remain separate claims.
+Design/review are optional and selected explicitly. Implementation, including the
+former conceptual
+`aek-deliver-phase`, follows the [core task route](standards/core.md#task-scope-and-context)
+and existing delivery/verification owners without a separate skill or native alias.
 
 An instruction-only template is inactive for native discovery until adopted through
 the selected client's supported mechanism. An agent can explicitly read the source

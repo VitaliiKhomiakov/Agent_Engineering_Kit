@@ -23,7 +23,7 @@ agreed stages under the plan's human checkpoints; progress is owned by the plan.
 No application, installer, CLI, monitor, workflow engine, new framework skill,
 mandatory test suite, or automatic model launch is introduced. Engineering choices
 such as strict typing, dependency boundaries, and proportionate verification remain
-in force. A live adoption pilot is a separately authorized follow-up.
+in force.
 
 ## Audit basis
 
@@ -144,7 +144,7 @@ adaptations. Move version-specific helper contracts and existing inspection limi
 to `standards/superpowers/compatibility.md`. Register that file as a catalog resource;
 read it only when using those helpers or resolving version compatibility. Preserve
 the 6.4.1 evidence date. Inspect relevant available 6.4.2 contracts before adding
-claims about that version; never infer a live pilot from source inspection.
+claims about that version; never infer native activation from source inspection.
 
 No duplicate/shadow skills or plugin-cache patches. An unsupported helper may be
 bypassed by directly reading a scoped task and reviewing its actual changes.
@@ -194,13 +194,3 @@ scenarios below. It does not require installation or a paid model call.
 For each static scenario, record the input, expected reading/action path and any
 remaining ambiguity. These walkthroughs establish instruction consistency, not
 measured agent compliance. Do not build a new testing product around them.
-
-## Follow-up adoption evidence
-
-After the library changes, a separately authorized pilot can select one actual
-project, one client/version and the user's model choices. Exercise a small inline
-task, one justified delegation when configured, the selected stage checkpoint,
-and resumption from the canonical task artifact. Observe loading and model/effort
-through supported controls; record unavailable telemetry as unknown. Other clients
-remain unverified until separately exercised. No percentage cost saving or universal
-compatibility claim follows from file-size reduction or one successful task.

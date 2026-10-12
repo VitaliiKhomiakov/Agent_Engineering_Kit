@@ -70,7 +70,7 @@ preserve one canonical store and record it separately from each execution checko
   `<actual installed skill or accessible source skill path>`. Read `.agents-framework/adoption.md`
   only for import/update/recovery; ordinary work or missing files does not start integration.
 - Superpowers: [local adaptations](.agents-framework/standards/superpowers.md), then the triggered skill; helpers are conditional.
-- If `project-workflows` is selected, use the design, implementation or review entry
+- If `project-workflows` is explicitly selected, use the installed optional design or review entry
   through the [project-skill contract](.agents-framework/standards/project-skills.md).
   Selected native entries: `<actual installed task skill paths>`; list only those installed.
   Remove this optional route when that profile is omitted; direct core/stack routes remain.

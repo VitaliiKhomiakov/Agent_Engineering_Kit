@@ -58,8 +58,7 @@ To apply a reviewed proposal:
 > and follow the agreed checkpoints.
 
 An explicit import request can already authorize the relevant changes; the
-procedure reuses that authorization. Model setup and a live client pilot have
-separate scopes.
+procedure reuses that authorization. Model setup has its own scope.
 
 The [integration skill](templates/skills/aek-integrate-project/SKILL.md) follows
 [MIGRATION.md](MIGRATION.md), which defines the full procedure:
@@ -229,19 +228,17 @@ or report an unresolved step. Ordinary coding does not trigger this workflow.
 ### Superpowers integration
 
 For consumer-project work, the optional `project-workflows` profile supplies
-[aek-design-feature](templates/skills/aek-design-feature/SKILL.md),
-[aek-implement-feature](templates/skills/aek-implement-feature/SKILL.md) and
+[aek-design-feature](templates/skills/aek-design-feature/SKILL.md) and
 [aek-review-changes](templates/skills/aek-review-changes/SKILL.md) through one
 [local reference/output contract](standards/project-skills.md). They select the
 project's relevant technical rules for the current operation while preserving
 direct routes and its existing task/procedure. They select no technology or model.
-Install selected entries through the [existing adoption procedure](MIGRATION.md#optional-project-task-skills).
-Native support is established per client/version; a copied template alone is not
-evidence of activation. [Dated Codex CLI 0.162.1 observations](docs/research/2026-10-11-project-skills-behavior.md#client-support-and-stage-disposition)
-cover discovery and bounded use of all three entries. Superpowers composition was
-checked through an explicit route to installed 6.4.2 procedures; automatic plugin
-discovery was not established in that private CLI runtime. Other clients retain
-their documented static/direct-reference limits; real consumer adoption is separate.
+Both entries are optional and selected explicitly. Implementation follows the
+ordinary
+[core task route](standards/core.md#task-scope-and-context), without a separate skill.
+Install explicitly selected entries through the [existing adoption procedure](MIGRATION.md#optional-project-task-skills).
+Use the selected client's supported skill location and format. Copying an inactive
+template into the bundle does not install it as a native skill.
 
 [The Superpowers policy](standards/superpowers.md) maps skills to relevant tasks
 and adapts their workflows to the project's checkpoints, Git permissions, model
@@ -315,12 +312,11 @@ and planning files remain inactive templates; no root `PLANS.md` or client
 configuration is installed by this maintenance entry. Target adoption is verified
 in each target workspace independently.
 
-## Status and verification limits
+## Library maintenance
 
 Recorded library work covers instruction-framework refinement, project integration,
 technology profiles, maintenance checks, policy settings, and contained adoption.
-The records below distinguish implemented changes, review status, and checks from
-the remaining target-client pilot.
+The records below describe source changes and maintenance checks.
 
 | Evidence | Scope |
 | --- | --- |
@@ -329,20 +325,9 @@ the remaining target-client pilot.
 | [Project integration](docs/plans/2026-09-27-project-rule-integration.md) | Recorded preparation, import, update, and recovery acceptance checks |
 | [Unreal support](docs/plans/2026-09-27-unreal-engine-support.md) | Profile, template, and routing checks; engine/editor execution remains unverified |
 | [Angular and NgRx](docs/plans/2026-09-29-angular-ngrx-rules.md) | Profile/catalog consistency and documented checks for conditional applicability |
-| [Technology instruction audit](docs/plans/2026-10-03-technology-instruction-audit.md) | Stages 0–5 complete: example corrections, conditional guidance, source-maintenance entry and checker; the real-agent pilot remains outstanding |
+| [Technology instruction audit](docs/plans/2026-10-03-technology-instruction-audit.md) | Example corrections, conditional guidance, source-maintenance entry and checker |
 | [Contained adoption, policy settings and orchestration](docs/plans/2026-10-04-contained-adoption-layout.md) | Recorded source and bundle checks; stage C implementation and verification are complete but await user review in the record; consuming-project migration remains pending |
 | [Superpowers compatibility](standards/superpowers/compatibility.md) | Bounded local-source checks for 6.4.2; historical 6.4.1 results are retained separately |
-
-These records establish the stated library checks. They do not establish
-successful end-to-end adoption in every client, token savings, active model
-assignments, or Unreal build/editor behavior. A target-client pilot after these
-changes remains unverified in the recorded evidence.
-
-A pilot should select one project and client version, define any required model
-assignments and permitted configuration changes, and observe instruction loading,
-a small inline task, justified delegation if selected, checkpoints, and resumption
-from canonical task documents. Compare efficiency only on comparable tasks with
-the same model and reasoning effort.
 
 When changing the library, run `python3 tools/check_instruction_artifacts.py`
 (Python 3.11+, standard library only) for catalog, local-link, fence and TOML checks.

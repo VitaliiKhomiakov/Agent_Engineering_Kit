@@ -18,7 +18,7 @@ A1–A8, while this document owns progress and evidence.
 ## Global Constraints
 
 - Current authorization: after S4, the user instructed completion of S5.
-  The authorized library work is complete; P1 remains a separate follow-up.
+  The authorized library work is complete.
 - Execution: inline, one logical stage followed by user review; reuse
   any later explicit authorization for several stages without repeated questions.
 - Workspace and project checkout: `/home/vitalii/Documents/Local_Project/AgentsFramework`.
@@ -49,7 +49,6 @@ A1–A8, while this document owns progress and evidence.
 | S3 | Compact prompts and conditional Superpowers compatibility | R4 / A6, A8 | S1, S2 |
 | S4 | Existing native task stores remain canonical | R5 / A7 | S2, S3 |
 | S5 | Integrated library acceptance and accurate handoff | R1–R6 / A1–A8 | S1–S4 |
-| P1 | Observed adoption in one chosen client/project | Follow-up only | S5 and separate pilot authorization |
 
 Each stage updates its affected authoritative text and entry summaries together;
 do not knowingly leave contradictory active instructions for the next stage.
@@ -181,20 +180,8 @@ cross-document conflicts found during this stage.
   prior checks unless changed inputs invalidate them; record scenario scope/outcome.
 - [x] Review only the accumulated stage changes against their captured baselines.
   Distinguish static instruction evidence from any actual runtime observation.
-- [x] Record final changed paths, criteria, checks, residual limitations and pilot
-  prerequisites. Library completion requires all R1–R6 criteria; P1 is not its gate.
-
-## Follow-up P1: Bounded adoption pilot
-
-P1 is specified for future execution and is not authorized by the current library
-implementation scope. Select the actual target project, client/version, model choices and
-allowed configuration edits before starting it. Reuse later explicit authorization.
-
-Exercise the scenarios in the specification's follow-up section in that one client.
-Record discovered instructions, actual checks, stage stopping, resumption and
-available model/effort evidence. Fix confirmed in-scope issues; report unknown
-telemetry honestly. Do not infer compatibility with other clients or launch a broad
-benchmark. Store pilot evidence in its own adoption task and link it here.
+- [x] Record final changed paths, criteria, checks and residual limitations.
+  Library completion requires all R1–R6 criteria.
 
 ## Verification method and review focus
 
@@ -230,7 +217,6 @@ of tests/reviewers and no repetition of the removed application's test suite.
   to S3; S3 supplies policy routes to S4; S5 integrates their evidence. No shared
   interface conflict was found. S1's inline-planning walkthrough assumes an
   existing configured selection; missing-profile behavior belongs to S2.
-- P1 remains separately gated by target adoption scope.
 - Planning verification: PASS on 2026-09-26. Checked 12 local links/anchors,
   Markdown fences, placeholder absence, six requirements, eight acceptance
   scenarios and five implementation stages. Scope inspection confirmed exactly
@@ -323,7 +309,7 @@ and conditional Superpowers compatibility, after instruction to continue.
 
 The user's instruction to continue accepted S2 and authorized S3. The original
 S3 file set is unchanged; this plan also records progress. S4's native-store
-semantics and the S5 integration/pilot work remain pending.
+semantics and the S5 integration work remained pending at that checkpoint.
 
 Baseline: `/tmp/af-refinement-s3-b5_kqbg6/baseline.json`; `original/` preserves all
 13 existing affected files, and the new compatibility file's prior absence is
@@ -442,7 +428,7 @@ readiness wording remains S5 work.
 diff. Exactly 15 scoped files changed; 167 pre-existing files remain unchanged.
 No material S4 finding remains unresolved. Next checkpoint: user review of S4.
 Proposed next stage: S5 integrated library acceptance and README/handoff, after
-instruction to continue. The live adoption pilot remains a separate follow-up.
+instruction to continue.
 
 ## S5 integrated acceptance — 2026-09-27
 
@@ -531,10 +517,4 @@ and ready for final user review. No application, permanent test infrastructure,
 installation, native/global settings change, Git write or external model call was
 introduced. The templates remain inactive.
 
-P1 is the remaining separate adoption activity, not unfinished library acceptance.
-It needs an actual project, one client/version, explicit model choices where needed
-and authorized configuration scope. Observe instruction loading, an inline task,
-justified delegation if configured, the stage checkpoint and resumption. Record
-runtime-reported model/effort only when available; unavailable telemetry is unknown.
-Neither cross-client runtime compatibility nor token/time savings are established.
 The dated inspection limits in the compatibility reference remain applicable.

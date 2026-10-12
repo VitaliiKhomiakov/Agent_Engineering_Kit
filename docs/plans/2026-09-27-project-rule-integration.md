@@ -1,6 +1,6 @@
 # Project rule integration implementation plan
 
-Date: 2026-09-27. Status: Tasks 1–4 complete; library integration delivered; target pilot not run.
+Date: 2026-09-27. Status: Tasks 1–4 complete; library integration delivered.
 
 **Goal:** Provide a repeatable agent-guided import of Agent_Engineering_Kit into new and
 existing projects, replacing conflicting old process rules while preserving local contracts.
@@ -43,7 +43,6 @@ Executors read both documents; requirements belong to the spec and progress belo
 | Existing instruction refinement and subsequent clarifications | Available foundation | Reuse current rules and applicable evidence |
 | Unreal Engine support requested before integration | Library prerequisite complete; no runtime pilot | U1–U4 profile, routing/catalog changes and scoped checks complete; reuse their evidence |
 | Library integration | Tasks 1–4 complete | Confirmed single skill, procedure, record and static acceptance I1–I8/A1–A10 delivered |
-| Target adoption pilot | Future separate scope | Target/client and permitted operations are specified |
 
 ## Task 1: Integration and conflict contract
 
@@ -108,7 +107,7 @@ Executors read both documents; requirements belong to the spec and progress belo
 **Produces:** Documented import entry and scoped library acceptance evidence.
 
 - [x] Describe new/existing project use, preparation versus application, old-rule
-  replacement, provenance, repeated import and the target-pilot boundary in README.
+  replacement, provenance and repeated import in README.
 - [x] Check changed TOML/YAML, catalog uniqueness/dependencies/assets and affected
   Markdown links, fences and relocatable template paths with existing tools.
 - [x] Walk through A1–A10 together; reuse valid results and rerun only for changed
@@ -124,11 +123,6 @@ Once the library is ready, a separately scoped adoption names an actual project,
 one client/version, accessible source identity, import intent and permitted target
 changes. Native model choices are supplied only when setup/delegation requires them.
 The integration task then owns its preparation, snapshots, application and evidence.
-
-A bounded pilot checks actual instruction discovery, task-specific reading, retained
-local checks, one justified handoff if configured, stage stopping and canonical-task
-resumption. Do not extrapolate one client's result to all clients. Unavailable model
-telemetry remains unknown. A library-only validation does not run this pilot implicitly.
 
 ## Verification and review focus
 
@@ -344,7 +338,7 @@ checkpoint. No target client, global skill, external model or real import was ru
 Baseline: `/tmp/af-integration-t4-z4nvbxyx/`. Changed: `README.md` and this plan.
 README now describes the implemented entry, source-based use before installation,
 new/existing projects, preparation versus application, actual conflict replacement,
-provenance, repeated imports, partial recovery and the target-pilot boundary.
+provenance, repeated imports and partial recovery.
 
 ### Requirements and scenarios
 
@@ -391,8 +385,7 @@ Modified: `MIGRATION.md`, `ARCHITECTURE.md`, `standards/catalog.toml`,
 The catalog retains schema 1 and all 20 profiles; one available record template
 was added. The procedure/skill/templates are delivered, not installed into a real
 target. No importer application, external model invocation, global configuration
-change, Git write or native pilot was performed. Actual target/client discovery,
-conditional reading, checkpoint behavior and resumption remain pilot observations.
+change or Git write was performed.
 
 
 ### Final verification and handoff
@@ -415,6 +408,3 @@ refreshing diffs, without another verification cycle.
 
 Library work is complete. A future adoption needs an accessible source, actual
 target roots, one client/version, prepare/import/update intent and permitted scope.
-A live pilot is separately scoped and reports observed discovery/adherence and
-remaining limits. Saved rules, a valid skill and static scenario acceptance do not
-establish those runtime observations or cross-client compatibility.

@@ -113,8 +113,8 @@ procedure; a smaller closure is not permission to delete previously managed file
 ## Read for the current task
 
 The optional `project-workflows` profile supplies the
-[project-skill contract](project-skills.md) and inactive design, implementation and
-review templates. Select it explicitly during adoption when project task skills are wanted;
+[project-skill contract](project-skills.md) and inactive design and review templates.
+Select it explicitly during adoption when those optional project task skills are wanted;
 technology selections alone do not include it, and it selects no technology.
 Bundle availability is separate from installing a chosen native skill. Source
 MIGRATION owns destination adaptation and recording the managed native path.

@@ -10,9 +10,8 @@ target, and create reusable support only when actual reuse justifies it.
 **Architecture:** Existing authoritative procedures and checker, a scoped human-
 readable report, optionally a source-owned procedure and a thin inactive skill.
 **Stack:** Markdown; existing Python 3.11+ standard-library artifact checker.
-**Status:** Updated 2026-10-08. AEK_TEST is available as a future diagnostic
-substrate; no specific diagnosis or feature implementation is selected.
-Every execution item remains unstarted.
+**Status:** Conditional proposal; no specific diagnosis or feature implementation
+is selected. Every execution item remains unstarted.
 
 ## Global Constraints
 
@@ -30,16 +29,8 @@ Every execution item remains unstarted.
 - This plan owns the diagnostic workstream and source-support progress. A selected
   existing target task owns private observations and any later repair; link it
   without copying its detailed checklist or private contents.
-- [Roadmap](2026-10-07-development-roadmap.md) owns prioritization and the current
-  documentation-only stage. Preparing this plan does not approve its implementation.
-- The owner supplied `/home/vitalii/Documents/Local_Projects/AEK_TEST` for setup
-  and tests. The pilot plan owns its scheduled provisioning. A bounded synthetic
-  diagnostic may reuse it; a real adoption uncertainty or recurring need is still
-  required before claiming user value or promoting reusable support.
-- The current continuation schedules sandbox work and updates documentation.
-  Later fixture setup reuses the sandbox grant; diagnosis itself remains read-only.
-  No new feature, model batch, native activation, plugin edit, delegation or Git
-  write is authorized merely by availability of a test directory.
+- Preparing this plan does not authorize implementation, target changes or native
+  configuration. A diagnostic request supplies its own target and scope.
 - Before future source edits capture affected originals/prior absence and relevant
   local changes. Before authorized read-only diagnosis record enough target state
   externally to substantiate preservation; do not write a baseline into the target.
@@ -47,9 +38,8 @@ Every execution item remains unstarted.
   not trigger model setup merely to run this diagnostic.
 
 **Current item:** DIA-01 — planned, awaiting a diagnostic need and scope.
-**Next checkpoint:** Review this proposal. Proceed only when there is a concrete
-question or the bounded synthetic exercise is selected; absence of a real need
-is a valid reason to leave feature stages deferred.
+**Next checkpoint:** Review this proposal. Proceed only when a concrete diagnostic
+question is selected; otherwise leave feature stages deferred.
 
 ## Review focus
 
@@ -60,15 +50,6 @@ is a valid reason to leave feature stages deferred.
 - A general audit or ordinary task must not launch integration, setup or repair.
 
 ## Stage A — Manual diagnosis before a reusable feature
-
-**Optional sandbox prerequisite:** Reuse the verified fixture only after
-[pilot stage S](2026-10-07-agent-behavior-pilot.md#stage-s--final-preparation-provision-aek_test).
-For a selected synthetic exercise, prepare the healthy and broken-route copies
-named in the spec; record the one deliberate mutation before diagnosis and store
-preservation evidence outside each target. Use the existing source checker with
-each resolved copy root, contained bundle and selected profiles. No application
-server, package installation, new diagnostic runtime or wrapper is required.
-Keep setup writes separate from the read-only inspection boundary.
 
 **Files:** Read only the selected target entries, relevant adoption/managed files
 and necessary source owners. Report in chat or the explicitly selected canonical
@@ -85,8 +66,6 @@ location. No new source implementation files are required.
 - [ ] **DIA-03:** Review the report and target preservation. Decide whether the
   direct existing procedure was sufficient, a reusable procedure is useful, or
   repeated invocation warrants an eventual wrapper. Record the reuse rationale.
-  A synthetic defect is capability evidence only; it does not establish real
-  recurrence or satisfy the feature-investment gate.
 
 **Checks:** Cover applicable DIA-AC01 through DIA-AC08 and DIA-AC11. Use the existing
 checker command only after explicit root, bundle and profile resolution. Supply
@@ -205,10 +184,7 @@ it is not permission for a checker rewrite within this documentation-led plan.
 At each selected stage stop for the ordinary user checkpoint and reuse valid
 evidence on resumption. Deferred stages remain explicitly deferred, not completed.
 
-## Execution evidence
+## Implementation status
 
-None yet. The supplied sandbox remains unprovisioned. No diagnostic copies or
-seeded defects exist; source implementation, native invocation and usefulness
-are unverified.
-The roadmap tracks preparation of this proposal; future work records actual stage
-outcomes here with links to the single owner of detailed target evidence.
+No diagnostic procedure or wrapper has been implemented. This proposal remains
+conditional on a specific adoption question and a selected source change.

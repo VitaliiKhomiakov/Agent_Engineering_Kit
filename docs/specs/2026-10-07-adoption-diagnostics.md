@@ -3,9 +3,7 @@
 **Status:** Conditional proposed design, awaiting review. No implementation or
 target inspection is authorized by this document.
 **Date:** 2026-10-07.
-**Updated:** 2026-10-08, optional reuse of the owner-supplied AEK_TEST sandbox.
 **Implementation plan:** [Diagnostics plan](../plans/2026-10-07-adoption-diagnostics.md).
-**Rationale:** [Feasibility assessment](../research/2026-10-07-development-feasibility.md).
 
 ## Outcome and decision to build
 
@@ -152,39 +150,6 @@ candidate, rewrites accepted snapshots or starts an import.
 Do not add an independent update skill or change log that duplicates adoption
 ownership. If the diagnostic is unnecessary but semantic summaries are useful,
 add that reporting detail to the existing integration procedure independently.
-
-## Optional sandbox reuse
-
-The owner supplied `/home/vitalii/Documents/Local_Projects/AEK_TEST` for tests
-on 2026-10-08. The [pilot specification](2026-10-07-agent-behavior-pilot.md#selected-sandbox--aek_test)
-owns its application, layout and adoption contract; do not create a second fixture
-or require application tests merely to inspect adoption. The sandbox is scheduled,
-not provisioned by this document update.
-
-After pilot stage S, a selected diagnostic exercise can reuse its verified bundle:
-
-1. Prepare a disposable copy at `runs/diagnostic-healthy/project/`; inspect the
-   selected routes and intentionally absent optional policy override. Expect a
-   clean artifact scope with explicit native-discovery limits.
-2. Prepare a separate copy at `runs/diagnostic-broken-route/project/`; change one
-   selected entry link to a nonexistent local resource, without creating a second
-   defect. The diagnostic must name that link and its authoritative repair path.
-3. Keep the seeding manifest and expected result in sandbox evidence outside the
-   inspected target. Record target contents after seeding and after diagnosis to
-   establish that inspection did not repair, initialize or rewrite anything.
-
-Fixture creation and deliberate corruption are coordinator setup actions under
-the sandbox grant; they are not read-only diagnostic actions. The diagnostic
-itself remains read-only. Do not modify the healthy seed or original observation
-project to create a failure case. Other edge cases from the acceptance table are
-optional when a specific question warrants them, not an automatic test matrix.
-
-Label these as synthetic cases. Correctly detecting an intentionally broken route
-validates a narrow diagnostic capability; it does not demonstrate a naturally
-recurring problem, justify `aek-doctor`, or establish that the client loaded the
-file. Apply the existing recurrence gate even if both synthetic cases pass.
-The pilot's restrictions on exposed reference answers also apply to any claimed
-independent behavioral probe; directory separation alone does not hide evidence.
 
 ## Minimal implementation shape, if the gates pass
 

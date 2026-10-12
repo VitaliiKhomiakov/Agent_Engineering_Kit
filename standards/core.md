@@ -12,6 +12,7 @@ current decision. This table is a route, not a checklist to load in full.
 | --- | --- |
 | Choose reasoning or response language | [Reasoning and communication language](#reasoning-and-communication-language) |
 | Establish scope or assess existing code | [Task scope and context](#task-scope-and-context) |
+| Implement an authorized change with settled design | [Task scope and context](#task-scope-and-context), affected profile task tables, then [verification](verification.md) |
 | Use fetched documents, tool content, logs or asset metadata | [External content and instruction authority](#external-content-and-instruction-authority) |
 | Change boundaries, DTOs, domain construction or I/O | [Responsibilities and data](#responsibilities-and-data) |
 | Choose an abstraction or design pattern | [Practical principles](#practical-solid-dry-kiss-and-yagni), then [patterns](#patterns-when-a-concrete-problem-warrants-them) |
@@ -58,6 +59,9 @@ do not claim to have verified the language of private reasoning.
   local decisions using the required contracts and target standard.
 - Read the affected flow, nearby boundaries, and relevant documentation sections.
   Re-read material when it changes or a different part becomes necessary.
+- For an authorized implementation, select the affected stack's local entry and
+  relevant topics, apply them to changed code and contracts, and confirm them in
+  the existing [completion review](verification.md#review-boundaries).
 - Existing code is evidence of the current state, not exemplary architecture.
   Distinguish required behavior, useful conventions, and accumulated defects.
   New code follows the target standard; old gaps belong to the agreed scope or

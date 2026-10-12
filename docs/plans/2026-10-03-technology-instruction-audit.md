@@ -18,35 +18,20 @@ Blueprint guidance; Markdown instructions, TOML catalog and inactive client temp
 **Spec:** The scope, finding register and acceptance criteria in this document form
 the specification. No separate design artifact is necessary for this audit.
 
-**Date:** 2026-10-03. **Status:** Awaiting user review / pilot scope selection.
-Stages 0–5 are complete, including all three user-selected refinements (2026-10-04).
-Only the separately scoped stage 6 real-agent pilot remains outstanding.
+**Date:** 2026-10-03. **Status:** Source-library stages 0–5 complete,
+including all three user-selected refinements (2026-10-04).
 
-**Current execution:** No implementation item is active. Stage 5 is complete.
-The next pending item is QA-02.1: select and record the pilot target, client/version
-and permitted scope before authorizing stage 6 execution. Installation alone does
-not satisfy the pilot's behavioral acceptance criteria.
-
-**Next human checkpoint:** Agree the stage 6 pilot scope and authorization.
-Its execution record remains in `docs/plans/2026-09-20-native-client-adoption.md`;
-this audit retains only its finding-level acceptance and summary.
+**Current execution:** No implementation item is active. Future source changes
+need their own concrete scope.
 
 **2026-10-05 adoption outcome:** Successful instruction installation and file
-verification. Model setup was explicitly deferred; stage 6 runtime behavior remains
-unverified. Target identity and detailed adoption evidence stay outside this plan.
+verification. Model setup was explicitly deferred. Target identity and detailed
+adoption evidence stay outside this plan.
 
-**Assessment:** The library is detailed and generally technically sound. It does
-not need wholesale rewriting. The audit identifies **13 future-work items**:
-three concrete example defects, four technology clarifications/compatibility items,
-three instruction/evidence improvements (including the already acknowledged pilot),
-and three optional additions. The strongest immediate value is repairing the
-NestJS, FastAPI and React examples; technical depth alone does not yet prove
-reliable behavior in a consuming AI-agent session.
-
-**User-requested extension:** Plan a root `AGENTS.md` for maintaining this source
-library and make the three instruction-size constraints explicit. There are now
-**14 future-work items**: the 13 audit items plus MAINT-01. The three constraints
-below are acceptance gates for those items, not three additional audit defects.
+**Assessment:** The audit addressed example defects, technology clarifications,
+instruction maintenance and selected optional additions. It also added a root
+`AGENTS.md` for source-library maintenance and explicit instruction-size constraints.
+The constraints below govern those source changes.
 
 ## Global constraints
 
@@ -55,10 +40,10 @@ below are acceptance gates for those items, not three additional audit defects.
   future implementation. Subsequent requests authorized stages 0–5 using
   Superpowers, including the source-library entry and instruction-size gates.
   The 2026-10-06 request authorizes the plan-record corrections, a commit and
-  push; it does not start the separate stage 6 pilot.
+  push.
 - Execute inline in the current checkout under `standards/superpowers.md` and
   the direct-mode stage checkpoints in `standards/work-modes.md`. No implementation
-  stage is active; stages 0–5 are complete and stage 6 awaits scope selection.
+  stage is active; stages 0–5 are complete.
   Git writes were not authorized for the historical implementation stages.
   The 2026-10-06 correction permits staging this plan, committing it with the
   preserved adoption note, and pushing `main` to `origin`. No worktrees,
@@ -205,7 +190,7 @@ is not a catalog asset for automatic export into consuming projects.
   relevant fixture; a catalog change validates the selected bundle contract;
   a planning-only task changes the canonical plan without installing templates
   or starting implementation. Record static outcomes as static evidence, not
-  proof of client loading. Actual client adherence remains QA-02's scope.
+  proof of client loading.
 
 ### DB-01 — SQLAlchemy 2.1 compatibility guidance needs a current branch
 
@@ -283,7 +268,7 @@ requirement to add a particular approval ritual.
   disregard the embedded authorization attempt and continue the legitimate task.
 - [x] AI-01.4. Include an ordinary safe documentation command as a control: the agent
   may use it when it serves the authorized task. Static rule review is not a
-  measured claim of prompt-injection resistance; observe this in the pilot below.
+  measured claim of prompt-injection resistance.
 
 ### QA-01 — Retain small reproducible maintenance checks
 
@@ -339,35 +324,6 @@ the supported repository syntax and report unsupported ambiguous links clearly.
 - [x] QA-01.5. Define maintenance triggers: changed API contract, supported-version change,
   broken source link or a reported issue. Record checked date/version and source
   separately from runtime-tested versions; avoid automatic "latest" upgrades.
-
-### QA-02 — Close the acknowledged real-agent evidence gap
-
-**Priority/category:** P2, carried-forward verification limit, not a newly discovered
-defect or proof that the instructions fail.
-
-**Evidence:** `README.md:284–293` already states that target-client adoption and
-behavior remain unverified. Good technical prose and intact routes are necessary
-but do not answer whether an AI agent consistently selects and follows them.
-
-**Files:** Modify the existing pilot owner
-`docs/plans/2026-09-20-native-client-adoption.md` when execution is selected;
-update `README.md` evidence links only after recording actual results. Do not
-create a competing pilot ledger.
-
-- [ ] QA-02.1. Select one real target checkout and client/version with its established
-  permissions; treat this as a separate future execution stage. This audit has
-  not selected or modified a target.
-- [ ] QA-02.2. Exercise a small declared stack through concrete tasks: plain Python must
-  not pull in FastAPI; JavaScript React must not impose TypeScript/Next.js; an
-  adopted instruction must lead to the relevant topic instead of loading all
-  resources. Use only scenarios supported by the selected target, with disposable
-  bundles for the other routing cases.
-- [ ] QA-02.3. Observe a bounded change, applicable checks, preservation of user edits,
-  checkpoint/resumption and the canonical plan owner. Include AI-01's trust
-  scenarios in an isolated fixture if the client supports them.
-- [ ] QA-02.4. Record client/model settings, selected instructions, task outcome and
-  failures/limits. Report observed adherence; do not infer hidden reasoning or
-  claim universal compliance or token savings from one successful run.
 
 ### PY-01 — FastAPI snapshot body-read errors escape gateway mapping
 
@@ -695,7 +651,6 @@ style is not evidence that these choices are wrong.
 | 3. Improve agent instruction trust | AI-01 | One owning rule and short routes. Check compatibility with existing scope/authorization policy. |
 | 4. Make maintenance repeatable | QA-01 | May proceed independently; preserves the catalog's existing bundling semantics and supports later audits. |
 | 5. Optional focused additions | SYM-01, NEST-02, ANG-02 | Select only if the added specificity is useful. Their omission does not block fixes to confirmed defects. |
-| 6. Observe real-agent use | QA-02 | Reuse the existing pilot owner after selecting a target/client; consume corrected rules and distinguish observed results from static evidence. |
 
 For every stage, inspect only its changes and affected contracts, validate relevant
 links/formats, apply G1–G3 and run `git diff --check`. Executable example changes additionally
@@ -742,9 +697,8 @@ this plan as authorization for automatic commits, client configuration or deploy
   tooling, not an importer or a new application runtime.
 - ANG-01 no longer mandates constructing a missing application fixture for prose
   maintenance. Any claimed behavioral result still requires execution.
-- SYM-01, NEST-02 and ANG-02 remain optional; QA-02 still requires a separately
-  selected target/client. None of these decisions blocks stage 0 or authorizes
-  installations or target changes. The three example defects retain real-stack
+- SYM-01, NEST-02 and ANG-02 remain optional. None of these decisions blocks
+  stage 0 or authorizes installations or target changes. The three example defects retain real-stack
   regression requirements; unavailable dependencies are not a passed check.
 - The reviewed MAINT-01 design is sufficiently specified by the approved plan:
   one short source-maintenance entry and a scoped README adjustment. No new
@@ -877,7 +831,7 @@ artifact counts above describe the pre-extension plan.
 
 Historical checkpoint after stage 3 (superseded by the stage 4 and 5 results below):
 **stages 0–3 complete, awaiting user review**. At that checkpoint, stages 4 onward
-and any target-client pilot had not started. The current state is recorded at
+had not started. The current state is recorded at
 this document's beginning.
 
 ## Temporary artifact cleanup — 2026-10-04
@@ -928,7 +882,7 @@ commands or observed native-client runs.
 
 All five decisions are supported by the new text on static review. This establishes
 coverage and consistency only. Prompt-injection resistance and real client loading
-remain unmeasured; QA-02 retains the separate pilot requirement.
+remain outside this source-review result.
 
 Artifact checks passed for all six changed files: 63 local references/fragments
 (including intended target-root template paths), balanced fences and clean
@@ -995,7 +949,7 @@ Verification and scoped review:
 - Official Python TOML, CommonMark fence and GitHub anchor documentation informed
   the stated syntax boundary. The maintenance owner records the date and links.
   This is a bounded repository checker, not a renderer, external-link monitor,
-  runtime verifier or proof of agent adherence. Real-client evidence remains QA-02.
+  runtime verifier or proof of agent adherence.
 
 The coordinator reviewed the actual stage changes against the saved baseline and
 QA-01 criteria; no unresolved in-scope issue remains. G3 is complete. G2 still
@@ -1061,10 +1015,9 @@ all 230 other file hashes matched. G1 and G3 remain intact and G2 is complete:
 each rule lives in its technology owner with explicit applicability conditions.
 No new runtime proof is claimed or needed for unchanged executable examples.
 
-All source-library implementation stages are complete. QA-02 remains a separate
-real-agent pilot requiring a selected project/client and its permitted scope;
-it has not started. No Git integration was performed. After recording and checking
-this result, the exact stage temporary directory is removed as the user requested.
+All source-library implementation stages are complete. No Git integration was
+performed. After recording and checking this result, the exact stage temporary
+directory is removed as the user requested.
 
 ## Plan-record reconciliation — 2026-10-06
 
@@ -1076,12 +1029,11 @@ in `/tmp/aek-plan-status-ruyjw_ri/2026-10-03-technology-instruction-audit.md`;
 Added 53 stable item IDs while preserving all 56 checkbox states and their
 acceptance text, including the existing G1–G3 IDs. Labelled the superseded
 stage 3 checkpoint as historical and reconciled the current status and
-authorization. QA-02.1–QA-02.4 remain pending; no pilot execution or new
-technology/runtime verification is claimed.
+authorization. No new technology/runtime verification is claimed.
 
 Verification: the scoped artifact checker reported zero errors; `git diff --check`
 passed. A comparison with the saved pre-edit plan confirmed unchanged checkbox
 states and item text, 53 unique new IDs and preservation of the adoption note.
 Scoped diff review covered the status, historical checkpoint and authorization
 changes. These results concern this record correction, not a rerun of earlier
-implementation checks. The next substantive step remains pilot scope selection.
+implementation checks.

@@ -7,10 +7,7 @@ description: Use when reviewing changed code or contracts in a project with adop
 
 Assess the actual change against the task and affected technical contracts. Use
 the [project-skill contract](../../../standards/project-skills.md) for local
-inputs, procedure composition and the review result. Rebase this link from the
-installed folder; contained Codex adoption uses
-`../../../.agents-framework/standards/project-skills.md`. Ordinary review does not
-need the original source checkout or an adoption record.
+inputs, procedure composition and the review result.
 
 1. Establish the requested review scope, acceptance criteria and actual baseline.
    Include new/uncommitted files while distinguishing prior user work. If the

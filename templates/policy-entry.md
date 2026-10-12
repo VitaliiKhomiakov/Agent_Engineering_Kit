@@ -52,7 +52,7 @@ $routes
 
 ## Planning, skills and roles
 
-If `project-workflows` is selected, use the appropriate design, implementation or
+If `project-workflows` is explicitly selected, use the installed optional design or
 review entry through the [project-skill contract](.agents-framework/standards/project-skills.md).
 Selected native entries: `<actual installed task skill paths>`; list only those installed.
 Remove this optional route when that profile is omitted; direct rules remain usable.

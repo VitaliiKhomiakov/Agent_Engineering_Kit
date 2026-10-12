@@ -32,7 +32,7 @@ application code, change dependency versions or relocate existing task stores.
 
 ## Existing foundations and gaps
 
-- [Migration](../../MIGRATION.md) owns adoption, conflict inventory and a bounded pilot.
+- [Migration](../../MIGRATION.md) owns adoption, conflict inventory and handoff.
 - [Catalog semantics](../../standards/catalog.md) distinguishes bundle availability
   from conditional reading; its existing profile IDs and dependency rules are reused.
 - Entry, architecture and planning templates already preserve local contracts,
@@ -169,10 +169,8 @@ conflicting loaded instructions, preserved local contracts and repeat/update cas
 Reuse valid results; every repeat follows the existing evidence-reuse policy.
 No application test suite is required merely to copy instruction text.
 
-Distinguish a verified file bundle from observed client discovery/adherence.
-A bounded target pilot can check fresh entry, conditional reading, required task
-checks and resumption. It needs an actual selected target/client and authorization;
-maintaining this library does not itself grant installation or model execution.
+Keep file verification and native activation distinct. Maintaining this library
+does not itself grant installation into a consuming project or model execution.
 
 ## Acceptance scenarios
 
@@ -187,7 +185,7 @@ maintaining this library does not itself grant installation or model execution.
 | A7 | Source update plus local edits, missing base or removed resource | Scoped comparison; preserved user work; unresolved replacement/deletion made explicit |
 | A8 | Failure during apply or edits after preparation | Accurate partial report and safe scoped recovery; no false success or overwrite |
 | A9 | Existing native tasks and model choices | Canonical store and choices preserved; import alone triggers no relocation or reassignment |
-| A10 | Valid files but no client pilot | File verification reported separately; runtime behavior remains unverified |
+| A10 | Valid inactive files | File verification does not imply native activation |
 
 ## Sequencing constraint
 

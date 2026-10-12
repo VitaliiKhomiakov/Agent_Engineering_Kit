@@ -84,14 +84,12 @@ class ProfileSelectionChecks(unittest.TestCase):
     def test_project_workflows_add_only_task_resources(self) -> None:
         expected = {"standards/project-skills.md",
                     "templates/skills/aek-design-feature/SKILL.md",
-                    "templates/skills/aek-implement-feature/SKILL.md",
                     "templates/skills/aek-review-changes/SKILL.md"}
         self.assertEqual(self.selected("project-workflows") - self.selected("core"), expected)
 
     def test_project_workflows_preserve_selected_stack_closures(self) -> None:
         additions = {"standards/project-skills.md",
                      "templates/skills/aek-design-feature/SKILL.md",
-                     "templates/skills/aek-implement-feature/SKILL.md",
                      "templates/skills/aek-review-changes/SKILL.md"}
         for selection in (("fastapi",), ("react", "typescript"), ("angular",),
                           ("ngrx",), ("go",), ("unreal-engine",)):

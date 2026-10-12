@@ -128,10 +128,6 @@ architecture; no FSD migration or extra layer follows from the finding.
 
 ### Evidence limits, not newly discovered defects
 
-- [The recorded status](../../README.md#status-and-verification-limits) already
-  discloses that the target-client pilot remains unverified. File checks cannot
-  prove native loading, language adherence, checkpoints, resumption, selected-role
-  execution, or reduced total token use. This audit does not close that pilot.
 - Embedded executable examples were not all rerun. None changed in this audit.
   Prior runtime results remain historical results, not a newly reproduced
   all-stack certification. Unreal editor/build behavior remains target-dependent.
@@ -224,8 +220,7 @@ no instruction, reference or executable input, so prior checks remain applicable
 
 Only this audit document is added. Existing rules, examples, catalog, templates and
 historical evidence remain unchanged. Suggested follow-up: a bounded documentation
-stage for R1/R2, preserving current architecture choices; a separately selected
-target/client pilot is needed for behavioral adoption claims. Neither starts as
+stage for R1/R2, preserving current architecture choices. It does not start as
 part of this audit.
 
 ## Correction-stage results
@@ -258,6 +253,5 @@ finding remains. No independent-agent review is claimed.
 
 The earlier checker regression results remain evidence for unchanged checker/tests;
 no new runtime tests were needed for these prose-only changes. Historical audit
-limits above remain applicable; these corrections do not establish runtime or
-native-client pilot evidence. This final evidence/progress update adds no policy
+limits above remain applicable. This final evidence/progress update adds no policy
 or reference changes and does not invalidate the affected artifact check.

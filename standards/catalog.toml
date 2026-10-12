@@ -72,11 +72,10 @@ id = "project-workflows"
 source = "standards/project-skills.md"
 resources = [
   "templates/skills/aek-design-feature/SKILL.md",
-  "templates/skills/aek-implement-feature/SKILL.md",
   "templates/skills/aek-review-changes/SKILL.md",
 ]
-activities = ["design", "implementation", "review"]
-when = "Selecting or using adopted AEK consumer-project design, implementation or review task skills."
+activities = ["design", "review"]
+when = "Explicitly selecting or using optional AEK consumer-project design or review task skills."
 dependencies = ["core"]
 
 [[profiles]]

@@ -13,7 +13,7 @@ from tests.test_project_skill_adoption import ROOT, adapt_document
 from tools.check_instruction_artifacts import Checker
 
 
-SKILLS = ("aek-design-feature", "aek-implement-feature", "aek-review-changes")
+SKILLS = ("aek-design-feature", "aek-review-changes")
 TASK = ".work/items/feature.md"
 # Reviewed conditional host/framework links; never treat every missing route as optional.
 OPTIONAL_STACK_ROUTES = frozenset({

@@ -12,8 +12,12 @@ the identified source's MIGRATION procedure, not by this task-time guide.
 | Entry | Select for | Result | Keep outside this entry |
 | --- | --- | --- | --- |
 | [aek-design-feature](../templates/skills/aek-design-feature/SKILL.md) | Designing a new capability or material architecture/public-contract change in a project using AEK | Technical decisions connected to local owners, contracts, applicable rules and acceptance evidence | Wording-only changes, a routine fix with settled design, review-only work, or restarting an approved design |
-| [aek-implement-feature](../templates/skills/aek-implement-feature/SKILL.md) | Implementing an authorized code change with sufficient design and acceptance criteria, including a settled small fix | Scoped behavior change connected to applicable technical rules and actual acceptance evidence | Design-only or review-only requests, wording-only edits, unresolved material design and setup |
 | [aek-review-changes](../templates/skills/aek-review-changes/SKILL.md) | Requested review of changed code/contracts or an applicable completion review | Located consequential findings and explicit coverage/evidence limits | Automatic fixes, whole-project audits, wording-only edits, reviewer dispatch or setup merely because this entry is read |
+
+Both entries are optional. Select one when the project explicitly requests that
+entry. Implementation uses the ordinary [core task route](core.md#task-scope-and-context)
+and existing delivery/verification
+owners; it needs neither this profile nor a separate implementation skill.
 
 The table links inactive bundle templates for reference. Use the selected native
 skill paths recorded in the active project entry when installed. Reading a template
@@ -70,6 +74,9 @@ Include the parts needed for the affected behavior:
 - Observable acceptance cases and sufficient existing or proposed checks,
   distinguishing a planned check from executed evidence.
 
+Name only rules that changed a design decision; place necessary process-compliance
+evidence in the existing task's evidence note.
+
 Preserve the project's integration model: backend layers are not a default for
 UI, gameplay or editor work. Keep details proportional to the change; an output
 contract is not a quota of sections, patterns, tests or new files. Implementation
@@ -78,16 +85,11 @@ the skill produced a design.
 
 ## Implementation result
 
-Use the existing canonical task/result to connect the changed behavior and actual
-paths to its accepted design and applicable stack rules. Report the evidence for
-its acceptance criteria, the remaining material findings or unavailable gates,
-and the next checkpoint under the selected work mode. Distinguish checks actually
-executed from planned checks and still-valid evidence reused for unchanged inputs.
-
-This is an output boundary, not another delivery procedure. Baseline preservation,
-test selection/cadence, review, completion and progression remain with
-[delivery](delivery-workflow.md), [verification](verification.md) and
-[work modes](work-modes.md). A small fix does not require a new design document.
+Implementation follows the [core task route](core.md#task-scope-and-context),
+[delivery completion](delivery-workflow.md#phase-completion) and
+[verification](verification.md#completion-and-lack-of-progress). Use their
+existing canonical task/result and evidence boundary; no implementation skill
+or additional design, review or reporting cycle is required.
 
 ## Review result
 

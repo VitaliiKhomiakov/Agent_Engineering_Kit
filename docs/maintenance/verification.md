@@ -144,34 +144,22 @@ compatibility entries. Prepared target bundles still need their own reference ch
 Project-skill adoption tests prepare a fixed FastAPI instruction fixture from the
 real selected templates, check its bundle and selected native skills separately,
 and reject unadapted/broken required references. They distinguish selecting the
-three-template bundle from installing just one native entry. Flat/custom cases
+two-template bundle from installing just one native entry. Flat/custom cases
 check the design native reference only; these tests are neither a general installer
 nor client behavior evidence.
-The [dated validation record](../research/2026-10-11-project-skills-validation.md)
-retains the original design slice and subsequent source/adoption/behavior evidence
-with their distinct input identities and limits.
 
 Portability tests cover five representative selections across contained, flat and
 custom layouts, independently opened child paths, active planning literals, a
 Claude import and Codex role references. They preserve fixed local sentinels and
 check write-free preparation and identical repeated candidates. These are syntax
 and file-state observations, not client activation or an automated update engine.
-The [adoption walkthrough](../research/2026-10-11-project-skills-adoption.md) records
-the separate instruction-led B/C/N, collision and recovery decisions.
-
-Bounded native observations have separate [behavior inputs and commands](../../tests/fixtures/project-skills-behavior/README.md)
-and a [dated client-support record](../research/2026-10-11-project-skills-behavior.md).
-They require the recorded client, settings and authorized disposable environment;
-ordinary artifact checks do not start model calls. Check the acceptance fixture
-against the prepared project's domain, using its documented interpreter/analyzer
-commands rather than importing a nonexistent source-root application.
 
 When modifying the checker or tests, run their focused unittest suites and the
 [strict Python analyzer](../../standards/python/typing-contracts.md#strict-static-contracts).
 The checked analyzer baseline is mypy 2.1.0, installed outside the repository:
 
 ```sh
-python -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --explicit-package-bases --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tests/test_instruction_artifacts.py tests/test_profile_selection.py tests/test_project_skill_adoption.py tests/test_project_skill_portability.py tests/fixtures/project-skills-behavior/prepare.py
+python -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --explicit-package-bases --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tests/test_instruction_artifacts.py tests/test_profile_selection.py tests/test_project_skill_adoption.py tests/test_project_skill_portability.py
 ```
 
 ## Reproduce an affected executable example
