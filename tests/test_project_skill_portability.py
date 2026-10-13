@@ -54,7 +54,10 @@ def write_fixture(root: Path, files: dict[str, bytes]) -> None:
         path.write_bytes(contents)
 
 
-def portable_candidate(profiles: tuple[str, ...], bundle_dir: str) -> dict[str, bytes]:
+def portable_candidate(profiles: tuple[str, ...], bundle_dir: str, *,
+                       client: str = "codex",
+                       roles: tuple[str, ...] = ("architect", "implementer", "reviewer"),
+                       pairs: dict[str, tuple[str, str]] | None = None) -> dict[str, bytes]:
     """Render known fixture inputs in memory; no target reads/writes or merge logic."""
     target = Path("/tmp/aek-virtual-target")
     bundle = target / bundle_dir
@@ -100,9 +103,24 @@ def portable_candidate(profiles: tuple[str, ...], bundle_dir: str) -> dict[str, 
             source, destination, bundle, selected, source.read_text()).encode()
     # Separate syntax fixtures: reference resolution only, not client activation.
     result["CLAUDE.md"] = (ROOT / "templates/claude/policy-bridge.md").read_bytes()
-    for filename in ROLE_FILES:
-        result[f".codex/agents/{filename}"] = (ROOT / "templates/codex/agents" / filename).read_text().replace(
-            ".agents-framework/standards/", prefix + "standards/").encode()
+    for role in roles:
+        suffix = "toml" if client == "codex" else "md"
+        filename = f"af-{role}.{suffix}"
+        text = (ROOT / f"templates/{client}/agents" / filename).read_text().replace(
+            ".agents-framework/templates/", prefix + "templates/")
+        # Fixed fixture assignments, not discovery, schema validation or an installer.
+        if pairs is not None:
+            model, effort = pairs[role]
+            if client == "codex":
+                text = re.sub(r'^model = .*$', f'model = "{model}"', text, flags=re.MULTILINE)
+                text = re.sub(r'^model_reasoning_effort = .*$',
+                              f'model_reasoning_effort = "{effort}"', text, flags=re.MULTILINE)
+            elif client == "claude":
+                text = re.sub(r'^model: .*$', f'model: {model}', text, flags=re.MULTILINE)
+                text = re.sub(r'^effort: .*$', f'effort: {effort}', text, flags=re.MULTILINE)
+            else:
+                text = re.sub(r'^model: .*$', f'model: {model}[effort={effort}]', text, flags=re.MULTILINE)
+        result[f".{client}/agents/{filename}"] = text.encode()
     return result
 
 
@@ -169,7 +187,7 @@ class ProjectSkillPortabilityChecks(unittest.TestCase):
                     original = tomllib.loads((ROOT / "templates/codex/agents" / filename).read_text())
                     for key in original.keys() - {"developer_instructions"}:
                         self.assertEqual(role[key], original[key], (filename, key))
-                    role_routes = re.findall(r"[\w./-]*standards/[\w/-]+\.md", str(role["developer_instructions"]))
+                    role_routes = re.findall(r"[\w./-]*templates/agents/[\w/-]+\.md", str(role["developer_instructions"]))
                     self.assertTrue(role_routes, filename)
                     for route in role_routes:
                         self.assertIn(route, candidate, filename)

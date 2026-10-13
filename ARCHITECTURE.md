@@ -61,7 +61,11 @@ The following components describe an adopted target workspace.
 In this repository, `standards/` contains the target rules and `templates/`
 contains inactive templates. The schema-v2 routing template illustrates the
 coordinator, implementer and optional disabled architect/reviewer; other roles use the same
-documented contract. Native role examples remain limited to Codex. A Markdown link
+documented contract. [Shared role bodies](templates/agents/README.md) supply the
+architect, implementer and reviewer procedures; Codex, Claude Code and Cursor have
+thin native adapters that explicitly read the matching local body. Models, effort
+and native restrictions stay client-specific. Template syntax and route tests do
+not establish client activation or runtime enforcement. A Markdown link
 does not mean the client has read a file; an instruction route or selected skill
 must direct it to the relevant resource.
 

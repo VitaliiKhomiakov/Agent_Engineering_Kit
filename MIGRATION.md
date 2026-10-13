@@ -190,7 +190,8 @@ links, code-span paths, TOML developer instructions and native imports separatel
 | Model setup/reassignment skills | `../../../standards/model-configuration.md` remains relative to each inactive skill folder. | For Codex `.agents/skills/<skill>/SKILL.md`, use `../../../.agents-framework/standards/model-configuration.md` for the contained layout, or the reconciled flat route. |
 | Project task skills | `../../../standards/project-skills.md` resolves inside each source or inactive bundle template. | Rebase from each native folder to the actual guide; contained Codex uses `../../../.agents-framework/standards/project-skills.md`. Keep operational references local. |
 | Integration skill | Source-relative discovery requires both source procedure and catalog. | Resolve the full source through the request/provenance, independently of the inactive or native skill folder. Source unavailability blocks dependent import/update work, not ordinary work using reachable local rules. |
-| Native role examples | Developer-instruction paths describe the intended target instruction root, not the TOML folder. | Adapt their bundle prefix from the supplied instruction root; retain native configuration and model values unless separately authorized. |
+| Native role adapters | Body paths in TOML instructions or Markdown code spans describe the intended target instruction root, not the native file's folder. | Adapt `.agents-framework/templates/agents/<role>.md` to the actual bundle prefix; preserve selected native settings. Supply the exact root and body location to the worker. |
+| Shared role bodies | `templates/agents/<role>.md` holds the common procedure; policy links resolve from that body. | Retain the body inside the bundle, outside native discovery, with reachable relative policy links. The adapter explicitly reads it; a link does not perform native inclusion. |
 | Claude bridge and Cursor route | Inactive examples only; an `@` import is not a Markdown link. | Root `CLAUDE.md` may keep `@AGENTS.md`; verify that root entry separately. Fill the Cursor rule's instructions from its real location and selected native contract. |
 
 Adapt planning-policy code-span routes as well as links. An inactive copy of
@@ -343,6 +344,30 @@ For an existing configured project, preserve saved choices; a newly available
 role template is not a request to enable it. Explicitly adding a role follows
 setup/reassignment for its pair, incoming edge and affected managed native files.
 Keep unselected examples inactive in the bundle, outside native agent discovery.
+
+The [composition guide](templates/agents/README.md) supplies architect, implementer
+and reviewer adapters for all three clients. Prepare only the selected client's
+enabled native definitions and their required local bodies. Shared bodies are
+managed adoption content, not new roles or model assignments. Single-agent mode
+installs no active specialist, and disabled specialists remain inactive.
+
+When replacing an embedded Codex procedure, compare its last accepted version,
+current local contents, and proposed adapter/body. Preserve accepted project
+differences in the adapted common body; reconcile conflicts before replacing
+owned content. Inspect duplicate definitions in the client's native and compatibility
+directories. An `af-` name alone does not prove ownership. A shared-body update
+affects every adapter referencing it even if adapter bytes are unchanged: include
+that behavioral change and local exceptions in the preview and accepted contents.
+
+Prepare outside the target without activating roles. For authorized application,
+preserve original bodies/adapters or their absence, reconcile intervening edits,
+and make each required body available before switching its adapter. Validate routes
+from the actual instruction root and preserve body-relative policy links. Missing
+or unreadable bodies block dependent role work; do not silently embed an alternative.
+On interruption, report partial application and repair only task-owned changes
+under the existing recovery procedure. Do not claim configured agreement or loading
+until the relevant checks pass. Repeated unchanged adoption preserves local choices
+without duplicate native definitions or an automatic reload.
 
 | Situation | Integration action and outcome |
 | --- | --- |

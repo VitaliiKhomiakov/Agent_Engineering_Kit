@@ -56,6 +56,16 @@ id = "model-configuration"
 source = "standards/model-configuration.md"
 resources = [
   "templates/framework/model-routing.toml",
+  "templates/agents/README.md",
+  "templates/agents/architect.md",
+  "templates/agents/implementer.md",
+  "templates/agents/reviewer.md",
+  "templates/claude/agents/af-architect.md",
+  "templates/claude/agents/af-implementer.md",
+  "templates/claude/agents/af-reviewer.md",
+  "templates/cursor/agents/af-architect.md",
+  "templates/cursor/agents/af-implementer.md",
+  "templates/cursor/agents/af-reviewer.md",
   "templates/codex/README.md",
   "templates/codex/config.toml",
   "templates/codex/agents/af-architect.toml",

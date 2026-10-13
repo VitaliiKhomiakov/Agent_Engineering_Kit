@@ -21,7 +21,7 @@ not trigger setup merely because configuration is absent.
 | [af-reviewer.toml](agents/af-reviewer.toml) | `.codex/agents/af-reviewer.toml` | Independent review when justified |
 
 Native destinations remain relative to the target instruction root. The examples'
-developer-instruction paths use `.agents-framework/standards/...` from that root;
+developer-instruction paths use `.agents-framework/templates/agents/...` from that root;
 adapt this prefix for a recorded flat/custom bundle, not from the TOML directory
 or current cwd. Inactive copies stay under the bundle's `templates/codex/` and
 do not activate roles. Parse installed TOML and inspect these path literals
@@ -38,7 +38,8 @@ its presence among these templates does not enable it. Other roles are optional.
 ## Role instructions and selection
 
 The role's `description` identifies when it is useful; `developer_instructions`
-defines its scope and return contract. Pass the task-specific handoff separately
+explicitly loads its [shared role body](../agents/README.md), which owns the
+procedure and return contract for all three clients. Pass the task-specific handoff separately
 under [orchestration](../../standards/orchestration.md#delegation-contract).
 
 | Selected role | Task and return boundary |
@@ -115,3 +116,7 @@ Role instructions and the read-only defaults were source-reviewed on 2026-10-12;
 see the optional [design evidence](../../docs/research/2026-10-12-specialized-agent-instructions.md)
 for recommendations, their application and untested runtime limits. The earlier
 configuration check above retains its original date and scope.
+
+On 2026-10-13 the procedures were extracted into shared bodies and the Codex files
+became thin adapters. See the optional [composition evidence](../../docs/research/2026-10-13-portable-agent-roles.md)
+for source/static checks and runtime limits; earlier evidence does not test this revision.

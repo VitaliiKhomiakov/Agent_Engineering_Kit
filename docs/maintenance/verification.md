@@ -17,6 +17,7 @@ python3 -m unittest discover -s tests -p 'test_instruction_artifacts.py'
 python3 -m unittest discover -s tests -p 'test_profile_selection.py'
 python3 -m unittest discover -s tests -p 'test_project_skill_adoption.py'
 python3 -m unittest discover -s tests -p 'test_project_skill_portability.py'
+python3 -m unittest discover -s tests -p 'test_agent_templates.py'
 python3 -m unittest discover -s tests -p 'test_model_routing.py'
 git diff --check
 ```
@@ -163,12 +164,22 @@ Claude import and Codex role references. They preserve fixed local sentinels and
 check write-free preparation and identical repeated candidates. These are syntax
 and file-state observations, not client activation or an automated update engine.
 
+Agent-template tests cover the three shared role bodies and Codex/Claude/Cursor
+adapters, catalog closure, body/policy routes in contained/flat/custom bundles,
+missing/wrong/stale routes, selected-pair fixtures, disabled/single-agent choices
+and write-free repeated preparation. The Markdown adapter helper accepts only the
+templates' small unquoted scalar frontmatter subset; it rejects unsupported syntax
+and is neither a general YAML parser nor native schema validation. Codex uses
+`tomllib`. These tests do not prove semantic instruction following, client loading,
+effective permissions or actual model execution. Review role-body parity separately.
+The offline model-routing checker below remains Codex-only.
+
 When modifying the checker or tests, run their focused unittest suites and the
 [strict Python analyzer](../../standards/python/typing-contracts.md#strict-static-contracts).
 The checked analyzer baseline is mypy 2.1.0, installed outside the repository:
 
 ```sh
-python -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --explicit-package-bases --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tools/check_model_routing.py tests/test_instruction_artifacts.py tests/test_model_routing.py tests/test_profile_selection.py tests/test_project_skill_adoption.py tests/test_project_skill_portability.py
+python -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --explicit-package-bases --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tools/check_model_routing.py tests/test_instruction_artifacts.py tests/test_model_routing.py tests/test_profile_selection.py tests/test_project_skill_adoption.py tests/test_project_skill_portability.py tests/test_agent_templates.py
 ```
 
 ## Offline model-routing agreement

@@ -215,6 +215,16 @@ schema and effective permissions before using them. For a capability question,
 consult the dated [client comparison](../docs/research/2026-10-04-orchestration-capabilities.md);
 it is optional source evidence, not a required imported resource or runtime proof.
 
+## Shared role loading
+
+The [shared role composition](../templates/agents/README.md) supplies one body per
+specialization and native adapters for all three clients. Before dependent work,
+the selected adapter explicitly loads its matching local body; a path alone is
+not native inclusion. Adapt instruction-root-relative body paths for the recorded
+bundle, and supply the exact root/body location in the handoff. Shared policy links
+resolve from the body. Missing required contents block that role's dependent work.
+Source MIGRATION owns adoption/update and preservation of local role customizations.
+
 ## Mapping to native Codex files
 
 Use [the inactive native templates](../templates/codex/README.md), checking their
@@ -244,6 +254,12 @@ invent parameters or claim a file changed an already running thread.
 
 ## Mapping to native Claude Code files
 
+Use the inactive [architect](../templates/claude/agents/af-architect.md),
+[implementer](../templates/claude/agents/af-implementer.md) and
+[reviewer](../templates/claude/agents/af-reviewer.md) adapters with their shared bodies.
+Architect/reviewer examples allow only local read/search tools; the implementer
+inherits the session's tools and permissions. Verify effective controls at setup.
+
 Use `.claude/agents/af-<role>.md` for enabled specialists, with supported `model`
 and `effort` YAML fields and Markdown instructions. Select the main-session pair
 through the installed version's supported settings or native controls. Codex keys
@@ -257,6 +273,12 @@ files. Preserve custom metadata, instructions and unrelated settings. The
 version-specific observations, not universal installation or runtime support.
 
 ## Mapping to native Cursor files
+
+Use the inactive [architect](../templates/cursor/agents/af-architect.md),
+[implementer](../templates/cursor/agents/af-implementer.md) and
+[reviewer](../templates/cursor/agents/af-reviewer.md) adapters with their shared bodies.
+Architect/reviewer examples set `readonly`; model selector examples are suggestions,
+not availability or execution evidence. Verify account/admin overrides as well.
 
 Use the installed client's supported `.cursor/agents/af-<role>.md` format for
 selected specialists. Check how its selector represents the chosen model/effort
