@@ -41,6 +41,60 @@ See [toolchain selection](https://go.dev/doc/toolchain) and
   or domain boundary when business behavior needs one; a small tool does not
   need a mandatory layered directory tree.
 
+## Business modules and internal layers
+
+For applications with substantial business functionality, prefer organizing code
+by cohesive business capability, with internal layers or adapter packages where
+their responsibilities warrant separation. This is an engineering default, not
+a Go requirement or a fixed directory template. Preserve an established project
+structure unless the task authorizes changing it.
+
+- Choose module boundaries from related operations, rules, and data ownership.
+  An entity or database table does not automatically define a module; ordering,
+  for example, may own orders, line items, and cancellation rules together.
+  A business module here is a group of responsibilities/packages, not necessarily
+  a separate `go.mod`, repository, process, or microservice. Full DDD is optional.
+- Within a complex module, distinguish domain rules, application use cases,
+  transport adapters, and persistence/integration adapters. Apply the
+  [shared responsibility rules](../core.md#responsibilities-and-data); separate
+  packages only where these roles need distinct dependency or access boundaries.
+  A simpler module can retain a few cohesive files without matching its peers'
+  directory tree.
+- Let additional nesting express a real boundary, such as another transport,
+  storage implementation, or independently owned business capability. File count
+  alone is not a reason for a package per operation, entity, DTO, or interface.
+  There is no required nesting depth or prescribed set of directory names.
+- Keep business behavior independent of transport packages and concrete storage
+  implementations where those boundaries are introduced. Adapters implement the
+  needed contracts; entry-point assembly connects concrete dependencies.
+  Other modules use the intended business API rather than another module's
+  storage implementation. Avoid a universal service that coordinates every domain.
+- Review imports as well as directory placement. Directory nesting does not make
+  one Go package private to another; a top-level `internal` does not isolate
+  sibling business modules from each other. Choose explicit APIs and allowed
+  dependencies, and avoid import cycles.
+- Keep shared technical facilities, such as connection setup and observability,
+  free of module-specific business rules. Queries, policies, and adapters for a
+  business capability stay with that capability unless actual shared ownership
+  justifies extraction.
+
+## Boundary models and DTO placement
+
+Apply [shared model separation](../core.md#responsibilities-and-data) and
+[Go domain contracts](contracts.md#domain-rules-and-boundary-validation).
+Placement follows the contract's owner:
+
+- Transport request/response DTOs and their conversions belong to the relevant
+  module's transport adapter; avoid a project-wide DTO package by default.
+- Use-case inputs/results belong with the application operation. Domain types
+  belong with their rules. Storage-specific records and mappings belong with the
+  persistence adapter, when a separate representation is needed.
+- Split representations when meaning, lifecycle, exposure, or dependencies
+  differ. Do not generate identical models and mappers merely to cross folders,
+  or require a dedicated DTO subpackage when local files suffice.
+- Keep tests near the package or operation they cover; use a separate integration
+  test area only when its scope or fixtures justify it.
+
 ## Patterns in Go
 
 Apply the common selection criteria. These are available forms, not a checklist
@@ -73,3 +127,9 @@ inform this policy; they do not mandate a pattern-based architecture.
 - [Effective Go](https://go.dev/doc/effective_go) demonstrates Go approaches to
   construction and interfaces, including function adapters. It is historical
   guidance; consult current specifications and release notes for newer features.
+
+The business-module recommendation is local policy informed by source review on
+2026-10-13 of [Ardan Labs packaging](https://www.ardanlabs.com/blog/2017/02/design-philosophy-on-packaging.html)
+and [Grafana's package guidance](https://github.com/grafana/grafana/blob/main/contribute/backend/package-hierarchy.md).
+These are architectural references, not mandatory layouts or executed runtime
+checks. Their company-specific conventions need not be adopted together.

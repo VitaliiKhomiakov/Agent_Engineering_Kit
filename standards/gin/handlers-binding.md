@@ -6,6 +6,12 @@ contract; defaults below allow a concrete project exception.
 
 ## Transport and application boundary
 
+Use the [Go business-module recommendation](../go/architecture.md#business-modules-and-internal-layers)
+for application structure and [DTO placement](../go/architecture.md#boundary-models-and-dto-placement).
+For a substantial module, its Gin routes, handlers, request/response DTOs, and
+HTTP mappings can form a cohesive transport package. Route groups organize URL
+prefixes and middleware; they need not mirror business-module or directory nesting.
+
 - A handler translates HTTP input into a typed operation, calls application
   behavior, and maps the outcome. Use a closure or a cohesive handler struct
   with explicit dependencies; a base controller, DI container, or interface per

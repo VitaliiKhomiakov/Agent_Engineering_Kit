@@ -18,6 +18,7 @@ project's supported Go/Gin versions and actual runtime contract.
 
 | Task touches | Read |
 | --- | --- |
+| Business-module layout, internal layers, package nesting, DTO placement | [Go architecture](go/architecture.md#business-modules-and-internal-layers) and [HTTP boundaries](gin/handlers-binding.md#transport-and-application-boundary) |
 | Gin handlers, request sources, binding, response/error contracts | [Handlers and binding](gin/handlers-binding.md) |
 | Gin route assembly, middleware order, authentication gates, recovery | [Routing and middleware](gin/routing-middleware.md) |
 | Gin request lifetime, background work, server shutdown, proxies, uploads | [Runtime and exposed boundaries](gin/runtime.md) |

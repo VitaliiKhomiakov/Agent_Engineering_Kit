@@ -25,7 +25,7 @@ requires them. Detailed guidance applies when its stated condition is met.
 | Task touches | Read |
 | --- | --- |
 | Formatting, imports, naming, comments, readable Go flow | [Formatting and readability](go/style.md) |
-| Packages, dependency direction, construction, patterns, modules/toolchains | [Architecture and patterns](go/architecture.md) |
+| Business-module layout, package nesting, DTO placement, dependencies, construction, patterns, modules/toolchains | [Architecture and patterns](go/architecture.md) |
 | Public types, domain state, validation, receivers, errors | [Types and contracts](go/contracts.md) |
 | Goroutines, channels, shared state, cancellation, shutdown | [Concurrency](go/concurrency.md) |
 | SQL, transactions, HTTP clients/servers, resource lifetime | [External resources](go/resources.md) |
