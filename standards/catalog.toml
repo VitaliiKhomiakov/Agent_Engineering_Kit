@@ -215,6 +215,7 @@ dependencies = ["go", "gin"]
 id = "go"
 source = "standards/go.md"
 resources = [
+  "standards/go/style.md",
   "standards/go/architecture.md",
   "standards/go/contracts.md",
   "standards/go/concurrency.md",
@@ -223,6 +224,7 @@ resources = [
   "standards/go/examples/domain.md",
   "standards/go/examples/dependencies.md",
   "standards/go/examples/concurrency.md",
+  "standards/go/examples/style-tooling.md",
 ]
 technologies = ["go"]
 activities = ["design", "implementation", "test", "review"]

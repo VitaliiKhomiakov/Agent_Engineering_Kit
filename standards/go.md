@@ -12,8 +12,8 @@ Gin has its own profile and is selected only where used.
   type when sufficient; introduce an interface or pattern for a present need.
 - Preserve typed contracts, domain invariants, error behavior, and resource
   lifetimes. Changes to those concerns trigger the relevant detailed section.
-- Format changed Go code with `gofmt` and follow the shared
-  [verification policy](verification.md) for proportionate checks.
+- Follow [Go formatting and readability](go/style.md) for changed code and the
+  shared [verification policy](verification.md) for proportionate checks.
 
 General SOLID, DRY, KISS, YAGNI, and pattern criteria remain in the common rules.
 Requirements protect affected contracts/resources; defaults may change for a
@@ -24,11 +24,12 @@ requires them. Detailed guidance applies when its stated condition is met.
 
 | Task touches | Read |
 | --- | --- |
+| Formatting, imports, naming, comments, readable Go flow | [Formatting and readability](go/style.md) |
 | Packages, dependency direction, construction, patterns, modules/toolchains | [Architecture and patterns](go/architecture.md) |
 | Public types, domain state, validation, receivers, errors | [Types and contracts](go/contracts.md) |
 | Goroutines, channels, shared state, cancellation, shutdown | [Concurrency](go/concurrency.md) |
 | SQL, transactions, HTTP clients/servers, resource lifetime | [External resources](go/resources.md) |
-| Choosing Go checks, security boundaries, measured performance | [Verification](go/verification.md) |
+| Choosing Go checks, formatter/linter adoption, security boundaries, measured performance | [Verification](go/verification.md) |
 
 Availability in a bundle does not imply mandatory reading. Stop once the task
 requirements are known; follow examples only to resolve a current decision.
