@@ -9,6 +9,9 @@ Deliver a reviewable preparation or the authorized import/update. Use the source
 framework's `MIGRATION.md` as the procedure owner; preserve the selected stage
 checkpoints. This is an instruction-only entry, with no installer; full integration
 includes the procedure's required model-selection step through the existing model skills.
+Read this entry and the model skills from the identified source by default; their
+use does not install them in the target. Source `MIGRATION.md`, "Setup procedures
+and persistent skills", owns explicit installation choices and existing-copy handling.
 
 ## Resolve the source and target
 
@@ -36,7 +39,7 @@ by their headings; follow further references only for the requested operation.
 | --- | --- |
 | Any import/preparation | MIGRATION: Import inputs and boundaries; Prepare and apply; Execution rule for the migration |
 | New/existing target and conflict inventory | MIGRATION: New and existing projects; Phase 1; Resolving active conflicts; relevant Phase 2 profile choices |
-| Bundle and target entries | MIGRATION: Layout and path contract; `standards/catalog.md`, selected catalog profiles and relevant Phase 3 instruction restructuring |
+| Bundle and target entries | MIGRATION: Setup procedures and persistent skills; Layout and path contract; `standards/catalog.md`, selected catalog profiles and relevant Phase 3 instruction restructuring |
 | Selected project task skills | MIGRATION: Optional project task skills; Adapting installation routes; selected templates and native mappings in the adoption record |
 | Model selection/reuse | MIGRATION: Model-selection step; `aek-model-setup` or `aek-model-reassign` as selected there; source `standards/model-configuration.md` owns actual settings |
 | Proposed/applied record | MIGRATION: Adoption record and ownership; `templates/framework/adoption-record.md` |

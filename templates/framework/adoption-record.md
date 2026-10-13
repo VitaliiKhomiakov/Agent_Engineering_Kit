@@ -18,6 +18,7 @@ and managed scope; the canonical adoption task owns decisions and progress.
 - Candidate source: `<accessible location + revision or selected-content manifest>`
 - Candidate profiles and layout: `<IDs, target routes and any adapted locations>`
 - Selected native task skills: `<names or none; mapping below; bundle availability is separate>`
+- Integration/model procedure access: `<identified source paths by default; record any explicitly requested persistent native exceptions in managed paths>`
 - Policy configuration: `<defaults/contract content identity or legacy absence; optional project override path and owned scope, if present; no duplicate values>`
 - Model-selection outcome: `<checked/reused | configured | explicitly deferred | unresolved; canonical decision and existing routing/native owner references, with scope/activation limits; no duplicate assignments>`
 - Last accepted import: `<source identity, selection/layout and snapshot/manifest reference; none on first import>`

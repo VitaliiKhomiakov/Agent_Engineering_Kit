@@ -99,7 +99,7 @@ workspace/
     adoption.md                     # Import provenance; not task progress or model choices
     policy.toml                     # Optional sparse overrides; not copied by default
     accepted/                       # Immutable accepted contents under recorded names
-  .agents/skills/                   # Codex procedures when selected
+  .agents/skills/                   # Explicitly selected persistent Codex skills only
   .codex/
     config.toml                     # Native Codex settings when used
     agents/
@@ -337,9 +337,9 @@ instruction-only templates; native installation is a separate adoption step:
 
 | Name | Narrow trigger | Status and resources |
 | --- | --- | --- |
-| `aek-model-setup` | Full integration's model-selection step, explicit setup or missing choices required by authorized delegation | Existing [template](templates/skills/aek-model-setup/SKILL.md); absence of a record alone does not trigger it |
+| `aek-model-setup` | Full integration's model-selection step, explicit setup or missing choices required by authorized delegation | Read the [template](templates/skills/aek-model-setup/SKILL.md) from source during integration; no default native installation; absence of a record alone does not trigger it |
 | `aek-model-reassign` | Explicit change to saved client, roles, pairs or delegation choices | Existing [template](templates/skills/aek-model-reassign/SKILL.md); not installed automatically |
-| `aek-integrate-project` | Explicit framework preparation/import/update request | Existing [template](templates/skills/aek-integrate-project/SKILL.md); routes to MIGRATION; ordinary coding or missing files do not trigger it |
+| `aek-integrate-project` | Explicit framework preparation/import/update request | Read the [template](templates/skills/aek-integrate-project/SKILL.md) from source; no default native installation; routes to MIGRATION; ordinary coding or missing files do not trigger it |
 | `aek-design-feature` | Designing a capability or material architecture/public-contract change with adopted AEK rules | Optional `project-workflows` [contract](standards/project-skills.md) and [template](templates/skills/aek-design-feature/SKILL.md); source availability is separate from native installation/use |
 | `aek-review-changes` | Requested or applicable completion review of changed code/contracts | Optional `project-workflows` [template](templates/skills/aek-review-changes/SKILL.md); located findings and coverage limits under the existing review policy |
 

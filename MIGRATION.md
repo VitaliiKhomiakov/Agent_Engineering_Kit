@@ -55,9 +55,10 @@ explicit framework preparation/import/update request. General audits, ordinary
 coding and missing instruction/model files alone do not trigger it. The skill
 routes into this document; it replaces the former conceptual migration entry.
 
-Before installation, the agent can read the template from an accessible framework
-source named in the request. No global installation is needed. For an authorized
-Codex project installation, the proposed layout is
+Read the template directly from the accessible framework source named in the
+request or adoption record. This is the default for preparation, import and
+updates; neither project-local nor global installation is needed. Only when the
+user explicitly requests a persistent Codex project installation, use
 `.agents/skills/aek-integrate-project/SKILL.md`; verify discovery in the actual
 client/version separately. Other clients require a verified native skill mapping;
 until then source-based reading is available without claiming native discovery.
@@ -72,6 +73,33 @@ alone is not a self-contained copy of the migration library. Resolve source-rela
 references there and target-relative references against the named target root.
 Adapt entry routes to the actual installed skill or accessible source location;
 check independent repository opening and any selected role's reachable route.
+
+### Setup procedures and persistent skills
+
+Integration installs the selected rules and configuration, not the procedures
+used to prepare them. Apply these defaults independently of catalog availability:
+
+| Procedure | Default use | Persistent project installation |
+| --- | --- | --- |
+| `aek-integrate-project` | Read from the identified AEK source for import/update | Only on explicit request |
+| `aek-model-setup` | Read from that source during integration's model-selection step | Only on explicit request |
+| `aek-model-reassign` | Read from the source for a requested later change; the reachable adopted model contract remains a fallback | Only on explicit request |
+| `aek-design-feature`, `aek-review-changes` | Optional ongoing project work | Only the explicitly selected entries under the project-task route below |
+
+Do not create `.agents/skills` or an empty `.agents` directory for setup alone.
+Create native skill directories only for explicitly selected persistent entries;
+preserve any existing directories and unrelated skills. Required inactive catalog
+templates remain in the bundle without becoming active installations. Root entries
+route integration to the accessible source by default; the adoption record retains
+source identity for future updates. Ordinary project work uses the adopted local
+rules without requiring the source checkout.
+
+On updates, do not automatically delete existing integration/setup skills or
+recreate deliberately absent ones. Preview retention or retirement of managed
+copies and affected entry routes under [repeat and update](#repeat-and-update),
+comparing accepted contents with local edits. Preserve unowned entries; an explicit
+persistent installation remains supported. Changing this source policy does not
+modify already adopted projects.
 
 ### Skill names and existing installations
 
@@ -158,6 +186,8 @@ agreed locations. Create the target entry from a template; never export the sour
 library's maintenance `AGENTS.md`. Keep the canonical task store where it is.
 Native settings, active roles and skills remain in the selected client's supported
 directories; the bundle directory does not replace native discovery locations.
+Skill-directory creation follows [the persistent-skill selection](#setup-procedures-and-persistent-skills);
+model configuration can create native settings/roles without installing setup skills.
 
 | Path category | Resolution base |
 | --- | --- |
@@ -187,7 +217,7 @@ links, code-span paths, TOML developer instructions and native imports separatel
 | --- | --- | --- |
 | `AGENTS.root.md`, `policy-entry.md`, `PLANS.md` | Source templates describe root-installed paths; the source checker maps their `.agents-framework/` prefix virtually. When retained inactive in a target bundle, rebase Markdown links to their containing file; there is no virtual target mapping. | Resolve from the actual root entry, using `.agents-framework/standards/...` and `.agents-framework/templates/...` by default. A nested or alternate entry needs its own base. |
 | Task template and helper routes | Retain source-relative links inside the inactive bundle. | Rebase to the installed `PLANS.md` and bundle from the existing canonical task location; a plan at `docs/plans/` usually needs `../../`. Native stores can differ. |
-| Model setup/reassignment skills | `../../../standards/model-configuration.md` remains relative to each inactive skill folder. | For Codex `.agents/skills/<skill>/SKILL.md`, use `../../../.agents-framework/standards/model-configuration.md` for the contained layout, or the reconciled flat route. |
+| Model setup/reassignment skills | `../../../standards/model-configuration.md` remains relative to each inactive skill folder; read from source during integration. | Only for explicitly requested persistent installation: at Codex `.agents/skills/<skill>/SKILL.md`, use `../../../.agents-framework/standards/model-configuration.md` for the contained layout, or the reconciled flat route. |
 | Project task skills | `../../../standards/project-skills.md` resolves inside each source or inactive bundle template. | Rebase from each native folder to the actual guide; contained Codex uses `../../../.agents-framework/standards/project-skills.md`. Keep operational references local. |
 | Integration skill | Source-relative discovery requires both source procedure and catalog. | Resolve the full source through the request/provenance, independently of the inactive or native skill folder. Source unavailability blocks dependent import/update work, not ordinary work using reachable local rules. |
 | Native role adapters | Body paths in TOML instructions or Markdown code spans describe the intended target instruction root, not the native file's folder. | Adapt `.agents-framework/templates/agents/<role>.md` to the actual bundle prefix; preserve selected native settings. Supply the exact root and body location to the worker. |
@@ -332,6 +362,9 @@ second progress record for a target import.
 
 Every full integration accounts for the selected client and model choices through
 `aek-model-setup` ([inactive source template](templates/skills/aek-model-setup/SKILL.md)).
+Read it from the identified source; completing this step does not require installing
+the setup or reassignment skill in the target. Apply the
+[persistent-skill selection](#setup-procedures-and-persistent-skills).
 Pass the adoption intent, preparation/application mode, prior choices, actual
 source/target roots and authorized write scope. This is a required decision step,
 not mandatory delegation, template-default assignment or permission to change a
@@ -693,9 +726,10 @@ The integration entry is the inactive
 [aek-integrate-project template](templates/skills/aek-integrate-project/SKILL.md).
 Two separate instruction-only model skills also exist:
 [aek-model-setup](templates/skills/aek-model-setup/SKILL.md) and
-[aek-model-reassign](templates/skills/aek-model-reassign/SKILL.md). Install only the
-procedures the target workspace needs; copying a template or its unconfigured
-example is not consent to model assignments. The optional design and review
+[aek-model-reassign](templates/skills/aek-model-reassign/SKILL.md). Use these from
+source under [the persistent-skill selection](#setup-procedures-and-persistent-skills);
+integration alone does not select native installation. Copying a template or its
+unconfigured example is not consent to model assignments. The optional design and review
 entries use the [project-task adoption route](#optional-project-task-skills).
 The former conceptual names `aek-design-change` and `aek-deliver-phase` are not
 additional templates or native aliases; their responsibilities are covered by

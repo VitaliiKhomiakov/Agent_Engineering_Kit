@@ -36,6 +36,9 @@ Select only the technologies your project uses; available profiles are listed in
 
 The agent selects the relevant rules, adapts project instructions, checks the
 adopted references, and records the import. No package or global skill installation
-is required. Keep the library source accessible for future updates.
+is required. Integration and model-setup skills run from the library source by
+default; they are not installed in the target's `.agents/skills`. That directory
+is created only for explicitly selected persistent skills, such as the optional
+design/review entries. Keep the library source accessible for future updates.
 
 See [MIGRATION.md](MIGRATION.md) for the full procedure, updates, and recovery.

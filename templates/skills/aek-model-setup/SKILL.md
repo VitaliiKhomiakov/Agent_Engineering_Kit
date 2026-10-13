@@ -12,8 +12,11 @@ Agent_Engineering_Kit workspace layout, not a standalone global installer.
 
 Read the [model setup contract](../../../standards/model-configuration.md) for
 first-use behavior, persistence, native target mapping, and execution limits.
-That link is relative to this inactive source/bundle template. Before native
-installation, rebase it to the adopted contract: at Codex
+That link is relative to this inactive source/bundle template. During integration,
+read this skill from the identified AEK source without installing it in the target.
+Source `MIGRATION.md`, "Setup procedures and persistent skills", owns installation
+selection. Only for an explicitly requested persistent native installation,
+rebase the link to the adopted contract: at Codex
 `.agents/skills/aek-model-setup/SKILL.md`, the default contained route is
 `../../../.agents-framework/standards/model-configuration.md`. Use the recorded
 bundle for a flat or custom layout; resolve independently of the process cwd.

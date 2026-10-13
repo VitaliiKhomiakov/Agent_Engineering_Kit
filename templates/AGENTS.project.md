@@ -22,6 +22,7 @@ provenance route below; a link to an undiscovered parent is insufficient.
   and accepted exception decisions; retain their applicable operational constraints here.
 - Explicit framework import/update/preparation: `aek-integrate-project` at
   `<reachable installed or source skill path>`; only then read adoption provenance.
+  Use the source path by default; an installed path requires explicit persistent selection.
   Recovery also reads the record; ordinary coding and missing files do not trigger import.
 
 Do not introduce a conflicting verification, typing, model, or Git-workflow policy.

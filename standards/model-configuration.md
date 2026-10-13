@@ -23,7 +23,10 @@ its sample model IDs are suggestions, not assignments or evidence of availabilit
 
 The routing record and native destinations below resolve from the target
 instruction root regardless of the bundle location. Relative links to inactive
-templates resolve from this document. Before installing skills or native role
+templates resolve from this document. Source `MIGRATION.md`, "Setup procedures
+and persistent skills", owns source-based setup and explicit persistent skill
+selection; configuring models does not require native setup/reassignment skills.
+Before installing explicitly selected skills or native role
 instructions, adapt their routes to the actual bundle and destination; source
 `MIGRATION.md`, "Adapting installation routes", owns that path contract. Moving
 inactive resources neither moves native configuration nor changes assignments.
