@@ -3,6 +3,8 @@
 Read when changing routes/controllers, request mapping, DTO constraints, forms,
 serialization, public errors, or authorization. [PHP contracts](../php/types-contracts.md)
 own native typing/coercion; framework mapping and validation have additional rules.
+For choosing or naming a Serializer extension versus an independent transformation,
+read [Serializer roles and application transformations](structure-services.md#serializer-roles-and-application-transformations).
 
 ## Request mapping is an executed boundary
 

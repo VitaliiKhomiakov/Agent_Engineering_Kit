@@ -36,6 +36,61 @@ operation; a command bus, event, decorator, or factory needs a concrete dispatch
 cross-cutting behavior, variation, or construction problem.
 [Controllers](https://symfony.com/doc/7.4/controller.html).
 
+## Serializer roles and application transformations
+
+Before creating or renaming a transformation class, identify its input/output,
+responsibility, and actual caller. Choose the mechanism and name from that role;
+an array, DTO, or method named `normalize()` does not establish participation in
+Symfony Serializer. Apply this decision to HTTP, CLI, messages, and integrations.
+
+| Actual need | Choose |
+| --- | --- |
+| Conversion already supported by Serializer | Existing normalizers, metadata, and context; no custom extension by default |
+| Custom normalized representation within the Serializer path | `NormalizerInterface`: data to arrays/scalars, with the interface's permitted `ArrayObject`/null cases |
+| Custom construction of a requested type within that path | `DenormalizerInterface`: intermediate data to the requested type |
+| Conversion to/from an encoded format | Existing Serializer/encoder capabilities, or an explicitly required serialization contract |
+| Independent payload parsing, DTO mapping, canonicalization, or acceptance decisions | A cohesive application method or class named for that responsibility |
+
+For a custom Symfony normalizer/denormalizer, implement the installed version's
+interface, including its `supports*()` and `getSupportedTypes()` contracts. Register
+it in the actual Serializer path: FrameworkBundle uses `serializer.normalizer`
+tags, often supplied by autoconfiguration; standalone component use supplies the
+instance to Serializer explicitly. Check selection through that path for an
+affected integration; a direct unit call alone does not prove discovery or dispatch.
+[Custom normalizers](https://symfony.com/doc/7.4/serializer/custom_normalizer.html),
+[Serializer](https://symfony.com/doc/7.4/serializer.html).
+
+As a local naming rule in Symfony projects, reserve `*Normalizer` and
+`*Denormalizer` for those Serializer roles, or an explicitly identified equivalent
+contract in another library. Do not use those suffixes for an ordinary application
+processor merely because it cleans up data or returns a DTO. Reserve `*Serializer`
+for actual serialization responsibilities; do not use it for an arbitrary
+array builder, mapper, or business operation. This is an engineering convention
+to prevent ambiguity, not a Symfony prohibition on general normalization terms.
+
+For independent transformations, choose a responsibility-specific name such as
+`PayloadParser`, `ResponseMapper`, or `AddressCanonicalizer` only when that is what
+the component does. An operation that also decides acceptance or recovery needs
+a name expressing that operation, not an automatic `Mapper`/`Validator` replacement.
+A small local transformation can remain a descriptive method; do not create a
+service, generic processor layer, or forwarding Serializer wrapper just to comply
+with a naming pattern. Reuse the injected Serializer directly when sufficient.
+
+Do not add an interface, tag, or Serializer dependency merely to legitimize a
+misleading name. Keep business acceptance/recovery decisions, persistence, and
+external effects with their application owner; a real Serializer adapter may
+delegate to an appropriate conversion collaborator. Representation and type checks
+required by a conversion contract remain valid in that adapter, but do not replace
+the [executed validation boundary](http-validation.md#request-mapping-is-an-executed-boundary).
+When changing an existing class, inspect its callers and behavior before choosing
+a rename or separation; preserve public contracts and keep repairs within scope.
+
+The framework contracts above were source-reviewed against Symfony 7.4 on
+2026-10-13, including
+[NormalizerInterface](https://github.com/symfony/symfony/blob/7.4/src/Symfony/Component/Serializer/Normalizer/NormalizerInterface.php)
+and [DenormalizerInterface](https://github.com/symfony/symfony/blob/7.4/src/Symfony/Component/Serializer/Normalizer/DenormalizerInterface.php).
+This adds no runtime execution evidence or target-version upgrade.
+
 ## Container wiring and lifetime
 
 Use constructor injection and the existing autowiring workflow for services.
