@@ -70,7 +70,7 @@ distinct. PHP's `Throwable` includes `Exception` and `Error`; catch broadly only
 at a boundary with a real cleanup/reporting responsibility, preserving the cause.
 Do not convert a TypeError into successful empty output or invalid user input by
 default. Warnings/false-returning APIs are not automatically exceptions.
-[Exceptions](https://www.php.net/manual/en/language.exceptions.php).
+[Exceptions](https://www.php.net/manual/en/control-structures.try-catch.php).
 
 Map expected failures to safe public responses in the entry adapter; preserve
 appropriate internal diagnostics without payloads, credentials, or database

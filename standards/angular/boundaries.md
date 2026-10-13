@@ -61,7 +61,7 @@ Interceptors handle cross-cutting transport work, not feature state transitions.
 Do not attach credentials to arbitrary third-party hosts or retry every mutation.
 
 For cookie-authenticated mutations, verify both halves of
-[HttpClient XSRF protection](https://angular.dev/best-practices/security#httpclient-xsrfcsrf-security):
+[HttpClient XSRF protection](https://angular.dev/best-practices/security#httpclient-xsrf-csrf-security):
 the backend provisions a JavaScript-readable XSRF token cookie and validates the
 token on protected requests; Angular supplies the corresponding request header.
 Keep the authentication cookie's protection separate from the readable token.

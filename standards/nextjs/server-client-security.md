@@ -72,6 +72,6 @@ explicit verification fixtures, not production authentication or persistence.
 [Server and Client Components](https://nextjs.org/docs/app/getting-started/server-and-client-components),
 [data security](https://nextjs.org/docs/app/guides/data-security),
 [authentication](https://nextjs.org/docs/app/guides/authentication),
-[Server Actions](https://nextjs.org/docs/app/getting-started/updating-data),
+[Server Actions](https://nextjs.org/docs/app/getting-started/mutating-data),
 [cookies](https://nextjs.org/docs/app/api-reference/functions/cookies) and
 [Proxy](https://nextjs.org/docs/app/api-reference/file-conventions/proxy).

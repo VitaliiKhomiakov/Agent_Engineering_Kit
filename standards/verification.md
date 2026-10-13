@@ -234,7 +234,7 @@ Do not expand scope to unrelated cleanup after the completion criteria are met.
 
 Official sources rechecked on 2026-09-17.
 
-[OpenAI's Astra testing guidance](https://developers.openai.com/api/docs/guides/latest-model#testing-and-verification)
+[OpenAI's Astra testing guidance](https://developers.openai.com/api/docs/guides/latest-model#gpt-6-astra-testing-and-verification)
 recommends matching validation to the change and making additional passes
 conditional on changes, failures, or unresolved concerns.
 [OpenAI's skills and prompts guidance](https://learn.chatgpt.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra)

@@ -32,7 +32,7 @@ the original failure if cleanup also fails. Avoid `return` from `finally` or a
 destructor that commits a success-critical effect. Destruction/request shutdown
 is not a dependable application transaction boundary; forced termination may
 prevent ordinary cleanup altogether.
-[Finally semantics](https://www.php.net/manual/en/language.exceptions.php),
+[Finally semantics](https://www.php.net/manual/en/control-structures.finally.php),
 [destructors](https://www.php.net/manual/en/language.oop5.decon.php).
 
 Use bounded/chunked reads when input size warrants them. A lazy generator can

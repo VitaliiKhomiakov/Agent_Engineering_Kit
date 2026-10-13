@@ -592,7 +592,7 @@ application vulnerability is established.
 **Evidence:** `standards/angular/boundaries.md:49–58` covers credentials and server
 authorization but not cookie-based CSRF. The Next.js-specific section already
 discusses it, but Angular does not route through that profile.
-[Angular security](https://angular.dev/best-practices/security#httpclient-xsrfcsrf-security)
+[Angular security](https://angular.dev/best-practices/security#httpclient-xsrf-csrf-security)
 requires backend token provisioning/validation alongside eligible client requests;
 URL/origin eligibility must match the installed version.
 
@@ -986,7 +986,7 @@ catalog, root entry or client configuration changed.
   Node-runner examples and earlier runtime evidence are unchanged.
 - ANG-02: the transport topic now covers the client/server responsibilities and
   version-sensitive request eligibility from the official
-  [Angular XSRF guidance](https://angular.dev/best-practices/security#httpclient-xsrfcsrf-security).
+  [Angular XSRF guidance](https://angular.dev/best-practices/security#httpclient-xsrf-csrf-security).
   It preserves cookie/header configuration, negative server checks and origin
   isolation without imposing cookies on bearer-only APIs.
 
@@ -1037,3 +1037,10 @@ states and item text, 53 unique new IDs and preservation of the adoption note.
 Scoped diff review covered the status, historical checkpoint and authorization
 changes. These results concern this record correction, not a rerun of earlier
 implementation checks.
+
+## Link maintenance — 2026-10-13
+
+Corrected the two Angular XSRF references from the absent fragment
+`#httpclient-xsrfcsrf-security` to the verified `#httpclient-xsrf-csrf-security`
+anchor on the same official security page. Earlier source-review dates, task
+states and runtime evidence remain unchanged; this correction checks navigation only.

@@ -101,7 +101,7 @@ existing server owner. **R:** independent business operations retain current-sta
 and permission rules under core policy. Directory boundaries alone create no trust.
 
 [Authentication](https://nextjs.org/docs/app/guides/authentication) and
-[mutation guidance](https://nextjs.org/docs/app/getting-started/updating-data) support
+[mutation guidance](https://nextjs.org/docs/app/getting-started/mutating-data) support
 **R:** authorize every public mutation against current server identity/resource
 ownership. Layout/Proxy checks improve navigation but do not protect all entry paths.
 Treat Action arguments and bound values as untrusted. Hidden buttons, Action IDs or
@@ -255,3 +255,10 @@ external adapter, native TS 7, Turbopack or benchmark was tested. The file/token
 fixtures demonstrate boundaries, not production infrastructure. Synthetic delivery
 checks establish portable artifacts, not model reading compliance or token savings.
 P3–P7 remain planned; stop for user review before K15 PostgreSQL.
+
+## Link maintenance — 2026-10-13
+
+The former Next.js URL `https://nextjs.org/docs/app/getting-started/updating-data`
+returned HTTP 404. The mutation reference now targets the official Mutating Data
+page, checked on this date. This is a navigation correction; the research and
+executed checks recorded above retain their original dates and scope.

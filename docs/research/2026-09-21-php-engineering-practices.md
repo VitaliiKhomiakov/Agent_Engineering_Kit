@@ -120,7 +120,7 @@ it includes Errors such as TypeError. Preserve causes and safe public mapping,
 without exposing rejected payloads or database details. Warnings/false results
 need their actual API handling. An Option/Result package is optional where the
 existing composition style warrants it; it is not required for one branch.
-[Exceptions](https://www.php.net/manual/en/language.exceptions.php).
+[Exceptions](https://www.php.net/manual/en/control-structures.try-catch.php).
 
 ## State, resources, persistence, and concurrency
 
@@ -226,3 +226,10 @@ matrix. Checks do not prove production performance or cleanup under forced
 termination. The [practice plan](../plans/2026-09-21-engineering-practices.md)
 records exact commands, delivery/portability checks, scoped baseline evidence,
 remaining limits and the human review checkpoint. K07/K08 and P3–P7 remain planned.
+
+## Link maintenance — 2026-10-13
+
+The former PHP manual URL `https://www.php.net/manual/en/language.exceptions.php`
+returned HTTP 404. The Exceptions reference now targets the official `try...catch`
+page, checked on this date. This is a navigation correction; the research and
+executed checks recorded above retain their original dates and scope.

@@ -20,7 +20,7 @@ capabilities, and explicit decisions.
 
 ## Source maintenance
 
-The [repository map](README.md#repository-map) shows the source layout.
+The [repository map](AGENTS.md#repository-map) shows the source layout.
 `tools/check_instruction_artifacts.py` is a read-only, standard-library Python
 checker for catalog resources, supported local links, fences, TOML and policy
 settings. `tests/test_instruction_artifacts.py` exercises it against disposable
