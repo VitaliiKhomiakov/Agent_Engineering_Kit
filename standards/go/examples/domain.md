@@ -41,6 +41,7 @@ func (d *Document) Publish() error {
 	if strings.TrimSpace(d.title) == "" {
 		return ErrEmptyTitle
 	}
+
 	d.status = published
 	return nil
 }

@@ -15,7 +15,8 @@ prefixes and middleware; they need not mirror business-module or directory nesti
 - A handler translates HTTP input into a typed operation, calls application
   behavior, and maps the outcome. Use a closure or a cohesive handler struct
   with explicit dependencies; a base controller, DI container, or interface per
-  handler is unnecessary. Organize related routes around their feature.
+  handler is unnecessary. Organize related routes around their feature. Apply
+  [Go flow and spacing](../go/style.md#readable-flow-and-spacing) within the handler.
 - Keep Gin types and binding tags at the transport boundary. Pass
   `c.Request.Context()` and explicit typed values into application work. Do not
   turn `gin.H`, `map[string]any`, or context keys into an implicit command bus.

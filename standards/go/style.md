@@ -37,11 +37,40 @@ owns the inactive configuration, version pins, and reproduction commands.
 - Handle failures with guard clauses where they make the normal path easy to
   scan. Follow [simple control flow](../core.md#simple-control-flow); no additional
   nesting quota is introduced here.
-- Separate meaningful steps with blank lines and keep closely related statements
-  together. A blank line after every statement obscures those groups.
+- Separate successive meaningful steps inside a function with one blank line.
+  Typical boundaries are input preparation/validation, application or domain
+  work, and output construction. In a Gin handler, visually separate binding
+  and validation, the application call with its error handling, and the success
+  response when those steps are present.
+- Keep an operation and its immediate error/result check together. Short setup
+  used only by that operation belongs in the same group. After the completed
+  group, use a blank line before the next independent step; this includes the
+  transition from a rejecting guard to normal work.
+- Consecutive guards validating the same input may stay together. Do not insert
+  a blank line after every statement or closing brace, or mechanically before
+  every `return`; a return may stay with the operation it completes. Avoid
+  leading/trailing blank lines inside blocks and multiple blank lines between steps.
+- Review this grouping separately from mechanical formatting. Formatter/linter
+  success does not establish that meaningful steps are visually separated.
 - Split unwieldy calls or composite literals, or name a complex predicate, when
   doing so clarifies intent. There is no fixed line-length gate and no automatic
   extraction solely to satisfy a line count. Preserve clear, cohesive code.
+
+For example, this function-body excerpt from the
+[dependency example](examples/dependencies.md) keeps reading and its error check
+together, then separates the transformation that follows:
+
+```go
+text, err := source.ReadText(ctx)
+if err != nil {
+	return "", fmt.Errorf("prepare text: %w", err)
+}
+
+return normalize(text), nil
+```
+
+Use blank lines to expose the steps without adding comments that merely label
+each operation.
 
 ## Comments and errors
 

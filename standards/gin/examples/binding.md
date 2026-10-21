@@ -72,6 +72,7 @@ func Handler(publish Publish) gin.HandlerFunc {
 		if !ok {
 			return
 		}
+
 		if err := publish(c.Request.Context(), command); err != nil {
 			status, code := http.StatusInternalServerError, "internal_error"
 			switch {
@@ -80,9 +81,11 @@ func Handler(publish Publish) gin.HandlerFunc {
 			case errors.Is(err, ErrConflict):
 				status, code = http.StatusConflict, "publication_conflict"
 			}
+
 			c.AbortWithStatusJSON(status, APIError{Code: code})
 			return
 		}
+
 		c.Status(http.StatusNoContent)
 	}
 }
@@ -93,11 +96,13 @@ func bindCommand(c *gin.Context) (PublishCommand, bool) {
 		c.AbortWithStatusJSON(http.StatusBadRequest, APIError{Code: "invalid_path"})
 		return PublishCommand{}, false
 	}
+
 	mediaType, _, err := mime.ParseMediaType(c.GetHeader("Content-Type"))
 	if err != nil || mediaType != "application/json" {
 		c.AbortWithStatusJSON(http.StatusUnsupportedMediaType, APIError{Code: "unsupported_media_type"})
 		return PublishCommand{}, false
 	}
+
 	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 1024)
 	var body publishBody
 	if err := c.ShouldBindWith(&body, singleJSON{}); err != nil {
@@ -106,9 +111,11 @@ func bindCommand(c *gin.Context) (PublishCommand, bool) {
 		if errors.As(err, &tooLarge) {
 			status, code = http.StatusRequestEntityTooLarge, "body_too_large"
 		}
+
 		c.AbortWithStatusJSON(status, APIError{Code: code})
 		return PublishCommand{}, false
 	}
+
 	return PublishCommand{DocumentID: path.ID, Notify: *body.Notify}, true
 }
 
@@ -122,6 +129,7 @@ func (singleJSON) Bind(request *http.Request, value any) error {
 	if err := decoder.Decode(value); err != nil {
 		return err
 	}
+
 	var extra json.RawMessage
 	if err := decoder.Decode(&extra); err != io.EOF {
 		if err == nil {
@@ -129,6 +137,7 @@ func (singleJSON) Bind(request *http.Request, value any) error {
 		}
 		return err
 	}
+
 	return binding.Validator.ValidateStruct(value)
 }
 ```

@@ -171,6 +171,7 @@ func Write(w io.Writer, userID string) error {
 	if _, err := fmt.Fprintf(w, "hello, %s\n", userID); err != nil {
 		return fmt.Errorf("write greeting: %w", err)
 	}
+
 	return nil
 }
 ```
@@ -191,6 +192,7 @@ func TestWrite(t *testing.T) {
 	if err := Write(&output, "  user-42  "); err != nil {
 		t.Fatal(err)
 	}
+
 	if got := output.String(); got != "hello, user-42\n" {
 		t.Fatalf("Write output = %q; want %q", got, "hello, user-42\n")
 	}
@@ -201,6 +203,7 @@ func TestWriteRejectsBlankID(t *testing.T) {
 	if err := Write(&output, "  "); err == nil {
 		t.Fatal("Write accepted a blank ID")
 	}
+
 	if output.Len() != 0 {
 		t.Fatalf("Write produced output for a rejected ID: %q", output.String())
 	}
@@ -216,6 +219,7 @@ func (w failingWriter) Write([]byte) (int, error) {
 
 func TestWritePreservesWriterError(t *testing.T) {
 	want := errors.New("writer unavailable")
+
 	err := Write(failingWriter{err: want}, "user-42")
 	if !errors.Is(err, want) {
 		t.Fatalf("Write error = %v; want wrapped %v", err, want)

@@ -40,6 +40,7 @@ func RequireAccess(allow func(*http.Request) bool) gin.HandlerFunc {
 			c.AbortWithStatusJSON(http.StatusForbidden, APIError{Code: "forbidden"})
 			return
 		}
+
 		c.Next()
 	}
 }
@@ -47,18 +48,22 @@ func RequireAccess(allow func(*http.Request) bool) gin.HandlerFunc {
 func ErrorResponses(report func(context.Context, error)) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Next()
+
 		last := c.Errors.Last()
 		if last == nil {
 			return
 		}
+
 		report(c.Request.Context(), last.Err)
 		if c.Writer.Written() {
 			return
 		}
+
 		status, code := http.StatusInternalServerError, "internal_error"
 		if errors.Is(last.Err, ErrUnavailable) {
 			status, code = http.StatusServiceUnavailable, "service_unavailable"
 		}
+
 		c.AbortWithStatusJSON(status, APIError{Code: code})
 	}
 }

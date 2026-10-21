@@ -31,6 +31,11 @@ Return to the [Go entry](../go.md).
   duplicated style diagnostic one owner while retaining correctness checks.
   Configuration validation and negative probes in the example demonstrate
   enforcement; linters do not replace review of names, contracts, and readability.
+- During the scoped review, inspect changed function bodies against
+  [flow and spacing](style.md#readable-flow-and-spacing), including after
+  formatting. Check that independent steps are visibly separated and operations
+  remain grouped with their immediate checks; a clean tooling result alone
+  does not satisfy this readability criterion.
 
 ## Behavior, security, and performance
 

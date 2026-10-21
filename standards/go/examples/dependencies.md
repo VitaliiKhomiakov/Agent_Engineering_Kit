@@ -26,6 +26,7 @@ func PrepareText(ctx context.Context, source TextSource, normalize func(string) 
 	if err != nil {
 		return "", fmt.Errorf("prepare text: %w", err)
 	}
+
 	return normalize(text), nil
 }
 ```

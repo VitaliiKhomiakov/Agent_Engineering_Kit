@@ -21,6 +21,7 @@ func Forward(ctx context.Context, input <-chan string, output chan<- string) err
 			if !ok {
 				return nil
 			}
+
 			select {
 			case <-ctx.Done():
 				return ctx.Err()
