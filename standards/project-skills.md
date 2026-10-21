@@ -100,6 +100,9 @@ evidence and the uncertainty that remains. Rank material findings by consequence
 keep optional improvements and incidental pre-existing issues distinct.
 
 Include the baseline/scope reviewed, evidence used and important coverage limits.
+Account for binding profile style rules through
+[readability acceptance](verification.md#readability-acceptance) in that same result;
+optional preferences remain distinct from violated requirements.
 If no findings remain, say so for that scope without certifying unexamined code.
 Self-review is not independent review. Put the result in the requested review
 surface or existing task; do not create another plan or editable progress ledger.

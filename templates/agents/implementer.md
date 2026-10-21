@@ -31,11 +31,16 @@ Default: current checkout, no staging, commits, branches, stashes or worktrees;
 specific actions need explicit authorization. Do not cross the user's stage checkpoint.
 Before writing each path, preserve original contents/absence and existing user edits;
 retain the original stage baseline through handoff. Never replace it with modified content.
+Before writing code, apply [responsibility placement](../../standards/core.md#responsibility-placement-before-implementation)
+to the affected behavior, reusing valid ownership decisions and suitable existing owners.
 Keep control flow simple; guards/fallbacks need a concrete rule or plausible failure.
 Preserve validation/invariants. Report unrelated bugs without expanding scope.
 Reuse valid coverage/evidence, add tests for material uncovered behavior, and run required
 gates. Repeat checks only for changed inputs, failures or concrete concerns.
 Name the reason before a repeat; handoff/final reporting alone does not require another run.
+Apply the [readability acceptance check](../../standards/verification.md#readability-acceptance)
+using the relevant profile: inspect final code after formatting, fix in-scope
+violations and include scoped readability evidence separately from tool results.
 Further delegation requires a specific authorized task and the orchestration policy:
 delegated mode, enabled endpoints, saved pairs, an allowed edge, fresh context and capacity.
 For a continued assignment, reconcile changed inputs and current ownership before acting.

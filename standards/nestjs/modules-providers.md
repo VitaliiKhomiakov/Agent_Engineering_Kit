@@ -15,9 +15,10 @@ resource ownership. The [provider example](examples/provider-lifecycle.md) is op
 - Put each independent controller, provider, repository adapter, and module in a
   separate file. Small nested DTOs for one operation may share a DTO file; the
   common cohesion and size criteria still apply.
-- As a service grows, split it into independent use cases or responsibilities.
-  An `OrdersService` containing everything about orders is not cohesive merely
-  because its content shares a noun.
+- Apply [responsibility placement](../core.md#responsibility-placement-before-implementation)
+  before implementing a service: place independent use cases or responsibilities
+  with their owners from the outset. An `OrdersService` containing everything about
+  orders is not cohesive merely because its content shares a noun or is still small.
 - Treat a dependency cycle first as evidence of a misplaced boundary. Do not add
   `forwardRef` or a general global module by default.
 

@@ -130,6 +130,10 @@ Leave successful raw logs/transcripts outside the main context. The coordinator
 checks actual scoped changes and unresolved risks, reusing applicable evidence
 under [verification](verification.md#reuse-evidence-before-repeating-work); a worker's
 return alone triggers neither duplicate discovery nor another test/review cycle.
+Before accepting changed code, apply
+[readability acceptance](verification.md#readability-acceptance): confirm coverage
+of the applicable profile check and resolution of in-scope violations. Obtain
+missing evidence within the existing boundary; formatter success alone is insufficient.
 
 ## Concurrency and isolation
 

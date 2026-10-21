@@ -34,21 +34,30 @@ owns the inactive configuration, version pins, and reproduction commands.
 
 ## Readable flow and spacing
 
+The grouping convention below is a binding AEK readability requirement within
+the applicable scope, subject to explicitly accepted project exceptions. It is
+not a Go language requirement. Use the [readability acceptance check](verification.md#readability-acceptance)
+when implementing or reviewing changed Go code.
+
 - Handle failures with guard clauses where they make the normal path easy to
   scan. Follow [simple control flow](../core.md#simple-control-flow); no additional
   nesting quota is introduced here.
 - Separate successive meaningful steps inside a function with one blank line.
-  Typical boundaries are input preparation/validation, application or domain
-  work, and output construction. In a Gin handler, visually separate binding
-  and validation, the application call with its error handling, and the success
-  response when those steps are present.
+  A step groups statements serving one immediate purpose; a change of purpose
+  establishes the boundary. Typical phases include creation, configuration,
+  registration, input preparation/validation, application work and result delivery.
+  Sharing a variable or statement type does not by itself make one cohesive step.
 - Keep an operation and its immediate error/result check together. Short setup
-  used only by that operation belongs in the same group. After the completed
-  group, use a blank line before the next independent step; this includes the
-  transition from a rejecting guard to normal work.
-- Consecutive guards validating the same input may stay together. Do not insert
-  a blank line after every statement or closing brace, or mechanically before
-  every `return`; a return may stay with the operation it completes. Avoid
+  used only by that operation belongs in the same group. A guard and subsequent
+  statements may also belong together when they continue that same phase, as in
+  the configuration below. Separate the next independent step after the completed
+  group; a closing brace alone does not establish a boundary.
+- Consecutive guards validating the same input and other small cohesive sequences
+  may stay together. An early error return belongs inside its guard; a final
+  return may complete its operation or form a distinct result-delivery phase in
+  a multi-step function. Decide by purpose, not by the `return` keyword.
+- Do not insert a blank line after every statement or closing brace, or before
+  every `if` or `return`. There is no fixed number of lines per group. Avoid
   leading/trailing blank lines inside blocks and multiple blank lines between steps.
 - Review this grouping separately from mechanical formatting. Formatter/linter
   success does not establish that meaningful steps are visually separated.
@@ -69,8 +78,42 @@ if err != nil {
 return normalize(text), nil
 ```
 
+A short cohesive configuration sequence also needs no internal separator:
+
+```go
+options.ReadTimeout = readTimeout
+options.WriteTimeout = writeTimeout
+```
+
+This router illustrates four distinct phases: create, configure, register the
+route, and return the configured result. The configuration guard and related
+assignments stay together:
+
+```go
+func livenessRouter() (*gin.Engine, error) {
+	router := gin.New()
+
+	if err := router.SetTrustedProxies(nil); err != nil {
+		return nil, fmt.Errorf("configure trusted proxies: %w", err)
+	}
+	router.HandleMethodNotAllowed = true
+	router.RedirectTrailingSlash = false
+
+	router.GET("/api/health/live", func(c *gin.Context) {
+		c.String(http.StatusOK, "alive\n")
+	})
+
+	return router, nil
+}
+```
+
+Removing the three blank lines between those phases produces a compact variant
+that violates this convention even though both layouts can be `gofmt`-clean.
+This is a spacing illustration using Gin, not a requirement to use Gin or adopt
+its profile. The same grouping principle applies to Go code without a framework.
+
 Use blank lines to expose the steps without adding comments that merely label
-each operation.
+each operation or extracting functions solely to manufacture visual separation.
 
 ## Comments and errors
 

@@ -29,10 +29,15 @@ Do not reconstruct the baseline from modified files or assume HEAD captures loca
 Follow surrounding contracts only to resolve concrete regression questions, then stop.
 Combine acceptance and implementation quality in one accountable pass. Check types,
 boundaries and material risks; reject speculative complexity while preserving safeguards.
+Check [responsibility placement](../../standards/core.md#responsibility-placement-before-implementation)
+within this scope and include its outcome in the existing review result.
 Prioritize concrete correctness, authorization, compatibility, data integrity and
 concurrency failures where the changed behavior makes them relevant. Do not invent
 a finding quota or report cosmetic preferences as defects; a style issue matters
 when it violates a binding requirement or causes a concrete failure.
+Apply [readability acceptance](../../standards/verification.md#readability-acceptance)
+within this review. A binding profile rule is not an optional cosmetic preference;
+a clean result includes its scoped check outcome, not just formatter success.
 Reuse valid check evidence; no repeated checks or extra tests without a concrete reason.
 Name what remains unresolved before repeating; a fresh reviewer does not invalidate evidence.
 For findings give severity, location, failure/violated requirement, impact and evidence.

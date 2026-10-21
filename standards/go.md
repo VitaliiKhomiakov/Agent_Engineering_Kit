@@ -12,8 +12,9 @@ Gin has its own profile and is selected only where used.
   type when sufficient; introduce an interface or pattern for a present need.
 - Preserve typed contracts, domain invariants, error behavior, and resource
   lifetimes. Changes to those concerns trigger the relevant detailed section.
-- Follow [Go formatting and readability](go/style.md) for changed code and the
-  shared [verification policy](verification.md) for proportionate checks.
+- Apply [Go formatting and readability](go/style.md) while writing code and the
+  [readability acceptance check](go/verification.md#readability-acceptance) to the
+  final changed code within the shared [verification policy](verification.md).
 
 General SOLID, DRY, KISS, YAGNI, and pattern criteria remain in the common rules.
 Requirements protect affected contracts/resources; defaults may change for a
@@ -24,7 +25,7 @@ requires them. Detailed guidance applies when its stated condition is met.
 
 | Task touches | Read |
 | --- | --- |
-| Formatting, imports, naming, comments, readable Go flow | [Formatting and readability](go/style.md) |
+| Writing/reviewing changed Go code, formatting, imports, naming, comments, readable flow | [Formatting and readability](go/style.md); [readability acceptance](go/verification.md#readability-acceptance) |
 | Business-module layout, package nesting, DTO placement, dependencies, construction, patterns, modules/toolchains | [Architecture and patterns](go/architecture.md) |
 | Public types, domain state, validation, receivers, errors | [Types and contracts](go/contracts.md) |
 | Goroutines, channels, shared state, cancellation, shutdown | [Concurrency](go/concurrency.md) |

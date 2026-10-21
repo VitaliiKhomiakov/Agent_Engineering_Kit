@@ -8,9 +8,11 @@ The [entry](../react.md) owns selection; [core](../core.md) owns shared architec
 - A feature represents a user action: place an order, change an address, or add a
   document to favorites. A button, modal, or individual input does not become a
   feature merely because it has a click handler.
-- Small private UI components and their props may share a file. An independent
-  component, complex hook, API adapter, and input schema have different
-  responsibilities and move apart as they grow or become reusable.
+- Apply [responsibility placement](../core.md#responsibility-placement-before-implementation)
+  from the outset. Small private UI components, props and helpers may share a file
+  when they serve one cohesive owner. Give independently meaningful components,
+  Hooks, API adapters and input schemas their own placement when those responsibilities
+  already exist; growth or reuse is not a prerequisite for separating them.
 - When a component grows beyond `size.react_component_review_lines`, resolved
   through [policy configuration](../policy-configuration.md), reconsider whether it mixes UI,
   requests, state, and transformations. This is a signal in our standard, not a

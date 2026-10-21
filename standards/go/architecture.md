@@ -20,20 +20,25 @@ See [toolchain selection](https://go.dev/doc/toolchain) and
 
 ## Packages and files
 
+Apply [responsibility placement](../core.md#responsibility-placement-before-implementation)
+before adding or changing code; these are its Go-specific boundary choices.
+
 - The package is the primary boundary for organization and public access. Group
   files within a package by cohesive responsibility or operation, not by a “one
   struct per file” rule.
 - A file may contain a struct with its methods, a constructor, small related
-  types, and private helpers. Separate independent handlers and adapters when
-  their responsibilities diverge or their size grows.
+  types, and private helpers. Place already independent handlers and adapters in
+  separate cohesive files from the outset; file size is not the prerequisite.
 - Apply the common size signals to files and functions. For a struct with methods,
   consider its aggregate behavior: distributing methods across files does not
   fix an overly broad type responsibility.
 - Name a package for its purpose. Do not collect unrelated code in global
   `utils`, `common`, `types`, `interfaces`, or a universal `manager`.
-- Splitting a file and extracting a package are different decisions. Create a
-  package when an independent boundary emerges, accounting for import direction.
-  Do not resolve import cycles by moving everything into a common package.
+- Splitting a file and extracting a package are different decisions. Another file
+  in the same package is sufficient when only organization needs to change. Create
+  a package when a distinct dependency or access boundary is needed, accounting for
+  import direction. Do not resolve import cycles by moving everything into a
+  common package.
 - Private server application implementations may live under `internal`. Do not
   create a directory or module for every small type.
 - Default to concrete, cohesive packages. Keep entry-point assembly thin and

@@ -13,6 +13,10 @@ checks. A short task does not authorize broader functionality, a coverage campai
 or a repository-wide audit. For a small change, one sentence can explain the
 verification choice; do not create a separate test-plan document by default.
 
+Establish [responsibility placement](core.md#responsibility-placement-before-implementation)
+for the affected behavior before writing code, reusing still-valid ownership
+decisions and the relevant profile's boundary rules.
+
 Before the first write to each affected path in a stage, the coordinator ensures
 that its original contents or prior absence are recorded. Include existing local
 edits and untracked files, and both sides of a rename. A delegated writer confirms
@@ -140,11 +144,42 @@ links or structure only when needed. Use the recorded results when reporting com
 If a required result is genuinely unavailable or its applicability cannot be established,
 recover it from existing evidence or repeat the necessary check and report that limit.
 
+Reuse also depends on the applicable rule and reviewed scope. When a clarified or
+new rule changes acceptance expectations, assess whether previous evidence actually
+covers it; a historical clean review or formatter result alone cannot establish
+that coverage. Unchanged or merely moved code can retain valid evidence when the
+code, relevant context and criterion still match; map it to the current location.
+Recheck only the affected gap, without creating a repository-wide cleanup task.
+
 Do not repeat an answered inspection under a different command, launch another
 reviewer for reassurance, or run an extra final pass after criteria, required checks
 and scoped review are satisfied. End verification and deliver the result. A newly
 observed failure or changed relevant input can reopen only the affected verification.
 Explicitly required fresh project/CI gates and authorized additional reviews remain binding.
+
+## Readability acceptance
+
+Applicable mandatory style/readability requirements are acceptance criteria even
+without a runtime failure. Use the selected profile's canonical rules and scoped
+check; do not turn optional preferences or differences from an example into defects.
+
+Apply those rules during implementation and inspect the final changed code after
+formatting, including meaningfully affected surrounding code. Fix in-scope
+violations before handoff. Record the checked scope and outcome separately from
+formatter/linter output in the existing evidence note; a concise result can cover
+several functions/files. Do not require a per-function report or duplicate checklist.
+
+The reviewer applies this criterion in the existing scoped review, including an
+independent review only when already selected. A clean result must account for the
+applicable check and its coverage; reading a rule or passing a formatter is not
+compliance evidence. Locate findings and cite the violated requirement, without
+inflating severity or inventing style findings when the requirement is satisfied.
+
+Before acceptance, the coordinator confirms that the evidence covers the submitted
+changes under the applicable rules, using the scoped diff and valid evidence.
+Obtain a missing scoped check and resolve outstanding in-scope violations before
+claiming verified acceptance. Apply [evidence reuse](#reuse-evidence-before-repeating-work);
+this adds no agent, separate style review or extra review round.
 
 ## Review boundaries
 
@@ -169,6 +204,13 @@ Neither setting grants delegation, changes saved roles or overrides actual
 capabilities. Report an unavailable required independent review rather than claiming
 it happened; continue independent authorized work. Do not add a duplicate pass or
 separate specification, style, security and quality reviewers for every small task.
+
+Within that review, check [responsibility placement](core.md#responsibility-placement-before-implementation)
+against the actual changed code, including code below size thresholds. Include the
+scoped outcome and consequential new ownership decisions in the existing review
+result; resolve in-scope violations before acceptance. Reuse applicable decisions
+and evidence under [the reuse policy](#reuse-evidence-before-repeating-work), without
+a separate architecture checklist or review round.
 
 A blocking finding identifies a location, a plausible failure scenario or
 violated requirement, and its consequence. A missing test is a finding when

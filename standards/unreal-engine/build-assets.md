@@ -10,8 +10,13 @@ documented reference is UE 5.8. Select checks with [Unreal verification](verific
   platform. An IDE-generated project is not the authority for module dependencies.
   Do not introduce a parallel generic C++ build just to compile Unreal examples.
 - Keep cohesive runtime and editor modules distinct. Runtime public contracts must
-  not accidentally require editor-only modules. Add a module for a meaningful
-  responsibility or loading/deployment boundary, not every small class.
+  not accidentally require editor-only modules. Apply
+  [responsibility placement](../core.md#responsibility-placement-before-implementation)
+  when deciding whether to add a module. Require a concrete need for separately
+  controlled dependencies or public exposure, module loading/lifecycle, or
+  target/platform inclusion. A meaningful responsibility alone is insufficient;
+  use cohesive files in an existing suitable module when those boundaries remain
+  shared. Do not create a module for every small class.
 - Declare public dependencies for types needed by public headers; implementation
   dependencies remain private. Keep dependencies acyclic rather than enabling
   legacy circular allowances to silence a build error.
