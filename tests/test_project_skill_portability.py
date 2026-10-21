@@ -143,7 +143,8 @@ class ProjectSkillPortabilityChecks(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_layouts_stacks_and_independent_child_routes(self) -> None:
-        cases = (("fastapi",), ("react", "typescript"), ("angular",), ("angular", "ngrx"), ("go",))
+        cases = (("fastapi",), ("react", "typescript"), ("angular",), ("angular", "ngrx"),
+                 ("go",), ("godot",))
         for layout in (".agents-framework", ".", "rules/aek"):
             for profiles in cases:
                 with self.subTest(layout=layout, profiles=profiles), tempfile.TemporaryDirectory(

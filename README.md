@@ -12,7 +12,8 @@ coding practices, verification, and agent collaboration.
 - **Go:** Gin.
 - **JavaScript / TypeScript:** Node.js, NestJS, React, Next.js, Angular, NgRx, TypeORM.
 - **Database and containers:** PostgreSQL, Docker.
-- **Game development:** Unreal Engine, including C++ and Blueprints.
+- **Game development:** Unreal Engine, including C++ and Blueprints; [Godot](standards/godot.md),
+  with GDScript and conditional C#/GDExtension guidance.
 
 Select only the technologies your project uses; available profiles are listed in
 [the catalog](standards/catalog.toml).

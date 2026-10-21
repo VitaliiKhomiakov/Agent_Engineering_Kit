@@ -14,6 +14,8 @@ provenance route below; a link to an undiscovered parent is insufficient.
   independently; record only project-specific applicability here. For Unreal,
   retain the selected `unreal-engine` entry's actual local path and task routes;
   source-only work does not require an editor connection or installed skill.
+  For Godot, retain the selected `godot` entry's actual local path and task routes;
+  C#/GDExtension are conditional and source-only work needs no MCP setup.
 - Checks: `<CHECKS.md or a few commands with their triggering conditions>`.
 - Native tasks: `<reachable canonical store/entry and adopted planning policy;
   independent opening must not require parent discovery or task relocation>`.

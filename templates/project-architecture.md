@@ -41,6 +41,7 @@ Empty tables make no technology or command assignment; run checks only when need
 [technologies]
 # postgresql = "<version declared by this project>"
 # unreal-engine = "<engine version declared by this project>"
+# godot = "<engine version declared by this project>"
 
 [checks]
 # api = "<existing project check command>"
@@ -151,6 +152,25 @@ observations. Reuse stable context and update it when affected inputs change.
   connection configuration owner and relevant editor/world/PIE context; revalidate
   ephemeral handles/state after reload or world change, not on every source edit>`.
 - Rules: `<reachable unreal-engine profile entry and accepted local exceptions>`.
+
+## Godot, when present
+
+Reuse known context; fill relevant actual facts and distinguish intended choices
+from observed capabilities. Do not configure unused toolchains merely to fill fields.
+
+- Engine/project: `<version/build, standard or .NET edition, project.godot root and evidence>`.
+- Languages/targets: `<GDScript; C# or GDExtension when used; host/target platforms and renderer>`.
+- Ownership: `<scene/script/resource responsibilities, composition points, state sharing,
+  autoloads and their actual lifetimes>`.
+- Assets/export: `<source/import pipeline, UID/move policy, applicable presets/templates,
+  development add-on exclusion and unsaved-work preservation>`.
+- Additional toolchains, only when used: `<.NET SDK/framework/packages or native
+  engine API/bindings, architecture, precision and build configurations>`.
+- Checks: `<existing commands/scenarios and their triggers; distinguish parse/import,
+  behavior, rendered observation and target export evidence>`.
+- Editor/MCP, only when used: `<server/add-on/client versions, qualified capabilities,
+  configuration owner/scope, session selection and mutation/recovery limits>`.
+- Rules: `<reachable godot profile entry and accepted local exceptions>`.
 
 ## Frontend, when present
 

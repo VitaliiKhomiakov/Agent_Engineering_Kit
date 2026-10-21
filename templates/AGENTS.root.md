@@ -65,6 +65,8 @@ preserve one canonical store and record it separately from each execution checko
   database, driver and container profiles apply only when used.
 - Unreal project/plugin work: [Unreal](.agents-framework/standards/unreal-engine.md) task routes. Generic C++ alone does not
   select it; Blueprint-only work needs no C++ detail and source-only work needs no MCP setup.
+- Godot project work: [Godot](.agents-framework/standards/godot.md) task routes, with C#/GDExtension
+  only where used. Source-only work needs no MCP setup; GDScript does not select Python.
 - Planning/stages: `PLANS.md`, the canonical task and [delivery rules](.agents-framework/standards/delivery-workflow.md).
 - Explicit framework import/update/preparation: `aek-integrate-project` at
   `<actual installed skill or accessible source skill path>`. Read `.agents-framework/adoption.md`

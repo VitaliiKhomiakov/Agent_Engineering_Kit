@@ -46,6 +46,8 @@ availability, not a reading queue. Actual task/stack and `when` select reading:
 JavaScript React excludes TypeScript/unused Next.js; Python alone excludes FastAPI/Pydantic.
 Unreal work selects [its task routes](.agents-framework/standards/unreal-engine.md), without mandatory C++ detail for
 Blueprint-only work or MCP setup for source-only work; generic C++ does not select Unreal.
+Godot work selects [its task routes](.agents-framework/standards/godot.md); C# and GDExtension
+apply only where used, and source-only work needs no MCP setup.
 Examples/research are optional; stop when relevant rules are known.
 
 $routes

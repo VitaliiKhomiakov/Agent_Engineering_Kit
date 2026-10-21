@@ -95,6 +95,7 @@ it under this library's policy. Host selection follows the actual task/runtime.
 | React JavaScript or TypeScript, without Next.js | `react`; add `typescript` when used |
 | Next.js JavaScript or TypeScript | `nextjs-framework`; add `typescript` when used and `nodejs` for Node host work |
 | Angular or NestJS; optional packages | `angular` or `nestjs`; add `ngrx` or `typeorm` only when used |
+| Godot; conditional C# or GDExtension | `godot`; read additional language sections only where used |
 
 Dependencies supply shared bases automatically; explicitly selecting the same
 base again does not duplicate its files. Examples retain their stated language
@@ -140,6 +141,8 @@ its name or bundled dependencies do not require adding a language or framework.
 | Substantive inline plan with an existing configured session selection | Adopted planning policy, relevant delivery/design rules and the selected skill's adaptations | Delegation and model setup merely because they are dependencies of delivery/Superpowers |
 | Blueprint-only Unreal asset change | `unreal-engine` entry, affected gameplay/assets and verification sections; editor procedure when operating that provider | C++ details, networking or mandatory MCP installation |
 | Source-only Unreal change | `unreal-engine` entry and affected C++/build sections | Editor setup or an external skill merely to edit source |
+| GDScript-only Godot change | `godot` entry, affected architecture/GDScript/runtime and verification sections | C#, GDExtension, Python/Node application profiles or MCP installation |
+| Godot scene/import or editor operation | `godot` entry, affected assets/runtime and verification sections; provider procedure when used | Every runtime topic, native compiler or a provider merely because scenes are involved |
 | Generic C++ outside an Unreal project | Applicable common/project guidance | Unreal solely from a `.cpp` or `.h` filename |
 | NestJS with TypeORM | NestJS and TypeORM entries, relevant integration/model/query sections | A different ORM, second domain model or every persistence section |
 | NestJS without TypeORM | NestJS and the actual persistence profile | TypeORM solely from NestJS or an `*.entity.ts` filename |
@@ -156,6 +159,13 @@ the actual project context also selects it. Keep every resource declared for
 `unreal-engine` in [the catalog](catalog.toml) available; route by task, including
 subsection routes for concurrency/networking/performance.
 An independently opened target uses its reachable local entry and selected copies.
+
+Godot selection likewise follows declared/evidenced project context, with
+`project.godot` and related resource files as hints. Generic C# or C++ does not
+establish Godot. Keep the complete `godot` resource set available, route by task
+and retain actual engine/platform compatibility. C#/GDExtension sections are
+conditional; an MCP server's language does not select a Python/Node application
+profile. Importing instructions installs no engine or provider.
 
 Angular/NgRx globs are hints too: modern suffix-free Angular files still select
 Angular through declared/actual use; a generic `*.store.ts` does not prove NgRx.

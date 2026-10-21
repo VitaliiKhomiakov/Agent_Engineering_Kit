@@ -17,6 +17,8 @@ TOPICS: dict[str, tuple[str, ...]] = {
                "examples/development-production"),
     "unreal-engine": ("cpp-lifetime", "gameplay-blueprints", "build-assets", "mcp-editor",
                       "verification", "runtime-performance", "skills"),
+    "godot": ("architecture", "gdscript", "lifecycle-runtime", "assets-export",
+              "ui-performance", "interop", "tooling-mcp", "verification"),
     "react": ("components-boundaries", "state-identity", "effects-integrations", "forms-contracts",
               "verification-compatibility", "examples/reservation-form", "examples/latest-result"),
     "nextjs": ("routing-composition", "server-client-security", "data-cache-mutations",
@@ -92,7 +94,7 @@ class ProfileSelectionChecks(unittest.TestCase):
                      "templates/skills/aek-design-feature/SKILL.md",
                      "templates/skills/aek-review-changes/SKILL.md"}
         for selection in (("fastapi",), ("react", "typescript"), ("angular",),
-                          ("ngrx",), ("go",), ("unreal-engine",)):
+                          ("ngrx",), ("go",), ("unreal-engine",), ("godot",)):
             with self.subTest(selection=selection):
                 original = self.selected(*selection)
                 self.assertTrue(original.isdisjoint(additions))
@@ -100,13 +102,22 @@ class ProfileSelectionChecks(unittest.TestCase):
                                  original | additions)
 
     def test_unchanged_controls_do_not_select_application_stacks(self) -> None:
-        controls = {"postgresql", "docker", "unreal-engine"}
+        controls = {"postgresql", "docker", "unreal-engine", "godot"}
         for profile in controls:
             with self.subTest(profile=profile):
                 self.assert_topics(self.selected(profile), {profile},
                                    (controls - {profile}) | {"php", "symfony", "doctrine", "python",
                                     "pydantic", "fastapi", "go", "gin", "javascript", "nodejs", "typescript",
                                     "react", "nextjs", "nestjs", "angular", "ngrx", "typeorm"})
+
+    def test_godot_adds_only_its_engine_resources_to_core(self) -> None:
+        expected = {"standards/godot.md"}
+        expected.update(f"standards/godot/{topic}.md" for topic in TOPICS["godot"])
+        self.assertEqual(self.selected("godot") - self.selected("core"), expected)
+
+    def test_engine_profiles_compose_only_when_selected(self) -> None:
+        self.assertEqual(self.selected("godot", "unreal-engine"),
+                         self.selected("godot") | self.selected("unreal-engine"))
 
     def test_symfony_includes_php_without_selecting_doctrine(self) -> None:
         self.assert_topics(self.selected("symfony"), {"php", "symfony"}, {"doctrine"})

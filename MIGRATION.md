@@ -607,6 +607,16 @@ scripting selects relevant Python guidance without unused backend frameworks.
 Generic C++ files alone do not select Unreal. Preserve reachable copies of the
 entry and every resource declared for `unreal-engine` in
 [the catalog](standards/catalog.toml); the mandatory workflow needs no personal skill path.
+For Godot, follow `standards/godot.md` and include every resource declared for
+`godot`. Record actual engine/edition, languages, target platforms/renderer and
+scene/resource owners in the passport. C# and GDExtension guidance is conditional;
+generic C#/C++ files alone do not select Godot. GDScript and an MCP server's own
+language do not select Python/Node application profiles. Profile adoption does not
+install an engine/provider, upgrade a project or authorize mass resaving/formatting.
+For an existing integration, reconcile new routes and rules through
+[B/C/N comparison](#repeat-and-update), preserving local checks, style adaptations
+and client configuration. Assess whether earlier evidence covers newly adopted
+acceptance criteria; historical clean review alone does not establish that coverage.
 Inline planning alone does not require delegation or model setup.
 
 For several projects, also fill the root

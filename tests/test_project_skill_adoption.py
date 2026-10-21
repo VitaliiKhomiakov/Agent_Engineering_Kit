@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL = "templates/skills/aek-design-feature/SKILL.md"
 NATIVE = ".agents/skills/aek-design-feature/SKILL.md"
 # These references are conditional on technologies/profile omitted by this fixture.
-OMITTED = {"standards/react/components-boundaries.md", "standards/unreal-engine.md",
+OMITTED = {"standards/react/components-boundaries.md", "standards/unreal-engine.md", "standards/godot.md",
            "standards/project-skills.md"}
 
 

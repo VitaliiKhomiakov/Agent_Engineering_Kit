@@ -522,3 +522,22 @@ activities = ["design", "implementation", "test", "review", "setup"]
 when = "Declared or evidenced Unreal project/plugin work; read only task-relevant sections. Generic C++ or Python files alone do not select Unreal; source-only work does not require MCP."
 dependencies = ["core"]
 globs = ["**/*.uproject", "**/*.uplugin"]
+
+[[profiles]]
+id = "godot"
+source = "standards/godot.md"
+resources = [
+  "standards/godot/architecture.md",
+  "standards/godot/gdscript.md",
+  "standards/godot/lifecycle-runtime.md",
+  "standards/godot/assets-export.md",
+  "standards/godot/ui-performance.md",
+  "standards/godot/interop.md",
+  "standards/godot/tooling-mcp.md",
+  "standards/godot/verification.md",
+]
+technologies = ["godot", "gdscript"]
+activities = ["design", "implementation", "test", "review", "setup"]
+when = "Declared or evidenced Godot project work; read task-relevant sections. GDScript is primary; C# and GDExtension apply only where used. Generic C#/C++ files alone do not select Godot; source-only work does not require MCP."
+dependencies = ["core"]
+globs = ["**/project.godot", "**/*.tscn", "**/*.tres", "**/*.gd", "**/*.gdextension"]

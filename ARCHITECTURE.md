@@ -133,7 +133,7 @@ Use the [workspace architecture template](templates/workspace-architecture.md)
 for cross-project responsibilities, runtime interactions, contracts, and data
 ownership. Use the [project passport](templates/project-architecture.md) for each
 project's internal responsibilities and permitted code dependencies. Adapt its
-flow and fields to the stack: Unreal gameplay/editor projects use engine-managed
+flow and fields to the stack: Unreal and Godot gameplay/editor projects use engine-managed
 construction and lifecycle owners rather than compulsory backend layers or custom
 DI constructors. Common invariants and verification rules still apply. The
 [admin/backend/ocr example](examples/document-processing-workspace-architecture.md)
@@ -332,6 +332,10 @@ rules; a compatible installed skill is optional. All resources declared for
 `unreal-engine` in [the catalog](standards/catalog.toml) are available as a bundle
 and read by task, without forcing MCP setup for source-only work.
 No local engine/provider availability follows from selecting the profile.
+The independent `godot` profile maps the same shared principles to scenes,
+resources, imports and editor/runtime state. Its GDScript guidance and conditional
+C#/GDExtension topics remain task-selected; selecting it installs no engine/MCP
+provider and adds no unrelated application stack.
 Skills describe concrete procedures. The current catalog supplies these inactive
 instruction-only templates; native installation is a separate adoption step:
 
