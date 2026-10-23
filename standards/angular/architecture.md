@@ -49,7 +49,7 @@ folder. A folder name does not protect access; use the
 Independent public/admin sections may be siblings. Directory nesting does not
 require matching URL prefixes.
 
-This is the framework's recommended grouping, not a mandated Angular tree or
+This is this library's recommended grouping, not a mandated Angular tree or
 an instruction to migrate an established compatible layout. Introduce role
 folders only when useful; do not create empty layers. A small section can be
 routed directly from the application routes without a separate route file or
@@ -145,5 +145,5 @@ Basis: [style guide](https://angular.dev/style-guide),
 [NgModules](https://angular.dev/guide/ngmodules/overview) and
 [route definitions](https://angular.dev/guide/routing/define-routes).
 The section/domain grouping, bounded role folders and dependency boundaries are
-framework policy. Angular's style guide favors feature grouping and discourages
+this library's policy. Angular's style guide favors feature grouping and discourages
 grouping by code type; it does not prescribe this particular folder tree.

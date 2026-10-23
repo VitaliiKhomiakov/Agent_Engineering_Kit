@@ -205,6 +205,11 @@ check($noted->editorNote === 'private note', 'Non-null note must be preserved');
 echo "input-domain: 10 invalid inputs and draft/publication/editing cases passed\n";
 ```
 
+Repeated publication is idempotent here by this example's choice; the
+[Python](../../python/examples/domain.md) and [Go](../../go/examples/domain.md)
+examples reject it instead. Either is valid when the domain contract states it;
+neither example defines the invariant for another project.
+
 Run the following using the project's installed tools, without changing its
 dependency versions solely to run this example:
 

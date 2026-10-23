@@ -13,9 +13,12 @@ conventions rather than translating GDScript naming mechanically. Separate exist
 independent logic and engine/tree responsibilities at suitable owners; a second
 assembly is justified by a real boundary, not by a desire for smaller files.
 
-Use useful types and explicit nullable/dynamic boundaries. Managed garbage
+Declare `GodotObject`-derived types `partial` (diagnostic GD0001) and name an
+attached script's class after its `.cs` file. Use useful types and explicit
+nullable/dynamic boundaries. Managed garbage
 collection and native Godot object lifetime are different contracts. Do not assume
-that a non-null managed reference means its native object remains usable. Respect
+that a non-null managed reference means its native object remains usable; use
+`GodotObject.IsInstanceValid` at a boundary where it may already be freed. Respect
 the affected lifecycle when subscribing, awaiting or delivering callbacks.
 
 Use typed signals/events where appropriate and rebuild when required for generated
@@ -44,14 +47,17 @@ Keep the exported boundary narrow and preserve engine ownership/lifetime semanti
 native code does not make scene-tree access from worker threads safe.
 
 Record and pin the target engine API, bindings, compiler/toolchain, operating system,
-architecture, debug/release mode and precision where applicable. Compatible API
-direction and version exceptions matter; do not promise one binary works across
-all Godot 4.x versions. Custom engine builds may require matching API/binding inputs.
+architecture, debug/release mode and precision where applicable. An extension built
+for an earlier 4.x minor version should load in later minor versions, not the
+reverse, and 4.0-targeted extensions do not load in 4.1+; do not promise one binary
+works across all Godot 4.x versions. Custom engine builds may require matching API/binding inputs.
 Use [godot-cpp's contract](https://docs.godotengine.org/en/4.7/tutorials/scripting/cpp/about_godot_cpp.html)
 when that binding is selected; it does not select Unreal guidance.
 
 Keep `.gdextension` compatibility bounds and library mappings consistent with the
-actual built libraries and export targets. Verify extension loading and relevant
+actual built libraries and export targets: `compatibility_minimum` is the lowest
+engine version actually targeted, and optional `compatibility_maximum` (4.3+) only
+records a known upper bound. Verify extension loading and relevant
 runtime behavior in addition to compilation, including the affected exported
 configuration when needed. A successful host build is not a target/ABI check.
 Descriptor reference:

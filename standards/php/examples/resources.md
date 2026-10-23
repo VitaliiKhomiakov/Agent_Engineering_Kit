@@ -160,6 +160,9 @@ observe closure after consumption, but do not simulate a device failure or a
 failed close. The reader assumes a local blocking stream: it is not a network
 timeout, cancellation protocol, total-input limit, or generator-close API. An
 endless sequence of empty records needs an operation budget in a streaming service.
+The 1024-byte record limit includes the line ending: up to 1023 content bytes with
+`\n`, 1022 with `\r\n`, and 1024 for a final unterminated record. State the
+limit in those terms, or exclude the terminator, when adapting it to a contract.
 The fixture writer rejects partial preparation; it is not a general production
 write-all implementation. `get_resource_type()` returns `Unknown` for a closed
 handle; runtime tests establish that lifetime fact rather than a PHPDoc assertion.

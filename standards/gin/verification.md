@@ -73,5 +73,5 @@ owns measurement practice.
 
 This research checks examples and policy delivery. It does not certify a deployed
 service, an alternate codec, or model adherence to conditional reading. Actual
-commands/results and the native-pilot boundary are recorded in the
-[K02 plan](../../docs/plans/2026-09-21-engineering-practices.md#k02-working-scope).
+commands/results and the limits left for a later native-client trial are recorded in the
+[practice plan](../../docs/plans/2026-09-21-engineering-practices.md#k02-working-scope).

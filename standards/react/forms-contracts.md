@@ -5,12 +5,13 @@ Shared [JavaScript validation](../javascript/values-state.md) and [core](../core
 rules own runtime validation and independent business invariants. Apply
 [TypeScript contracts](../typescript.md) only when TypeScript is used.
 
+## Client checks and visible states
+
 - Client-side form validation helps the user; the server validates the contract
   and operation eligibility again. A TypeScript `type`/`interface` or `as`
   assertion does not validate received JSON.
 - Define relevant loading, error, empty, and success states. Preserve element
   accessibility, focus behavior, and keyboard interaction.
-
 
 ## Representation is not eligibility
 

@@ -73,7 +73,8 @@ project-workflows profile.
   Its checkpoint and authorization rules replace continuous execution, mandatory
   plan/spec/task commits, worktree setup, and branch-finishing defaults.
   Choosing inline or delegated execution does not itself authorize automatic
-  progression or Git writes. A recorded `Ruling` cannot grant either permission
+  progression or Git writes. A `Ruling:` ledger entry (the upstream
+  subagent-driven-development convention for autonomous decisions) cannot grant either permission
   or settle a missing material user decision.
 - **Tests, review, and retries:** read the relevant [verification sections](verification.md).
   Resolve relevant cadence/review/reset settings through [policy configuration](policy-configuration.md)
@@ -89,7 +90,7 @@ project-workflows profile.
   before repeating a command or review merely to satisfy a stock freshness recipe.
   A parked finding or exhausted fix budget does not satisfy acceptance criteria.
 - **Delegation and models:** read [orchestration](orchestration.md) when delegating.
-  Saved model/effort pairs (including the user's `high`), fresh context, bounded
+  Saved model/effort pairs (including a saved `high` effort), fresh context, bounded
   ownership, and the concurrency ceiling replace a skill's suggested tiers or escalation.
   Its [delegation contract](orchestration.md#delegation-contract) owns the reason,
   sufficient task context and evidence return; use its lifecycle for continuation

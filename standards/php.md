@@ -24,10 +24,8 @@ Symfony and Doctrine have separate profiles, selected only when actually used.
 | Mutation, readonly/clone, streams, generators, workers, transactions or I/O | [State and effects](php/state-effects.md) |
 | Tests, static analysis, autoload/file moves, security, performance or upgrades | [Verification and compatibility](php/verification.md) |
 
-For class moves, check namespaces and autoloading under
-[PHP verification](php/verification.md). Framework DI and ORM registrations
-are checked only for the integrations present; a move alone does not authorize
-a data-schema migration.
+For class moves, follow [PHP move rules](php/verification.md#class-and-file-moves),
+including their registration and schema-migration limits.
 
 ## Basis
 

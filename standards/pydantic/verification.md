@@ -98,8 +98,7 @@ Keep migration bounded to the authorized contract, including public formats and
 callers. `pydantic.v1` can be a staged compatibility tool, not permission to create
 an indefinite dual model hierarchy. No migration is triggered by adopting this
 profile. FastAPI integration belongs to the separate
-[FastAPI entry](../fastapi.md), applied only where FastAPI is used; SQLAlchemy and psycopg have separate profiles
-selected only when those dependencies are present or explicitly requested.
+[FastAPI entry](../fastapi.md), applied only where FastAPI is used.
 
 Sources: [mypy integration](https://docs.pydantic.dev/latest/integrations/mypy/),
 [errors](https://docs.pydantic.dev/latest/errors/errors/),

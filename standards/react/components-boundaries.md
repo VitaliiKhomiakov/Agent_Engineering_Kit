@@ -52,8 +52,9 @@ Treat props/state as immutable snapshots; local mutation of a newly created obje
 is fine. Start purchases, logging side effects and subscriptions outside rendering.
 React can restart or discard render work. Call Hooks at the top level of components
 or custom Hooks, before early returns. React 19's `use` has documented conditional
-call exceptions; it still belongs in React rendering and cannot be caught in a
-`try/catch`. Do not generalize that exception to `useState` or `useEffect`.
+call exceptions; it still belongs in React rendering and must not be called inside
+`try`/`catch`. Handle a rejected Promise with an Error Boundary. Do not generalize
+that exception to `useState` or `useEffect`.
 
 ## Basis
 

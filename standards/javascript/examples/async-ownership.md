@@ -315,6 +315,6 @@ termination is exercised. Aborting a read does not imply undoing a remote write.
 The result objects use a named contract; no deep-copy/immutability guarantee is
 added to those adapter-owned data values.
 
-The [K09 record](../../../docs/plans/2026-09-21-engineering-practices.md#k09-result-and-verification)
+The [JavaScript practice record](../../../docs/plans/2026-09-21-engineering-practices.md#k09-result-and-verification)
 contains verification commands, delivery checks and limits. This example does
 not authorize replacing the consumer project's runtime, checker or test framework.

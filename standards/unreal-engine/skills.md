@@ -16,17 +16,12 @@ or the [verification cadence](verification.md#complete-a-coherent-block-then-ver
 | [`blender-modeling` — RobLe3/cc-blender-skill](https://github.com/RobLe3/cc-blender-skill/blob/main/plugin/skills/blender-modeling/SKILL.md) | Mesh, modifier and procedural prop work through Blender Python/MCP | Community candidate, not Blender-maintained. Match Blender version and MCP execution semantics; preserve project naming instead of imposing its `GEO-` convention. |
 | [`blender-export` — RobLe3/cc-blender-skill](https://github.com/RobLe3/cc-blender-skill/blob/main/plugin/skills/blender-export/SKILL.md) | Preparing an asset for the selected Unreal import pipeline | Conditional reference only: review recipes before execution. Do not inherit fixed file/texture/polycount budgets, whole-scene export, transform baking or universal axis settings. Validate a representative import when the pipeline is unfamiliar. |
 
-The Epic repository is vendor-owned (311 GitHub stars observed); a verified
-skills.sh install count was not established. For RobLe3, the directory reported
-about 1.2K installs for modeling and 714 for export; the repository had 77 stars.
-These are dated adoption signals, not proof of correctness. Its export recipes
-contain opinionated defaults and require adaptation before production use.
-
-Directory links: [modeling](https://skills.sh/roble3/cc-blender-skill/blender-modeling),
-[export](https://skills.sh/roble3/cc-blender-skill/blender-export).
-If installation is requested, select individual skills, for example
-`npx skills add RobLe3/cc-blender-skill@blender-modeling`; check the destination
-and client support before changing configuration. This catalog installs nothing.
+The Epic repository is vendor-owned; RobLe3 is a community source. Popularity
+signals are not proof of correctness; dated metrics remain in the
+[skills research](../../docs/research/2026-09-29-unreal-blender-skills-and-batched-verification.md#2026-10-23-addendum-relocated-adoption-signals).
+RobLe3's export recipes contain opinionated defaults and require adaptation before
+production use. If installation is requested, install individual skills only after
+checking the destination and client support. This catalog installs nothing.
 
 ## Providers and workflow references are separate
 
@@ -52,7 +47,7 @@ renaming, save-all, process restart or whole-scene export follows from this list
 Keep unrelated dirty assets intact.
 
 Epic's current skill permits some independent overlapping calls, while the UE 5.8
-[engine documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-mcp-in-unreal-editor)
-states that clients should avoid overlapping tool invocations. Retain this
+[engine documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-mcp-in-unreal-editor?application_version=5.8)
+states that clients should not issue overlapping tool calls. Retain this
 profile's serial-call policy; batching means a bounded sequence, not concurrent
 mutations. Resolve version-specific differences only when the task needs them.

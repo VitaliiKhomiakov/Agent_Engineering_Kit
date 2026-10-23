@@ -34,9 +34,9 @@ For nested class DTOs, supply validation decorators and the transformer's elemen
 constructor (`@ValidateNested`/`@Type` where applicable). Validate the container and
 size as well as each item. `@Type` performs transformation, not validation.
 For a one-dimensional object list, require each item to be a non-null object
-(`@IsObject({ each: true })` with class-validator). `@ValidateNested` traverses
-multidimensional arrays; recursive validation alone does not reject extra array
-levels, including empty arrays that have no children to validate.
+(`@IsObject({ each: true })` with class-validator). `@ValidateNested` also descends
+into nested arrays, so recursive validation alone does not reject an extra array
+level. An empty inner array has no children to validate and also passes.
 
 Choose strip/reject/preserve rules for unknown fields. With class-validator,
 whitelist membership is based on validation decorators, not every TS field or

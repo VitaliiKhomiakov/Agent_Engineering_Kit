@@ -56,7 +56,7 @@ Do not preload all profiles, examples, research records or historical plans.
 | Change shared engineering policy | Affected [core](standards/core.md#read-by-task) section and its entry routes |
 | Change a technology rule or executable example | That technology's entry, affected topic/example and applicable official sources |
 | Change catalog, resources or bundle routes | [Catalog contract](standards/catalog.md); [migration procedure](MIGRATION.md) only when adoption is affected |
-| Create or resume a substantive plan | [Planning policy](templates/PLANS.md), then the task's canonical document in `docs/plans/` or existing native store |
+| Create or resume a substantive plan | [Planning policy](templates/PLANS.md), applied here as this repository's policy without installing it, then the task's canonical document in `docs/plans/` or existing native store |
 | Use Superpowers | [Local skill adaptations](standards/superpowers.md), then the applicable available skill |
 | Configure or delegate agents | [Model configuration](standards/model-configuration.md) and [orchestration](standards/orchestration.md) only when selected by the task |
 

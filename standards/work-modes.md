@@ -1,7 +1,7 @@
 # Working directory, checkpoints, and Git actions
 
 Execution mode and model selection are separate decisions. Use the saved role
-assignments in either mode. The default is direct, incremental work with human
+assignments (the coordinator's pair, plus specialists when delegating) in either mode. The default is direct, incremental work with human
 checkpoints; an explicit task instruction can enable autonomous work in a worktree.
 
 ## Workspace root and project checkouts
@@ -159,4 +159,4 @@ Carry the selected mode, current stage, and Git permissions into every delegatio
 
 [Codex worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees)
 documents optional isolation and Local/Worktree handoff. The default checkpoint
-behavior and no-commit policy above are this user's choices, not Codex requirements.
+behavior and no-commit policy above are this library's defaults, not Codex requirements.

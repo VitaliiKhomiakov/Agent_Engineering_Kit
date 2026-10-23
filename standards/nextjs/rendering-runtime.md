@@ -35,8 +35,9 @@ prefer local assets where offline/controlled builds are required.
 
 Pick the actual Node, Edge, static-export or adapter target before choosing drivers
 and runtime APIs. Edge has a narrower API surface and different feature support;
-check the specific convention rather than assuming every Proxy uses Edge. Current
-16.x Proxy defaults to Node and has its own runtime restrictions. A static export
+check the specific convention rather than assuming every Proxy uses Edge. In 16.x,
+`proxy` runs only on Node.js: a `runtime` export there throws, and Edge requires the
+deprecated `middleware` convention. A static export
 has no request-time application server for Actions, sessions or mutable endpoints.
 Adapter support for streaming, ISR and cache backends requires explicit verification.
 

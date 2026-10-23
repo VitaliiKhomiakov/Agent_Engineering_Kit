@@ -118,7 +118,7 @@ row causes `23505` and leaves an invalid index. After a reviewed duplicate repai
 drop/rebuild that failed index deliberately, then attach the eligible B-tree index
 as a constraint. Do not blindly use IF NOT EXISTS and assume its name proves success.
 
-The K15 harness exercised old-gap validation failure, denied new NULL, backfill,
+The recorded harness exercised old-gap validation failure, denied new NULL, backfill,
 validation and NOT NULL conversion on **16.15 and 18.4**. It also injected a duplicate,
 observed the failed/invalid concurrent index, repaired the fixture, rebuilt/attached
 the index and verified duplicate rejection and final row preservation. These are

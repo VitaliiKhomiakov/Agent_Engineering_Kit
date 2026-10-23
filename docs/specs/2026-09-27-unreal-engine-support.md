@@ -1,6 +1,9 @@
 # Unreal Engine support
 
 Date: 2026-09-27. Status: approved by the user; implementation pending.
+2026-10-23 status note: the [implementation plan](../plans/2026-09-27-unreal-engine-support.md)
+records U1–U4 complete and library support delivered; a target pilot was not run.
+The original text below is retained unchanged.
 
 The user authorized this specification after the
 [Unreal engineering and MCP research](../research/2026-09-27-unreal-engine-engineering-and-mcp.md).

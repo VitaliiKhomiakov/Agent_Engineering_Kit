@@ -56,7 +56,8 @@ requiring an input DTO for each method.
   ORM's rehydration bypasses constructors; it is not a replay of creation checks.
   Verify stored data, mappings and database constraints separately.
 - Keep mapping discovery, namespaces, service registration and class moves in
-  sync. A file move alone does not authorize a schema migration.
+  sync. [Schema changes](schema-verification.md#schema-changes-and-migrations)
+  owns whether a move needs a migration.
 
 ## Mapping and contracts
 

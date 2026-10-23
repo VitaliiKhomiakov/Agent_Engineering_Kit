@@ -49,7 +49,10 @@ def parse_booking(body: bytes) -> BookingInput:
 ```
 
 Strict JSON validation intentionally accepts ISO date strings. Passing the same
-strings through strict Python-object validation has a different contract.
+strings through strict Python-object validation has a different contract. Do not
+reuse this model-wide `strict=True` as a FastAPI body model unchanged: FastAPI
+validates decoded JSON in Python mode, where a strict `date` rejects ISO strings
+([FastAPI input](../../fastapi/transport.md#input-and-public-output)).
 `note` has no default: null is valid, omission is not. A normal typed constructor
 can receive actual `date` objects. The adapter returns one named type; an
 independent use case should receive its owned command/values when transport

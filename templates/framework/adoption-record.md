@@ -13,7 +13,7 @@ and managed scope; the canonical adoption task owns decisions and progress.
 - Target instruction root and selected projects: `<actual roots>`
 - Bundle directory: `<target-root-relative directory; .agents-framework for a new import, . for a retained flat import>`
 - Client/version: `<selected client; unknown version stays unknown>`
-- Canonical adoption task: `<reachable location; no copied task ledger>`
+- Canonical adoption task: `<reachable location, or "to be created at <path>" in a proposed record; no copied task ledger>`
 - State: `<prepared | applied but unverified | verified | partial>`
 - Candidate source: `<accessible location + revision or selected-content manifest>`
 - Candidate profiles and layout: `<IDs, target routes and any adapted locations>`

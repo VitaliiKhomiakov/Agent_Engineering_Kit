@@ -5,7 +5,10 @@ responsibilities, interactions, and layers below have not been verified against
 any specific repositories. This file is neither an audit report nor a migration decision.
 Do not infer installed languages, frameworks, versions, endpoints, or a broker.
 
-The example demonstrates how to fill the root workspace ARCHITECTURE.md.
+The example demonstrates how to fill the root workspace ARCHITECTURE.md. It is
+partial: it illustrates the responsibility, interaction, scenario, layer and
+ownership sections; the template's scope/evidence, current gaps/target decisions
+and navigation/maintenance sections need real project facts and are omitted.
 Replace assumptions with evidence and agreed target decisions during adoption.
 
 ## Responsibility map

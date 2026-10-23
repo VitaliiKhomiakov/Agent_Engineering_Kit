@@ -26,9 +26,10 @@ Doctrine is a separate selection, not implied by Symfony.
 | Symfony HttpClient, Messenger, kernel events, workers, transaction handoff or caches | [Runtime and effects](symfony/runtime-effects.md) |
 | Symfony tests, container/routes, deployment, upgrades or compatibility | [Verification and compatibility](symfony/verification.md) |
 
-For file moves, preserve PHP autoloading and affected service registrations.
-If Doctrine is used, also apply its [profile](doctrine.md) to mapping changes;
-a file move alone does not authorize a data-schema migration.
+For file moves, preserve PHP autoloading and affected service registrations under
+[PHP move rules](php/verification.md#class-and-file-moves).
+If Doctrine is used, also apply its [profile](doctrine.md) to mapping changes and
+its [schema-change rules](doctrine/schema-verification.md#schema-changes-and-migrations) to moves.
 
 ## Basis
 

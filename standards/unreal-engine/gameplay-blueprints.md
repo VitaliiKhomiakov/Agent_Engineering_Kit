@@ -20,9 +20,9 @@ These are roles to select, not a required class list. Distinguish ownership from
 access: retaining a world-owned object in a longer-lived owner requires deliberate
 lifetime management. Resolve the intended world/player; a global reference must
 not silently select another PIE instance. Do not move all state into GameInstance.
-[Gameplay framework](https://dev.epicgames.com/documentation/unreal-engine/gameplay-framework-in-unreal-engine),
-[Subsystems](https://dev.epicgames.com/documentation/unreal-engine/programming-subsystems-in-unreal-engine),
-[World subsystem API](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UWorldSubsystem).
+[Gameplay framework](https://dev.epicgames.com/documentation/unreal-engine/gameplay-framework-in-unreal-engine?application_version=5.8),
+[Subsystems](https://dev.epicgames.com/documentation/unreal-engine/programming-subsystems-in-unreal-engine?application_version=5.8),
+[World subsystem API](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/UWorldSubsystem?application_version=5.8).
 
 Apply the [core design principles](../core.md#practical-solid-dry-kiss-and-yagni)
 through engine-compatible composition. Components, suitable subsystem access,
@@ -48,14 +48,14 @@ adapters solely to mirror a generic architecture diagram.
 - Profile a real performance problem before converting a Blueprint to C++. Neither
   language is mandatory for every feature, and conversion is not a routine cleanup.
 
-Basis: [Blueprint versus C++](https://dev.epicgames.com/documentation/unreal-engine/coding-in-unreal-engine-blueprint-vs-cplusplus).
+Basis: [Blueprint versus C++](https://dev.epicgames.com/documentation/unreal-engine/coding-in-unreal-engine-blueprint-vs-cplusplus?application_version=5.8).
 
 Keep graphs cohesive with meaningful functions and local state. Choose macros
 only where their expansion/latent behavior fits. Use events, delegates or timers
 when work is driven by a change or interval; retain Tick when frame updates are
 actually required. Avoid polling for an existing event or duplicating subscriptions
 across repeated initialization. Blueprint node counts are not source-line limits.
-[Blueprint practices](https://dev.epicgames.com/documentation/unreal-engine/blueprint-best-practices-in-unreal-engine).
+[Blueprint practices](https://dev.epicgames.com/documentation/unreal-engine/blueprint-best-practices-in-unreal-engine?application_version=5.8).
 
 ## Interfaces and dispatch
 
@@ -67,9 +67,11 @@ For Blueprint-capable interface events, call the generated static `Execute_`
 wrapper on the implementing UObject. Calling `_Implementation` directly bypasses
 Blueprint overrides; `Cast<I...>` cannot establish support for an implementation
 added only in Blueprint. At a boundary where support is unknown, establish object
-validity and interface support using reflected checks before dispatch. Do not
+validity, then check `Obj->Implements<UMyInterface>()` or
+`Obj->GetClass()->ImplementsInterface(UMyInterface::StaticClass())` before calling
+`IMyInterface::Execute_Func(Obj, ...)`. Do not
 repeat those checks where the same unchanged contract already guarantees them.
-[Unreal interfaces](https://dev.epicgames.com/documentation/unreal-engine/interfaces-in-unreal-engine).
+[Unreal interfaces](https://dev.epicgames.com/documentation/unreal-engine/interfaces-in-unreal-engine?application_version=5.8).
 
 Choose evidence for the affected caller and native/Blueprint implementation under
 [Unreal verification](verification.md). Compile relevant derived Blueprints when

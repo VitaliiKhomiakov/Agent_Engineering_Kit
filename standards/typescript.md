@@ -16,7 +16,9 @@ Examples and research are optional, not an instruction to load all links recursi
 - Do not add explicit or implicit `any`, including `any[]`, `Promise<any>`, and
   `Record<string, any>`. This also applies to tests, mocks, and fixtures.
 - Describe public object and dependency contracts with named `interface`
-  declarations. Use `type` for unions, tuples, mapped or conditional types, and
+  declarations; variants of a union follow the
+  [variant rule](typescript/composition-effects.md#outcomes-states-and-errors).
+  Use `type` for unions, tuples, mapped or conditional types, and
   types derived from schemas. Do not duplicate a schema with an interface that
   repeats the same fields.
 - Explicitly type the inputs and result of public functions and methods, including
@@ -74,5 +76,5 @@ loading at the changed boundary. Keep the supported compiler/toolchain pinned.
 - [typescript-eslint: no-explicit-any](https://typescript-eslint.io/rules/no-explicit-any/)
   explains the separate ban on explicit `any` and the safer `unknown` type.
 
-These restrictions are mandatory as a user standard; they are not a claim that
+These restrictions are mandatory under this library's policy; they are not a claim that
 the language technically prohibits dynamic types.

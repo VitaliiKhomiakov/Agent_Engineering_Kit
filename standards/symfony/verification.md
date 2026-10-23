@@ -52,8 +52,9 @@ environment, service aliases/tags, route imports and relevant generated caches.
 Preserve route names, DTO/serializer contracts, service IDs, reflection/string
 registrations, message identifiers and ORM mappings during a file move. Coordinate
 cache invalidation/rebuild and worker restart where deployment needs them. Moving
-an entity file does not itself authorize schema DDL or a new domain/persistence
-model. Keep the existing Doctrine guidance until its dedicated adoption stage.
+an entity file does not itself authorize a new domain/persistence model. Schema
+limits follow [PHP move rules](../php/verification.md#class-and-file-moves) and, when
+Doctrine is used, its [schema changes and migrations](../doctrine/schema-verification.md#schema-changes-and-migrations).
 
 ## Versions and operational applicability
 

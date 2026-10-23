@@ -148,6 +148,12 @@ export default tseslint.config(
 );
 ```
 
+This config keeps `no-floating-promises`' default `ignoreVoid: true`, so the
+[latest-result](latest-result.md) example's `void load()` marks a deliberately
+unawaited Effect call. `load` handles its own rejection, because `void` handles
+nothing. The TypeScript, NestJS and Next.js examples set `ignoreVoid: false`;
+they make no such fire-and-forget call.
+
 ### `tests/setup.ts`
 
 ```ts
@@ -254,6 +260,12 @@ export function ReservationForm({ service }: ReservationFormProps): ReactElement
   );
 }
 ```
+
+Within the same reservation feature, `Outcome` restates the `reserved`/`unavailable`
+variants of `ReserveResult` and the `invalid` variant of `ParsedQuantity` inline. Under the TypeScript variant rule,
+new code composes them instead, for example
+`ReserveResult | Extract<ParsedQuantity, { kind: 'invalid' }> | { readonly kind: 'idle' } | { readonly kind: 'failed' }`.
+The executed code above is kept as recorded and was not re-run for this note.
 
 ### `tests/reservation.test.tsx`
 

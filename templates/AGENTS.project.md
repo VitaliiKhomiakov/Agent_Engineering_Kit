@@ -3,6 +3,11 @@
 Optional supplement: replace placeholders, remove this note, and reconcile with
 the root standard before installation. Keep facts and exceptions concise.
 
+Entered only through the workspace root, this file holds local constraints and
+routes; the root entry supplies the policy. If the repository is also opened on its
+own as the launch root, its entry also carries the adapted policy-entry block,
+including the language rule, rebased here and recorded as a deliberate duplicate
+(source MIGRATION "Entry and passport templates").
 Link to the selected rules available inside this repository. Shared rules must
 be reachable when the repository is opened independently. Record the adopted
 provenance route below; a link to an undiscovered parent is insufficient.

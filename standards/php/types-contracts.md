@@ -9,8 +9,9 @@ contracts; PHP does not require every collection to become an object.
 Use native parameter/property/return types where the supported PHP version can
 express the contract. Prefer `declare(strict_types=1)` in new application files;
 introducing it into existing code requires checking coercion-dependent callers.
-For scalar arguments it is the calling file that chooses strictness. Internal
-function callbacks have different behavior; an `int` can still satisfy `float`.
+For scalar arguments it is the calling file that chooses strictness. Calls made
+from within internal functions, such as `array_map()` or `usort()` invoking a
+callback, are not affected by `strict_types`; an `int` can still satisfy `float`.
 This setting does not validate HTTP/CLI/JSON payloads or array members, and does
 not change all comparison or operator conversions.
 [Type declarations](https://www.php.net/manual/en/language.types.declarations.php).

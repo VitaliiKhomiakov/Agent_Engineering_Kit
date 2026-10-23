@@ -26,7 +26,17 @@ validation. Do not expand a single optional argument into an overload family.
 
 ## Outcomes, states and errors
 
-Use named object interfaces for union variants and a `type` alias for their union.
+Use a `type` alias for a union, including an exported one. Name a variant as an
+object interface when it is reused or non-trivial; other variants may stay inline:
+
+- Reused: consumers need to refer to the variant by itself, or the same variant
+  meaning is restated within the same contract, module or feature.
+- Non-trivial: besides the discriminant it has more than two fields or an inline
+  nested object type. Fields typed by a named contract count as single fields.
+
+Compose a larger union from existing unions or named variants, for example
+`RequestResult | { readonly kind: 'idle' }`, instead of restating their variants.
+The [validated-command example](examples/validated-command.md) names its variants.
 A discriminant makes the valid data for each state visible. Handle all relevant
 variants; a `never` exhaustiveness check makes an added variant a compiler-visible
 change at consumers. A default success/fallback can conceal a newly unhandled case.

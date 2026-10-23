@@ -7,6 +7,7 @@ from tools.check_instruction_artifacts import Checker, markdown
 
 
 ROOT = Path(__file__).resolve().parents[1]
+SHARED_EDITOR_MCP = "standards/editor-mcp.md"
 # Existing public topic paths are a compatibility fixture, independent of catalog edges.
 TOPICS: dict[str, tuple[str, ...]] = {
     "postgresql": ("schema-contracts", "transactions-concurrency", "queries-performance",
@@ -111,9 +112,16 @@ class ProfileSelectionChecks(unittest.TestCase):
                                     "react", "nextjs", "nestjs", "angular", "ngrx", "typeorm"})
 
     def test_godot_adds_only_its_engine_resources_to_core(self) -> None:
-        expected = {"standards/godot.md"}
+        expected = {"standards/godot.md", SHARED_EDITOR_MCP}
         expected.update(f"standards/godot/{topic}.md" for topic in TOPICS["godot"])
         self.assertEqual(self.selected("godot") - self.selected("core"), expected)
+
+    def test_engines_share_one_editor_mcp_owner(self) -> None:
+        # Available to each engine alone, without core selecting it.
+        for engine in ("godot", "unreal-engine"):
+            with self.subTest(engine=engine):
+                self.assertIn(SHARED_EDITOR_MCP, self.selected(engine))
+        self.assertNotIn(SHARED_EDITOR_MCP, self.selected("core"))
 
     def test_engine_profiles_compose_only_when_selected(self) -> None:
         self.assertEqual(self.selected("godot", "unreal-engine"),

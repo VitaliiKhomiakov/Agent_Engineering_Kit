@@ -8,7 +8,8 @@ JavaScript; it does not require a new class or directory hierarchy.
 
 ## Put contracts with their consumers and owners
 
-Use a named `interface` for public object and dependency contracts. The interface
+Use a named `interface` for public object and dependency contracts; union variants
+follow the [variant rule](composition-effects.md#outcomes-states-and-errors). The interface
 describes the capability a consumer needs, not every method of a concrete SDK or
 service. Keep transport, persistence and generated-client types behind adapters
 unless the architecture explicitly owns that dependency. Pure contracts should

@@ -4,9 +4,6 @@ Read for server reads, caching, persistence or mutation reconciliation. React's
 [state](../react/state-identity.md) and [forms](../react/forms-contracts.md) sections
 retain client draft/query ownership; do not create a second store here.
 
-- After a mutation, update data through an agreed mechanism. Verify cache and
-  revalidation behavior for the project's Next.js version, not from a general assumption.
-
 ## Identify the actual cache model
 
 Record router/version, `cacheComponents`, runtime and host before choosing APIs.
@@ -38,7 +35,9 @@ Do not cache writes or use a cached stock/permission read to authorize a transac
 
 ## Mutation and invalidation are separate responsibilities
 
-Complete the authoritative operation first, then reconcile the affected data/UI.
+Complete the authoritative operation first, then reconcile the affected data/UI
+through an agreed mechanism. Verify cache and revalidation behavior for the
+project's Next.js version, not from a general assumption.
 The operation owns transaction/concurrency, durable effects and idempotency; a
 Server Action or Route Handler supplies transport, not those guarantees. Reuse the
 appropriate backend/ORM connection lifetime rather than acquiring one per component.

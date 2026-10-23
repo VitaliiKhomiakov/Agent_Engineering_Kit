@@ -162,4 +162,4 @@ provide those through their existing owners; do not copy the illustrative
 unexpected-error mapping as a complete operational policy.
 
 Actual example commands, test results, and retained test sources are recorded in
-the [K02 plan](../../../docs/plans/2026-09-21-engineering-practices.md#k02-working-scope).
+the [practice plan](../../../docs/plans/2026-09-21-engineering-practices.md#k02-working-scope).

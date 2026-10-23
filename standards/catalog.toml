@@ -375,7 +375,7 @@ technologies = ["ngrx"]
 activities = ["design", "implementation", "test", "review"]
 when = "An NgRx package is used or explicitly selected; read only relevant Store/Effects/Entity/Router Store/Signals/ComponentStore guidance, not from Angular alone."
 dependencies = ["angular"]
-globs = ["**/*.actions.ts", "**/*.effects.ts", "**/*.reducer.ts", "**/*.selectors.ts", "**/*.store.ts"]
+globs = ["**/*.actions.ts", "**/*.effects.ts", "**/*.reducer.ts", "**/*.selectors.ts", "**/*.store.ts", "**/*-actions.ts", "**/*-effects.ts", "**/*-reducer.ts", "**/*-selectors.ts"]
 
 [[profiles]]
 id = "nextjs"
@@ -449,7 +449,6 @@ technologies = ["sqlalchemy"]
 activities = ["design", "implementation", "test", "review"]
 when = "SQLAlchemy Core/ORM mappings, queries, sessions, engines, or persistence integration; not every Python task."
 dependencies = ["python"]
-globs = ["**/*.py"]
 
 [[profiles]]
 id = "psycopg"
@@ -466,7 +465,6 @@ technologies = ["psycopg"]
 activities = ["design", "implementation", "test", "review"]
 when = "Psycopg 3 SQL, adaptation, connection, transaction, async or pool integration; not every Python/PostgreSQL task."
 dependencies = ["python", "postgresql"]
-globs = ["**/*.py"]
 
 [[profiles]]
 id = "postgresql"
@@ -513,6 +511,7 @@ resources = [
   "standards/unreal-engine/gameplay-blueprints.md",
   "standards/unreal-engine/build-assets.md",
   "standards/unreal-engine/mcp-editor.md",
+  "standards/editor-mcp.md",
   "standards/unreal-engine/verification.md",
   "standards/unreal-engine/runtime-performance.md",
   "standards/unreal-engine/skills.md",
@@ -535,6 +534,7 @@ resources = [
   "standards/godot/interop.md",
   "standards/godot/tooling-mcp.md",
   "standards/godot/verification.md",
+  "standards/editor-mcp.md",
 ]
 technologies = ["godot", "gdscript"]
 activities = ["design", "implementation", "test", "review", "setup"]

@@ -141,6 +141,8 @@ def markdown(path: Path, text: str) -> Document:
     for number, line in enumerate(text.splitlines(), 1):
         visible_lines.append("")
         marker = FENCE.match(line)
+        if marker and marker[1][0] == "`" and "`" in marker[2]:
+            marker = None  # CommonMark: a backtick fence's info string cannot contain backticks.
         if fence:
             if marker and marker[1][0] == fence[0] and len(marker[1]) >= len(fence) and not marker[2].strip():
                 fence = ""
@@ -428,7 +430,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             files.add(adoption)
     else:
         files = {p for p in checker.root.glob("*.md") if p.is_file()}
-        for directory in ("standards", "templates"):
+        for directory in ("standards", "templates", "examples"):
             files.update(p for p in (checker.root / directory).rglob("*") if p.is_file() and p.suffix in ARTIFACT_SUFFIXES)
     for path in sorted(files):
         checker.check_file(path)

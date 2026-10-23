@@ -16,9 +16,12 @@ discover a class merely because another entity references it in a relation. Ensu
 all relation targets are registered. Maintain the CLI DataSource's discovery
 separately, with the same schema/naming choices and validated configuration.
 
-Let the selected integration own pool startup/shutdown. Do not create a DataSource
-per service/request or close a shared pool from a request-scoped provider. Managed
-shutdown must be connected to the actual process signal path.
+Let the selected integration own pool startup/shutdown: `TypeOrmModule` destroys its
+DataSource in `onApplicationShutdown`, which runs on `app.close()` or, after
+`enableShutdownHooks()`, on a process signal
+([teardown ownership](../nestjs/application-lifecycle.md#startup-and-teardown-ownership)).
+Ensure one of those paths actually runs in the deployed process. Do not create a DataSource per service/request or close a shared pool from a
+request-scoped provider.
 
 ## Application boundary
 

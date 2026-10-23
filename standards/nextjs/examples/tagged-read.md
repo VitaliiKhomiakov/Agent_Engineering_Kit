@@ -16,9 +16,9 @@ the client. A real read adapter would own storage/network validation and credent
 remains cached. Thus an HTTP no-store header does not erase the server data cache.
 The protected invalidation endpoint expires only the fixed tag using `{ expire: 0 }`
 because the next read must be fresh. It does not accept arbitrary caller-supplied
-tags and does not use Server Action-only `updateTag`. The fixture editor capability
-represents permission to administer this public catalog; real scopes need their own
-policy. A webhook would verify its signature rather than copy this test token map.
+tags and does not use Server Action-only `updateTag`. The fixture reuses its
+`canReserve` capability to stand in for permission to administer this public catalog;
+real scopes need their own named permission and policy. A webhook would verify its signature rather than copy this test token map.
 
 The server page passes only `title` into a small Client Component. The `'use client'`
 directive allows interaction but does not prevent initial server rendering. The

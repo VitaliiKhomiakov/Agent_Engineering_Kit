@@ -48,6 +48,18 @@ skill discovery. Source AGENTS/PLANS installation is not required. Limit changes
 to selected targets; import grants no application-code changes, dependency upgrades,
 task-store relocation, other-client setup, global settings or plugin-cache edits.
 
+When no canonical adoption task exists, such as on a first import, preparation
+carries decisions, open questions and evidence in its preview outside the target.
+The preview proposes the task's path and planning store, which the user agrees
+there; the planning policy adopted in the same application does not decide it. An
+explicit import that authorizes the prepared changes also agrees the proposed path,
+unless that path is unresolved or collides with an existing file.
+Authorized application creates that task as a target write, seeded from the
+preview's decisions and evidence, before dependent writes, unless the user names an
+existing task. The preview then becomes historical, leaving one progress owner.
+References below to the canonical adoption task mean the preview until then;
+[Prepare and apply](#prepare-and-apply) owns its relation to the source library plan.
+
 ### Integration entry and location
 
 Use [aek-integrate-project](templates/skills/aek-integrate-project/SKILL.md) for an
@@ -182,7 +194,8 @@ profile's resource list nor a missing file is permission to restore or delete it
 For a new adoption, place imported `standards/` and inactive `templates/` under
 target `.agents-framework/`. The source library keeps its existing layout.
 Root `AGENTS.md`, `ARCHITECTURE.md` and `PLANS.md` retain their project purpose and
-agreed locations. Create the target entry from a template; never export the source
+agreed locations. Create the target entry from the selected
+[entry template](#entry-and-passport-templates); never export the source
 library's maintenance `AGENTS.md`. Keep the canonical task store where it is.
 Native settings, active roles and skills remain in the selected client's supported
 directories; the bundle directory does not replace native discovery locations.
@@ -206,6 +219,35 @@ is selected; a record without a bundle field requires reconciliation with its
 recorded paths and actual files, not an inferred move. Adoption and optional model
 routing remain target-root-relative `.agents-framework/adoption.md` and
 `.agents-framework/model-routing.toml`, including for a flat bundle.
+
+### Entry and passport templates
+
+`templates/policy-entry.md` is the single owner of the adopted policy block. Choose
+each launch scope's entry by this rule:
+
+| Situation | Entry |
+| --- | --- |
+| A root entry already exists | Merge the adapted policy-entry block into it; reconcile conflicts under the conflict policy |
+| No root entry; multi-project workspace | `templates/AGENTS.root.md`: the policy-entry block plus the workspace project map as its `$projects` |
+| No root entry; single project | The adapted policy-entry block as root `AGENTS.md` |
+| Nested repository entered only through the workspace root | `templates/AGENTS.project.md` with local constraints and routes; the root entry already supplies the policy block at that scope (`instructions.local_guideline_lines`) |
+| Repository also opened on its own as the launch root | Its entry carries the adapted policy-entry block, rebased, or a supported native import of that adapted block, plus the `AGENTS.project.md` local facts (`instructions.root_guideline_lines` for that launch scope). Where the workspace launch also loads the root entry, record this as a deliberate duplicate derived from policy-entry: list both copies in the adoption record's managed scope and compare them under [Repeat and update](#repeat-and-update) |
+
+Rows apply per launch scope. Whenever a repository is its own launch root, the last
+row's duplicate recording applies, including when its entry already exists and the
+first row's merge is used.
+
+| Template | Bundled |
+| --- | --- |
+| `templates/policy-entry.md` | Yes, as the catalog `entry` template |
+| `templates/AGENTS.root.md`, `templates/AGENTS.project.md` | No; read from the identified source |
+| `templates/project-architecture.md`, `templates/workspace-architecture.md` (passport and workspace map) | No; read from the identified source |
+
+Templates read from the source produce target files; their adapted results, not
+the inactive templates, are managed adoption content. Copy one of them into the
+bundle only when the adoption explicitly selects it. The selected-bundle scan
+covers only catalog templates, so check such a copy in a separate explicit-path run;
+explicit paths replace the body scan.
 
 ### Adapting installation routes
 
@@ -316,9 +358,13 @@ check selects only particular Markdown bodies. Account for model selection throu
 the [required integration step](#model-selection-step); model configuration retains
 ownership of assignments and native settings.
 
-Phases 1–2 below supply the inventory and selection; phase 3 supplies entry and
-native mapping details. Read only the sections needed by the requested operation.
-They form one procedure for both new and existing projects.
+These five steps are the procedure for both new and existing projects. Phases 1–4
+below are their detailed reference: phases 1–2 supply step 1's inventory and
+selection; phase 3 supplies entry and native-mapping detail for steps 1, 4 and 5;
+phase 4 supplies step 5's record update and activation report. Read only the
+sections needed by the requested operation. A phase's "Ready for review when…" line
+is a readiness criterion for that step's output, not an additional user checkpoint;
+checkpoints follow the [execution rule](#execution-rule-for-the-migration).
 
 1. **Inspect and prepare.** Read affected active instructions and current destination
    contents. Select the catalog bundle, resolve its required local references and
@@ -326,6 +372,8 @@ They form one procedure for both new and existing projects.
    Keep optional research outside required reading. Produce a reviewable change set:
    source identity, profiles, target/client, path-by-path create/update/retire actions,
    proposed content or diff, conflict decisions, retained contracts and check scope.
+   When no canonical adoption task exists and the user names none, list its
+   creation among the create actions.
    Include the model-selection outcome or proposal below. Mark unresolved material
    decisions and the paths they block.
 2. **Respect intent.** Preparation only leaves target files untouched, including
@@ -338,7 +386,9 @@ They form one procedure for both new and existing projects.
 3. **Preserve and reconcile.** Before the first target write, retain original contents
    or absence, including user edits, outside active instruction/skill discovery.
    Compare current files with the preparation baseline; reconcile intervening edits
-   before overwriting. A deletion/retirement needs the same protection. Preserve
+   before overwriting. A deletion/retirement needs the same protection, as does a
+   task file created at its agreed path; an existing file there, including at a
+   default `docs/plans/` path, is a collision to reconcile, not a file to replace. Preserve
    unrelated settings, roles and comments. No Git action or model switch is implied.
 4. **Apply the agreed scope.** Edit the actual loaded sources using the conflict
    rules below. Retire obsolete active content only after its necessary contracts
@@ -356,7 +406,7 @@ They form one procedure for both new and existing projects.
 Updates also need comparison with the last accepted import and current local edits;
 the current source alone is not a safe replacement baseline. The canonical adoption
 task owns decisions, authorization and progress; the source library plan is not a
-second progress record for a target import.
+second progress record or the adoption task for a target import.
 
 ### Model-selection step
 
@@ -511,18 +561,11 @@ cycle merely because another agent resumes the task.
 
 ## Execution rule for the migration
 
-Use [direct mode](standards/work-modes.md) by default: work in the current
-directory and checkout without branches, worktrees, commits, staging, or stashes.
-Define one small logical stage, finish it, apply
-[proportionate verification](standards/verification.md), report the evidence and
-limitations briefly, propose the next stage, and stop for user review. Do not start the
-next stage or a background implementation while waiting.
-
-Only an explicit user instruction enables autonomous worktree execution. Worktree
-permission alone does not grant permission to commit, merge, copy changes into
-another checkout, push, or open a pull request. Record each authorized Git action
-in the task contract. The phases below describe dependencies; they do not grant
-automatic progression through the migration.
+Migration follows the default [direct mode](standards/work-modes.md): one logical
+stage in the current checkout, [proportionate verification](standards/verification.md),
+then a stop for user review. That owner governs worktree execution and each Git
+action; record authorized actions in the task contract. The phases below describe
+dependencies; they do not grant automatic progression through the migration.
 
 ## Phase 1: inventory and conflicts
 
@@ -590,8 +633,10 @@ profiles and complete the
 state from target state. Record language, framework, database, and ORM versions;
 responsibility flow; DTOs; interfaces or Protocols; justified patterns and DI;
 and contract owners where applicable. For Unreal, record engine/build and target
-evidence, gameplay/module/asset owners and engine-managed composition; do not force
-HTTP/ORM fields, backend layers or custom DI constructors. Pattern applicability
+evidence, gameplay/module/asset owners and engine-managed composition. For Godot,
+record actual engine/edition, languages, target platforms/renderer and scene/resource
+owners. Do not force HTTP/ORM fields, backend layers or custom DI constructors on
+engine projects. Pattern applicability
 follows the core standard; migration does not require adding a Factory, Facade,
 Strategy, or monadic abstraction.
 
@@ -599,20 +644,11 @@ Use the [catalog guide](standards/catalog.md) when assembling the bundle: includ
 shared required profiles, selected dependencies and resources, but derive reading
 routes from the task and actual stack. A dependency keeps files available; it
 does not make their instructions applicable. Include the guide among shared assets.
-Check that Python-only work excludes unused FastAPI/Pydantic sections and that
-JavaScript React work excludes TypeScript obligations and unused Next.js sections.
-For Unreal, follow `standards/unreal-engine.md`: Blueprint-only work excludes
-unneeded C++ details, source-only work does not require MCP, and Python editor
-scripting selects relevant Python guidance without unused backend frameworks.
-Generic C++ files alone do not select Unreal. Preserve reachable copies of the
-entry and every resource declared for `unreal-engine` in
-[the catalog](standards/catalog.toml); the mandatory workflow needs no personal skill path.
-For Godot, follow `standards/godot.md` and include every resource declared for
-`godot`. Record actual engine/edition, languages, target platforms/renderer and
-scene/resource owners in the passport. C# and GDExtension guidance is conditional;
-generic C#/C++ files alone do not select Godot. GDScript and an MCP server's own
-language do not select Python/Node application profiles. Profile adoption does not
-install an engine/provider, upgrade a project or authorize mass resaving/formatting.
+Its [task reading table](standards/catalog.md#read-for-the-current-task) and engine
+notes own per-technology inclusion and exclusion; check prepared routes against them,
+including every resource declared for a selected engine profile. The mandatory Unreal
+workflow needs no personal skill path. Profile adoption does not install an
+engine/provider, upgrade a project or authorize mass resaving/formatting.
 For an existing integration, reconcile new routes and rules through
 [B/C/N comparison](#repeat-and-update), preserving local checks, style adaptations
 and client configuration. Assess whether earlier evidence covers newly adopted
@@ -623,16 +659,15 @@ For several projects, also fill the root
 [workspace map](templates/workspace-architecture.md): responsibilities, contracts,
 runtime interactions, and data ownership. Keep internal layers in each passport.
 
-Use compact product features for the frontend target. For Doctrine or TypeORM, explicitly
+For a frontend target, record the product-feature organization chosen under the
+selected framework profile; one framework's layout does not bind another. For Doctrine or TypeORM, explicitly
 choose a mapped rich domain model or a separate domain and persistence model
 according to project needs. Do not present the user's choice as a framework ban
 or requirement.
 
-For NestJS with TypeORM, select both profiles; NestJS with another persistence
-tool does not select TypeORM. TypeORM without NestJS needs no Nest profile.
-Record intent methods and transaction ownership, preserving existing placement.
-For Docker, include Compose-only environments and environment override files in
-stack evidence. Record the dev/prod file combinations and operational owners;
+For NestJS with TypeORM, record intent methods and transaction ownership, preserving
+existing placement. For Docker, include Compose-only environments and environment
+override files in stack evidence. Record the dev/prod file combinations and operational owners;
 importing Docker rules does not authorize running containers or deploying.
 
 Select the execution mode, completion criteria, and risk-based verification
@@ -652,13 +687,13 @@ large architecture changes are divided into verifiable stages.
 ## Phase 3: instruction restructuring
 
 Keep agent-facing instructions, profiles, and templates in canonical English,
-with mandatory rules distinct from recommendations. A user-facing Russian README
-may remain, but do not load a second Russian copy of rules into agent context.
+with mandatory rules distinct from recommendations. A user-facing README in another
+language may remain, but do not load a translated copy of rules into agent context.
 When token comparison is useful, use an available tokenizer for the target model;
 do not substitute byte counts or another unverified encoding.
 
 For every imported project, retain the short reasoning and communication rule from
-the [root AGENTS](templates/AGENTS.root.md) or [policy entry](templates/policy-entry.md):
+the selected [entry template](#entry-and-passport-templates):
 reasoning, internal analysis, working notes, specifications and plans (including
 progress/handoff records) in English; user-facing explanations, questions, progress
 updates, results and final summaries in the user's language. Honor explicit requests
@@ -668,18 +703,31 @@ owns details and artifact-language exceptions. Include the short rule in an
 always-loaded entry for each supported launch scope, including independently
 opened repositories; a conditional route to core alone is insufficient. For Cursor,
 if carried by an `.mdc` rule, use `alwaysApply: true` without file-glob restrictions.
-For Claude Code, ensure the native entry or import bridge reaches that policy.
+For Claude Code, ensure the native entry or import bridge reaches that policy;
+the inactive [Claude bridge](templates/claude/policy-bridge.md) is a starting point.
+
 Reconcile conflicting loaded language rules and record deliberate exceptions under
 the adoption policy. Pass this policy and the selected response language to roles
 that do not inherit the entry, including Superpowers handoffs.
 
+The inactive [Cursor rule](templates/cursor/rule-route.mdc) placeholders mean:
+`$description`, a one-line purpose; `$globs`, the selected profile's catalog
+`globs` hint or none; `$always_apply`, `true` only for always-loaded policy such as
+the language rule, otherwise `false`; `$instructions`, short routes resolved from
+the rule's installed location. Check field syntax against the installed Cursor
+version; a profile without catalog globs is selected by its `when` condition.
+
 Check that prepared/applied entries contain the rule, planning instructions retain
 English for specifications and plans, and their references resolve.
 
-Create a short root AGENTS from the [template](templates/AGENTS.root.md). Add the
+Create or reconcile a short root AGENTS from the selected
+[entry template](#entry-and-passport-templates). Add the
 project map and conditional routes to passports and profiles. Reduce nested AGENTS
 files to local constraints and links, or remove them from the chain after preserving
-their required content. Use the [project template](templates/AGENTS.project.md)
+their required content. The exception is a repository also opened on its own as
+the launch root: its entry carries the policy block under the
+[entry rule](#entry-and-passport-templates), as a recorded deliberate duplicate.
+Use the [project template](templates/AGENTS.project.md)
 when a local addition is necessary.
 Use the resolved `instructions.root_guideline_lines` and
 `instructions.local_guideline_lines` as soft substantive-line ranges. Preserve
@@ -767,16 +815,18 @@ and reference paths for the normal root and independently opened repositories.
 
 ## Phase 4: adoption handoff
 
-Record selected profiles, managed files, retained local constraints and unresolved
-configuration choices in the existing adoption record. Report the file/reference
-checks actually performed and any activation step the selected client requires.
-Instruction adoption is complete within its agreed scope after these checks and
+With step 5's report, record selected profiles, managed files, retained local
+constraints and unresolved configuration choices in the adoption record: the
+existing one on update, or the one created during this application on first import.
+Report any activation step the selected client requires. Instruction adoption is
+complete within its agreed scope after these checks and
 record updates.
 
-## Phase 5: architecture improvements and rollout
+## Separate follow-up: architecture improvements and rollout
 
-Application-code remediation and adoption in additional projects are separately
-scoped work; they are not required merely to complete an instruction import.
+This is not an adoption phase. Application-code remediation and adoption in
+additional projects are separately scoped work; they are not required merely to
+complete an instruction import.
 
 Prioritize discovered violations such as `any`/`Any` leaks, thick entry points,
 blurred responsibilities, duplicated object creation, oversized classes, and
@@ -786,7 +836,7 @@ risk-based checks. Migrating AGENTS files does not repair application code.
 Move the verified standard to another project only after the user authorizes that
 stage. Adapt the stack profile, versions, contract map, commands, model routing,
 and exceptions. Do not copy another project's factual architecture into a different
-stack. Record the framework version and project exceptions.
+stack. Record the source/content identity and project exceptions.
 
 If a rule change regresses behavior, revert that specific change while preserving
 independent user work. Do not hard-reset the repository.

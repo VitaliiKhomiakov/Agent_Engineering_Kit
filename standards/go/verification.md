@@ -34,29 +34,19 @@ Return to the [Go entry](../go.md).
 
 ## Readability acceptance
 
-Use this check within the existing
-[implementation, review and acceptance boundary](../verification.md#readability-acceptance).
-The detailed requirement and examples have one owner:
+Use this Go check within the shared
+[readability acceptance](../verification.md#readability-acceptance), which owns
+inspection after formatting, fixing, recording and acceptance by role. The detailed
+requirement and examples have one owner:
 [Go flow and spacing](style.md#readable-flow-and-spacing).
 
-1. Identify the changed functions and meaningfully affected surrounding code.
-   Determine their steps by purpose using the canonical rule; do not expand a
-   local change into a review or reformat of unrelated functions.
-2. Inspect the final code after formatting against that rule. The implementer
-   fixes in-scope violations before handoff; the existing reviewer applies the
-   same criterion and locates any violated boundary/requirement. Formatter success
-   is separate mechanical evidence, not the result of this inspection.
-3. Include the checked scope and outcome in the existing handoff/review evidence.
-   For example: `cmd/api/main.go: livenessRouter — creation, configuration,
-   registration and final-result groups checked; no violations.` Use actual
-   project paths. One concise statement may cover multiple functions/files;
-   report unresolved violations or accepted exceptions without a per-function log
-   or a second checklist.
-
-The coordinator uses that evidence under the shared acceptance policy. Reuse
-valid evidence for unchanged or moved code under
-[evidence reuse](../verification.md#reuse-evidence-before-repeating-work), including
-the applicable rule and coverage check when acceptance expectations change.
+Identify the changed functions and meaningfully affected surrounding code, and
+determine their steps by purpose using that rule; do not expand a local change into
+a review or reformat of unrelated functions. A concise evidence statement can read:
+`cmd/api/main.go: livenessRouter — creation, configuration, registration and
+final-result groups checked; no violations.` Use actual project paths, and report
+unresolved violations or accepted exceptions. Reuse valid evidence for unchanged or
+moved code under [evidence reuse](../verification.md#reuse-evidence-before-repeating-work).
 
 ## Behavior, security, and performance
 

@@ -68,3 +68,29 @@ MCP provider Blender выделен отдельно от skills; установ
 Реализация политики: [Unreal verification](../../standards/unreal-engine/verification.md)
 и [MCP/editor](../../standards/unreal-engine/mcp-editor.md). Каталог включён в
 переносимый комплект, но читается только при выборе навыков.
+
+## 2026-10-23 addendum: relocated adoption signals
+
+Moved from `standards/unreal-engine/skills.md` on 2026-10-23; observed 2026-09-29
+and not rechecked:
+
+> The Epic repository is vendor-owned (311 GitHub stars observed); a verified
+> skills.sh install count was not established. For RobLe3, the directory reported
+> about 1.2K installs for modeling and 714 for export; the repository had 77 stars.
+
+Directory links: [modeling](https://skills.sh/roble3/cc-blender-skill/blender-modeling),
+[export](https://skills.sh/roble3/cc-blender-skill/blender-export). Example
+individual installation recorded then:
+`npx skills add RobLe3/cc-blender-skill@blender-modeling`. These are dated adoption
+signals, not proof of correctness or a current installation instruction.
+
+2026-10-23 wording check: the UE 5.8
+[Unreal MCP page](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-mcp-in-unreal-editor?application_version=5.8)
+states that the server executes tool invocations serially on the game thread,
+"meaning clients should not issue overlapping Tool calls". The earlier text above
+described this as a requirement; the standards now label non-overlap as local policy.
+
+2026-10-23 telemetry check: the same UE 5.8 page's console-variable table lists
+`ModelContextProtocol.EnableAnalytics`, type `bool`, default `true`, described as
+"Gate telemetry emission". The standards now apply the shared local policy of
+disabling optional telemetry where supported; enabling it is a project decision.

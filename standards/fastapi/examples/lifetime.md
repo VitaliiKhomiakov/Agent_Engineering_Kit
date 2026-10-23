@@ -240,7 +240,7 @@ analyzer over both modules. Actual results are in the
 Starlette TestClient supports HTTPX with a visible deprecation warning in favor of
 HTTPX2; no dependency migration is implied by this example.
 
-Rechecked on 2026-10-03 for PY-01 on the same pinned runtime stack: eight tests
+Rechecked on 2026-10-03 during a Python review follow-up on the same pinned runtime stack: eight tests
 passed, including both body-read failure subcases, and both modules passed strict
 mypy 2.1.0 with the Pydantic plugin. The
 [follow-up evidence](../../../docs/research/2026-09-21-fastapi-engineering-practices.md#2026-10-03-follow-up-py-01)

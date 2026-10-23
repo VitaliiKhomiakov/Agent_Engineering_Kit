@@ -46,8 +46,8 @@ criterion. A single frame cannot establish animation timing or gameplay behavior
 There is no fixed screenshot quota; take additional views only to resolve a
 specific occlusion or unanswered visual criterion.
 
-This cadence is framework policy applying the user's cost constraint. It is
-consistent with [Epic's editor automation guidance](https://dev.epicgames.com/documentation/en-us/unreal-engine/scripting-and-automating-the-unreal-editor)
+This cadence is this library's policy for bounding verification cost. It is
+consistent with [Epic's editor automation guidance](https://dev.epicgames.com/documentation/en-us/unreal-engine/scripting-and-automating-the-unreal-editor?application_version=5.8)
 and [on-demand MCP/code execution](https://www.anthropic.com/engineering/code-execution-with-mcp),
 not a vendor-mandated check count or a measured token-saving claim.
 
@@ -76,14 +76,14 @@ Use engine-dependent automation/functional tests for engine behavior; module-ori
 Low-Level Tests can suit isolated native logic. Their availability does not require
 installing both frameworks or adding a test for every class, accessor or reflected
 field. Keep test data and editor state isolated and restore changes owned by the test.
-[Automation Framework](https://dev.epicgames.com/documentation/unreal-engine/automation-test-framework-in-unreal-engine),
-[Low-Level Tests](https://dev.epicgames.com/documentation/unreal-engine/lowlevel-tests-in-unreal-engine?lang=en-US).
+[Automation Framework](https://dev.epicgames.com/documentation/unreal-engine/automation-test-framework-in-unreal-engine?application_version=5.8),
+[Low-Level Tests](https://dev.epicgames.com/documentation/unreal-engine/lowlevel-tests-in-unreal-engine?lang=en-US&application_version=5.8).
 
 For content changes, select relevant assets/dependencies and confirm which validators
 actually execute. The Data Validation commandlet's default coverage must not be
 assumed to include all Blueprint/Python validators. Running it successfully with no
 relevant validator is not evidence for the intended content contract.
-[Data Validation](https://dev.epicgames.com/documentation/unreal-engine/data-validation-in-unreal-engine).
+[Data Validation](https://dev.epicgames.com/documentation/unreal-engine/data-validation-in-unreal-engine?application_version=5.8).
 
 Add coverage for a material regression or uncovered requirement, at the cheapest
 reliable level. Avoid duplicating the same assertions in unit, editor, functional
@@ -106,18 +106,15 @@ performance by itself.
 
 Build, cook, package and run have different purposes. Select the ones needed by the
 changed contract rather than treating editor success as proof of a target release.
-[Build operations](https://dev.epicgames.com/documentation/unreal-engine/build-operations-cooking-packaging-deploying-and-running-projects-in-unreal-engine).
+[Build operations](https://dev.epicgames.com/documentation/unreal-engine/build-operations-cooking-packaging-deploying-and-running-projects-in-unreal-engine?application_version=5.8).
 Use representative conditions and bounded profiling for performance claims.
-[Performance profiling](https://dev.epicgames.com/documentation/unreal-engine/introduction-to-performance-profiling-and-configuration-in-unreal-engine).
+[Performance profiling](https://dev.epicgames.com/documentation/unreal-engine/introduction-to-performance-profiling-and-configuration-in-unreal-engine?application_version=5.8).
 
 ## Stop when the evidence is sufficient
 
-Before repeating a build, test, search, scene scan, diff review or screenshot, reuse
-the recorded result if applicable. State the changed input, unreliable result,
-concrete unanswered failure or required fresh gate that makes a repeat necessary.
-Use the smallest check that answers it; a final report or new agent is not a reason.
-
-After a fix, repeat affected checks and retain unrelated results. An editor restart
+Shared [evidence reuse](../verification.md#reuse-evidence-before-repeating-work)
+governs repeating a build, test, search, scene scan, diff review or screenshot.
+Unreal-specific invalidation follows. After a fix, repeat affected checks and retain unrelated results. An editor restart
 can invalidate object handles and loaded state without invalidating an unchanged
 source check. A world change can invalidate runtime evidence without requiring
 another whole-project compilation. A report-only edit does not invalidate code tests.

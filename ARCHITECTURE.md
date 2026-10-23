@@ -77,7 +77,7 @@ on redundant tests; connect them through the target entry routes and reconcile
 existing mandatory checks and local contracts.
 
 Agent-facing documentation, profiles, and templates use English as their
-canonical language. A user-facing README may remain in Russian and must not be
+canonical language. A user-facing README may remain in another language and must not be
 loaded as a duplicate instruction source.
 
 ## Target workspace layout
@@ -176,7 +176,7 @@ authorized application preserves originals and reconciles intervening edits firs
 | Bundle availability and task-specific reading | Catalog contract and selected profile routes |
 | Imported provenance, owned scope and accepted contents/exceptions | Target adoption record, adapted from the available template |
 | Actual commands, gates, versions and product contracts | Target local entry/passport/check document; preserve accepted exceptions |
-| Adoption decisions, permission, progress and evidence | Existing canonical adoption task; keep its native store and single progress owner |
+| Adoption decisions, permission, progress and evidence | Existing canonical adoption task, keeping its native store and single progress owner; before one exists, the preparation preview ([MIGRATION](MIGRATION.md#import-inputs-and-boundaries)) |
 | Saved model choices and activation | MIGRATION owns the required integration selection step; model configuration and the native client own setup/reuse and activation within authorization |
 
 Replace conflicting generic process rules in the sources actually loaded; preserve
@@ -222,7 +222,8 @@ opened repositories rather than assuming only `.cursor/` is discovered.
 
 The framework's organizational order is: shared standards define policy; local
 documents contain stack facts, commands, and explicitly accepted exceptions.
-Migration removes conflicting local instructions. Move long local guidance into
+Within authorized scope, migration removes conflicting local instructions; conflicts
+outside that scope are reported unresolved. Move long local guidance into
 ordinary reference files with conditional reading routes. Do not leave opposing
 rules in place and rely on a statement that “the root wins.”
 
@@ -252,20 +253,11 @@ those files; merely writing a link does not load its target.
 
 ## Work modes and checkpoints
 
-The default is direct mode in the current directory and checkout. Do not create
-branches, worktrees, commits, stashes, or staged changes as routine bookkeeping.
-Complete one small logical stage, run necessary checks, report its result and
-limitations briefly, propose the next stage, and stop for user review. Do not implement
-the next stage in the background while the checkpoint is pending.
-
-An explicit user request can enable autonomous worktree execution for a task.
-Permission to use a worktree does not by itself authorize commits, integration,
-pushes, or deployment. Record each granted Git action separately and preserve
-uncommitted user work. At completion, offer the concrete merge; after the approved
-merge and necessary checks succeed, remove the worktree when no work would be lost.
-Branch deletion is a separate permission. See [work modes](standards/work-modes.md) for the complete
-contract and [proportionate verification](standards/verification.md) for evidence
-and review rules.
+The default is direct mode: the current directory and checkout, one logical stage
+with necessary checks, then a stop for user review. Worktree execution and each Git
+action need their own explicit authorization. [Work modes](standards/work-modes.md)
+owns the complete contract, including checkpoints, worktree completion and cleanup;
+[proportionate verification](standards/verification.md) owns evidence and review rules.
 
 ## Workspace model routing
 

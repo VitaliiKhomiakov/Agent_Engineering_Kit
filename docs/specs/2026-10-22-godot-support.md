@@ -1,6 +1,9 @@
 # Godot engineering profile specification
 
 Date: **2026-10-22**. Status: **proposed; awaiting user review**.
+2026-10-23 status note: implemented in the source library by commit `8173afb`
+per the [canonical plan](../plans/2026-10-22-godot-support.md); the original
+proposal text below is retained unchanged, and paths it shows as future now exist.
 Evidence: [dated research and primary sources](../research/2026-10-22-godot-engineering-and-mcp.md).
 Execution and progress: [canonical plan](../plans/2026-10-22-godot-support.md).
 

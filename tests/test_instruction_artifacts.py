@@ -81,6 +81,10 @@ class ArtifactChecks(unittest.TestCase):
         result = self.run_checker()
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_default_scan_includes_examples(self) -> None:
+        self.write("examples/workspace.md", "[Missing](absent.md)\n")
+        self.assert_failure(self.run_checker(), "examples/workspace.md:1:")
+
     def test_indented_list_content_is_not_silently_treated_as_code(self) -> None:
         for marker in ("1.", "-", "10)"):
             for indentation in ("    ", "\t"):
@@ -196,6 +200,16 @@ class ArtifactChecks(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.write("standards/python.md", "[Fake](details.md#fake)\n")
         self.assert_failure(self.run_checker(), "missing fragment")
+
+    def test_backtick_info_string_with_backtick_does_not_open_fence(self) -> None:
+        # CommonMark: such a line is paragraph text, so later links stay checked.
+        self.write("standards/details.md", "# Details\n```py`x`\n[Broken](missing.md)\n")
+        result = self.run_checker()
+        self.assert_failure(result, "missing link target")
+        self.assertNotIn("unclosed fence", result.stdout)
+        self.write("standards/details.md", "# Details\n~~~py`x`\n[Sample](missing.md)\n~~~\n")
+        result = self.run_checker()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_unclosed_fence_fails_at_its_opening_line(self) -> None:
         self.write("standards/details.md", "# Details\n~~~~python\n~~~\n")

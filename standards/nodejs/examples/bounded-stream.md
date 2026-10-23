@@ -215,8 +215,8 @@ pre-abort and in-flight abort destroying streams, observed backpressure with the
 first sink write held, and invalid capacity before ownership transfer. Test files
 are created under the OS temporary directory and removed in `finally`.
 
-JSDoc in both files passed strict TypeScript 7.0.2 `allowJs`/`checkJs` with Node
-24.13.6 types; that optional development check is separate from executing Node.
+JSDoc in both files passed strict TypeScript 7.0.2 `allowJs`/`checkJs` with
+`@types/node` 24.13.6; that optional development check is separate from executing Node.
 The [plan](../../../docs/plans/2026-09-21-engineering-practices.md#k11-result-and-verification)
 records the exact tool command and artifact equality check.
 

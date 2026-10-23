@@ -57,7 +57,7 @@ own acceptance includes tests, it remains unchecked until those tests pass.
 - [ ] S1.2. Verify the required scenarios.
 
 Current item: S1.2 — in progress.
-Stage status: in progress.
+Status: in progress.
 ```
 
 Update the existing item when its criteria are met, before the next item/handoff;

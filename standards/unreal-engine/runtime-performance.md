@@ -17,14 +17,14 @@ Use the actual project's engine, target and [verification policy](verification.m
   before applying results. Handle destruction, cancellation or a superseded request
   when reachable. Do not repeat checks for an unchanged state without a reason.
 
-Basis: [Tasks System](https://dev.epicgames.com/documentation/unreal-engine/tasks-systems-in-unreal-engine).
+Basis: [Tasks System](https://dev.epicgames.com/documentation/unreal-engine/tasks-systems-in-unreal-engine?application_version=5.8).
 
 Retaining or pinning a UObject protects allocation lifetime, not arbitrary shared
 state or gameplay validity. Thread-safe reference counting protects the count,
 not the object. Follow [reference ownership](cpp-lifetime.md#references-and-ownership)
 and the accessed API's contract; do not capture a raw `this` into deferred work
 without a lifetime guarantee.
-[Object pointers](https://dev.epicgames.com/documentation/unreal-engine/object-pointers-in-unreal-engine).
+[Object pointers](https://dev.epicgames.com/documentation/unreal-engine/object-pointers-in-unreal-engine?application_version=5.8).
 
 ## Networking and authority
 
@@ -44,7 +44,7 @@ Apply when networking is affected or multiplayer is an established requirement:
   does not prove a changed multiplayer contract; avoid a full network matrix for
   an unrelated local edit.
 
-Basis: [Networking overview](https://dev.epicgames.com/documentation/unreal-engine/networking-overview-for-unreal-engine).
+Basis: [Networking overview](https://dev.epicgames.com/documentation/unreal-engine/networking-overview-for-unreal-engine?application_version=5.8).
 Settle intended multiplayer constraints early; do not add speculative networking
 to a task whose required scope is single-player.
 
@@ -61,14 +61,14 @@ to a task whose required scope is single-player.
 - Scope optimization to measured cost. No blanket ban on Tick, casts, allocations
   or Blueprints, and no automatic pooling, threading or native rewrite.
 
-Basis: [Performance profiling](https://dev.epicgames.com/documentation/unreal-engine/introduction-to-performance-profiling-and-configuration-in-unreal-engine),
-[bounded trace capture](https://dev.epicgames.com/documentation/unreal-engine/trace-quick-start-guide-in-unreal-engine).
+Basis: [Performance profiling](https://dev.epicgames.com/documentation/unreal-engine/introduction-to-performance-profiling-and-configuration-in-unreal-engine?application_version=5.8),
+[bounded trace capture](https://dev.epicgames.com/documentation/unreal-engine/trace-quick-start-guide-in-unreal-engine?application_version=5.8).
 
 Consult GAS/Lyra when current requirements need their ability, effect, attribute
 or modular gameplay mechanisms. They demonstrate particular solutions, not a
 mandatory architecture for a small interaction. Preserve grant/removal and state
 lifetime ownership when those systems are used.
-[Lyra](https://dev.epicgames.com/documentation/unreal-engine/lyra-sample-game-in-unreal-engine),
-[abilities](https://dev.epicgames.com/documentation/unreal-engine/abilities-in-lyra-in-unreal-engine).
+[Lyra](https://dev.epicgames.com/documentation/unreal-engine/lyra-sample-game-in-unreal-engine?application_version=5.8),
+[abilities](https://dev.epicgames.com/documentation/unreal-engine/abilities-in-lyra-in-unreal-engine?application_version=5.8).
 For rendering, animation, Niagara, Mass or other specialist work, read the relevant
 versioned subsystem contract rather than extrapolating this general section.

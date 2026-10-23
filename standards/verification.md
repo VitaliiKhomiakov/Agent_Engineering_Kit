@@ -73,7 +73,9 @@ them after every edit, file or internal task merely because that step finished.
 Design and write needed tests within the implementation phase; execute them at the
 selected boundary unless an earlier check is required above. With authorized
 progression across internal phases, `task_end` may batch their functional checks
-at task completion. Pending evidence is not acceptance: keep criteria and item
+at task completion. Without that progression, each stage ends at a human checkpoint,
+so `task_end` then uses the same boundary as `phase_end`. The setting selects timing;
+it never authorizes progression. Pending evidence is not acceptance: keep criteria and item
 markers requiring those results open under the adopted planning policy.
 
 Before the selected boundary, run the smallest relevant check only to reproduce a bug,
@@ -285,7 +287,7 @@ also identifies inherited blanket testing instructions as a cause of extra work.
 diff scopes, uncommitted changes, custom CLI review instructions, and model choice.
 
 The one-pass default, incidental-finding boundary, risk examples, diagnostic reset,
-and [control-flow constraints](core.md#simple-control-flow) are our framework policy,
+and [control-flow constraints](core.md#simple-control-flow) are this library's policy,
 not numerical test/review/branch limits documented by OpenAI.
 Audit active skills for conflicting blanket requirements; layering this policy
 over contradictory instructions does not reliably solve the problem.

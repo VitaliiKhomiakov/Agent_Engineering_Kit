@@ -29,13 +29,14 @@ files separately because `git diff --check` does not include them.
 
 | Invocation | Scope |
 | --- | --- |
-| No paths | Full source catalog; root `.md` files and `.md`, `.mdc`, `.toml` files under `standards/` and `templates/` |
+| No paths | Full source catalog; root `.md` files and `.md`, `.mdc`, `.toml` files under `standards/`, `templates/` and `examples/` |
 | Explicit file paths | Full source catalog plus only those file bodies; paths resolve from `--root`, not the current directory |
 | `--root DIR` | Source/target instruction root; the default is this tool's checkout |
 | `--bundle-dir DIR` | Bundle directory relative to `--root`, default `.`; a non-default directory requires explicit profiles |
 | Repeatable `--profile ID` | Shared assets, required and selected profiles with transitive dependencies; their documents, present catalog templates, root `.md` files and existing `.agents-framework/adoption.md` |
 
-Historical `docs/` bodies are opt-in. A checked document's local targets must
+All `docs/` bodies, including active `docs/maintenance/` pages, are opt-in;
+pass edited ones explicitly. A checked document's local targets must
 exist, and a linked heading is inspected even when that target's body was not
 selected. Outgoing links in that target are not recursively scanned. Explicit
 paths replace the default body selection in either source or bundle mode;
@@ -102,7 +103,8 @@ installed entry files explicitly when they are outside catalog resources.
   supported; custom anchors do not change heading numbering.
 - Backtick/tilde fences use at least three matching characters, indented by at
   most three spaces. Closing fences must use the same character and at least
-  the opening length. This repository check requires a closing fence even though
+  the opening length. As in CommonMark, a backtick line whose info string
+  contains a backtick is paragraph text, not a fence opening. This repository check requires a closing fence even though
   CommonMark permits an open fence through end of file. Code blocks and same-line
   inline code are excluded from link checks.
 - Reference-link definitions/uses, HTML hyperlink tags, quoted fences and
@@ -158,16 +160,17 @@ two-template bundle from installing just one native entry. Flat/custom cases
 check the design native reference only; these tests are neither a general installer
 nor client behavior evidence.
 
-Portability tests cover five representative selections across contained, flat and
+Portability tests cover six representative selections across contained, flat and
 custom layouts, independently opened child paths, active planning literals, a
-Claude import and Codex role references. They preserve fixed local sentinels and
-check write-free preparation and identical repeated candidates. These are syntax
+Claude import and Codex role references. They render candidates in memory, check
+that repeated rendering is identical and that writing a candidate preserves fixed
+local sentinels; the in-memory renderer itself is not write-free preparation evidence. These are syntax
 and file-state observations, not client activation or an automated update engine.
 
 Agent-template tests cover the three shared role bodies and Codex/Claude/Cursor
 adapters, catalog closure, body/policy routes in contained/flat/custom bundles,
 missing/wrong/stale routes, selected-pair fixtures, disabled/single-agent choices
-and write-free repeated preparation. The Markdown adapter helper accepts only the
+and identical repeated in-memory candidates. The Markdown adapter helper accepts only the
 templates' small unquoted scalar frontmatter subset; it rejects unsupported syntax
 and is neither a general YAML parser nor native schema validation. Codex uses
 `tomllib`. These tests do not prove semantic instruction following, client loading,
@@ -179,7 +182,7 @@ When modifying the checker or tests, run their focused unittest suites and the
 The checked analyzer baseline is mypy 2.1.0, installed outside the repository:
 
 ```sh
-python -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --explicit-package-bases --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tools/check_model_routing.py tests/test_instruction_artifacts.py tests/test_model_routing.py tests/test_profile_selection.py tests/test_project_skill_adoption.py tests/test_project_skill_portability.py tests/test_agent_templates.py
+python3 -m mypy --strict --disallow-any-explicit --disallow-any-unimported --python-version 3.11 --explicit-package-bases --cache-dir /tmp/aek-mypy-cache tools/check_instruction_artifacts.py tools/check_model_routing.py tests/test_instruction_artifacts.py tests/test_model_routing.py tests/test_profile_selection.py tests/test_project_skill_adoption.py tests/test_project_skill_portability.py tests/test_agent_templates.py
 ```
 
 ## Offline model-routing agreement
@@ -214,10 +217,14 @@ validated. The command never writes files or activates templates.
 
 Exit 0 means these selected project-local fields agree, 1 reports invalid input
 or a conflict, and 2 means invalid arguments or agreement not evaluated (including
-unconfigured/legacy/unknown schemas and unsupported native clients or ID mappings).
-Incomplete configured records fail; no missing pair is inferred from defaults.
+a missing or unconfigured record, legacy/unknown schemas, an absent native
+concurrency field in delegated mode, and unsupported native clients or ID mappings).
+An absent native concurrency field is reported only after the remaining checks run,
+so a definite conflict still exits 1. Incomplete configured records fail; no missing pair is inferred from defaults.
 The source template is deliberately unconfigured and must not be activated to
-make this command pass. Use disposable configured fixtures for source maintenance.
+make this command pass. Use disposable configured fixtures for source maintenance;
+a regression test checks copies of the shipped routing, Codex config and implementer
+templates marked configured in such a fixture.
 
 This is not a full native schema validator or effective-configuration resolver.
 Global/managed/profile/environment/CLI overrides, alternate registration paths,

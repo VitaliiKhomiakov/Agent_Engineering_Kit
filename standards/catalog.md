@@ -33,8 +33,9 @@ flat until relocation is explicitly selected and reconciled.
 
 Select profiles for the actual project stack and intended work. Include shared
 `required` and selected profiles with their transitive dependencies, sources and
-resources, shared assets and needed templates. Keep each file once when it
-appears through several routes. Preserve these IDs and bundle-relative paths;
+resources, shared assets and needed catalog `templates`. Other entry and passport
+templates are read from the source library's MIGRATION section "Entry and passport
+templates". Keep each file once when it appears through several routes. Preserve these IDs and bundle-relative paths;
 change the bundle's placement without prefixing catalog values.
 
 Check reachable references from the adopted entry and copied documents. Templates
@@ -96,6 +97,9 @@ it under this library's policy. Host selection follows the actual task/runtime.
 | Next.js JavaScript or TypeScript | `nextjs-framework`; add `typescript` when used and `nodejs` for Node host work |
 | Angular or NestJS; optional packages | `angular` or `nestjs`; add `ngrx` or `typeorm` only when used |
 | Godot; conditional C# or GDExtension | `godot`; read additional language sections only where used |
+| Unreal Engine project or plugin | `unreal-engine` |
+| PostgreSQL; optional Python database access | `postgresql`; add `sqlalchemy` and/or `psycopg` when used (`psycopg` depends on `postgresql`) |
+| Container builds or Compose environments | `docker` |
 
 Dependencies supply shared bases automatically; explicitly selecting the same
 base again does not duplicate its files. Examples retain their stated language
@@ -106,7 +110,9 @@ The stable IDs `php-symfony-doctrine`, `go-gin`, `python-fastapi`,
 paths, anchors and resource availability. In particular, `nodejs-typescript`
 still does not select TypeScript automatically, while old `nextjs` retains its
 React/TypeScript/Node resource set. The independent Next.js ID is
-`nextjs-framework`; `nextjs-feature-structure` now selects that narrower profile.
+`nextjs-framework`. `nextjs-feature-structure` is a separate optional profile for
+feature-boundary work, not a compatibility aggregate; it depends on `nextjs-framework`,
+which also lists its document as a resource.
 Do not reinterpret an old ID as a new narrow selection. A reviewed selection
 change during adoption follows the source library's MIGRATION repeat/update
 procedure; a smaller closure is not permission to delete previously managed files.
@@ -168,7 +174,16 @@ conditional; an MCP server's language does not select a Python/Node application
 profile. Importing instructions installs no engine or provider.
 
 Angular/NgRx globs are hints too: modern suffix-free Angular files still select
-Angular through declared/actual use; a generic `*.store.ts` does not prove NgRx.
+Angular through declared/actual use, and NgRx globs cover both dotted names and
+this library's hyphenated `<domain>-actions.ts` style; a generic `*.store.ts` or
+`*-actions.ts` does not prove NgRx.
+
+A rendered glob applies only after its profile is selected for the project.
+SQLAlchemy and psycopg carry no `**/*.py` glob because most Python files in such a
+project are not persistence work. PostgreSQL keeps `**/*.sql`: once PostgreSQL is selected, a
+changed SQL file is normally the schema/query work its `when` covers, and migration
+or query paths vary too much to narrow safely. SQL for another engine or a vendored
+dump does not select PostgreSQL guidance.
 NgRx resources cover alternative packages, not a requirement to install them all.
 
 Profiles need not share an application architecture. Unreal selects an engine/editor

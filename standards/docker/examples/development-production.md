@@ -7,7 +7,11 @@ on `0.0.0.0:3000`. Adapt paths for a monorepo or a different Nest output layout.
 The app implements `/health/ready`, reads `DB_PASSWORD_FILE` itself and supports
 SIGTERM draining. Those capabilities are assumptions, not supplied by Compose.
 The service uses PostgreSQL 17's `/var/lib/postgresql/data` layout; changing the
-database major requires its own data/mount upgrade procedure.
+database major requires its own data/mount upgrade procedure. For the official
+image 18+, `PGDATA` is `/var/lib/postgresql/<major>/docker` and the volume belongs
+at `/var/lib/postgresql`; an existing 17 volume must be migrated into that layout.
+The healthcheck needs global `fetch` and `AbortSignal.timeout` in `NODE_IMAGE`:
+unflagged from Node 18 and no longer experimental from Node 21.
 
 ## Image recipe
 

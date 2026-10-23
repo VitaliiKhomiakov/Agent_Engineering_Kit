@@ -12,7 +12,8 @@ ordering. Keep selection as an ID and derive the selected entity. Do not store a
 duplicate array and dictionary that must be manually synchronized.
 
 Use adapter operations according to semantics: `setAll` replaces the collection,
-`addMany` adds new records, `upsertMany` accepts complete records and
+`addMany` adds new records, `setMany` adds or replaces records, `upsertMany` adds
+complete records or shallowly merges them into existing ones, and
 `updateOne`/`updateMany` apply partial changes. Updates are shallow; build a full
 replacement for a nested field when that is the intended transition. Do not
 assume Entity enforces domain invariants or performs server requests.

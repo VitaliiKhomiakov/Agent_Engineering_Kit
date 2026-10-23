@@ -38,7 +38,7 @@ Checked **2026-09-22** against official Docker documentation. Guidance targets
 Linux containers, BuildKit where used, and the current Compose Specification;
 feature support depends on installed tools. Compose example validation used 2.40.3;
 no image was built or run. Existing detection fixtures are not production recipes.
-Evidence: framework source `docs/research/2026-09-22-docker-engineering-practices.md`
+Evidence: [Docker research](../docs/research/2026-09-22-docker-engineering-practices.md)
 (optional research).
 
 [Development/production research](../docs/research/2026-09-27-docker-development-production.md)

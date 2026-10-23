@@ -56,7 +56,9 @@ For a database write plus publish, define the transaction/handoff boundary that
 actually guarantees the requirement. A database transaction does not atomically
 commit an external broker/HTTP call. An outbox or existing durable handoff can be
 appropriate when that guarantee is required; do not add it to a read-only or purely
-local operation. Doctrine middleware/flush details remain the later ORM topic.
+local operation. When Doctrine is used, flush and transaction failure belong to
+its [transaction boundary](../doctrine/unit-of-work-transactions.md#transaction-boundary-and-failure);
+Doctrine middleware details are not covered by this library.
 
 Persistent workers reuse the service graph. Keep services stateless where possible;
 reset per-message state with the configured ResetInterface/container mechanism,

@@ -285,5 +285,5 @@ handoff or retry was exercised. The fake that ignores cancellation still settles
 this does not prove real I/O termination. Public output projection is demonstrated;
 a broader serialization/authorization policy remains with the actual application.
 
-The [K10 record](../../../docs/plans/2026-09-21-engineering-practices.md#k10-result-and-verification)
+The [TypeScript practice record](../../../docs/plans/2026-09-21-engineering-practices.md#k10-result-and-verification)
 contains final commands, negative-check evidence, delivery checks and limits.

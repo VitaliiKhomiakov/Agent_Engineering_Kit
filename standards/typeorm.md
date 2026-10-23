@@ -40,5 +40,5 @@ Read only the task's sections; examples and research are optional.
 
 [Research and verification](../docs/research/2026-09-27-typeorm-engineering-practices.md)
 records official sources checked on 2026-09-27 and the limits of executable checks.
-Rich-model boundaries and the prohibition on attribute setters are framework policy
-requested by the user, not requirements imposed by TypeORM.
+Rich-model boundaries and the prohibition on attribute setters are this library's
+policy, not requirements imposed by TypeORM.

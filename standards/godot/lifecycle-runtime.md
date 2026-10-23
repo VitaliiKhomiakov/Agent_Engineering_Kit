@@ -15,7 +15,11 @@ Repeated activation/reparenting does not imply that `_ready()` runs on every ent
 Free objects through their actual ownership contract. `queue_free()` is deferred;
 a reference can remain after its native object is freed. Signal connections,
 timers, awaited work and delayed callbacks need a lifetime policy when either end
-can disappear or a scene can be replaced. Cancel obsolete work, reject stale results
+can disappear or a scene can be replaced. Freeing a connection's target object drops
+that connection, but lambdas are not tied to the object that created them
+([Object](https://docs.godotengine.org/en/4.7/classes/class_object.html)); C#
+exceptions are in [interop](interop.md#c). Bound arguments and `await` on a
+long-lived or never-emitting signal also need that policy. Cancel obsolete work, reject stale results
 or check validity at that boundary. Do not add blanket validity checks that conceal
 a broken ownership invariant. See the [Node contract](https://docs.godotengine.org/en/4.7/classes/class_node.html).
 
@@ -23,7 +27,11 @@ Resources loaded or instantiated through scenes may be shared. Keep shared
 configuration immutable by convention; actor health, inventory and similar
 per-instance state need the appropriate separate state owner. If a mutable resource
 is intentional, verify whether it is shared, duplicated or scene-local, including
-nested resources. Do not mechanically deep-copy all resources or assume changing
+nested resources. From 4.5, `duplicate(true)` copies only internal subresources; use
+`duplicate_deep()` with an explicit mode when external subresources must also be
+copied, and check code migrated from 4.4
+([4.5 upgrade notes](https://docs.godotengine.org/en/4.7/tutorials/migrating/upgrading_to_godot_4.5.html)).
+Do not mechanically deep-copy all resources or assume changing
 a scene-local flag retroactively isolates existing instances. Emit change
 notifications when custom observable resource state requires them. See
 [resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html) and
@@ -60,7 +68,15 @@ Validate loaded fields before they affect ordinary typed state. Handle missing,
 malformed, unsupported and failed I/O outcomes. When compatibility/durability matters,
 define a data version, supported migration path and interrupted-write strategy;
 these are application responsibilities. Do not enable object deserialization for
-untrusted input. See [saving games](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html)
+untrusted input. Local policy: do not `load()` or `ResourceLoader`-load `.tres`/`.res`
+or scene files from player-modifiable or downloaded locations. Resource files "store
+the path of the script they use"
+([resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html)),
+so loading one also loads that script; code running on load is discussed in engine
+proposals [#4925](https://github.com/godotengine/godot-proposals/issues/4925) and
+[#10968](https://github.com/godotengine/godot-proposals/issues/10968), not in the
+manual. Use a data-only format validated at the boundary and treat ConfigFile values
+as untrusted input. See [saving games](https://docs.godotengine.org/en/4.7/tutorials/io/saving_games.html)
 and [FileAccess](https://docs.godotengine.org/en/4.7/classes/class_fileaccess.html).
 Resource imports/export inclusion have a different owner: [assets and export](assets-export.md).
 

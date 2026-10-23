@@ -273,6 +273,6 @@ concurrent writer, authorization system, duplicate-request policy or transaction
 is implemented. A persistent reservation needs its own concurrency/transaction
 contract. A parsed `note` is data, not proof it is safe at every output sink.
 
-The [K09 record](../../../docs/plans/2026-09-21-engineering-practices.md#k09-result-and-verification)
+The [JavaScript practice record](../../../docs/plans/2026-09-21-engineering-practices.md#k09-result-and-verification)
 contains verification commands, delivery checks and limits. This example does
 not authorize replacing the consumer project's runtime, checker or test framework.

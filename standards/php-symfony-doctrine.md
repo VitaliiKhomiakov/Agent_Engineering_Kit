@@ -26,7 +26,7 @@ DBAL-only work does not require ORM guidance.
 
 ## Framework integration during file moves
 
-Use [PHP verification](php/verification.md) for autoloading and file moves.
+Use [PHP move rules](php/verification.md#class-and-file-moves) for autoloading and file moves.
 Check [Symfony services](symfony/structure-services.md) only with Symfony and
 [Doctrine mapping](doctrine/models-mapping.md) only with Doctrine ORM.
 Their owners retain the constraints on related registration and schema changes.

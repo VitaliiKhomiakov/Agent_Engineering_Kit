@@ -317,5 +317,5 @@ side effect. The readonly interface alone does not create the frozen snapshot;
 the explicit runtime operation does. The numeric type alone permits values the
 domain rejects. The example's state/limits are illustrative, not a product schema.
 
-The [K10 record](../../../docs/plans/2026-09-21-engineering-practices.md#k10-result-and-verification)
+The [TypeScript practice record](../../../docs/plans/2026-09-21-engineering-practices.md#k10-result-and-verification)
 contains final commands, negative-check evidence, delivery checks and limits.

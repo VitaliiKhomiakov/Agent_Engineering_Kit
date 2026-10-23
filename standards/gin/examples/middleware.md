@@ -90,4 +90,4 @@ continue writing a success response after handing off an error.
 
 Run `gofmt`, relevant `go test` checks, and `go vet` under the project's supported
 toolchain. Actual checks and retained test sources are recorded in the
-[K02 plan](../../../docs/plans/2026-09-21-engineering-practices.md#k02-working-scope).
+[practice plan](../../../docs/plans/2026-09-21-engineering-practices.md#k02-working-scope).

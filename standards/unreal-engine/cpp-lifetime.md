@@ -20,22 +20,22 @@ apply; engine-managed composition follows [gameplay ownership](gameplay-blueprin
 - Keep project-owned copyright notices. Epic's source-header policy does not
   make Epic the owner of user code.
 
-Basis: [Epic coding standard](https://dev.epicgames.com/documentation/unreal-engine/epic-cplusplus-coding-standard-for-unreal-engine).
+Basis: [Epic coding standard](https://dev.epicgames.com/documentation/unreal-engine/epic-cplusplus-coding-standard-for-unreal-engine?application_version=5.8).
 
 Choose `FName` for identifiers/comparisons, `FString` for string manipulation and
 `FText` for localizable display text. Preserve identifier case requirements and
 localization intent across conversions; these types are not interchangeable.
-[String handling](https://dev.epicgames.com/documentation/unreal-engine/string-handling-in-unreal-engine).
+[String handling](https://dev.epicgames.com/documentation/unreal-engine/string-handling-in-unreal-engine?application_version=5.8).
 
 Expose `UCLASS`, `USTRUCT`, `UPROPERTY` and `UFUNCTION` only for a required engine
 contract. Preserve the generated-header layout and supported reflected signatures;
 edit declarations, not UHT output. Reflection/serialization support does not imply
 that every type or field automatically replicates or is visible to Blueprints.
-[UHT](https://dev.epicgames.com/documentation/unreal-engine/unreal-header-tool-for-unreal-engine).
+[UHT](https://dev.epicgames.com/documentation/unreal-engine/unreal-header-tool-for-unreal-engine?application_version=5.8).
 Inspect module/target settings before depending on exceptions or RTTI. Use reflected
 type mechanisms where appropriate; do not change global flags or disable diagnostics
 to accommodate an unrelated C++ recipe.
-[Module properties](https://dev.epicgames.com/documentation/unreal-engine/module-properties-in-unreal-engine).
+[Module properties](https://dev.epicgames.com/documentation/unreal-engine/module-properties-in-unreal-engine?application_version=5.8).
 
 ## Construction and lifecycle
 
@@ -47,8 +47,8 @@ to accommodate an unrelated C++ recipe.
   objects. Do not assume a playable world, local player or live subsystem there.
   Select later initialization by the dependency's actual availability.
 
-Basis: [Objects](https://dev.epicgames.com/documentation/unreal-engine/objects-in-unreal-engine),
-[ordinary smart pointers](https://dev.epicgames.com/documentation/unreal-engine/smart-pointers-in-unreal-engine).
+Basis: [Objects](https://dev.epicgames.com/documentation/unreal-engine/objects-in-unreal-engine?application_version=5.8),
+[ordinary smart pointers](https://dev.epicgames.com/documentation/unreal-engine/smart-pointers-in-unreal-engine?application_version=5.8).
 
 - Spawn Actors through the appropriate world spawning API; complete deferred
   spawning when used. Respect load, duplication and spawn paths rather than
@@ -62,7 +62,7 @@ Basis: [Objects](https://dev.epicgames.com/documentation/unreal-engine/objects-i
   Memory existence is not proof of active gameplay participation; streaming can
   end and later restore participation without allocating a fresh object.
 
-Basis: [Actor lifecycle](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-actor-lifecycle).
+Basis: [Actor lifecycle](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-actor-lifecycle?application_version=5.8).
 
 ## References and ownership
 
@@ -72,14 +72,17 @@ Basis: [Actor lifecycle](https://dev.epicgames.com/documentation/unreal-engine/u
 | Non-owning cache or deferred target | `TWeakObjectPtr<T>`; resolve and check at use after possible invalidation |
 | Asset path for loading on demand | `TSoftObjectPtr<T>` / appropriate soft class reference; a path alone neither loads nor retains an asset |
 | Short-lived parameter/local | Raw pointer when lifetime and access are established |
-| Deliberate retention from a non-UObject owner | `TStrongObjectPtr<T>` where needed; consider retention cost and cycles |
+| Deliberate retention from a non-UObject owner | `TStrongObjectPtr<T>` for individual handles, or an `FGCObject` that implements `AddReferencedObjects` and `GetReferencerName`; consider retention cost and cycles, and do not store an `FGCObject` by value in Unreal containers |
 
-A bare `TObjectPtr` is not automatically a GC-tracked root. Ordinary shared/unique
+`TObjectPtr` affects GC only as a reflected `UPROPERTY` or a reference reported
+through `AddReferencedObjects`; a bare member neither retains its target nor is
+cleared when the target is destroyed. Ordinary shared/unique
 pointers cannot own UObjects. Soft references need an explicit loading and retention
 strategy. Keeping an object allocated or pinning a weak reference does not establish
 thread safety or current gameplay validity. Reuse an established lifetime contract;
 do not mechanically replace every raw pointer.
-[Object pointers](https://dev.epicgames.com/documentation/unreal-engine/object-pointers-in-unreal-engine).
+[Object pointers](https://dev.epicgames.com/documentation/unreal-engine/object-pointers-in-unreal-engine?application_version=5.8),
+[FGCObject](https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/CoreUObject/FGCObject?application_version=5.8).
 
 ## Guards and diagnostics
 
@@ -98,4 +101,4 @@ reference and relevant state again. A non-null address alone may be insufficient
 
 Use diagnostics at the owning boundary, not on every layer or Tick. Select checks
 for the changed behavior under [Unreal verification](verification.md).
-[Assertion behavior](https://dev.epicgames.com/documentation/unreal-engine/asserts-in-unreal-engine).
+[Assertion behavior](https://dev.epicgames.com/documentation/unreal-engine/asserts-in-unreal-engine?application_version=5.8).

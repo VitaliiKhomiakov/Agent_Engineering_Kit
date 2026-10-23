@@ -175,8 +175,13 @@ def native_roles(root: Path, chosen: Selection) -> None:
             raise ValueError(f"{relative}: model/reasoning pair differs from saved role")
 
 
+ROUTING_RECORD = ".agents-framework/model-routing.toml"
+
+
 def check(root: Path, default_role: str | None) -> None:
-    chosen = selection(read(root, ".agents-framework/model-routing.toml"))
+    if not contained(root, ROUTING_RECORD).exists() and not (root / ROUTING_RECORD).is_symlink():
+        raise NotEvaluated(f"{ROUTING_RECORD} is missing; no saved agreement to check")
+    chosen = selection(read(root, ROUTING_RECORD))
     config = read(root, ".codex/config.toml")
     if pair(config, "model_reasoning_effort", ".codex/config.toml") != chosen.roles["orchestrator"]:
         raise ValueError(".codex/config.toml: coordinator model/reasoning pair differs")
@@ -184,10 +189,16 @@ def check(root: Path, default_role: str | None) -> None:
     enabled = boolean(agents.get("enabled"), "agents.enabled")
     if enabled != (chosen.mode == "delegated"):
         raise ValueError("agents.enabled: differs from saved mode")
+    # Definite conflicts found by later checks take precedence over this limitation.
+    pending: NotEvaluated | None = None
     if enabled:
-        ceiling = integer(agents.get("max_concurrent_threads_per_session"), "native ceiling")
-        if ceiling != chosen.ceiling:
-            raise ValueError("native ceiling differs from max_subagents")
+        if "max_concurrent_threads_per_session" not in agents:
+            pending = NotEvaluated("agents.max_concurrent_threads_per_session is absent; "
+                                   "native ceiling agreement not evaluated")
+        else:
+            ceiling = integer(agents.get("max_concurrent_threads_per_session"), "native ceiling")
+            if ceiling != chosen.ceiling:
+                raise ValueError("native ceiling differs from max_subagents")
     if default_role is not None:
         if default_role == "orchestrator" or default_role not in chosen.roles:
             raise ValueError("--default-role must name an enabled specialist")
@@ -197,6 +208,8 @@ def check(root: Path, default_role: str | None) -> None:
             if agents.get(key) != value:
                 raise ValueError(f"agents.{key}: differs from explicit default role {default_role}")
     native_roles(root, chosen)
+    if pending is not None:
+        raise pending
 
 
 def main() -> int:

@@ -96,7 +96,7 @@ requirement to install two compilers.
 TypeScript 6/7 change defaults and deprecations relative to 5.x. Preserve explicit
 strictness, targets, module choices and included ambient types; review the actual
 release notes for an authorized upgrade. An article recommending a migration
-does not authorize changing a consumer project or weakening this framework's
+does not authorize changing a consumer project or weakening this library's
 strict policy. Update lock/config/framework outputs coherently when migration is
 in scope; do not paper over diagnostics with a blanket suppression.
 

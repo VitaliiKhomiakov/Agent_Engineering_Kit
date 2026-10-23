@@ -90,5 +90,5 @@ Sources: [modules](https://docs.python.org/3.11/tutorial/modules.html),
 [typing library guidance](https://typing.python.org/en/latest/guides/libraries.html),
 [src and flat layouts](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/),
 [project metadata](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/).
-Boundary and pattern choices above are framework policy and conditional design
+Boundary and pattern choices above are this library's policy and conditional design
 defaults, not Python language requirements.

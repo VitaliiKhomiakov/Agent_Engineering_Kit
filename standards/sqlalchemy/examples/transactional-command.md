@@ -13,10 +13,11 @@ PostgreSQL **16.15**, psycopg **3.3.6**, asyncpg **0.31.0** and mypy **2.1.0**.
 The stage retains the full resolved dependency list; these direct pins do not freeze
 all transitives. No SQLAlchemy typing plugin or external stubs are needed.
 
-These tests create/drop their `k16_*` tables. Set `K16_PG_SOCKET` to the Unix-socket
+These tests create/drop their `k16_*` tables; the `k16_` prefix and `K16_PG_SOCKET`
+are fixture names retained from the recorded run. Set `K16_PG_SOCKET` to the Unix-socket
 directory of a **disposable PostgreSQL database** accessible as postgres, database
-postgres. This is local fixture authentication, not production configuration. K16
-used a task-owned container with network disabled, database data in tmpfs and only
+postgres. This is local fixture authentication, not production configuration. The
+recorded run used a task-owned container with network disabled, database data in tmpfs and only
 a task-scoped socket directory mounted to the host. Production uses its own role,
 credentials and driver transport; do not repoint this fixture at an application DB.
 
@@ -261,5 +262,5 @@ because these are fresh disposable tables, not because create_all migrates schem
 
 Limits: no production authorization, idempotency receipt replay, SQLSTATE translation,
 deadlock/retry scheduler, real migration, proxy pool, lost connection during COMMIT,
-failover or load benchmark. The psycopg dialect is a fixture dependency, not K17
-adoption. No SQLAlchemy 1.4/2.1 runtime or alternative database was tested.
+failover or load benchmark. The psycopg dialect is a fixture dependency, not
+selection of the `psycopg` profile. No SQLAlchemy 1.4/2.1 runtime or alternative database was tested.

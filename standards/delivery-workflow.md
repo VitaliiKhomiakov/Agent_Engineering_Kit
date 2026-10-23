@@ -50,19 +50,15 @@ practical. Name its affected area, dependencies, criteria, and necessary checks.
 An entire backend with testing deferred until later is too broad; each edit is too small.
 Necessary tests belong to the implementation phase.
 
-Use `verification.timing` through the verification owner to select the phase/task
-batching boundary. Required phase gates and human-checkpoint acceptance stay binding;
-a bounded unphased change has the same completion boundary in either setting. Internal
-steps and item markers do not each trigger a cycle. Intermediate checks need a concrete reason
-under [verification timing](verification.md#what-to-run-and-when), including selected
-TDD or a required gate. Define acceptance and necessary checks before implementation;
-reuse valid evidence and rerun affected checks after repairs. Keep summaries compact
-under the [output policy](verification.md#compact-check-output).
+[Verification timing](verification.md#what-to-run-and-when) owns the check batching
+boundary, required gates and reasons for intermediate checks; internal steps and
+item markers do not each trigger a cycle. Reuse valid evidence, rerun affected checks
+after repairs and keep summaries compact under the [output policy](verification.md#compact-check-output).
 
 ## Phase completion
 
-For an internal phase whose checks are deferred under authorized `task_end`
-progression, record implementation progress and pending criteria without claiming
+For an internal phase whose checks are deferred under `task_end` with authorized
+progression across internal phases, record implementation progress and pending criteria without claiming
 verified completion. Apply the checks and accountable review below at the selected
 boundary. A human stage checkpoint still requires its acceptance evidence under
 [verification timing](verification.md#what-to-run-and-when).

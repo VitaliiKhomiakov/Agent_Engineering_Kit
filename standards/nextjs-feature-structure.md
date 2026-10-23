@@ -106,7 +106,8 @@ needed for the current structure decision, not every linked resource.
 
 - [Next.js: Project Structure](https://nextjs.org/docs/app/getting-started/project-structure)
   allows different organization approaches, colocation, private folders, and route
-  groups. Next.js does not require FSD; this structure is the chosen user standard.
+  groups. Next.js does not require FSD; this structure is this library's chosen standard.
 
-Do not adopt middleware, caching, or framework-file placement rules from a
-third-party example without checking the installed Next.js version's documentation.
+Do not adopt Proxy (`middleware` before 16.0), caching, or framework-file placement
+rules from a third-party example without checking the installed Next.js version's
+documentation.

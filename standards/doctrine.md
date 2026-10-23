@@ -30,8 +30,8 @@ Symfony is not required by this profile; its integration rules apply only when u
 | Doctrine mapping/schema tests, migrations, deployment, upgrades or compatibility | [Schema and verification](doctrine/schema-verification.md) |
 
 When moving a mapped class, check PHP autoloading and affected mapping;
-check DI registration only where present. A file move alone does not authorize
-a data-schema migration.
+check DI registration only where present. [Schema changes](doctrine/schema-verification.md#schema-changes-and-migrations)
+owns whether a move needs a migration.
 
 ## Basis
 

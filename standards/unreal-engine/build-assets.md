@@ -21,16 +21,16 @@ documented reference is UE 5.8. Select checks with [Unreal verification](verific
   dependencies remain private. Keep dependencies acyclic rather than enabling
   legacy circular allowances to silence a build error.
 
-Basis: [Modules](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-modules),
-[module properties](https://dev.epicgames.com/documentation/unreal-engine/module-properties-in-unreal-engine).
+Basis: [Modules](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-modules?application_version=5.8),
+[module properties](https://dev.epicgames.com/documentation/unreal-engine/module-properties-in-unreal-engine?application_version=5.8).
 
 Include the headers actually needed; keep headers self-sufficient and include the
 matching header first in its implementation. Do not rely on an unrelated unity
 build file or transitive include for correctness. Respect the project's supported
 IWYU/PCH settings rather than globally changing them for a local fix.
-[IWYU](https://dev.epicgames.com/documentation/unreal-engine/include-what-you-use-iwyu-for-unreal-engine-programming).
+[IWYU](https://dev.epicgames.com/documentation/unreal-engine/include-what-you-use-iwyu-for-unreal-engine-programming?application_version=5.8).
 Edit reflected declarations, not generated output; UHT processing precedes C++
-compilation. [UHT](https://dev.epicgames.com/documentation/unreal-engine/unreal-header-tool-for-unreal-engine).
+compilation. [UHT](https://dev.epicgames.com/documentation/unreal-engine/unreal-header-tool-for-unreal-engine?application_version=5.8).
 
 Preserve diagnostic/build failures and identify the affected module or missing
 input. A local change does not justify an engine rebuild, global flag override,
@@ -52,7 +52,7 @@ Live Coding supports reinstancing, but cached object references and constructor
 defaults require care. Do not disable reinstancing to suppress symptoms or assume
 every structural edit has the same reload behavior. Preserve unsaved work before
 restart, and reacquire changed editor handles afterward.
-[Live Coding](https://dev.epicgames.com/documentation/unreal-engine/using-live-coding-to-recompile-unreal-engine-applications-at-runtime).
+[Live Coding](https://dev.epicgames.com/documentation/unreal-engine/using-live-coding-to-recompile-unreal-engine-applications-at-runtime?application_version=5.8).
 
 ## Binary assets and reference migrations
 
@@ -69,9 +69,9 @@ restart, and reacquire changed editor handles afterward.
   consumers. Preserve required saved-content compatibility and keep redirects until
   the supported migration contract permits removal, not merely until code compiles.
 
-Basis: [Binary assets and source control](https://dev.epicgames.com/documentation/unreal-engine/using-perforce-as-source-control-for-unreal-engine),
-[asset redirectors](https://dev.epicgames.com/documentation/unreal-engine/asset-redirectors-in-unreal-engine),
-[Core Redirects](https://dev.epicgames.com/documentation/unreal-engine/core-redirects-in-unreal-engine).
+Basis: [Binary assets and source control](https://dev.epicgames.com/documentation/unreal-engine/using-perforce-as-source-control-for-unreal-engine?application_version=5.8),
+[asset redirectors](https://dev.epicgames.com/documentation/unreal-engine/asset-redirectors-in-unreal-engine?application_version=5.8),
+[Core Redirects](https://dev.epicgames.com/documentation/unreal-engine/core-redirects-in-unreal-engine?application_version=5.8).
 For editor mutations and partial recovery, use [MCP/editor workflow](mcp-editor.md#mutation-and-recovery)
 when operating through that provider; the asset ownership contract also applies
 to other supported editing tools.
@@ -87,11 +87,14 @@ Use Asset Manager for an actual discovery/loading/audit or chunking requirement;
 do not make every reference soft or every small feature a primary-asset system.
 Verify that dynamically selected assets are included by the project's actual cook
 rules. Presence in the Content Browser is insufficient.
-[Asset management](https://dev.epicgames.com/documentation/unreal-engine/asset-management-in-unreal-engine).
+[Asset management](https://dev.epicgames.com/documentation/unreal-engine/asset-management-in-unreal-engine?application_version=5.8).
 
 Build compiles code; cook prepares target content; stage/package assemble it;
-deploy/run exercise a target. Use the selected project commands and required gates.
+deploy/run exercise a target. Packaging normally runs UAT `BuildCookRun` through
+`RunUAT.bat`/`RunUAT.sh` in `Engine/Build/BatchFiles`, or through the editor's
+Platforms menu or Project Launcher, which generate it. Use the selected project
+commands and required gates.
 An editor build is not evidence that an editor-only dependency or dynamically
 loaded asset works in the package. Avoid full cook/package cycles for unchanged
 contracts; [verification](verification.md) determines what evidence is needed.
-[Build operations](https://dev.epicgames.com/documentation/unreal-engine/build-operations-cooking-packaging-deploying-and-running-projects-in-unreal-engine).
+[Build operations](https://dev.epicgames.com/documentation/unreal-engine/build-operations-cooking-packaging-deploying-and-running-projects-in-unreal-engine?application_version=5.8).

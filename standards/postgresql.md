@@ -42,6 +42,6 @@ The initial fixture declares PostgreSQL 16. Research checked the 16 and 18 manua
 on **2026-09-21**; examples ran on **16.15 and 18.4**. Current support/patch status
 must be checked for deployment; the locally tested 18.4 is not a patch recommendation.
 Use features supported by the actual server and migration tool, not `/current/`
-documentation by assumption. Evidence and tradeoffs: framework source
-`docs/research/2026-09-21-postgresql-engineering-practices.md` (optional research,
-not a required installed rule).
+documentation by assumption. Evidence and tradeoffs:
+[PostgreSQL research](../docs/research/2026-09-21-postgresql-engineering-practices.md)
+(optional research, not a required installed rule).

@@ -340,7 +340,7 @@ discarded-writer-error case above; do not suppress whole packages or method name
 
 ## Evidence and limits
 
-The [dated G1 record](../../../docs/research/2026-10-13-go-gin-gorm-style-evidence.md)
+The [dated style-evidence record](../../../docs/research/2026-10-13-go-gin-gorm-style-evidence.md)
 contains executed checks and exact versions, separate from source review.
 This fixture does not prove editor integration, every rule/exception, generated
 code workflows, multiple modules/build tags, or compatibility with other Go/tool

@@ -126,5 +126,5 @@ Basis: [why Store](https://ngrx.io/guide/store/why),
 [ComponentStore](https://ngrx.io/guide/component-store),
 [feature state](https://ngrx.io/guide/store/feature-creators) and
 [Effects](https://ngrx.io/guide/effects).
-The ownership matrix, file placement and cache/reset obligations are framework
-policy; the chosen folders do not establish NgRx instance scope.
+The ownership matrix, file placement and cache/reset obligations are this
+library's policy; the chosen folders do not establish NgRx instance scope.

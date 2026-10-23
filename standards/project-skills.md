@@ -14,8 +14,8 @@ the identified source's MIGRATION procedure, not by this task-time guide.
 | [aek-design-feature](../templates/skills/aek-design-feature/SKILL.md) | Designing a new capability or material architecture/public-contract change in a project using AEK | Technical decisions connected to local owners, contracts, applicable rules and acceptance evidence | Wording-only changes, a routine fix with settled design, review-only work, or restarting an approved design |
 | [aek-review-changes](../templates/skills/aek-review-changes/SKILL.md) | Requested review of changed code/contracts or an applicable completion review | Located consequential findings and explicit coverage/evidence limits | Automatic fixes, whole-project audits, wording-only edits, reviewer dispatch or setup merely because this entry is read |
 
-Both entries are optional. Select one when the project explicitly requests that
-entry. Implementation uses the ordinary [core task route](core.md#task-scope-and-context)
+Both entries are optional. Install only entries the project explicitly selects;
+an installed entry then applies when its task trigger above matches. Implementation uses the ordinary [core task route](core.md#task-scope-and-context)
 and existing delivery/verification
 owners; it needs neither this profile nor a separate implementation skill.
 
@@ -64,7 +64,8 @@ guide nor a template changes native instruction precedence.
 Record the result in the existing canonical task/design location according to
 the adopted planning policy. A bounded decision may remain in the response when
 that policy permits it. Do not create a parallel plan or move a native task store.
-Include the parts needed for the affected behavior:
+A read-only role, such as `af-architect`, returns the result to the coordinator,
+who records it. Include the parts needed for the affected behavior:
 
 - Outcome, scope, compatibility and material open decisions.
 - Current and proposed owners at actual project paths, changed interfaces and

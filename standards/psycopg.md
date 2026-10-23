@@ -35,5 +35,5 @@ links recursively. Separate examples are optional, not automatic reading routes.
 Research started 2026-09-21 and completed **2026-09-22**, targeting **3.3.6**.
 The moving manual currently labels itself 3.3.7.dev1; release status and installed
 capabilities take precedence. Snippets received syntax/type and offline composition
-checks, not database execution. Evidence: framework source
-`docs/research/2026-09-21-psycopg-engineering-practices.md` (optional research).
+checks, not database execution. Evidence:
+[psycopg research](../docs/research/2026-09-21-psycopg-engineering-practices.md) (optional research).

@@ -39,7 +39,7 @@ portable bundle. Availability does not require preloading every topic.
 | Scene serialization, UID, imported assets, VCS or export | [Assets and export](godot/assets-export.md) |
 | Input, UI layout, renderer or a performance question | Relevant [UI/performance sections](godot/ui-performance.md) |
 | C# or GDExtension | Relevant [interop section](godot/interop.md); no unused language setup |
-| Tool selection, editor/MCP discovery, mutation or recovery | [Tooling and MCP](godot/tooling-mcp.md) |
+| Tool selection, editor/MCP discovery, mutation or recovery | [Tooling and MCP](godot/tooling-mcp.md), with the [shared editor MCP rules](editor-mcp.md) it routes to |
 | Selecting checks, reviewing evidence or reporting completion | [Verification](godot/verification.md) |
 
 A source-only task does not require MCP. GDScript is not Python; an add-on/server's

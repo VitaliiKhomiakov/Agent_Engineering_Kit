@@ -37,4 +37,4 @@ encapsulation mode from a newer manual without checking the installed release.
 Basis: [component styling](https://angular.dev/guide/components/styling),
 [style guide](https://angular.dev/style-guide) and
 [accessibility](https://angular.dev/best-practices/a11y).
-Token organization and override ownership are this framework's conventions.
+Token organization and override ownership are this library's conventions.

@@ -4,6 +4,8 @@ Optional illustration of [Store/selectors](../store-selectors.md). The fixture
 receives already validated catalog records and performs local filtering; it is
 not an HTTP workflow or a server cache. Supply records by dispatching
 `catalogReceived`. Error/request ownership belongs to the feature's Effects.
+`catalog-state.ts` combines actions, reducer and selectors in one file for brevity;
+a project follows the [per-file placement](../state-architecture.md#flat-classic-store-files).
 Use the versions supported by the target project; verification is recorded in
 the [research note](../../../docs/research/2026-09-29-angular-ngrx-engineering-practices.md).
 

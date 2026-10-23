@@ -73,5 +73,5 @@ Sources: [model semantics](https://docs.pydantic.dev/latest/concepts/models/),
 [copy contract](https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_copy),
 [TypeAdapter](https://docs.pydantic.dev/latest/concepts/type_adapter/),
 [settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/).
-The lifecycle/ownership requirements apply existing framework policy; none
+The lifecycle/ownership requirements apply this library's existing policy; none
 requires making every domain entity a Pydantic model.

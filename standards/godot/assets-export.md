@@ -49,8 +49,11 @@ Load imported engine resources with appropriate resource APIs. Raw filesystem re
 that work in the editor checkout can fail after export. Check dynamic inclusion,
 case-sensitive paths, presets, templates and platform dependencies when affected.
 An editor run does not validate an exported build. Keep signing material/credentials
-out of committed configuration, without indiscriminately applying older Godot
-export-preset ignore rules to newer releases. See
+out of committed configuration. From 4.1, confidential export options live in
+`.godot/export_credentials.cfg`, not in the committable `export_presets.cfg`. Supply
+CI secrets through a platform's documented environment variables where available,
+and review presets carried over from 3.x/4.0 for embedded credentials rather than
+ignoring every preset file. See
 [exporting projects](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_projects.html).
 
 Keep development add-ons from becoming accidental runtime dependencies or exposing

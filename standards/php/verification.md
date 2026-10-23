@@ -29,12 +29,18 @@ external `mixed` values must be narrowed first. Framework reflection/ORM magic
 can need the installed analyzer extension; do not add one speculatively to a
 language-only task. Static analysis complements runtime boundary tests.
 
-For a PSR-4 move, check namespace/path/case, public imports and parameter names,
-Composer maps, string/CLI entry points, and relevant container/ORM registration.
+### Class and file moves
+
+This section owns the general PHP move rule; Doctrine's
+[schema changes](../doctrine/schema-verification.md#schema-changes-and-migrations)
+own the Doctrine-specific decision. For a PSR-4 move, check namespace/path/case,
+public imports and parameter names, Composer maps, string/CLI entry points, and
+container/ORM registration only for the integrations present.
 Use the project's autoload check; where supported,
 `composer dump-autoload --optimize --strict-psr --strict-ambiguous` detects invalid
 mapping/duplicate classes. Follow its script/plugin policy. Preserve the public
-serialization/mapping contract; a file move alone does not authorize schema DDL.
+serialization/mapping contract. With or without an ORM, a file or class move alone
+does not authorize schema DDL or a data-schema migration.
 [Composer commands](https://getcomposer.org/doc/03-cli.md#dump-autoload-dumpautoload).
 
 ## Exposed security and operations
@@ -83,7 +89,7 @@ versions, including implicit nullable declarations and dynamic properties.
 [8.4 migration](https://www.php.net/manual/en/migration84.php),
 [8.5 migration](https://www.php.net/manual/en/migration85.php).
 
-K06 examples ran on PHP 8.3.6 from Ubuntu's 8.3.6-0ubuntu0.24.04.11 packages,
+The PHP examples ran on PHP 8.3.6 from Ubuntu's 8.3.6-0ubuntu0.24.04.11 packages,
 with Composer 2.10.3 and PHPStan 2.2.14. Analyzer targeting of PHP 8.2 syntax
 does not establish execution on 8.2/8.4/8.5 or another SAPI. Optional examples:
 [input/domain](examples/input-domain.md) and [resources](examples/resources.md).

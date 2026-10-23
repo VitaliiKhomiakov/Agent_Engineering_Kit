@@ -46,7 +46,7 @@ those behaviors. Test only the affected failure/cleanup boundary and record what
 not executed. A row factory's annotation cannot replace a real schema/row contract
 check when that contract changes.
 
-K17 snippets were syntax/type checked on Python 3.12.3, psycopg/binary 3.3.6 and
+The snippets were syntax/type checked on Python 3.12.3, psycopg/binary 3.3.6 and
 mypy 2.1.0. An offline check exercised identifier escaping and preserved parameter
 placeholders. No PostgreSQL connection, pool, migration, async cancellation or
 benchmark was run for this stage. Older stage integration evidence is not attributed

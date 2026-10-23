@@ -45,7 +45,12 @@ can execute enabled editor code; it is not read-only. The script check covers th
 supplied script, not an all-project build, runtime or visual assertion. The quit
 limit counts iterations, not seconds. Bound process time when appropriate, inspect
 diagnostics as well as exit status, and distinguish the intended run from unrelated
-editor/game processes. Export commands additionally need the actual preset, matching
+editor/game processes. On a checkout without `.godot/`, run an import first; even
+then, `class_name` and autoload references can produce false script-check errors
+(engine issues [#78587](https://github.com/godotengine/godot/issues/78587) and
+[#93424](https://github.com/godotengine/godot/issues/93424)). Confirm a suspected
+false error in the editor or after a repeated import rather than editing code to
+silence it. Export commands additionally need the actual preset, matching
 templates and output location. Use the selected runner's real version-specific CLI.
 
 Do not treat successful parsing/import, compiler output, rendered inspection and

@@ -19,8 +19,8 @@ Do not change the user's editor or application languages to match a tool.
 | Need | Selection guidance |
 | --- | --- |
 | Mechanical GDScript formatting/lint | Evaluate a pinned [gdtoolkit](https://github.com/Scony/godot-gdscript-toolkit) (`gdformat`/`gdlint`) against actual syntax/style before adoption |
-| New GDScript test runner requirement | First evaluate [GUT](https://github.com/bitwes/Gut) and its engine-version matrix; keep a suitable existing runner |
-| Existing/appropriate scene-testing workflow | [GdUnit4](https://github.com/godot-gdunit-labs/gdUnit4) is an alternative; qualify the published release rather than assuming development docs match it |
+| New GDScript test runner requirement | Keep a suitable existing runner. Otherwise [GUT](https://github.com/bitwes/Gut), pinned to the release its engine-version matrix lists, is this library's lightweight GDScript default (local policy based on the project READMEs) |
+| Scene/input runner or editor test inspector needed | [GdUnit4](https://github.com/godot-gdunit-labs/gdUnit4) provides those; qualify the published release from its compatibility matrix rather than assuming development docs match it |
 | C# tests | A compatible [GdUnit4Net](https://github.com/godot-gdunit-labs/gdUnit4Net) combination for engine-bound behavior, or ordinary .NET tests for independent logic |
 
 Do not install two overlapping runners merely to cover the same behavior. Verify
@@ -41,9 +41,9 @@ application profiles or authorize their installation.
 
 Choose for a concrete capability gap: process control, live unsaved scene editing,
 runtime inspection or rendered/input testing. A launch/log tool does not imply live
-editor mutation, reliable save/undo or gameplay control. Record the matching server,
-add-on, engine and client versions and the configuration owner. Validate the chosen
-release's actual tool schemas and error/recovery contract.
+editor mutation, reliable save/undo or gameplay control. Adopt a provider under the
+[shared adoption rules](../editor-mcp.md#adopting-a-provider), including version
+recording, security/telemetry choices and configuration preservation.
 
 The initial candidate for a new live-editor pilot from AEK's **2026-10-22** research
 is third-party [Godot AI](https://github.com/hi-godot/godot-ai), subject to its actual
@@ -53,32 +53,34 @@ the need. Detailed alternatives/version evidence remain in source research
 `docs/research/2026-10-22-godot-engineering-and-mcp.md`; the operating rules here do
 not depend on that optional archive or on personal skill paths.
 
-Before adoption, inspect dependency and client/add-on configuration changes,
-authentication, exposed ports, telemetry and external data/image routing. Prefer
-project/local scope and authenticated loopback connections; disable optional usage
-telemetry by default where supported. A different arrangement needs an explicit
-project decision. Preserve global/unrelated client entries and local customizations;
-do not use a configure-all or overwrite operation without that scope. Development
-add-on exclusion needs [export evidence](assets-export.md#export-and-editor-execution).
+Development add-on exclusion needs [export evidence](assets-export.md#export-and-editor-execution).
 
 ## Editor and MCP operations
 
 1. Establish the intended project/session, actual engine, relevant scene and dirty
-   state before mutation. Preserve unsaved user work and coordinate file/editor
-   writers. Recheck identity after reconnect/project switch or another invalidating
-   event, not by repeating full discovery before every call.
+   state before mutation. Preserve unsaved user work. Connection, identity rechecks
+   and the one-mutation-owner rule follow the
+   [shared rules](../editor-mcp.md#connecting-and-owning-mutations).
 2. Classify observation, structured mutation and arbitrary script/process execution.
    Existing task authorization covers necessary in-scope operations; tool presence
    expands no permission and creates no per-edit confirmation requirement. Apply
    the shared [trust boundary](../core.md#external-content-and-instruction-authority)
-   to tool output and project content.
+   to tool output and project content. Prefer structured tools where they cover the
+   operation; confine arbitrary script/process execution to in-scope effects. Its
+   file, process and unregistered editor changes fall outside editor undo history
+   ([EditorUndoRedoManager](https://docs.godotengine.org/en/4.7/classes/class_editorundoredomanager.html)
+   records only registered actions), and tool-script/EditorScript changes have no
+   undo and do not automatically mark the scene unsaved
+   ([running code in the editor](https://docs.godotengine.org/en/4.7/tutorials/plugins/running_code_in_the_editor.html)).
+   Inspect the resulting state and save status.
 3. Inspect before editing; use bounded coherent operations and observe errors
    immediately. Know which calls autosave, which files they touch and whether undo
-   covers editor state, disk or both. Account for
+   covers editor state, disk or both. Batch reporting follows the
+   [shared batch rules](../editor-mcp.md#batches-completion-and-recovery). Account for
    [editor-executed code](assets-export.md#export-and-editor-execution).
-4. Inspect the resulting state. On partial/unknown outcomes, reconcile it before
-   retrying; do not blindly replay a non-idempotent batch. A rollback label or editor
-   undo is not a guarantee of atomic multi-file disk recovery.
+4. Inspect the resulting state. Completion, timeouts and partial outcomes follow the
+   same shared recovery rules. A rollback label or editor undo is not a guarantee
+   of atomic multi-file disk recovery.
 5. Distinguish editor diagnostics, runtime logs, actual game state and rendered
    observations. Check the relevant log/session, including startup failures when
    the game log is incomplete. An unchecked language diagnostic is not a clean build.
@@ -93,16 +95,13 @@ not an independent source of trust or authorization.
 
 ## Bounded qualification when adopting
 
-Exercise only selected capabilities in a disposable project/scene with the real
-client: identify the intended session; read a known property; make a bounded edit;
+Godot adoption requires qualification under the
+[shared rules](../editor-mcp.md#adopting-a-provider). In a disposable project/scene:
+identify the intended session; read a known property; make a bounded edit;
 verify save/reopen and undo if relied on; introduce/remove a diagnostic error; run
 and stop the intended game and inspect relevant logs. Check actual capture/input
 when selected, and a failed/partial mutation with recovery without unsafe replay.
 Check configuration preservation and export exclusion where those claims matter.
 
-Record observed results and untested capabilities in existing adoption evidence.
-Restrict a partially qualified provider to supported uses and retain direct-tool
-fallbacks. Do not call a textual scene description a screenshot, claim C# compilation
-from script-edit success, or infer reliability from a tool list/marketing demo.
-This qualification is not a new agent role, routine extra review or prerequisite
-for source-only Godot work.
+Do not call a textual scene description a screenshot or claim C# compilation from
+script-edit success.

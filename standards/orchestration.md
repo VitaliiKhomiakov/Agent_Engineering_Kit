@@ -22,6 +22,8 @@ An agent role is a reusable specialization; a subagent is a delegated instance.
 Use the selected native role when supported, or its explicit pair and instructions
 under the [model mapping](model-configuration.md#mapping-to-native-codex-files).
 Specialization does not require a separate client session or another settings system.
+The coordinator is the main agent of the user's session; it fills the `orchestrator`
+role in saved routing. These standards use the three names for the same agent.
 
 | Role | Work | Output |
 | --- | --- | --- |
@@ -48,7 +50,7 @@ the ceiling is zero and no edges are permitted.
 ## Editable schemes
 
 Separate the selected role/model/effort pairs, permitted delegation relationships,
-and task progression. The user's coordinator-with-specialists examples are
+and task progression. The template's coordinator-with-specialists examples are
 starting profiles, not fixed model assignments or mandatory agent counts.
 Changing a model preserves the scheme; changing a scheme preserves unrelated
 choices and mandatory project checks.
@@ -107,8 +109,9 @@ global constraint or substitute a stale excerpt. If an essential route cannot be
 read, ask the coordinator for that input before dependent work; continue only
 independent authorized work, without restarting broad discovery.
 
-Explicitly disable history inheritance with `fork_turns: "none"` when supported,
-or the client's equivalent fresh context. A short prompt does not override a
+Explicitly request fresh context through the client's exposed control, such as a
+spawn tool's `fork_turns: "none"` where that tool schema offers it; no universal
+parameter exists across clients. A short prompt does not override a
 full-history default. If this control is absent, report the limitation and use
 the narrowest supported context. Never invent parameters or omit the user's
 authorization and requirements. Workers need a specific authorized reason to
@@ -137,8 +140,8 @@ missing evidence within the existing boundary; formatter success alone is insuff
 
 ## Concurrency and isolation
 
-The configured ceiling is not a target; the initial suggestion is two spawned
-agents excluding the main agent. Sequential execution is normal. Parallel tasks
+The configured ceiling is not a target; the initial suggestion is the
+[routing template's](../templates/framework/model-routing.toml) value, excluding the main agent. Sequential execution is normal. Parallel tasks
 need independent results and clear ownership. Avoid concurrent writers to the
 same files or tests competing over ports, databases, and fixtures; preserve others' work.
 Check native capacity separately: running work, pending tools and retained agent
@@ -221,4 +224,4 @@ prompt-size quota or cache setting; keep evidence in the existing task owner.
 [Codex subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents),
 [models](https://learn.chatgpt.com/docs/models), and
 [configuration](https://learn.chatgpt.com/docs/config-file/config-reference)
-describe capabilities. Role allocation and review scope here are framework policy.
+describe capabilities. Role allocation and review scope here are this library's policy.

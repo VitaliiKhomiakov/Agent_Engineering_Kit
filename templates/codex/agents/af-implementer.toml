@@ -1,6 +1,6 @@
 # Inactive example; adopt only when this role is explicitly enabled.
 name = "af-implementer"
-description = "Implement a bounded task or completed phase under the coordinator's contract."
+description = "Implement a bounded task or agreed phase under the coordinator's contract."
 model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 developer_instructions = """

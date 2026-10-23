@@ -7,7 +7,8 @@ import tempfile
 import unittest
 
 
-CHECKER = Path(__file__).resolve().parents[1] / "tools/check_model_routing.py"
+REPOSITORY = Path(__file__).resolve().parents[1]
+CHECKER = REPOSITORY / "tools/check_model_routing.py"
 ROUTING = '''schema_version = 2
 status = "configured"
 scope = "workspace"
@@ -131,11 +132,12 @@ class ModelRoutingChecks(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_native_integer_and_boolean_types_are_not_coerced(self) -> None:
-        for old, new in [('max_concurrent_threads_per_session = 2', 'max_concurrent_threads_per_session = true'),
-                         ('enabled = true', 'enabled = 1')]:
+        for old, new, fragment in [('max_concurrent_threads_per_session = 2',
+                                    'max_concurrent_threads_per_session = true', "native ceiling"),
+                                   ('enabled = true', 'enabled = 1', "agents.enabled")]:
             with self.subTest(new=new):
                 self.write(".codex/config.toml", CONFIG.replace(old, new))
-                self.failure("")
+                self.failure(fragment)
 
     def test_disabled_role_must_not_remain_discoverable(self) -> None:
         disabled = ROUTING.replace(', "orchestrator->reviewer"', '').replace(
@@ -178,24 +180,68 @@ class ModelRoutingChecks(unittest.TestCase):
                 self.assertIn("not evaluated", result.stdout + result.stderr)
 
     def test_mode_and_coordinator_invariants(self) -> None:
-        for old, new in [('max_subagents = 2', 'max_subagents = 0'),
-                         ('mode = "delegated"', 'mode = "single-agent"'),
-                         ('mode = "delegated"', 'mode = "unknown"'),
-                         ('[roles.orchestrator]\nenabled = true', '[roles.orchestrator]\nenabled = false'),
-                         ('reasoning_effort = "high"', 'reasoning_effort = ""')]:
+        for old, new, fragment in [
+                ('max_subagents = 2', 'max_subagents = 0', "positive ceiling"),
+                ('mode = "delegated"', 'mode = "single-agent"', "single-agent mode requires"),
+                ('mode = "delegated"', 'mode = "unknown"', "orchestration.mode"),
+                ('[roles.orchestrator]\nenabled = true', '[roles.orchestrator]\nenabled = false',
+                 "roles.orchestrator: must be enabled"),
+                ('reasoning_effort = "high"', 'reasoning_effort = ""', "roles.orchestrator.reasoning_effort")]:
             with self.subTest(new=new):
-                self.write(".agents-framework/model-routing.toml", ROUTING.replace(old, new))
-                self.failure("")
+                # Only the first occurrence: the orchestrator's effort, not the reviewer's.
+                self.write(".agents-framework/model-routing.toml", ROUTING.replace(old, new, 1))
+                self.failure(fragment)
 
     def test_malformed_types_and_incomplete_config_fail_cleanly(self) -> None:
-        for old, new in [('max_subagents = 2', 'max_subagents = true'),
-                         ('enabled = true', 'enabled = "true"'),
-                         ('schema_version = 2', 'schema_version = "2"'),
-                         ('model = "main-model"', 'model = ""'),
-                         ('[orchestration]', '[wrong]')]:
+        for old, new, fragment in [('max_subagents = 2', 'max_subagents = true', "max_subagents"),
+                                   ('enabled = true', 'enabled = "true"', "roles.orchestrator.enabled"),
+                                   ('schema_version = 2', 'schema_version = "2"', "schema_version"),
+                                   ('model = "main-model"', 'model = ""', "roles.orchestrator.model"),
+                                   ('[orchestration]', '[wrong]', "orchestration: expected a table")]:
             with self.subTest(new=new):
                 self.write(".agents-framework/model-routing.toml", ROUTING.replace(old, new))
-                self.failure("")
+                self.failure(fragment)
+
+    def test_missing_record_and_native_ceiling_are_not_evaluated(self) -> None:
+        cases = [(".agents-framework/model-routing.toml", None, "model-routing.toml is missing"),
+                 (".codex/config.toml", CONFIG.replace("max_concurrent_threads_per_session = 2\n", ""),
+                  "native ceiling agreement not evaluated")]
+        for name, replacement, fragment in cases:
+            with self.subTest(name=name):
+                self.setUp()
+                if replacement is None:
+                    (self.root / name).unlink()
+                else:
+                    self.write(name, replacement)
+                result = self.run_checker()
+                self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+                self.assertIn(fragment, result.stdout)
+                self.assertNotIn("Traceback", result.stderr)
+
+    def test_absent_native_ceiling_does_not_mask_definite_conflicts(self) -> None:
+        self.write(".codex/config.toml", CONFIG.replace("max_concurrent_threads_per_session = 2\n", ""))
+        self.role("implementer", "wrong", "medium")
+        self.failure("af-implementer")
+        self.role("implementer", "worker-model", "medium")
+        self.failure("enabled specialist", "--default-role", "absent")
+        result = self.run_checker()
+        self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+        self.assertIn("native ceiling agreement not evaluated", result.stdout)
+
+    def test_shipped_templates_agree_once_selected(self) -> None:
+        # Copies only; the source template stays unconfigured and inactive.
+        routing = (REPOSITORY / "templates/framework/model-routing.toml").read_text(encoding="utf-8")
+        self.assertIn('status = "unconfigured"', routing)
+        for name in (".codex/agents/af-implementer.toml", ".codex/agents/af-reviewer.toml"):
+            (self.root / name).unlink()
+        self.write(".agents-framework/model-routing.toml",
+                   routing.replace('status = "unconfigured"', 'status = "configured"'))
+        for name in ("config.toml", "agents/af-implementer.toml"):
+            self.write(f".codex/{name}", (REPOSITORY / "templates/codex" / name).read_text(encoding="utf-8"))
+        for args in ((), ("--default-role", "implementer")):
+            with self.subTest(args=args):
+                result = self.run_checker(*args)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_missing_and_malformed_files_fail_cleanly(self) -> None:
         self.write(".codex/config.toml", '[broken')

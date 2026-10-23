@@ -360,7 +360,7 @@ remains observable; an unrelated error after abort is still reported. Gates esta
 The small deadline test checks its effect rather than exact elapsed milliseconds.
 
 Both files also passed strict JSDoc `allowJs`/`checkJs` with TypeScript 7.0.2 and
-Node 24.13.6 types. The [plan](../../../docs/plans/2026-09-21-engineering-practices.md#k11-result-and-verification)
+`@types/node` 24.13.6. The [plan](../../../docs/plans/2026-09-21-engineering-practices.md#k11-result-and-verification)
 records commands and exact Markdown/source equality. The direct test-file command
 awaits every `node:test` registration and reports the individual test results.
 

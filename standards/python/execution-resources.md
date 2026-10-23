@@ -88,16 +88,10 @@ for identifiers; interpolation is not parameterization.
 
 Map external records/errors at the adapter boundary. Repository abstractions are
 conditional design tools, as described in [structure](structure.md); detailed
-ORM/driver policies apply only when those technologies are present. Python alone
-does not select SQLAlchemy, psycopg, or a database for a project.
-
-When SQLAlchemy is present or explicitly selected, use its separate `sqlalchemy`
-profile for mapping, Session, loading and engine details. The Python profile does
-not select it automatically, and SQLAlchemy does not imply PostgreSQL. Keep the
-transaction ownership above; ORM-specific mechanics belong to the selected profile.
-For Psycopg 3, use the separate `psycopg` profile for adaptation, connections and
-pools. The `postgresql` profile owns PostgreSQL constraints, isolation and migrations
-when that database is used; an ORM alone does not select it.
+ORM/driver policies apply only when those technologies are present: the separate
+`sqlalchemy`, `psycopg` and `postgresql` profiles, each applying only where used or
+explicitly selected. Python alone selects none of them, and an ORM does not select a database. Keep the
+transaction ownership above; ORM/driver mechanics belong to the selected profile.
 
 For outbound operations define connect/read/overall budgets supported by the
 client, response-size limits where needed, and who consumes/closes responses.

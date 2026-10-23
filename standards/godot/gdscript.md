@@ -14,7 +14,10 @@ silently weaken a known contract or substitute an unstructured dictionary for
 an established named domain contract. Genuine dynamic data is valid at a boundary;
 validate and narrow it before passing it into ordinary typed code.
 
-Use collection/type syntax available in the actual engine version. A cast can
+Use collection/type syntax available in the actual engine version: typed
+`Dictionary[K, V]` requires 4.4+, and nested typed collections are unsupported.
+Declared signal parameter types document the contract but are not checked at
+`emit()`; keep emitters and handlers consistent. A cast can
 fail; handle the real nullable/dynamic boundary instead of asserting it away.
 GDScript permits gradual typing; this profile's stronger application-contract
 convention is a local policy choice. Consult

@@ -5,7 +5,9 @@ eligibility. This optional example supports [server security](../server-client-s
 It and the [tagged-read example](tagged-read.md) are two scenarios in one temporary
 App Router fixture. Assemble both sets of files before building; their setup and
 runner are shared rather than duplicated. Neither is a deployable authentication,
-inventory or caching service.
+inventory or caching service. The fixture is deliberately flattened to
+`features/<feature>/<file>.ts`; it does not illustrate the optional
+[feature structure](../../nextjs-feature-structure.md) segments or public entries.
 
 The HTTP adapter validates identity, capability, media type and one exact JSON
 shape. The operation also protects permission and positive quantity for direct
@@ -251,6 +253,10 @@ export async function POST(request: Request): Promise<Response> {
   return reply({ remaining: result.remaining }, 201);
 }
 ```
+
+The route rejects a non-reserving actor with 403 before calling `reserveStock`;
+that function's own `forbidden` result protects direct callers, so the route's 400
+fallback never receives it. A route without the earlier check must map `forbidden` to 403.
 
 ### `tests/http.ts`
 

@@ -62,8 +62,8 @@ availability or permission to schedule belongs to the use case/domain owner.
 
 Use before validators only for deliberate normalization of raw input: accept
 `object`, narrow it, and avoid mutating caller-owned data that another union branch
-may inspect. Plain validators can terminate normal validation; wrap validators
-can skip or alter it. Use them only when their effect is necessary and tested,
+may inspect. Plain validators replace the type's own validation and stop further
+validators; wrap validators can skip or alter inner validation through their handler. Use them only when their effect is necessary and tested,
 not to turn rejected input into a successful default or bypass typing.
 
 With Annotated validators, before/wrap ordering is right-to-left and after
@@ -95,5 +95,5 @@ Sources: [models](https://docs.pydantic.dev/latest/concepts/models/),
 [conversion table](https://docs.pydantic.dev/latest/concepts/conversion_table/),
 [validators](https://docs.pydantic.dev/latest/concepts/validators/),
 [TypeAdapter](https://docs.pydantic.dev/latest/concepts/type_adapter/).
-Boundary ownership and pure validators are framework policy; model selection
+Boundary ownership and pure validators are this library's policy; model selection
 and strictness remain conditional on the real contract.

@@ -1,6 +1,6 @@
 ---
 name: af-implementer
-description: Implement a bounded task or completed phase under the coordinator contract
+description: Implement a bounded task or agreed phase under the coordinator contract
 model: claude-opus-5[effort=high]
 ---
 

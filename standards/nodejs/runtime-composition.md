@@ -61,7 +61,11 @@ Node's ability to `require()` synchronous ESM does not make a graph with top-lev
 
 Direct execution of `.ts` is a separate run mode. In the checked Node 24.13.0,
 default type stripping performs no type checking, ignores `tsconfig.json`, and
-does not provide TSX, decorator transforms or path-alias rewriting. Use the
+does not provide TSX, decorator transforms or path-alias rewriting. Only erasable
+syntax is stripped: `enum`, runtime `namespace`/`module`, parameter properties and
+import aliases need `--experimental-transform-types`. Relative imports need explicit
+`.ts` extensions (checked with `allowImportingTsExtensions` or
+`rewriteRelativeImportExtensions`), and type-only imports need `import type`. Use the
 project's real compiler/loader when those features are required, and retain strict
 checking even when stripping works. Verify target-version support before adopting
 new runtime syntax; this stage does not replace a NestJS/Next.js build pipeline.

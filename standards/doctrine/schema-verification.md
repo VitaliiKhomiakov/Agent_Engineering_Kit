@@ -86,4 +86,4 @@ is contributor guidance, not a replacement for this workspace's proportionate ga
 and [implicit commits](https://www.doctrine-project.org/projects/doctrine-migrations/en/3.9/explanation/implicit-commits.html)
 are the relevant primary references. Record actual commands, results and unexecuted
 platform checks; the [research note](../../docs/research/2026-09-21-doctrine-engineering-practices.md)
-and [practice plan](../../docs/plans/2026-09-21-engineering-practices.md) hold K08 evidence.
+and [practice plan](../../docs/plans/2026-09-21-engineering-practices.md) hold the Doctrine example evidence.

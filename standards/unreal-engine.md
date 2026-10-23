@@ -26,12 +26,9 @@ defaults merely because part of the project is written in C++ or Python.
   useful existing boundaries; profile before a performance-driven rewrite.
 - Preserve source and unsaved editor changes. Binary assets, loaded objects and
   packages on disk have different mutation/recovery contracts.
-- Select sufficient evidence with [Unreal verification](unreal-engine/verification.md).
-  Default to a bounded block of related edits followed by one verification cycle,
-  not a build, PIE run or screenshot after every tool call. Observe operation
-  errors immediately; check earlier when dependent work needs the result.
-  Required gates remain binding; repeat checks only for an identified invalidation,
-  unreliable result or concrete unanswered risk.
+- Select sufficient evidence with [Unreal verification](unreal-engine/verification.md):
+  by default, a bounded block of related edits followed by one verification cycle, not a build,
+  PIE run or screenshot after every tool call. Observe operation errors immediately.
 
 ## Read for the task
 
@@ -44,7 +41,7 @@ the portable bundle; their availability does not require preloading them.
 | Unreal C++, reflection, constructors, lifetime, references or guards | [C++ and lifetime](unreal-engine/cpp-lifetime.md) |
 | Gameplay owner, component/subsystem, Blueprint/native boundary or interface | [Gameplay and Blueprints](unreal-engine/gameplay-blueprints.md) |
 | Module/build/reload, assets/references, migration, cook or package | [Build and assets](unreal-engine/build-assets.md) |
-| Editor-provider setup, discovery, mutation, recovery or missing tool | [MCP/editor workflow](unreal-engine/mcp-editor.md) |
+| Editor-provider setup, discovery, mutation, recovery or missing tool | [MCP/editor workflow](unreal-engine/mcp-editor.md), with the [shared editor MCP rules](editor-mcp.md) it routes to |
 | Choosing skills for Unreal, Blender asset work or MCP extension | [Optional skills](unreal-engine/skills.md) |
 | Select checks, review evidence or report results | [Verification](unreal-engine/verification.md) |
 | Async work, thread access or deferred completion | [Concurrency](unreal-engine/runtime-performance.md#concurrency-and-lifetime) |
@@ -66,7 +63,10 @@ not prove it is installed in the target. Match consequential APIs, build/reload
 behavior and tool schemas to the actual engine/provider. Preserve compatible
 existing versions; do not require an upgrade or repeat a general source search
 before every task. Older releases and other providers need affected capability
-checks, not assumed native compatibility.
+checks, not assumed native compatibility. Epic documentation links pin
+`application_version=5.8`, the checked baseline. For another target, select its
+version and confirm the section exists; a page missing for that version can return
+an empty page rather than an error.
 
 This profile supplies instructions, not a provider, detector or verified editor
 session. UEFN/Verse, generic non-Unreal C++ and detailed specialist subsystems need

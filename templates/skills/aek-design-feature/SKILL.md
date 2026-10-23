@@ -21,7 +21,8 @@ for local input resolution, procedure composition and the design result.
 4. Record the chosen owners and paths, interface/compatibility decisions,
    consequential alternatives, open questions and observable acceptance checks
    in that task's permitted design location. Separate current facts, proposed
-   changes and checks that have actually run.
+   changes and checks that have actually run. A read-only role returns this content
+   under the [design result](../../../standards/project-skills.md#design-result) contract.
 
 A settled small fix returns to the implementation task without starting a design
 phase. Missing guidance is reported with its affected decision under the local

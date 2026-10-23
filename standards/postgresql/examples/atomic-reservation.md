@@ -110,7 +110,7 @@ returns zero rows; commit B. Verify stock is 1 and exactly one receipt exists.
 Reset only the disposable fixture before another scenario. Do not use a fixed sleep
 as evidence that the transactions actually overlapped.
 
-The K15 harness executed on **16.15 and 18.4**:
+The recorded harness executed on **16.15 and 18.4**:
 
 - Invalid text (`22P02`), zero/negative/NULL/excess quantity and missing item;
   refusals leave stock unchanged.

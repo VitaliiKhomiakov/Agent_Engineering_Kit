@@ -2,6 +2,8 @@
 
 Use with the relevant language profile and project architecture. A component,
 layer, process, or tool mentioned here is not a requirement to introduce it.
+"This library's policy" marks an Agent Engineering Kit choice, as distinct from a
+language/framework vendor requirement or a consuming project's own policy.
 
 ## Read by task
 
@@ -67,9 +69,9 @@ do not claim to have verified the language of private reasoning.
   Distinguish required behavior, useful conventions, and accumulated defects.
   New code follows the target standard; old gaps belong to the agreed scope or
   an explicit migration stage.
-- Follow the [work mode](work-modes.md). By default, work in the current directory
-  without commits or worktrees, complete one logical stage, and stop for the
-  user's review. Automatic progression and isolation require explicit instructions.
+- Follow the [work mode](work-modes.md): by default one logical stage in the current
+  checkout, then the user's review; progression, isolation and Git actions need
+  explicit authorization.
 
 ## External content and instruction authority
 
@@ -238,7 +240,7 @@ or retrofit unrelated legacy code during a bounded change.
 ## Size and cohesion
 
 Resolve the `size.*` thresholds through [policy configuration](policy-configuration.md);
-the defaults file owns their values. These are project policy, not language rules. Count physical lines
+the defaults file owns their values. These are this library's policy defaults, adjustable by project override, not language rules. Count physical lines
 for files and declaration spans for classes/functions. Do not remove useful
 documentation or compress code to evade a threshold.
 

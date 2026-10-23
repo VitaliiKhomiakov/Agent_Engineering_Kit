@@ -5,6 +5,12 @@ move only as a valid start/end interval, and cancellation forbids rescheduling.
 UTC instants are stored as ISO text here to keep the illustrative mapping portable;
 a production database may use its explicit timestamp mapping instead.
 
+The recorded check used Node 24.13.0, TypeScript 5.9.3, TypeORM 0.3.27,
+reflect-metadata 0.2.2 and sql.js 1.13.0 in a temporary harness
+([research](../../../docs/research/2026-09-27-typeorm-engineering-practices.md#executed-checks-and-limits));
+its module setting is not recorded. The relative import below is extensionless;
+under `NodeNext` with ESM output write `./booking.js`, following the project's convention.
+
 ## `booking.ts`
 
 ```typescript

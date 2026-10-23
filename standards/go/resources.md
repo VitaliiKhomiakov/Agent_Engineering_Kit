@@ -21,8 +21,9 @@ Read when changing database access, transactions, HTTP integrations, or resource
 - For HTTP/1 connection reuse, consume the required body within its budgets and
   close it. Unread bytes can prevent reuse; keeping the same Client is not proof
   of reusing its TCP connection. Check the supported Go version and RoundTripper:
-  newer Transport implementations may attempt a bounded read after close, but
-  close alone is no universal reuse guarantee. Any explicit drain needs both
+  from Go 1.27, the HTTP/1 `Transport` drains unread content asynchronously on
+  close up to a conservative limit; earlier versions and other RoundTrippers give
+  no such read, and close alone is no universal reuse guarantee. Any explicit drain needs both
   byte and time limits. Rejecting oversized/stalled content may properly sacrifice
   reuse; do not drain unbounded input just to save a connection or apply this
   HTTP/1 rule indiscriminately to HTTP/2. When reuse is required, observe it with

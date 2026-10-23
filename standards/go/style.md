@@ -34,9 +34,9 @@ owns the inactive configuration, version pins, and reproduction commands.
 
 ## Readable flow and spacing
 
-The grouping convention below is a binding AEK readability requirement within
-the applicable scope, subject to explicitly accepted project exceptions. It is
-not a Go language requirement. Use the [readability acceptance check](verification.md#readability-acceptance)
+The grouping convention below is a binding readability requirement under this
+library's policy within the applicable scope, subject to explicitly accepted project
+exceptions. It is not a Go language requirement. Use the [readability acceptance check](verification.md#readability-acceptance)
 when implementing or reviewing changed Go code.
 
 - Handle failures with guard clauses where they make the normal path easy to
@@ -48,9 +48,11 @@ when implementing or reviewing changed Go code.
   registration, input preparation/validation, application work and result delivery.
   Sharing a variable or statement type does not by itself make one cohesive step.
 - Keep an operation and its immediate error/result check together. Short setup
-  used only by that operation belongs in the same group. A guard and subsequent
-  statements may also belong together when they continue that same phase, as in
-  the configuration below. Separate the next independent step after the completed
+  used only by that operation belongs in the same group: creating and configuring
+  a decoder for the next decode is one step. A component that later phases
+  configure, register and return, such as the router below, has its own creation
+  step. A guard and subsequent statements may also belong together when they
+  continue that same phase, as in the configuration below. Separate the next independent step after the completed
   group; a closing brace alone does not establish a boundary.
 - Consecutive guards validating the same input and other small cohesive sequences
   may stay together. An early error return belongs inside its guard; a final

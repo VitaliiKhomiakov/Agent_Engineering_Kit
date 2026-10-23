@@ -92,5 +92,5 @@ Sources: [typing](https://docs.python.org/3.11/library/typing.html),
 [dataclasses](https://docs.python.org/3.11/library/dataclasses.html),
 [exceptions](https://docs.python.org/3.11/tutorial/errors.html),
 [mypy flags](https://mypy.readthedocs.io/en/stable/command_line.html).
-Strictness and ownership are framework policy; static typing's runtime limits
+Strictness and ownership are this library's policy; static typing's runtime limits
 come from Python's contracts.

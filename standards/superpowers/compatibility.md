@@ -4,6 +4,9 @@ Conditional reference: read for helper use or a version-contract investigation.
 [Common policy](../superpowers.md) owns skill selection, authority and workflow
 adaptations. Ordinary tasks do not need this file. Resolve the installed version
 before applying these observations; package presence is not proof of active selection.
+For an installed version not inspected here, treat helper commands and caveats as
+unknown: use the [direct scoped-task fallback](../superpowers.md#plans-and-helper-compatibility)
+until that version's contract is checked and recorded with dated evidence.
 
 ## Helper contracts: inspected 6.4.1 and 6.4.2
 

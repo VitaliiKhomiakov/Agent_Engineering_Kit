@@ -89,9 +89,14 @@ class AgentTemplateChecks(unittest.TestCase):
                         self.assertIs(metadata["readonly"], True)
 
     def test_frontmatter_rejects_unsupported_syntax(self) -> None:
-        for text in ("name: missing-delimiters", "---\nname: one\nname: two\n---\nbody",
-                     "---\nname: [one, two]\n---\nbody", "---\nreadonly: maybe\n---\nbody"):
-            with self.subTest(text=text), self.assertRaises(ValueError):
+        # Otherwise-complete fixtures, so each rejection comes from its named defect.
+        complete = "name: af-reviewer\ndescription: Review scope\nmodel: fixture-model\n"
+        self.assertEqual(read_adapter(f"---\n{complete}---\nbody", "claude")[1], "body")
+        for text, message in ((complete + "body", "delimiters"),
+                              (f"---\n{complete}name: two\n---\nbody", "duplicate"),
+                              (f"---\n{complete}tools: [one, two]\n---\nbody", "scalar syntax"),
+                              (f"---\n{complete}readonly: maybe\n---\nbody", "readonly must be Boolean")):
+            with self.subTest(text=text), self.assertRaisesRegex(ValueError, message):
                 read_adapter(text, "claude")
 
     def test_all_clients_layouts_and_independent_roots(self) -> None:

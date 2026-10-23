@@ -1,6 +1,7 @@
 # Codex role examples
 
-These inactive examples cover orchestrator, architect, implementer and reviewer. The
+These inactive examples cover the orchestrator's main model in `config.toml` and the
+architect, implementer and reviewer role files. The
 framework selection example uses schema_version = 2 as a documentation format;
 it is separate from the native Codex files below. Add optional roles only when
 the selected scheme needs them, following [orchestration](../../standards/orchestration.md).

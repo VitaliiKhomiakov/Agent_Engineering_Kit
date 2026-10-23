@@ -37,4 +37,8 @@ context to hide cancellation. The transport adapter decides how a returned
 error becomes a response. See [error wrapping](https://go.dev/blog/go1.13-errors).
 
 This is an original standard-library-only example. Save its Go block as a
-`.go` file in package `practices`; it can be compiled with the other Go examples.
+`.go` file in package `practices`; it can be compiled with the other Go examples
+in one module. The recorded `go test -race` and `go vet` run used a temporary
+module whose tests are not retained here
+([practice record](../../../docs/plans/2026-09-21-engineering-practices.md#k01-result-and-verification));
+reproduction needs a new module and tests.

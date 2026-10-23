@@ -36,8 +36,10 @@ to AEK's responsibility-first policy; directory layout alone does not establish 
 | RefCounted | Logic or data that needs reference-counted lifetime without scene-tree services |
 | Plain values | Small calculations and state needing no object identity or lifecycle |
 
-Do not add a node solely to look up another node. Choose direct `Object` ownership
-only with a deliberate release contract. Engine alternatives are described in
+Do not make a helper a Node only so it can look up other nodes; pass it the
+collaborators it needs. A plain `Object` is not reference-counted and leaks unless
+its owner calls `free()`; choose it only with that deliberate release contract,
+otherwise prefer RefCounted. Engine alternatives are described in
 [node alternatives](https://docs.godotengine.org/en/4.7/tutorials/best_practices/node_alternatives.html).
 Mutable resource sharing belongs to [runtime state](lifecycle-runtime.md#lifetimes-and-state);
 persisted scene ownership belongs to [serialization](assets-export.md#scenes-and-resource-identity).
@@ -58,10 +60,13 @@ nodes, defer the dependent behavior until setup completes; follow
 
 For scripts instantiated by `PackedScene.instantiate()` or recreated by
 `Node.duplicate()`, `_init(...)` must be callable without arguments. The same applies
-to custom resources that need to support `duplicate()`. These engine creation paths
-do not supply constructor arguments; see
-[Object._init](https://docs.godotengine.org/en/4.7/classes/class_object.html#class-object-private-method-init)
-and [Resource.duplicate](https://docs.godotengine.org/en/4.7/classes/class_resource.html#class-resource-method-duplicate).
+to custom resources that are created or edited in the Inspector, loaded from
+resource files or duplicated. In C#, provide a parameterless constructor; one whose
+parameters all have defaults is not equivalent. These engine creation paths do not
+supply constructor arguments; see
+[Object._init](https://docs.godotengine.org/en/4.7/classes/class_object.html#class-object-private-method-init),
+[Resource.duplicate](https://docs.godotengine.org/en/4.7/classes/class_resource.html#class-resource-method-duplicate)
+and [resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html).
 Required constructor arguments remain valid for objects created directly with
 `new(...)` when all their actual creation paths supply them.
 
