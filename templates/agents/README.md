@@ -13,8 +13,10 @@ do not copy its procedure into each adapter or add a second cross-role policy.
 
 Adapters contain native identity, selection descriptions, model/effort examples,
 restrictions and a minimal bootstrap instruction. Shared bodies stay outside native
-agent-discovery directories. Bundle availability neither enables a role nor installs
-its native adapter. Only the selected client's enabled roles are adopted under
+agent-discovery directories and remain operational dependencies after setup.
+Native preparation templates stay in the source; the target contains only the
+selected client's enabled native definitions, without inactive adapter duplicates.
+Body availability neither enables a role nor installs its native adapter. Roles are adopted under
 [model configuration](../../standards/model-configuration.md).
 
 ## Explicit loading and reference bases
@@ -31,6 +33,8 @@ Adapter body paths resolve from the supplied instruction root, not the native
 file's directory or cwd. The default is
 `.agents-framework/templates/agents/<role>.md`; adapt it to
 `templates/agents/<role>.md` for a flat bundle or the actual custom bundle prefix.
+These common bodies and this guide are retained bundle resources; their `templates`
+directory name does not give them a one-time installation lifetime.
 Policy links inside the body resolve relative to that body; the retained bundle
 layout preserves `../../standards/...`. Read only the assigned role and needed
 policies. Root entries do not preload every body.

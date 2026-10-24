@@ -90,6 +90,38 @@ class ProfileSelectionChecks(unittest.TestCase):
                     "templates/skills/aek-review-changes/SKILL.md"}
         self.assertEqual(self.selected("project-workflows") - self.selected("core"), expected)
 
+    def test_bundle_keeps_role_bodies_without_preparation_templates(self) -> None:
+        checker = Checker(ROOT)
+        selection = checker.catalog_selection(("core",))
+        self.assertFalse(checker.diagnostics, checker.diagnostics)
+        bundle = {path.relative_to(ROOT).as_posix() for path in selection.bundle_files}
+        source = {path.relative_to(ROOT).as_posix() for path in selection.source_files}
+        for role in ("architect", "implementer", "reviewer"):
+            self.assertIn(f"templates/agents/{role}.md", bundle)
+            for client, suffix in (("codex", "toml"), ("claude", "md"), ("cursor", "md")):
+                path = f"templates/{client}/agents/af-{role}.{suffix}"
+                self.assertIn(path, source)
+                self.assertNotIn(path, bundle)
+        for path in ("templates/codex/config.toml", "templates/codex/README.md",
+                     "templates/framework/model-routing.toml", "templates/policy-entry.md",
+                     "templates/claude/policy-bridge.md", "templates/cursor/rule-route.mdc",
+                     "templates/skills/aek-model-setup/SKILL.md",
+                     "templates/skills/aek-model-reassign/SKILL.md"):
+            self.assertIn(path, source)
+            self.assertNotIn(path, bundle)
+        self.assertTrue(bundle.isdisjoint(source))
+
+    def test_workflow_copy_selection_adds_guide_without_skill_duplicates(self) -> None:
+        checker = Checker(ROOT)
+        base = checker.catalog_selection(("core",))
+        workflow = checker.catalog_selection(("project-workflows",))
+        self.assertFalse(checker.diagnostics, checker.diagnostics)
+        self.assertEqual(workflow.bundle_files - base.bundle_files,
+                         {ROOT / "standards/project-skills.md"})
+        self.assertEqual(workflow.source_files - base.source_files,
+                         {ROOT / "templates/skills/aek-design-feature/SKILL.md",
+                          ROOT / "templates/skills/aek-review-changes/SKILL.md"})
+
     def test_project_workflows_preserve_selected_stack_closures(self) -> None:
         additions = {"standards/project-skills.md",
                      "templates/skills/aek-design-feature/SKILL.md",

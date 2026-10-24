@@ -59,7 +59,9 @@ The following components describe an adopted target workspace.
 | `.codex/agents/`, `.claude/agents/`, or `.cursor/agents/` | Named roles in the selected client's native format | When creating the corresponding agent |
 
 In this repository, `standards/` contains the target rules and `templates/`
-contains inactive templates. The schema-v2 routing template illustrates the
+contains preparation inputs and retained operational references. Source-only
+templates stay in AEK; selected native outputs and their shared role bodies remain
+in the target for ongoing work. The schema-v2 routing template illustrates the
 coordinator, implementer and optional disabled architect/reviewer; other roles use the same
 documented contract. [Shared role bodies](templates/agents/README.md) supply the
 architect, implementer and reviewer procedures; Codex, Claude Code and Cursor have
@@ -94,7 +96,7 @@ workspace/
   docs/plans/                       # New plain plans or navigation to canonical native tasks
   .agents-framework/
     standards/                      # Selected rules; catalog paths stay bundle-relative
-    templates/                      # Inactive resources; not native installations
+    templates/                      # Shared role bodies and retained planning/task assets
     model-routing.toml              # Framework state; not native client config
     adoption.md                     # Import provenance; not task progress or model choices
     policy.toml                     # Optional sparse overrides; not copied by default
@@ -328,8 +330,9 @@ The independent `godot` profile maps the same shared principles to scenes,
 resources, imports and editor/runtime state. Its GDScript guidance and conditional
 C#/GDExtension topics remain task-selected; selecting it installs no engine/MCP
 provider and adds no unrelated application stack.
-Skills describe concrete procedures. The current catalog supplies these inactive
-instruction-only templates; native installation is a separate adoption step:
+Skills describe concrete procedures. These instruction-only templates are source
+preparation inputs; selected native installation is a separate adoption step and
+does not require inactive copies in the target bundle:
 
 | Name | Narrow trigger | Status and resources |
 | --- | --- | --- |

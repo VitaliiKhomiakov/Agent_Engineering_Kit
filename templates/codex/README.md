@@ -24,7 +24,7 @@ not trigger setup merely because configuration is absent.
 Native destinations remain relative to the target instruction root. The examples'
 developer-instruction paths use `.agents-framework/templates/agents/...` from that root;
 adapt this prefix for a recorded flat/custom bundle, not from the TOML directory
-or current cwd. Inactive copies stay under the bundle's `templates/codex/` and
+or current cwd. Inactive originals stay in the source's `templates/codex/` and
 do not activate roles. Parse installed TOML and inspect these path literals
 separately: Markdown link validation cannot check developer instructions.
 Source `MIGRATION.md`, "Adapting installation routes", owns the relocation rules.

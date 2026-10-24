@@ -55,11 +55,13 @@ dependencies = ["model-configuration"]
 id = "model-configuration"
 source = "standards/model-configuration.md"
 resources = [
-  "templates/framework/model-routing.toml",
   "templates/agents/README.md",
   "templates/agents/architect.md",
   "templates/agents/implementer.md",
   "templates/agents/reviewer.md",
+]
+source_resources = [
+  "templates/framework/model-routing.toml",
   "templates/claude/agents/af-architect.md",
   "templates/claude/agents/af-implementer.md",
   "templates/claude/agents/af-reviewer.md",
@@ -81,7 +83,7 @@ when = "Integration model selection/reuse, authorized setup, explicit reassignme
 [[profiles]]
 id = "project-workflows"
 source = "standards/project-skills.md"
-resources = [
+source_resources = [
   "templates/skills/aek-design-feature/SKILL.md",
   "templates/skills/aek-review-changes/SKILL.md",
 ]

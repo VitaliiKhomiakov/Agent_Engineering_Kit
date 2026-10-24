@@ -22,14 +22,16 @@ uses `schema_version = 2` to label its documented layout. It starts unconfigured
 its sample model IDs are suggestions, not assignments or evidence of availability.
 
 The routing record and native destinations below resolve from the target
-instruction root regardless of the bundle location. Relative links to inactive
-templates resolve from this document. Source `MIGRATION.md`, "Setup procedures
+instruction root regardless of the bundle location. In the source library, links
+to preparation templates resolve from this document. Adoption labels omitted
+preparation links as source references; installed roles must retain their local
+bodies and operational rules. Source `MIGRATION.md`, "Setup procedures
 and persistent skills", owns source-based setup and explicit persistent skill
 selection; configuring models does not require native setup/reassignment skills.
 Before installing explicitly selected skills or native role
 instructions, adapt their routes to the actual bundle and destination; source
-`MIGRATION.md`, "Adapting installation routes", owns that path contract. Moving
-inactive resources neither moves native configuration nor changes assignments.
+`MIGRATION.md`, "Adapting installation routes", owns that path contract. Source
+template reclassification neither removes native agents nor changes assignments.
 
 [Orchestration](orchestration.md) owns responsibilities, delegation relationships,
 task order and checkpoints. Record additional chosen roles and scheme decisions
@@ -270,7 +272,7 @@ and effort levels are not interchangeable with Claude's.
 
 Check invocation, environment and managed overrides. Use a verified `CLAUDE.md`
 bridge when native AGENTS discovery is unavailable; an inactive [bridge template](../templates/claude/policy-bridge.md)
-is retained. Supply relevant policy explicitly to roles that skip normal entry
+is available in AEK. Supply relevant policy explicitly to roles that skip normal entry
 files. Preserve custom metadata, instructions and unrelated settings. The
 [research note](../docs/research/2026-09-20-native-agent-orchestration.md) records
 version-specific observations, not universal installation or runtime support.
@@ -290,7 +292,7 @@ Inspect native and compatibility role directories for collisions. Verify main
 session model selection separately; project `.cursor/cli.json` permissions do
 not represent the coordinator's model choice.
 
-The retained [rule route](../templates/cursor/rule-route.mdc) is an inactive template.
+The source [rule route](../templates/cursor/rule-route.mdc) is a preparation template.
 [Cursor research](../docs/research/2026-09-20-cursor-agent-orchestration.md) records
 capability limits. CLI and editor behavior require separate checks; do not infer
 support or activation from a saved role filename or selector.

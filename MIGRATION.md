@@ -100,8 +100,10 @@ used to prepare them. Apply these defaults independently of catalog availability
 
 Do not create `.agents/skills` or an empty `.agents` directory for setup alone.
 Create native skill directories only for explicitly selected persistent entries;
-preserve any existing directories and unrelated skills. Required inactive catalog
-templates remain in the bundle without becoming active installations. Root entries
+preserve any existing directories and unrelated skills. Keep catalog
+`source_resources` and named entry templates in the identified source; prepare
+selected native outputs without copying inactive duplicates into the bundle.
+Shared role bodies remain local operational resources. Root entries
 route integration to the accessible source by default; the adoption record retains
 source identity for future updates. Ordinary project work uses the adopted local
 rules without requiring the source checkout.
@@ -153,17 +155,17 @@ does not authorize deleting consumer files. Store any retained historical copy
 outside native discovery. No consumer update is performed by a source-library edit.
 
 List selected and deliberately uninstalled entries in the adoption preview. For
-each selected name, record the inactive template and native destination separately,
+each selected name, record the source template identity and native destination separately,
 the local guide resolved from that destination, and the managed scope/evidence
 reference. The [record template](templates/framework/adoption-record.md#native-task-skill-mapping-when-selected)
 provides this mapping without a second set of accepted-content hashes. Do not
-install a whole native skill directory merely because its resources are bundled.
+install a whole native skill directory merely because its templates are available.
 
 Preview the selected skill name, source/content identity, native destination and
 adapted reference alongside the bundle paths. For Codex, the project destination
-is `.agents/skills/<selected-skill>/SKILL.md`; the source template remains
-inactive inside the bundle. Record both paths and their adapted contents in the
-existing adoption record's managed scope. Reconcile any existing same-name skill
+is `.agents/skills/<selected-skill>/SKILL.md`; the source template stays in AEK.
+Record its source identity and the adapted native contents in the existing
+adoption record; do not invent a managed inactive bundle path. Reconcile any existing same-name skill
 under the ownership and B/C/N rules below; name equality does not establish ownership.
 If a same-name local skill is unowned, preserve it while preparing an explicit
 coexistence, adaptation or replacement decision. Do not leave competing active
@@ -182,8 +184,9 @@ Check the selected bundle and explicitly check the installed native file outside
 that scan. Validate skill metadata separately. Record any available client
 discovery/use evidence with its client/version; preparation and static checks do
 not prove activation.
-Other clients retain direct-reference use until their native mapping is separately
-verified. Preserve snapshots outside discovery and apply the existing recovery
+Other clients use the adopted local guide and core rules until a native skill
+mapping is separately verified; an inactive copy does not establish activation.
+Preserve snapshots outside discovery and apply the existing recovery
 procedure; adding these skills introduces no separate installer or model-setup step.
 Dropping a native selection, finding a deleted managed entry or losing its accepted
 base uses the same explicit update decision as any managed file; neither the
@@ -191,8 +194,12 @@ profile's resource list nor a missing file is permission to restore or delete it
 
 ## Layout and path contract
 
-For a new adoption, place imported `standards/` and inactive `templates/` under
-target `.agents-framework/`. The source library keeps its existing layout.
+For a new adoption, place selected `standards/` and retained runtime assets under
+target `.agents-framework/`. These include common role bodies and existing
+planning/task assets under `templates/`; the directory name does not make an
+operational body disposable. Omit source preparation resources under the
+[catalog contract](standards/catalog.md#assemble-a-portable-bundle).
+The source library keeps its existing layout.
 Root `AGENTS.md`, `ARCHITECTURE.md` and `PLANS.md` retain their project purpose and
 agreed locations. Create the target entry from the selected
 [entry template](#entry-and-passport-templates); never export the source
@@ -205,7 +212,8 @@ model configuration can create native settings/roles without installing setup sk
 | Path category | Resolution base |
 | --- | --- |
 | Source procedures and template/content identities | Identified accessible source checkout |
-| Catalog assets, sources, resources and template values | Bundle root: source root here; `.agents-framework/` in a new target |
+| Catalog assets, sources and resources | Bundle root: source root here; `.agents-framework/` in a new target |
+| Catalog `source_resources` and named templates | Source root for preparation; their catalog declarations do not require target copies |
 | Root entry and native role instruction paths | Target instruction root, with the actual bundle prefix |
 | Ordinary topic and inactive template Markdown links | Containing file directory |
 | Managed paths, relocation mappings and accepted snapshot names | Target instruction root, including any bundle prefix |
@@ -237,17 +245,24 @@ Rows apply per launch scope. Whenever a repository is its own launch root, the l
 row's duplicate recording applies, including when its entry already exists and the
 first row's merge is used.
 
-| Template | Bundled |
+| Template | Bundled by default |
 | --- | --- |
-| `templates/policy-entry.md` | Yes, as the catalog `entry` template |
+| `templates/policy-entry.md` | No; read the catalog `entry` template from the identified source |
 | `templates/AGENTS.root.md`, `templates/AGENTS.project.md` | No; read from the identified source |
 | `templates/project-architecture.md`, `templates/workspace-architecture.md` (passport and workspace map) | No; read from the identified source |
 
-Templates read from the source produce target files; their adapted results, not
-the inactive templates, are managed adoption content. Copy one of them into the
-bundle only when the adoption explicitly selects it. The selected-bundle scan
-covers only catalog templates, so check such a copy in a separate explicit-path run;
-explicit paths replace the body scan.
+Read these source templates to prepare the selected active entries, passports and
+workspace map at their final target paths. Manage those adapted outputs as adoption
+content. Named catalog template declarations do not require inactive target copies.
+
+An explicitly selected or retained inactive copy is separate adoption content,
+not an active entry. Reconcile existing copies under [Repeat and update](#repeat-and-update),
+preserving unowned files and local changes. Source reclassification alone does not
+authorize removal or recreation of an old copy.
+
+The bundle-mode checker still validates present named catalog templates for legacy
+compatibility. Check any other explicitly selected inactive copy in a separate
+explicit-path run; explicit paths replace the body scan.
 
 ### Adapting installation routes
 
@@ -260,9 +275,9 @@ links, code-span paths, TOML developer instructions and native imports separatel
 | `AGENTS.root.md`, `policy-entry.md`, `PLANS.md` | Source templates describe root-installed paths; the source checker maps their `.agents-framework/` prefix virtually. When retained inactive in a target bundle, rebase Markdown links to their containing file; there is no virtual target mapping. | Resolve from the actual root entry, using `.agents-framework/standards/...` and `.agents-framework/templates/...` by default. A nested or alternate entry needs its own base. |
 | Task template and helper routes | Retain source-relative links inside the inactive bundle. | Rebase to the installed `PLANS.md` and bundle from the existing canonical task location; a plan at `docs/plans/` usually needs `../../`. Native stores can differ. |
 | Model setup/reassignment skills | `../../../standards/model-configuration.md` remains relative to each inactive skill folder; read from source during integration. | Only for explicitly requested persistent installation: at Codex `.agents/skills/<skill>/SKILL.md`, use `../../../.agents-framework/standards/model-configuration.md` for the contained layout, or the reconciled flat route. |
-| Project task skills | `../../../standards/project-skills.md` resolves inside each source or inactive bundle template. | Rebase from each native folder to the actual guide; contained Codex uses `../../../.agents-framework/standards/project-skills.md`. Keep operational references local. |
+| Project task skills | `../../../standards/project-skills.md` resolves from the source template; omit inactive target copies. | Rebase from each native folder to the actual guide; contained Codex uses `../../../.agents-framework/standards/project-skills.md`. Keep operational references local. |
 | Integration skill | Source-relative discovery requires both source procedure and catalog. | Resolve the full source through the request/provenance, independently of the inactive or native skill folder. Source unavailability blocks dependent import/update work, not ordinary work using reachable local rules. |
-| Native role adapters | Body paths in TOML instructions or Markdown code spans describe the intended target instruction root, not the native file's folder. | Adapt `.agents-framework/templates/agents/<role>.md` to the actual bundle prefix; preserve selected native settings. Supply the exact root and body location to the worker. |
+| Native role adapters | Read templates from the source; body paths describe the intended target instruction root, not the native file's folder. | Create only selected enabled native definitions. Adapt `.agents-framework/templates/agents/<role>.md` to the actual bundle prefix; preserve settings and supply the exact root/body location. Omit inactive adapter duplicates. |
 | Shared role bodies | `templates/agents/<role>.md` holds the common procedure; policy links resolve from that body. | Retain the body inside the bundle, outside native discovery, with reachable relative policy links. The adapter explicitly reads it; a link does not perform native inclusion. |
 | Claude bridge and Cursor route | Inactive examples only; an `@` import is not a Markdown link. | Root `CLAUDE.md` may keep `@AGENTS.md`; verify that root entry separately. Fill the Cursor rule's instructions from its real location and selected native contract. |
 
@@ -272,7 +287,7 @@ need a reachable local entry, selected rules and canonical task route within the
 supported discovery boundary; merely linking to an undiscovered parent is insufficient.
 Check installed copies separately, even if their inactive originals passed.
 
-Optional omitted research/history and inapplicable cross-profile routes use a
+Omitted source preparation inputs, optional research/history and inapplicable cross-profile routes use a
 known source URL with revision/content identity where available, or labelled
 non-link source paths resolved through adoption provenance (for example,
 `Source reference: docs/research/<record>.md; source identity in adoption.md`).
@@ -426,13 +441,17 @@ or first integration, prepare only the chosen roles and their native settings.
 For an existing configured project, preserve saved choices; a newly available
 role template is not a request to enable it. Explicitly adding a role follows
 setup/reassignment for its pair, incoming edge and affected managed native files.
-Keep unselected examples inactive in the bundle, outside native agent discovery.
+Keep preparation templates in the source, including the selected client's
+originals; omit their inactive target duplicates.
 
 The [composition guide](templates/agents/README.md) supplies architect, implementer
 and reviewer adapters for all three clients. Prepare only the selected client's
-enabled native definitions and their required local bodies. Shared bodies are
-managed adoption content, not new roles or model assignments. Single-agent mode
-installs no active specialist, and disabled specialists remain inactive.
+enabled native definitions and their required local bodies. Architect, implementer,
+and reviewer are persistent development roles: retain their installed definitions
+and bodies after integration and after individual assignments finish. Shared bodies
+are managed operational content, not new roles or model assignments. Single-agent
+mode installs no active specialist; source reclassification does not enable or
+disable roles or change model choices.
 
 When replacing an embedded Codex procedure, compare its last accepted version,
 current local contents, and proposed adapter/body. Preserve accepted project
@@ -533,6 +552,33 @@ do not declare an import unchanged merely because one file matches. If prior wor
 was partial or unverified, matching bytes avoid rewrites but do not discharge its
 outstanding checks. Reuse valid evidence under the shared verification policy;
 only changed inputs or concrete unresolved questions require new checks.
+
+### Retiring preparation-only copies
+
+When an authorized update adopts the new source/bundle resource separation,
+inventory previously copied preparation templates separately from active native
+definitions and shared role bodies. Use the recorded bundle directory and owned
+paths, not a directory-prefix deletion rule. New catalog classification describes
+the proposed selection; it does not establish ownership or authorize removal.
+
+For a proven managed, unchanged inactive copy, include its scoped retirement and
+affected links in the prepared change set. Preserve a modified or unowned copy
+until its reconciliation decision is explicit. If a retained customization still
+needs that file, preserve the dependency or adapt it before retirement. Record
+accepted retention/absence so later imports do not recreate deliberately retired
+copies or silently acquire unowned ones.
+
+Keep enabled native architect, implementer and reviewer definitions and their
+local shared bodies. Keep explicitly retained persistent setup/task skills.
+Their lifecycle does not end with installation or a delegated assignment. A
+source-only template path is distinct from its adapted native output; neither
+an `af-` name nor the word `templates` is a safe retirement selector.
+
+Prepare the candidate without target writes. Recheck current contents, preserve
+recoverable originals outside discovery, and repair required local routes before
+retiring the covered inactive copies. Apply the recovery procedure below if
+interrupted; report partial state without removing working role dependencies.
+Source-library maintenance alone performs none of these consumer actions.
 
 ## Partial application and recovery
 
@@ -641,7 +687,9 @@ follows the core standard; migration does not require adding a Factory, Facade,
 Strategy, or monadic abstraction.
 
 Use the [catalog guide](standards/catalog.md) when assembling the bundle: include
-shared required profiles, selected dependencies and resources, but derive reading
+shared required profiles, selected dependencies and runtime resources. Read source
+preparation inputs only to create selected outputs; do not copy their inactive
+originals. Derive reading
 routes from the task and actual stack. A dependency keeps files available; it
 does not make their instructions applicable. Include the guide among shared assets.
 Its [task reading table](standards/catalog.md#read-for-the-current-task) and engine

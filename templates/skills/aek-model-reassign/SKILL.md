@@ -10,7 +10,7 @@ This skill belongs to the Agent_Engineering_Kit workspace layout.
 
 Read the [model configuration contract](../../../standards/model-configuration.md),
 especially native target mapping, active-session limits, and reassignment.
-That link is relative to this inactive source/bundle template. Read this skill from
+That link is relative to this source preparation template. Read this skill from
 the identified AEK source by default; a later reassignment does not require its
 installation in the target. Source `MIGRATION.md`, "Setup procedures and persistent
 skills", owns installation selection. Only for an explicitly requested persistent

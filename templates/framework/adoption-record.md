@@ -45,12 +45,12 @@ itself; preserve its prior contents/absence in the external operation snapshot.
 
 ## Native task-skill mapping, when selected
 
-| Skill | Inactive bundle template | Selected native destination or not installed | Adapted local guide | Managed-scope/evidence reference |
+| Skill | Source template identity | Selected native destination or not installed | Adapted local guide | Managed-scope/evidence reference |
 | --- | --- | --- | --- | --- |
-| `<selected name>` | `<bundle-relative template resolved from recorded bundle directory>` | `<target-relative native path; not installed when only bundled>` | `<reference resolved from native folder>` | `<managed-path row and file/discovery/use evidence; not observed stays not observed>` |
+| `<selected name>` | `<source-relative template and content identity; no inactive target copy required>` | `<target-relative native path or explicitly not installed>` | `<reference resolved from native folder>` | `<managed-path row and file/discovery/use evidence; not observed stays not observed>` |
 
-Map selected native entries separately from bundled templates. Do not count an
-inactive copy as a second installation or infer ownership from a matching name.
+Map selected native entries separately from source preparation inputs. Do not
+invent a managed target path for a source-only template or infer ownership from a matching name.
 Native destinations share the managed-path comparison/recovery rules; do not keep
 another copy of their accepted hashes here. If selection drops an entry or a
 managed path is intentionally absent, reference the explicit retain/retire/restore

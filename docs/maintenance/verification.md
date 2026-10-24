@@ -67,6 +67,21 @@ unambiguous across the catalog. Catalog templates are client alternatives:
 source mode requires all declared templates; bundle mode checks those present.
 Whether the correct client entry was installed still needs adoption review.
 
+Optional profile `source_resources` use the same string/path checks. Source mode
+requires them; bundle mode permits their absence while rejecting invalid selected
+declarations and conflicting runtime/source classification. Present preparation
+paths must be files within the bundle boundary; absence does not waive required
+runtime resources. Catalogs without the field retain their original requirements.
+No check deletes old copies or validates native activation.
+
+For programmatic fixture preparation, use `Checker.catalog_selection(profiles)`
+and copy only its `bundle_files` after rejecting diagnostics. Its `source_files`
+identify source preparation references to adapt; `entry_templates` retains named
+entry metadata for legacy optional validation. `catalog_files` selects validation
+inputs according to source/bundle mode, not a portable copy list. Both interfaces
+share one catalog parser and dependency traversal. CLI `--profile` selects bundle
+validation, including for a flat target; source mode remains the default source scan.
+
 For a prepared bundle, select its actual profiles, for example:
 
 ```sh
@@ -156,13 +171,15 @@ compatibility entries. Prepared target bundles still need their own reference ch
 Project-skill adoption tests prepare a fixed FastAPI instruction fixture from the
 real selected templates, check its bundle and selected native skills separately,
 and reject unadapted/broken required references. They distinguish selecting the
-two-template bundle from installing just one native entry. Flat/custom cases
+workflow contract from installing one or both native entries, without inactive
+template duplicates. They also cover no skill installation and explicitly selected
+persistent setup. Flat/custom cases
 check the design native reference only; these tests are neither a general installer
 nor client behavior evidence.
 
 Portability tests cover six representative selections across contained, flat and
-custom layouts, independently opened child paths, active planning literals, a
-Claude import and Codex role references. They render candidates in memory, check
+custom layouts, independently opened child paths, active planning literals,
+Claude-only bridge syntax and Codex role references. They render candidates in memory, check
 that repeated rendering is identical and that writing a candidate preserves fixed
 local sentinels; the in-memory renderer itself is not write-free preparation evidence. These are syntax
 and file-state observations, not client activation or an automated update engine.
@@ -172,10 +189,45 @@ adapters, catalog closure, body/policy routes in contained/flat/custom bundles,
 missing/wrong/stale routes, selected-pair fixtures, disabled/single-agent choices
 and identical repeated in-memory candidates. The Markdown adapter helper accepts only the
 templates' small unquoted scalar frontmatter subset; it rejects unsupported syntax
-and is neither a general YAML parser nor native schema validation. Codex uses
+and is neither a general YAML parser nor native schema validation. Prepared targets
+retain the three enabled roles and common bodies while omitting all inactive native
+adapters; non-Codex role fixtures do not install Codex task-skill paths. Codex uses
 `tomllib`. These tests do not prove semantic instruction following, client loading,
 effective permissions or actual model execution. Review role-body parity separately.
 The offline model-routing checker below remains Codex-only.
+
+### Preparation-copy retirement walkthrough
+
+Use a disposable target, never a consumer checkout, to exercise the existing
+MIGRATION comparison and recovery procedure. This is a manual file-state exercise,
+not an automated update engine or proof that another agent follows the procedure.
+
+1. Use `portable_candidate(("fastapi",), ".agents-framework", client="codex")`
+   and `write_fixture` from `tests/test_project_skill_portability.py` to prepare a
+   fresh target with all three native roles and local bodies. Add the controlled
+   old copies below, recording exact baseline contents and ownership outside it.
+2. Prepare the new candidate in memory and compare `snapshot(target)` before and
+   after. Preview decisions for the concrete cases; do not write the candidate
+   over current files as a substitute for reconciliation.
+
+| Controlled case | Prepared decision and evidence |
+| --- | --- |
+| Owned inactive Codex adapter, current bytes equal accepted baseline | Retire that exact inactive path in the explicitly scoped update; keep its active native counterpart and common body |
+| Owned inactive setup template with local changes | Retain pending reconciliation; preserve its current bytes |
+| Unowned same-name inactive template | Retain without acquiring ownership or deleting it |
+| Explicitly retained native `aek-model-setup` entry | Preserve its selected native file and local contract link |
+| Interruption immediately after the approved inactive-path retirement | Verify all three native/body routes, restore only the still-absent retired path from its snapshot, and verify exact recovery before resuming |
+
+3. Apply only the previewed unchanged inactive-path retirement. Check the retained
+   bytes and use `body_route` for each role. For the interruption case, preserve
+   any intervening replacement instead of overwriting it during recovery.
+4. After the accepted retirement, render again: the new candidate must still omit
+   source preparation copies. Preparation must leave retained custom/native files
+   untouched. Run the artifact checker for the selected target profiles and
+   explicitly include native role/skill files. Record the temporary location,
+   actual outcomes, source revision, and evidence limits in the current task plan.
+
+### Checker type verification
 
 When modifying the checker or tests, run their focused unittest suites and the
 [strict Python analyzer](../../standards/python/typing-contracts.md#strict-static-contracts).

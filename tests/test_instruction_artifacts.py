@@ -138,6 +138,58 @@ class ArtifactChecks(unittest.TestCase):
         self.assert_failure(result, "missing resource")
         self.assertRegex(result.stdout + result.stderr, r"standards/catalog.toml:\d+:")
 
+    def test_source_resources_missing_in_source_fail(self) -> None:
+        self.write("standards/catalog.toml", CATALOG.replace(
+            'id = "python"', 'id = "python"\nsource_resources = ["templates/setup.md"]'))
+        self.assert_failure(self.run_checker("standards/core.md"),
+                            "missing resource: templates/setup.md")
+
+    def test_source_resources_absent_in_target_pass(self) -> None:
+        self.write("templates/policy-entry.md", "[Rules](../standards/core.md#rules)\n")
+        catalog = CATALOG.replace(
+            'id = "python"', 'id = "python"\nsource_resources = ["templates/setup.md"]')
+        self.write("standards/catalog.toml", catalog)
+        result = self.run_checker("--profile", "python")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_source_resources_do_not_hide_missing_runtime_files(self) -> None:
+        self.write("templates/policy-entry.md", "[Rules](../standards/core.md#rules)\n")
+        self.write("standards/catalog.toml", CATALOG.replace(
+            'id = "python"', 'id = "python"\nsource_resources = ["templates/setup.md"]'))
+        (self.root / "standards/details.md").unlink()
+        self.assert_failure(self.run_checker("--profile", "python"),
+                            "missing resource: standards/details.md")
+
+    def test_source_resources_invalid_declarations_fail(self) -> None:
+        self.write("templates/policy-entry.md", "[Rules](../standards/core.md#rules)\n")
+        invalid = (('"templates/setup.md"', "expected an array of strings"),
+                   ('[false]', "expected a nonempty string"),
+                   ('[""]', "expected a nonempty string"),
+                   ('["../outside.md"]', "path outside bundle"),
+                   ('["/outside.md"]', "bundle path must be relative"))
+        for value, message in invalid:
+            for args in (("standards/core.md",), ("--profile", "python")):
+                with self.subTest(value=value, args=args):
+                    self.write("standards/catalog.toml", CATALOG.replace(
+                        'id = "python"', f'id = "python"\nsource_resources = {value}'))
+                    self.assert_failure(self.run_checker(*args), message)
+
+    def test_source_resources_conflicting_lifecycles_fail(self) -> None:
+        self.write("templates/policy-entry.md", "[Rules](../standards/core.md#rules)\n")
+        for name in ("standards/details.md", "standards/./details.md", "standards/core.md",
+                     "standards/catalog.toml"):
+            with self.subTest(name=name):
+                self.write("standards/catalog.toml", CATALOG.replace(
+                    'id = "python"', f'id = "python"\nsource_resources = ["{name}"]'))
+                self.assert_failure(self.run_checker("--profile", "python"),
+                                    "conflicting resource lifecycle")
+
+    def test_legacy_catalog_resources_remain_required(self) -> None:
+        self.write("templates/policy-entry.md", "[Rules](../standards/core.md#rules)\n")
+        (self.root / "standards/details.md").unlink()
+        self.assert_failure(self.run_checker("--profile", "python"),
+                            "missing resource: standards/details.md")
+
     def test_bad_fragment_reports_link_location(self) -> None:
         self.write("standards/python.md", "# Python\n[Wrong](core.md#absent)\n")
         result = self.run_checker()

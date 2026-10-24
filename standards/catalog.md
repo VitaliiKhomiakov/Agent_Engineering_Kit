@@ -20,11 +20,12 @@ flat until relocation is explicitly selected and reconciled.
 | --- | --- |
 | `schema_version` | Version of the documented catalog layout |
 | `assets` | Shared files supplied with the bundle, including this guide |
-| `templates` | Named template paths to adapt for the selected client's entry mechanism |
+| `templates` | Source preparation inputs for the selected client's entry mechanism; create the adapted entry without copying raw templates into a new bundle |
 | `profiles[].id` | Unique stable profile ID; `dependencies` refer to these IDs |
 | `source` | The profile's entry document |
 | `dependencies` | Profiles whose files must remain available with this profile; follow transitively when assembling the bundle, not when reading for a task |
 | `resources` | Supporting detail sections and examples available with the profile; availability does not require opening them |
+| `source_resources` | Optional array of source preparation paths; checked in AEK, omitted from copied bundles, and used to prepare selected native outputs |
 | `required = true` | Shared policy to include in an adopted bundle; reading still depends on the task and its `when` condition |
 | `activities`, `technologies`, `globs` | Applicability hints; confirm the actual task and stack rather than treating a match as an unconditional instruction |
 | `when` | The condition for reading the profile; its own routes then select relevant sections |
@@ -32,8 +33,10 @@ flat until relocation is explicitly selected and reconciled.
 ## Assemble a portable bundle
 
 Select profiles for the actual project stack and intended work. Include shared
-`required` and selected profiles with their transitive dependencies, sources and
-resources, shared assets and needed catalog `templates`. Other entry and passport
+`required` and selected profiles with their transitive dependencies, sources,
+resources and shared assets. Read `source_resources` and named catalog `templates`
+from the identified source only when preparing their selected outputs; exclude
+these preparation inputs from the bundle copy list. Other entry and passport
 templates are read from the source library's MIGRATION section "Entry and passport
 templates". Keep each file once when it appears through several routes. Preserve these IDs and bundle-relative paths;
 change the bundle's placement without prefixing catalog values.
@@ -46,14 +49,31 @@ installs a client, activates a skill, or selects a framework for the application
 The catalog itself is a shared asset so adopted bundle-selection routes remain
 reachable. Its entries describe the source library: an unselected profile's files
 need not exist in a selected target bundle. Validate the selected closure, not
-every unselected entry. The model-configuration resources keep routing examples,
-native role templates and setup/reassignment skills available in their inactive
-`templates/` locations. Copying them does not create active role definitions or
-model settings; activate only the chosen client's enabled roles during authorized
-setup. Ordinary imports can remain inline without this setup.
+every unselected entry. The model-configuration resources retain the common role
+bodies and composition guide for ongoing work. Its `source_resources` keep routing
+examples, native role templates, and setup/reassignment skills in AEK. Prepare
+the chosen client's enabled native roles and settings separately during authorized
+setup; retain their local bodies after setup and after delegated tasks finish.
+Ordinary imports can remain inline without this setup.
 
-Optional source research and historical plans are not bundle dependencies. When
-omitting them, adapt their links in copied documents to clearly labelled source
+The optional `source_resources` field defaults to an empty array under schema 1.
+Its paths use the same relative-path and boundary rules as other resources. Source
+validation requires these files; target validation accepts their absence. A
+selected path cannot be both an ordinary resource and a `source_resources` entry.
+Duplicate paths within one category are included once. Existing catalogs without
+the new field retain all their declared resource requirements; do not infer a
+different lifecycle from a filename. An explicit legacy runtime declaration of a
+named entry template also keeps its requirement.
+
+The checker exposes `catalog_selection(...).bundle_files` for the copy inventory
+and `.source_files` for preparation references. Reject diagnostics before using
+either result. `catalog_files(...)` is the validation inventory, not a copy list:
+source mode includes both categories, while target mode checks runtime files and
+present optional legacy named entry templates. Removing a resource from a new
+selection does not delete it from an existing target.
+
+Source preparation inputs, optional research and historical plans are not bundle
+dependencies. When omitting them, adapt their links in copied documents to clearly labelled source
 references resolved through adoption provenance, or an actually known source URL
 with content identity where available. A local author-machine Markdown link is
 not portable, even when reachable during preparation. Keep the rule/procedure
@@ -120,11 +140,12 @@ procedure; a smaller closure is not permission to delete previously managed file
 ## Read for the current task
 
 The optional `project-workflows` profile supplies the
-[project-skill contract](project-skills.md) and inactive design and review templates.
+[project-skill contract](project-skills.md), with design and review templates
+available as source preparation inputs.
 Select it explicitly during adoption when those optional project task skills are wanted;
 technology selections alone do not include it, and it selects no technology.
-Bundle availability is separate from installing a chosen native skill. Source
-MIGRATION owns destination adaptation and recording the managed native path.
+Install only chosen native skills, without inactive bundled template duplicates.
+Source MIGRATION owns destination adaptation and recording the managed native path.
 Projects without this profile keep their existing direct task routes; adapt this
 optional link when omitting the profile from a target bundle.
 

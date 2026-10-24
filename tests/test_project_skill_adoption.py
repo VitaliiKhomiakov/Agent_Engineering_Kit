@@ -52,23 +52,30 @@ def adapt_document(source: Path, destination: Path, bundle: Path,
 
 def prepare_design_fixture(target: Path, *, workflow: bool = True,
                            bundle_dir: str = ".agents-framework",
-                           native_skills: tuple[str, ...] = ("aek-design-feature",)) -> None:
+                           native_skills: tuple[str, ...] | None = None) -> None:
     """Prepare this fixed FastAPI instruction fixture in a caller-owned empty root."""
     if target.exists() and any(target.iterdir()):
         raise ValueError("Fixture target must be empty")
+    if native_skills is None:
+        native_skills = ("aek-design-feature",) if workflow else ()
+    if not workflow and set(native_skills) & {"aek-design-feature", "aek-review-changes"}:
+        raise ValueError("Task skills require the project-workflows guide")
     bundle = target / bundle_dir
     bundle.mkdir(parents=True, exist_ok=True)
     checker = Checker(ROOT)
     profiles = ("fastapi", "project-workflows") if workflow else ("fastapi",)
-    selected = checker.catalog_files(profiles)
+    selection = checker.catalog_selection(profiles)
     if checker.diagnostics:
         raise ValueError(str(checker.diagnostics))
+    selected = set(selection.bundle_files)
+    source_references = frozenset(path.relative_to(ROOT).as_posix() for path in selection.source_files)
     for source in sorted(selected):
         destination = bundle / source.relative_to(ROOT)
         destination.parent.mkdir(parents=True, exist_ok=True)
         if source.suffix in {".md", ".mdc"}:
             destination.write_text(adapt_document(source, destination, bundle, selected,
-                                                 source.read_text(encoding="utf-8")), encoding="utf-8")
+                                                 source.read_text(encoding="utf-8"), source_references),
+                                   encoding="utf-8")
         else:
             shutil.copyfile(source, destination)
     entry_source = ROOT / "templates/policy-entry.md"
@@ -86,25 +93,25 @@ def prepare_design_fixture(target: Path, *, workflow: bool = True,
     entry = entry.replace("Remove this optional route when that profile is omitted; direct rules remain usable.\n", "")
     if not workflow:
         entry = re.sub(r"If `project-workflows` is explicitly selected,.*?\n\n", "", entry, flags=re.DOTALL)
-    entry = adapt_document(entry_source, target / "AGENTS.md", bundle, selected, entry)
+    entry = adapt_document(entry_source, target / "AGENTS.md", bundle, selected, entry, source_references)
     (target / "AGENTS.md").write_text(entry.replace("$routes", routes), encoding="utf-8")
     plans_source = ROOT / "templates/PLANS.md"
     plans = "# Planning rules\n\n## Language" + plans_source.read_text(
         encoding="utf-8").split("## Language", 1)[1]
     (target / "PLANS.md").write_text(adapt_document(
-        plans_source, target / "PLANS.md", bundle, selected, plans), encoding="utf-8")
+        plans_source, target / "PLANS.md", bundle, selected, plans, source_references), encoding="utf-8")
     for source in sorted((ROOT / "tests/fixtures/project-skills").rglob("*")):
         if source.is_file():
             destination = target / source.relative_to(ROOT / "tests/fixtures/project-skills")
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, destination)
-    if workflow:
-        for name in native_skills:
-            source = ROOT / "templates/skills" / name / "SKILL.md"
-            destination = target / ".agents/skills" / name / "SKILL.md"
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            destination.write_text(adapt_document(source, destination, bundle, selected,
-                                                 source.read_text(encoding="utf-8")), encoding="utf-8")
+    for name in native_skills:
+        source = ROOT / "templates/skills" / name / "SKILL.md"
+        destination = target / ".agents/skills" / name / "SKILL.md"
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(adapt_document(source, destination, bundle, selected,
+                                             source.read_text(encoding="utf-8"), source_references),
+                               encoding="utf-8")
 
 
 class ProjectSkillAdoptionChecks(unittest.TestCase):
@@ -130,7 +137,7 @@ class ProjectSkillAdoptionChecks(unittest.TestCase):
         self.assertFalse((self.root / ".agents-framework/standards/react.md").exists())
         self.assertFalse((self.root / ".agents-framework/standards/nextjs-framework.md").exists())
 
-    def test_unadapted_native_link_fails_despite_valid_inactive_template(self) -> None:
+    def test_unadapted_native_link_fails_despite_valid_bundle(self) -> None:
         shutil.copyfile(ROOT / SKILL, self.root / NATIVE)
         self.assertEqual(self.check().returncode, 0)
         result = self.check(NATIVE)
@@ -187,7 +194,34 @@ class ProjectSkillAdoptionChecks(unittest.TestCase):
         name = "aek-design-feature"
         self.assertFalse((self.root / ".agents/skills" / name).exists())
         self.assertNotIn(f".agents/skills/{name}/SKILL.md", entry)
-        self.assertTrue((self.root / ".agents-framework/templates/skills" / name / "SKILL.md").is_file())
+        self.assertFalse((self.root / ".agents-framework/templates/skills").exists())
+
+    def test_setup_only_does_not_install_skill_directories(self) -> None:
+        for workflow in (False, True):
+            with self.subTest(workflow=workflow):
+                shutil.rmtree(self.root)
+                prepare_design_fixture(self.root, workflow=workflow, native_skills=())
+                self.assertFalse((self.root / ".agents").exists())
+                self.assertFalse((self.root / ".agents-framework/templates/skills").exists())
+
+    def test_task_skill_requires_its_selected_workflow_guide(self) -> None:
+        shutil.rmtree(self.root)
+        with self.assertRaisesRegex(ValueError, "project-workflows"):
+            prepare_design_fixture(self.root, workflow=False, native_skills=("aek-review-changes",))
+        self.assertFalse(self.root.exists())
+
+    def test_explicit_persistent_setup_skill_uses_local_contract(self) -> None:
+        shutil.rmtree(self.root)
+        prepare_design_fixture(self.root, workflow=False, native_skills=("aek-model-setup",))
+        native = ".agents/skills/aek-model-setup/SKILL.md"
+        self.assertTrue((self.root / native).is_file())
+        self.assertFalse((self.root / ".agents-framework/templates/skills").exists())
+        result = subprocess.run(
+            [sys.executable, "-B", str(ROOT / "tools/check_instruction_artifacts.py"),
+             "--root", str(self.root), "--bundle-dir", ".agents-framework",
+             "--profile", "fastapi", native], capture_output=True, text=True,
+            check=False, timeout=15)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
 
 if __name__ == "__main__":

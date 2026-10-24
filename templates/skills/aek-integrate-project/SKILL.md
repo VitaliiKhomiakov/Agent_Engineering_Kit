@@ -62,6 +62,6 @@ Report prepared/applied/unchanged/partial scope, evidence, unresolved decisions 
 the next agreed checkpoint, including the model-step outcome and its owner references.
 Distinguish valid files and saved choices from observed client discovery/activation.
 Neither source-based reading nor copying this skill proves native activation.
-For task skills, report the selected native subset separately from available
-bundle templates. Include those native paths in comparison, before-write protection
+For task skills, report the selected native subset separately from source
+preparation templates. Include those native paths in comparison, before-write protection
 and explicit installed-file checks; a same-name local skill is not owned by default.

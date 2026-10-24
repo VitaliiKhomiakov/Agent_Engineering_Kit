@@ -62,6 +62,22 @@ class Profile:
     dependencies: tuple[str, ...]
     required: bool
     line: int
+    source_resources: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
+class Catalog:
+    assets: tuple[str, ...]
+    templates: tuple[str, ...]
+    profiles: dict[str, Profile]
+
+
+@dataclass(frozen=True)
+class CatalogSelection:
+    # Declared paths; callers must reject diagnostics before using a copy list.
+    bundle_files: frozenset[Path]
+    source_files: frozenset[Path]
+    entry_templates: frozenset[Path] = frozenset()
 
 
 def string(value: object) -> str:
@@ -240,8 +256,7 @@ class Checker:
             raise ValueError(f"path outside bundle: {target}")
         return path
 
-    def catalog_files(self, selected: Sequence[str]) -> set[Path]:
-        path = self.bundle_root / "standards/catalog.toml"
+    def _read_catalog(self, path: Path) -> Catalog | None:
         line = 1
         try:
             path = self.bundle_path("standards/catalog.toml")
@@ -264,14 +279,18 @@ class Checker:
                 if not isinstance(required, bool):
                     raise ValueError(f"profile {name}: required must be boolean")
                 profile = Profile(name, string(item.get("source")), strings(item.get("resources", [])),
-                                  strings(item.get("dependencies", [])), required, line)
+                                  strings(item.get("dependencies", [])), required, line,
+                                  strings(item.get("source_resources", [])))
                 if name in profiles:
                     self.error(path, line, f"duplicate profile: {name}")
                 profiles[name] = profile
+            return Catalog(shared, templates, profiles)
         except (OSError, RuntimeError, UnicodeError, ValueError) as exc:
             self.error(path, line, f"invalid catalog: {exc}")
-            return set()
+            return None
 
+    def _selected_profiles(self, profiles: dict[str, Profile], selected: Sequence[str],
+                           path: Path) -> set[str]:
         included: set[str] = set()
         active: list[str] = []
 
@@ -294,26 +313,48 @@ class Checker:
         for name in sorted(roots):
             if name in profiles:
                 visit(name, profiles[name].line)
-        resources = [(name, 1) for name in shared]
-        for name in sorted(included):
-            profile = profiles[name]
-            resources.extend((resource, profile.line) for resource in (profile.source, *profile.resources))
-        files = {path}
-        for name in templates:
-            # Catalog templates are client alternatives; selected bundles need only copied ones.
-            candidate = self.bundle_root / name
-            if not selected or candidate.exists() or candidate.is_symlink():
-                resources.append((name, 1))
+        return included
+
+    def _catalog_paths(self, resources: Sequence[tuple[str, int]], path: Path, *,
+                       required: bool) -> frozenset[Path]:
+        files: set[Path] = set()
         for name, origin in resources:
             try:
                 resource = self.bundle_path(name)
-                if not resource.is_file():
+                candidate = self.bundle_root / name
+                if (required or candidate.exists() or candidate.is_symlink()) and not resource.is_file():
                     self.error(path, origin, f"missing resource: {name}")
-                else:
-                    files.add(resource)
+                files.add(resource)
             except (OSError, RuntimeError, ValueError) as exc:
                 self.error(path, origin, str(exc))
-        return files
+        return frozenset(files)
+
+    def catalog_selection(self, selected: Sequence[str]) -> CatalogSelection:
+        path = self.bundle_root / "standards/catalog.toml"
+        catalog = self._read_catalog(path)
+        if catalog is None:
+            return CatalogSelection(frozenset(), frozenset())
+        included = self._selected_profiles(catalog.profiles, selected, path)
+        resources = [(name, 1) for name in ("standards/catalog.toml", *catalog.assets)]
+        source_resources: list[tuple[str, int]] = []
+        for name in sorted(included):
+            profile = catalog.profiles[name]
+            resources.extend((resource, profile.line) for resource in (profile.source, *profile.resources))
+            source_resources.extend((resource, profile.line) for resource in profile.source_resources)
+        bundle_files = self._catalog_paths(resources, path, required=True)
+        source_files = self._catalog_paths(source_resources, path, required=self.source_mode)
+        for conflict in sorted(bundle_files & source_files):
+            self.error(path, 1, f"conflicting resource lifecycle: {conflict.relative_to(self.bundle_root)}")
+        entry_templates = self._catalog_paths([(name, 1) for name in catalog.templates], path,
+                                             required=self.source_mode)
+        # A legacy explicit runtime declaration retains its existing requirement.
+        source_files |= entry_templates - bundle_files
+        return CatalogSelection(bundle_files, source_files, entry_templates)
+
+    def catalog_files(self, selected: Sequence[str]) -> set[Path]:
+        selection = self.catalog_selection(selected)
+        optional = selection.source_files if self.source_mode else selection.entry_templates
+        return {path for path in selection.bundle_files | optional if path.is_file()}
 
     def check_file(self, path: Path) -> None:
         try:

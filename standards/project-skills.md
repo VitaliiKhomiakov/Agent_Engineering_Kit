@@ -19,9 +19,11 @@ an installed entry then applies when its task trigger above matches. Implementat
 and existing delivery/verification
 owners; it needs neither this profile nor a separate implementation skill.
 
-The table links inactive bundle templates for reference. Use the selected native
-skill paths recorded in the active project entry when installed. Reading a template
-directly is a fallback, not proof of native discovery. Select the entry for the
+The source table links preparation templates. Adoption uses the selected native
+skill paths recorded in the active project entry and omits inactive template
+duplicates; uninstalled entries remain labelled source references. Without a
+verified native entry, use this local guide and the direct rules below. Reading a
+source template is not proof of native discovery. Select the entry for the
 current operation; these are not a mandatory design → implementation → review
 chain. Direct rules remain available without any skill. A completion review uses
 the existing review boundary, not an extra cycle because a review entry exists.

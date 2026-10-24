@@ -63,16 +63,20 @@ def portable_candidate(profiles: tuple[str, ...], bundle_dir: str, *,
     bundle = target / bundle_dir
     prefix = "" if bundle_dir == "." else bundle_dir + "/"
     checker = Checker(ROOT)
-    selected = checker.catalog_files((*profiles, "project-workflows"))
+    selection = checker.catalog_selection((*profiles, "project-workflows"))
     if checker.diagnostics:
         raise ValueError(str(checker.diagnostics))
+    selected = set(selection.bundle_files)
+    source_references = frozenset(path.relative_to(ROOT).as_posix() for path in selection.source_files)
+    optional_references = source_references | OPTIONAL_STACK_ROUTES
+    native_skills = SKILLS if client == "codex" else ()
     result: dict[str, bytes] = {}
     for source in sorted(selected):
         relative = source.relative_to(ROOT).as_posix()
         destination = bundle / relative
         result[prefix + relative] = (
             adapt_document(source, destination, bundle, selected,
-                           source.read_text(encoding="utf-8"), OPTIONAL_STACK_ROUTES).encode()
+                           source.read_text(encoding="utf-8"), optional_references).encode()
             if source.suffix in {".md", ".mdc"} else source.read_bytes())
 
     for template, filename, heading in (("policy-entry.md", "AGENTS.md", "Reasoning and communication language"),
@@ -84,11 +88,12 @@ def portable_candidate(profiles: tuple[str, ...], bundle_dir: str, *,
         # LOCAL_RULES is a fixture-local route, not a source-template reference.
         text = text.replace("[local contracts](LOCAL_RULES.md)", "`LOCAL_RULES.md`")
         text = text.replace("<actual installed task skill paths>", ", ".join(
-            f".agents/skills/{name}/SKILL.md" for name in SKILLS))
+            f".agents/skills/{name}/SKILL.md" for name in native_skills) or
+            "none; use the adopted local project-skill contract")
         text = text.replace("<actual installed or accessible source skill path>",
                             "separately identified source; integration is not installed here")
         text = text.replace("Remove this optional route when that profile is omitted; direct rules remain usable.\n", "")
-        text = adapt_document(source, target / filename, bundle, selected, text)
+        text = adapt_document(source, target / filename, bundle, selected, text, optional_references)
         text = text.replace("$routes", "\n".join(
             f"- [{name}]({prefix}standards/{name}.md)" for name in profiles))
         # Only bundle-owned literal prefixes change; metadata paths stay root-relative.
@@ -96,13 +101,14 @@ def portable_candidate(profiles: tuple[str, ...], bundle_dir: str, *,
             text = text.replace(f".agents-framework/{directory}/", f"{prefix}{directory}/")
         result[filename] = text.encode()
 
-    for name in SKILLS:
+    for name in native_skills:
         source = ROOT / "templates/skills" / name / "SKILL.md"
         destination = target / ".agents/skills" / name / "SKILL.md"
         result[destination.relative_to(target).as_posix()] = adapt_document(
-            source, destination, bundle, selected, source.read_text()).encode()
+            source, destination, bundle, selected, source.read_text(), optional_references).encode()
     # Separate syntax fixtures: reference resolution only, not client activation.
-    result["CLAUDE.md"] = (ROOT / "templates/claude/policy-bridge.md").read_bytes()
+    if client == "claude":
+        result["CLAUDE.md"] = (ROOT / "templates/claude/policy-bridge.md").read_bytes()
     for role in roles:
         suffix = "toml" if client == "codex" else "md"
         filename = f"af-{role}.{suffix}"
@@ -175,9 +181,10 @@ class ProjectSkillPortabilityChecks(unittest.TestCase):
         for layout in (".agents-framework", ".", "rules/aek"):
             with self.subTest(layout=layout):
                 candidate = portable_candidate(("fastapi",), layout)
-                for line in candidate["CLAUDE.md"].decode().splitlines():
+                claude = portable_candidate(("fastapi",), layout, client="claude")
+                for line in claude["CLAUDE.md"].decode().splitlines():
                     if line.startswith("@"):
-                        self.assertIn(line[1:], candidate)
+                        self.assertIn(line[1:], claude)
                 plans = candidate["PLANS.md"].decode()
                 routes = re.findall(r"`([^`]+/standards/[^`]+\.md|standards/[^`]+\.md)`", plans)
                 self.assertGreaterEqual(len(routes), 6)

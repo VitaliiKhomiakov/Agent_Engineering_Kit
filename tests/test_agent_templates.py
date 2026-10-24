@@ -114,6 +114,14 @@ class AgentTemplateChecks(unittest.TestCase):
                     self.assertFalse(checker.diagnostics, checker.diagnostics)
                     native = {name for name in candidate if name.startswith(f".{client}/agents/")}
                     self.assertEqual(native, {adapter_path(client, role) for role in ROLES})
+                    prefix = "" if layout == "." else layout + "/"
+                    for source_client in CLIENTS:
+                        self.assertFalse(any(name.startswith(f"{prefix}templates/{source_client}/agents/")
+                                             for name in candidate))
+                    self.assertFalse(any(name.startswith(f"{prefix}templates/skills/") for name in candidate))
+                    self.assertEqual("CLAUDE.md" in candidate, client == "claude")
+                    if client != "codex":
+                        self.assertFalse(any(name.startswith(".agents/skills/") for name in candidate))
                     for other in set(CLIENTS) - {client}:
                         self.assertFalse(any(name.startswith(f".{other}/agents/") for name in candidate))
 
