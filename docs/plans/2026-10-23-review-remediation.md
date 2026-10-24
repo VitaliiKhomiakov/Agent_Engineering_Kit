@@ -429,3 +429,38 @@ All pages are under `https://docs.godotengine.org/en/4.7/`.
   implementer re-ran it after the fifth-review tool/test edits with the same
   result.
 - Executed examples were not re-run: only their prose changed.
+
+## Post-commit review corrections (2026-10-24)
+
+Status: corrections verified; the user accepted the stage and authorized a local
+commit. The review fixes stay in the existing source checkout. Baseline: clean
+`becdab3903cacfef31b7e3c311da3e7c8eb703d2`; the instruction root and checkout remain
+the paths recorded above. Earlier evidence retains its original scope.
+
+- [x] **R6:** inline-code matching now requires complete backtick runs of equal
+  length. Unequal runs leave real links visible; equal runs still exclude sample
+  links, including spans containing shorter or longer runs. Two CLI regression
+  tests cover these cases under the [CommonMark code-span contract](https://spec.commonmark.org/0.31.2/#code-spans).
+- [x] **R7:** the Pydantic rule now distinguishes replaced inner validation from
+  outer after/wrap validators, which can still run. Source review used the
+  [2.13.4 implementation](https://raw.githubusercontent.com/pydantic/pydantic/v2.13.4/pydantic/functional_validators.py)
+  and the [2.8 ordering example](https://docs.pydantic.dev/2.8/concepts/validators/#ordering-of-validators-within-annotated);
+  no new Pydantic runtime result is claimed.
+- [x] **R8:** the Go rule no longer asserts that every other RoundTripper lacks
+  draining. It requires checking the implementation, preserving the standard
+  Transport's version condition and bounded-drain/reuse requirements. Sources:
+  [Go 1.27 release notes](https://go.dev/doc/go1.27#nethttp) and the
+  [versioned RoundTripper contract](https://pkg.go.dev/net/http@go1.27.0#RoundTripper).
+
+Checks for this correction scope on Python 3.12.3:
+
+- The new unmatched-run test failed before the fix in three subcases; both new
+  tests passed after it. `python3 -B -m unittest discover -s tests`: 125 tests OK.
+- `python3 -B tools/check_instruction_artifacts.py`: 233 artifacts, zero errors.
+- mypy 2.1.0, installed only in `/tmp/aek-review-becdab3-venv`, passed for the eight
+  files with the documented strict flags and Python 3.11 target.
+- Scoped ownership/readability review retained the existing Markdown parser and
+  technology-rule owners; no new dependency or parsing subsystem was added.
+
+Native-client adoption trials remain a separate target-project follow-up. These
+checks do not establish instruction adherence or context/time savings.

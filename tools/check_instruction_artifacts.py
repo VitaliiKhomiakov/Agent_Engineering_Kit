@@ -16,7 +16,8 @@ ARTIFACT_SUFFIXES = {".md", ".mdc", ".toml"}
 # These source templates describe paths from their installed workspace root.
 ROOT_LINK_TEMPLATES = {"templates/policy-entry.md", "templates/AGENTS.root.md", "templates/PLANS.md"}
 FENCE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
-INLINE_CODE = re.compile(r"(`+)(.+?)\1(?!`)")
+# Code-span delimiters must be whole backtick runs of equal length.
+INLINE_CODE = re.compile(r"(?<!`)(`+)(?!`)(.+?)(?<!`)\1(?!`)")
 LINK = re.compile(r"!?\[([^\[\]\n]*(?:\n[^\[\]\n]+)*)\]\(([^()\n]*)\)")
 DESTINATION = re.compile(r'(?:<([^<>]+)>|([^\s<>]+))(?:\s+"[^"\n]*")?')
 POLICY_ENUMS = {

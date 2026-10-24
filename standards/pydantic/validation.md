@@ -62,9 +62,11 @@ availability or permission to schedule belongs to the use case/domain owner.
 
 Use before validators only for deliberate normalization of raw input: accept
 `object`, narrow it, and avoid mutating caller-owned data that another union branch
-may inspect. Plain validators replace the type's own validation and stop further
-validators; wrap validators can skip or alter inner validation through their handler. Use them only when their effect is necessary and tested,
-not to turn rejected input into a successful default or bypass typing.
+may inspect. Plain validators replace inner validation, including the type's own
+checks; outer after validators and the outer part of wrap validators can still run.
+Wrap validators can skip or alter inner validation through their handler. Use plain
+and wrap validators only when their effect is necessary and tested, not to turn
+rejected input into a successful default or bypass typing.
 
 With Annotated validators, before/wrap ordering is right-to-left and after
 ordering left-to-right; decorator validators join that pipeline. Prefer a

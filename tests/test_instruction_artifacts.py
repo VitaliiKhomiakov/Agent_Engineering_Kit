@@ -211,6 +211,24 @@ class ArtifactChecks(unittest.TestCase):
         result = self.run_checker()
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_unmatched_backtick_runs_keep_links_visible(self) -> None:
+        for text in ("```py [Broken](missing.md)``", "Text ``[Broken](missing.md)```",
+                     "Text `[Broken](missing.md)``", "Text ```[Broken](missing.md)`"):
+            with self.subTest(text=text):
+                self.write("standards/details.md", f"# Details\n{text}\n")
+                result = self.run_checker()
+                self.assert_failure(result, "missing link target")
+                self.assertIn("standards/details.md:2:", result.stdout)
+                self.assertNotIn("unclosed fence", result.stdout)
+
+    def test_matched_inline_code_runs_keep_sample_links_excluded(self) -> None:
+        for text in ("``[Sample](missing.md)``", "Text ```[Sample](missing.md)```",
+                     "Text `` `[Sample](missing.md)` ``", "Text ` ``[Sample](missing.md)`` `"):
+            with self.subTest(text=text):
+                self.write("standards/details.md", f"# Details\n{text}\n")
+                result = self.run_checker()
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_unclosed_fence_fails_at_its_opening_line(self) -> None:
         self.write("standards/details.md", "# Details\n~~~~python\n~~~\n")
         result = self.run_checker()
