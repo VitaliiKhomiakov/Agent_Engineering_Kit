@@ -5,8 +5,8 @@ without losing required behavior. An audit records facts; it does not declare
 the current code correct. This framework's structure does not derive from any
 specific company or existing project.
 
-This document owns adoption of instructions, selected engineering rules, skills
-and native configuration templates. The [scope](docs/specs/2026-09-20-agents-framework.md)
+This document owns adoption and read-only checks of instructions, selected
+engineering rules, skills and native configuration templates. The [scope](docs/specs/2026-09-20-agents-framework.md)
 is a rules framework. Apply reviewed changes through the current agent or normal
 file editing; no Agent_Engineering_Kit application or installer is required.
 Import selected resources from this source library into the target project and
@@ -29,8 +29,9 @@ Neither path requires a Git repository at the workspace root.
 
 ## Import inputs and boundaries
 
-Use this procedure for an explicit request to prepare, import or update the
-framework. Ordinary development or a missing AGENTS file does not trigger it.
+Use this procedure for an explicit request to open the AEK integration wizard,
+prepare/import/update the framework, or check an existing AEK adoption. Ordinary
+development, a general code audit or a missing AGENTS file does not trigger it.
 Reuse supplied facts; ask only for material gaps needed by the affected step:
 
 | Input | Establish |
@@ -38,7 +39,7 @@ Reuse supplied facts; ask only for material gaps needed by the affected step:
 | Framework source | Accessible location and revision, or verifiable content identity when no revision exists; never infer a remote revision |
 | Target | Selected workspace/projects, instruction roots and implementation checkouts; name independently opened repositories |
 | Client | One selected client and known version/capabilities; unresolved capability limits remain explicit |
-| Intent | Prepare only, initial import or update; new/existing project context, applicable stack and permitted paths/actions |
+| Intent | Prepare only, initial import, update or check only; new/existing project context, applicable stack and permitted paths/actions |
 | Existing task | Canonical adoption task/store, current stage, granted permissions and checkpoints; preserve existing model choices |
 
 The source library, target instruction root, bundle root, execution checkout and
@@ -63,9 +64,11 @@ References below to the canonical adoption task mean the preview until then;
 ### Integration entry and location
 
 Use [aek-integrate-project](templates/skills/aek-integrate-project/SKILL.md) for an
-explicit framework preparation/import/update request. General audits, ordinary
-coding and missing instruction/model files alone do not trigger it. The skill
-routes into this document; it replaces the former conceptual migration entry.
+explicit framework wizard/preparation/import/update or adoption-check request.
+General audits, ordinary coding and missing instruction/model files alone do not
+trigger it. The skill owns the chat menu, questions and progress presentation;
+this document owns the procedure. Opening the wizard alone authorizes no target
+writes. The entry replaces the former conceptual migration entry.
 
 Read the template directly from the accessible framework source named in the
 request or adoption record. This is the default for preparation, import and
@@ -379,7 +382,9 @@ check selects only particular Markdown bodies. Account for model selection throu
 the [required integration step](#model-selection-step); model configuration retains
 ownership of assignments and native settings.
 
-These five steps are the procedure for both new and existing projects. Phases 1–4
+These five steps cover preparation/import/update for new and existing projects.
+A check-only request follows [Checking an existing adoption](#checking-an-existing-adoption).
+Phases 1–4
 below are their detailed reference: phases 1–2 supply step 1's inventory and
 selection; phase 3 supplies entry and native-mapping detail for steps 1, 4 and 5;
 phase 4 supplies step 5's record update and activation report. Read only the
@@ -428,6 +433,36 @@ Updates also need comparison with the last accepted import and current local edi
 the current source alone is not a safe replacement baseline. The canonical adoption
 task owns decisions, authorization and progress; the source library plan is not a
 second progress record or the adoption task for a target import.
+
+### Checking an existing adoption
+
+A request to check AEK instructions is a read-only inspection of the selected
+target, not a new import or a general application audit. Reuse its source/client,
+recorded profiles, layout and model choices where known. Inspect the actual files;
+an adoption record marked verified is evidence of an earlier state, not proof of
+the current one. If no adoption can be established, report that fact rather than
+creating one or acquiring ownership of existing project instructions.
+
+Check the reachable entries, selected catalog closure, target-relative references,
+placeholders, conflicting loaded rules, known local contracts and owned native
+settings within the requested scope. Use available artifact/routing checkers where
+applicable, with their documented limits. Compare with accepted contents and the
+identified source only when that evidence is available. Do not infer that the
+identified source revision is the latest remote release without checking it.
+
+Keep target files and directory structure unchanged, including task files, adoption
+records, configuration and snapshots; do not refresh file modification times.
+Do not run first-use model setup, apply
+repairs or broaden to an application test suite merely to complete the check.
+Missing source or accepted snapshots limit the comparisons they support; still
+inspect available local routes and report what cannot be established. Hashes alone
+cannot reconstruct a missing merge base.
+
+Report the inspected roots/client/selection, findings with locations, known local
+changes, evidence and comparison limits. State model-routing agreement and any
+observed native activation separately; valid files alone do not establish loading
+or adherence. Proposed repairs remain a future authorized preparation/application,
+not an implicit consequence of choosing "Check" in the wizard.
 
 ### Model-selection step
 
@@ -653,6 +688,40 @@ from frequently repeated poor code. Existing projects remain audit evidence.
 Ready for review when relevant active sources, conflicts and known versions
 are recorded, with capability gaps explicit. Product tests
 are unnecessary merely to produce this inventory.
+
+### Stack evidence for profile selection
+
+Inspect the selected project/component before asking the user to list technologies.
+Start with dependency/workspace manifests, lockfiles and build/runtime configuration:
+for example `go.mod`/`go.work`, `pyproject.toml`, `package.json`, `composer.json`,
+container definitions or engine descriptors. Read relevant imports/entry points
+only to resolve a concrete ambiguity. Do not execute project scripts, install
+dependencies, start services or collect credential values for this inventory.
+
+Keep evidence scoped to its application or independently opened repository. Follow
+workspace manifests to identify components; a monorepo can contain multiple stacks.
+Respect dependency/generated/ignored directories and distinguish examples, fixtures,
+documentation snippets and development tools from the target application's runtime.
+An ignored path named explicitly by the task can still be relevant; exclusions are
+scan boundaries, not grounds to discard supplied evidence.
+
+Record each technology/version with its evidence path and component, distinguishing
+observed use, an inference to confirm and a user-requested future choice. A manifest
+establishes a declared dependency; it does not prove active use. Distinguish a
+version constraint from a resolved lockfile version. A suffix, transitive package
+or sample alone does not establish a framework or architecture.
+
+Show the proposed catalog profiles and why they apply. Let the user correct facts
+or add intended technologies; ask only for unresolved material choices. In a new
+project, ask for intended languages, frameworks and application goals, and label
+them as requested rather than detected. Unsupported technologies remain explicit
+gaps; retain applicable shared guidance without inventing a profile or adding a
+similar-looking framework. Complete selected dependency/resource closures under
+the catalog contract; availability does not require reading every topic.
+
+For an existing adoption, keep its accepted profile selection unless a change is
+authorized. Discovery can reveal a proposed update or mismatch, not permission to
+drop a profile, delete resources or rewrite local choices.
 
 ### Resolving active conflicts
 
