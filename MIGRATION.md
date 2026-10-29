@@ -63,6 +63,9 @@ References below to the canonical adoption task mean the preview until then;
 
 ### Integration entry and location
 
+For a shorter launch path, read [SETUP.md](SETUP.md) from the framework source.
+It routes to the same integration skill and procedure described below.
+
 Use [aek-integrate-project](templates/skills/aek-integrate-project/SKILL.md) for an
 explicit framework wizard/preparation/import/update or adoption-check request.
 General audits, ordinary coding and missing instruction/model files alone do not

@@ -13,12 +13,13 @@ and guides you through reviewing and applying the changes.
 
 **Copy one of these example requests into your AI chat.** Replace `<framework-path>`
 with the library location and `<project-path>` with your target project path,
-both accessible to the agent.
+both accessible to the agent. [SETUP.md](SETUP.md) is the entry point; when this
+library is your current workspace, you can use `SETUP.md` directly.
 
 **Example 1: AI request for an existing project**
 
 ```text
-Read <framework-path>/templates/skills/aek-integrate-project/SKILL.md and open
+Read <framework-path>/SETUP.md and open
 the Agent Engineering Kit integration wizard for my existing project at <project-path>.
 Inspect its technologies and current instructions, then propose the relevant rules.
 Show the changes for my approval before applying them.
@@ -27,7 +28,7 @@ Show the changes for my approval before applying them.
 **Example 2: AI request for a new project**
 
 ```text
-Read <framework-path>/templates/skills/aek-integrate-project/SKILL.md and open
+Read <framework-path>/SETUP.md and open
 the Agent Engineering Kit integration wizard for a new project at <project-path>.
 Ask me about its goals, languages and frameworks, then prepare the relevant instructions.
 Show the proposed files and their contents for my approval before creating them.
