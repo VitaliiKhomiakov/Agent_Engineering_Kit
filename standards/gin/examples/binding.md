@@ -135,6 +135,7 @@ func (singleJSON) Bind(request *http.Request, value any) error {
 		if err == nil {
 			return errors.New("multiple JSON values")
 		}
+
 		return err
 	}
 

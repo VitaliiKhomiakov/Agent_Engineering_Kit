@@ -82,6 +82,7 @@ func TestSanitizedChildSpan(t *testing.T) {
 			rootSpan = &spans[i]
 		}
 	}
+
 	if toolSpan == nil || rootSpan == nil {
 		t.Fatal("missing expected spans")
 	}
@@ -99,6 +100,7 @@ func TestSanitizedChildSpan(t *testing.T) {
 	if len(toolSpan.Attributes) != len(want) {
 		t.Fatalf("unexpected attributes: %v", toolSpan.Attributes)
 	}
+
 	for _, pair := range toolSpan.Attributes {
 		if expected, ok := want[pair.Key]; !ok || expected != pair.Value {
 			t.Fatalf("unexpected attribute: %v", pair)

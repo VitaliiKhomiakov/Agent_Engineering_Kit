@@ -22,9 +22,14 @@ Return to the [Go entry](../go.md).
   success is insufficient: fail on nonempty differences and on tool errors.
 - Require both the formatting gate and a spacing-lint gate before accepting
   changed Go code. The [tooling baseline](examples/style-tooling.md) enables
-  `wsl_v5`'s `if` and `err` checks; a version-compatible equivalent must demonstrate
-  rejection of adjacent standalone guards (including checks of the same input)
-  and preservation of operation/error-check pairs. Adopt required tooling within
+  `wsl_v5`'s `if`, `err` and `after-block` checks; a version-compatible equivalent
+  must demonstrate rejection of adjacent standalone guards (including checks of
+  the same input) and missing separators after completed blocks, including nested
+  guards followed by parsing or appending. Preserve operation/error-check pairs,
+  attached `else` branches and the narrow related-resource `defer` exception.
+  Provide a scoped spacing-repair command and verify its output with the ordinary
+  non-mutating gates; formatting alone does not apply these repairs.
+  Adopt required tooling within
   the authorized project scope; missing tooling is missing verification, not a
   passing check. Report it or an explicitly accepted project exception. Formatting
   alone does not satisfy this requirement.
@@ -51,8 +56,11 @@ requirement and examples have one owner:
 Identify the changed functions and meaningfully affected surrounding code, and
 determine their steps by purpose using that rule; do not expand a local change into
 a review or reformat of unrelated functions. Confirm separation of consecutive
-standalone guards, including those checking one object, and of independent
-preparation, compilation and validation steps. A clean spacing-lint result covers
+standalone guards, including those checking one object, completed blocks and their
+following statements (also inside loops), and independent preparation, compilation
+and validation steps. Inspect exceptions against the style rule; a shared variable
+or configuration phase does not waive a completed-block separator.
+A clean spacing-lint result covers
 only its enabled syntactic checks; it does not establish all semantic boundaries
 or every error-check form. A concise evidence statement can read:
 `cmd/api/main.go: livenessRouter — creation, configuration, registration and

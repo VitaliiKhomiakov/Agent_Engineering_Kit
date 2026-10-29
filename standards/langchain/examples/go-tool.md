@@ -66,6 +66,7 @@ func (l Lookup) Call(ctx context.Context, input string) (string, error) {
 	if len(input) > 1024 {
 		return "", errors.New("input too large")
 	}
+
 	var args struct {
 		ID string `json:"id"`
 	}

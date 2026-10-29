@@ -38,7 +38,7 @@ used here: editor/manual formatting uses the same bundled formatter as CI.
 
 ## Complete fixture
 
-Save the following five named blocks together, with the script under `scripts/`.
+Save the following six named blocks together, with the script under `scripts/`.
 The manifest has no third-party dependencies and needs no `go.sum`.
 
 ### `go.mod`
@@ -74,6 +74,7 @@ linters:
       enable:
         - if
         - err
+        - after-block
       allow-first-in-block: false
       allow-whole-block: false
     errcheck:
@@ -132,13 +133,21 @@ ST1005/ST1006. All SA correctness checks remain enabled. Revive's explicit five
 rules prevent its implicit default or all-rule expansion. No line-length linter
 or second formatter is enabled. Review this mapping when changing the pins.
 
-The required spacing gate uses only `wsl_v5`'s `if` and `err` checks:
-standalone guards need separation, and a direct error assignment/check stays
-adjacent. Both block-use allowances are disabled. The pinned `if` check permits
+The required spacing gate uses `wsl_v5`'s `if`, `err` and `after-block` checks:
+standalone guards and completed control-flow blocks need separation from the next
+statement, including inside loops; a direct error assignment/check stays adjacent.
+Both block-use allowances are disabled. The pinned `if` check permits
 one directly related preceding assignment, not arbitrary setup merely used later
 in the block. Separate earlier preparation while keeping the operation/error
-check together. Other whitespace checks, including line-count-based return
-spacing and blanket `after-block`, are not enabled. These syntactic checks do not
+check together. `after-block` preserves attached `else` branches and permits an
+immediately following `defer` when a direct `if err != nil` checks an assignment
+on the preceding line and the deferred call explicitly references its assigned
+variable through a receiver or argument. Capturing it only inside a closure body
+does not qualify; keep a separator before that deferred closure. Apply
+the style rule's narrower resource-cleanup meaning; a variable intersection alone
+does not establish cleanup. No separator is needed before an enclosing closing
+brace when there is no following statement. Other whitespace checks, including
+line-count-based return spacing, are not enabled. These syntactic checks do not
 infer every meaningful step or recognize every error predicate; purpose-based
 [readability review](../verification.md#readability-acceptance) remains required.
 
@@ -192,6 +201,39 @@ func Write(w io.Writer, userID string) error {
 	}
 
 	return nil
+}
+```
+
+### `prefixes.go`
+
+```go
+package greeting
+
+import (
+	"errors"
+	"net/netip"
+	"strings"
+)
+
+// ParsePrefixes supplies a nested-loop spacing fixture, not a proxy trust policy.
+func ParsePrefixes(raw string) ([]string, error) {
+	var prefixes []string
+
+	for _, cidr := range strings.Split(raw, ",") {
+		cidr = strings.TrimSpace(cidr)
+		if cidr == "" {
+			continue
+		}
+
+		prefix, err := netip.ParsePrefix(cidr)
+		if err != nil || prefix.Bits() == 0 {
+			return nil, errors.New("explicit non-global CIDR required")
+		}
+
+		prefixes = append(prefixes, cidr)
+	}
+
+	return prefixes, nil
 }
 ```
 
@@ -295,7 +337,7 @@ This command rewrites the selected source files, including imports.
 
 ```sh
 export GOTOOLCHAIN=local GOWORK=off
-golangci-lint fmt --config .golangci.yml greeting.go greeting_test.go
+golangci-lint fmt --config .golangci.yml greeting.go greeting_test.go prefixes.go
 ```
 
 For format-on-save, configure the editor's external formatter/save action to run
@@ -308,6 +350,7 @@ To repair spacing, first inspect the lint findings, then run this command on the
 selected package in the extracted fixture and review its diff:
 
 ```sh
+export GOTOOLCHAIN=local GOWORK=off
 golangci-lint run --config .golangci.yml --enable-only wsl_v5 --fix ./...
 ```
 
@@ -326,7 +369,7 @@ Do not prepend the editing command: that would repair formatting before checking
 ```sh
 set -eu
 export GOTOOLCHAIN=local GOWORK=off
-sh scripts/check-format.sh greeting.go greeting_test.go
+sh scripts/check-format.sh greeting.go greeting_test.go prefixes.go
 golangci-lint run --config .golangci.yml ./...
 go test ./...
 ```
@@ -356,6 +399,9 @@ package-load, typecheck, configuration, or tool failures are not passing probes.
 | Adjacent independent guards | Remove the blank line before the checked `fmt.Fprintf` block in `greeting.go` | Format gate passes; lint fails with `wsl_v5` at the second `if`; source stays unchanged |
 | Same-input guards | Insert the guard below immediately after the blank-ID guard, without a separating blank line | Format gate passes; lint fails with `wsl_v5` at `if len(userID) > 64`, despite both guards checking `userID` |
 | Detached error check | Rewrite the checked `fmt.Fprintf` as `_, err := fmt.Fprintf(w, "hello, %s\n", userID)` followed by a blank line and `if err != nil` with the existing error return | Format gate passes; lint fails with `wsl_v5`'s `err` check |
+| Nested guard before parsing | In `prefixes.go`, remove only the blank line before `prefix, err := netip.ParsePrefix(cidr)` | Format gate passes; lint rejects the missing separator after the `continue` guard with `after-block` |
+| Nested guard before appending | Remove only the blank line before `prefixes = append(prefixes, cidr)`, retaining the line before parsing | Format gate passes; lint rejects with `after-block`; the old `if,err`-only gate accepted this variant |
+| Completed outer loop | Remove only the blank line before `return prefixes, nil` | Format gate passes; lint rejects with `after-block`, regardless of the return-spacing check being disabled |
 | Naming | Replace every `userID` in `greeting.go` with `userId` | `run` fails with Revive `var-naming` naming `userID` |
 | Ignored error | Replace the checked `fmt.Fprintf` block with a bare `fmt.Fprintf(w, "hello, %s\n", userID)` call | `run` fails with `errcheck` for `fmt.Fprintf` |
 | Discarded writer error | Replace that block with `_, _ = fmt.Fprintf(w, "hello, %s\n", userID)` | `run` still fails with `errcheck`; concrete-method exceptions do not hide writer failures |
@@ -374,8 +420,10 @@ if len(userID) > 64 {
 
 Run the spacing repair command on each spacing variant, then the ordinary CI
 block. Require the intended whitespace-only fix and passing gates. Also check
-positive layouts: separated guards of the same input, an immediately adjacent
-`err != nil` check, and an attached `else if`/`else` chain. Do not interpret a
+positive layouts: the unchanged nested-loop fixture, separated guards of the same
+input, an immediately adjacent `err != nil` check, and an attached `else if`/`else`
+chain. Verify that the repair changes only blank lines, including when both
+internal loop separators are removed together. Do not interpret a
 lint pass as proof of every semantic grouping: for example, a separated
 `if !errors.Is(err, want)` predicate is not diagnosed by this pinned `err` check
 and still requires review under the style rule.
@@ -390,12 +438,56 @@ errors of `Write`, `WriteByte`, `WriteRune`, and `WriteString` on concrete
 the test and run lint: these eight calls must pass. Contrast this with the
 discarded-writer-error case above; do not suppress whole packages or method names.
 
+### Resource cleanup exception
+
+Add the following temporary `cleanup_test.go` to a disposable fixture. Include it
+in the formatting gate and run lint and tests. The resource/error check/cleanup
+sequence must pass without a separator before `defer`; the nested error check
+inside the deferred function must not gain trailing whitespace before its outer
+closing brace.
+
+```go
+package greeting
+
+import (
+	"os"
+	"testing"
+)
+
+func TestCleanupSpacing(t *testing.T) {
+	file, err := os.Open(os.DevNull)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func(opened *os.File) {
+		if err := opened.Close(); err != nil {
+			t.Error(err)
+		}
+	}(file)
+}
+```
+
+For the negative counterpart, insert `defer t.Log("cleanup probe")` immediately
+before the existing `defer`, without adding a blank line after the acquisition
+guard. Keep the real cleanup. Lint must reject the unrelated first `defer` with
+`after-block`. Repair must add the separator, preserve the cleanup and pass the
+ordinary gates. This qualifies the narrow exception rather than exempting every
+`defer` statement.
+
+Also replace the explicit `opened` parameter/`file` argument with an implicit
+capture of `file`. Without a separator after the guard, this closure must be
+rejected with `after-block`; adding the separator must pass. Do not refactor an
+existing closure solely to obtain the spacing exception.
+
 ## Evidence and limits
 
 The [original style-evidence record](../../../docs/research/2026-10-13-go-gin-gorm-style-evidence.md)
 describes the earlier configuration. The
 [spacing follow-up](../../../docs/research/2026-10-29-go-spacing.md) records
-checks of this revised baseline, keeping source review and execution separate.
+the earlier `if,err` baseline. The
+[block-spacing follow-up](../../../docs/research/2026-10-29-go-block-spacing.md)
+records `after-block`, the nested-loop fixture and cleanup probes, keeping source
+review and execution separate.
 This fixture does not prove editor integration, every rule/exception, generated
 code workflows, multiple modules/build tags, or compatibility with other Go/tool
 versions. See the versioned
@@ -405,7 +497,7 @@ and [formatter command](https://github.com/golangci/golangci-lint/blob/v2.11.3/p
 The [formatter error path](https://github.com/golangci/golangci-lint/blob/v2.11.3/pkg/goformatters/meta_formatter.go)
 explains why the gate checks diagnostics as well as exit status.
 The pinned [WSL checks](https://github.com/bombsimon/wsl/blob/v5.6.0/CHECKS.md)
-define the `if` and `err` behavior; the
+define the `if`, `err` and `after-block` behavior; the
 [integration manifest](https://github.com/golangci/golangci-lint/blob/v2.11.3/go.mod)
 pins that analyzer version. These sources do not establish another toolchain's
 compatibility.

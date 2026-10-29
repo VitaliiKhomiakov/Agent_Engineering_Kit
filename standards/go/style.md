@@ -49,23 +49,36 @@ when implementing or reviewing changed Go code.
   Sharing a variable or statement type does not by itself make one cohesive step.
 - Keep an operation and its immediate error/result check together. Short setup
   used only by that operation may share the group where compatible with the
-  required guard checks; separate earlier preparation rather than detaching an
+  required spacing checks; separate earlier preparation rather than detaching an
   error check from its operation. A component that later phases
   configure, register and return, such as the router below, has its own creation
-  step. A guard and subsequent statements may also belong together when they
-  continue that same phase, as in the configuration below. Separate the next independent step after the completed
-  group; a closing brace alone does not establish a boundary.
+  step.
+- Put one blank line between a completed control-flow block (`if`/`else`,
+  `for`/`range`, `switch` or `select`) and the next statement in its enclosing
+  block. Apply this inside loops and other nested bodies as well as at function
+  level. A following assignment, append, call or final return needs that
+  separator even when it uses the value just checked or continues configuration.
+  Keep `else if` and `else` attached to their conditional; do not insert a blank
+  line before an enclosing closing brace merely because an inner block ended.
+- A resource acquisition, its immediate direct `if err != nil` check and a
+  following `defer` that cleans up that acquired resource through an explicit
+  receiver or argument may stay together. A resource used only through a closure
+  capture does not qualify for the pinned check's exception; retain the separator.
+  This narrow cleanup exception does not permit an arbitrary `defer` or other
+  statement after a guard. The supported tooling form is documented in the
+  [tooling example](examples/style-tooling.md).
 - Separate consecutive standalone `if`/guard blocks with one blank line, even
   when they validate the same input or object. Each completed guard is a separate
   check; sharing `limits`, `config`, or another value is not an exception. Keep
   `else if` and `else` attached to their conditional. An assignment and its
   immediate check are one group, not two standalone guard blocks.
-- Small cohesive sequences without successive guard blocks may stay together.
-  An early error return belongs inside its guard; a final
-  return may complete its operation or form a distinct result-delivery phase in
-  a multi-step function. Decide by purpose, not by the `return` keyword.
-- Do not insert a blank line after every statement or closing brace, or before
-  every `if` or `return`. There is no fixed number of lines per group. Avoid
+- Small cohesive sequences without an intervening control-flow block may stay
+  together. An early error return belongs inside its guard; a final return may
+  complete its operation or form a distinct result-delivery phase. The mandatory
+  separator after a completed block still applies.
+- Do not insert a blank line after every statement, before every `if` or `return`,
+  or after a composite literal solely because it ends with `}`. There is no fixed
+  number of lines per group. Avoid
   leading/trailing blank lines inside blocks and multiple blank lines between steps.
 - Review this grouping separately from mechanical formatting. Formatter/linter
   success does not establish that meaningful steps are visually separated.
@@ -103,6 +116,31 @@ Removing that separator violates this policy even when `gofmt` accepts the
 result. Keep schema compilation and subsequent document validation, or independent
 configuration-policy checks, visually separate by the same purpose-based rule.
 
+Within a loop, keep preparation and its immediate check together, then separate
+parsing/validation from appending the accepted result. This function-body excerpt
+uses the same shape as the complete fixture in the
+[tooling example](examples/style-tooling.md#prefixesgo):
+
+```go
+for _, cidr := range strings.Split(raw, ",") {
+	cidr = strings.TrimSpace(cidr)
+	if cidr == "" {
+		continue
+	}
+
+	prefix, err := netip.ParsePrefix(cidr)
+	if err != nil || prefix.Bits() == 0 {
+		return nil, errors.New("explicit non-global CIDR required")
+	}
+
+	prefixes = append(prefixes, cidr)
+}
+```
+
+Both internal separators are required. Keeping the line before parsing but
+removing the line before `append` still violates the completed-block rule;
+passing only the `if` and `err` checks does not establish compliance.
+
 A short cohesive configuration sequence also needs no internal separator:
 
 ```go
@@ -110,9 +148,9 @@ options.ReadTimeout = readTimeout
 options.WriteTimeout = writeTimeout
 ```
 
-This router illustrates four distinct phases: create, configure, register the
-route, and return the configured result. The configuration guard and related
-assignments stay together:
+This router separates creation, checked proxy configuration, remaining settings,
+route registration and result delivery. The completed configuration guard is
+separated from the following assignments even within the configuration phase:
 
 ```go
 func livenessRouter() (*gin.Engine, error) {
@@ -121,6 +159,7 @@ func livenessRouter() (*gin.Engine, error) {
 	if err := router.SetTrustedProxies(nil); err != nil {
 		return nil, fmt.Errorf("configure trusted proxies: %w", err)
 	}
+
 	router.HandleMethodNotAllowed = true
 	router.RedirectTrailingSlash = false
 
@@ -132,8 +171,8 @@ func livenessRouter() (*gin.Engine, error) {
 }
 ```
 
-Removing the three blank lines between those phases produces a compact variant
-that violates this convention even though both layouts can be `gofmt`-clean.
+Removing any of these four separators violates this convention even though
+both layouts can be `gofmt`-clean.
 This is a spacing illustration using Gin, not a requirement to use Gin or adopt
 its profile. The same grouping principle applies to Go code without a framework.
 
@@ -166,3 +205,5 @@ above are local policy. The optional
 separates source review from executed checks.
 The [spacing follow-up](../../docs/research/2026-10-29-go-spacing.md) records
 the stricter guard rule and its bounded automated checks separately.
+The [block-spacing follow-up](../../docs/research/2026-10-29-go-block-spacing.md)
+records the additional `after-block` requirement and nested-loop probes.
