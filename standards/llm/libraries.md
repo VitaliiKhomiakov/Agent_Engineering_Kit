@@ -50,7 +50,9 @@ artifact still needs its own supported-version and licensing check.
 ## Go alternatives
 
 Eino provides native Go model/tool/retriever components and agent/workflow building
-blocks. LangChainGo supplies another Go composition option. Assess the
+blocks; select the optional `eino` profile for its Go-specific details and fixture.
+LangChainGo supplies another Go composition option; its Go topic and fixture are
+available under `langchain`, with the actual language selected separately. Assess the
 actual release's connectors, streaming, cancellation, persistence, interrupts and
 replay before mapping the workflow onto it. Do not label either as a tested
 drop-in LangGraph or LlamaIndex replacement. A native state machine with database

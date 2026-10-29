@@ -10,6 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SHARED_EDITOR_MCP = "standards/editor-mcp.md"
 # Existing public topic paths are a compatibility fixture, independent of catalog edges.
 TOPICS: dict[str, tuple[str, ...]] = {
+    "eino": ("composition", "tools-retrieval", "runtime-recovery", "examples/tool-graph"),
+    "llamaindex": ("ingestion-retrieval", "tools-synthesis", "examples/retrieval"),
+    "langchain": ("models-tools", "go", "examples/validated-tool", "examples/go-tool"),
+    "langgraph": ("state-execution", "recovery-streaming", "examples/resume"),
+    "langfuse": ("instrumentation", "privacy-evaluation", "examples/otel-go"),
     "postgresql": ("schema-contracts", "transactions-concurrency", "queries-performance",
                    "migrations-verification", "security-operations", "examples/atomic-reservation",
                    "examples/online-constraint"),
@@ -122,6 +127,26 @@ class ProfileSelectionChecks(unittest.TestCase):
                 self.assertIn("standards/llm/answers.md", paths)
                 for other in {"go", "python", "nodejs"} - {language}:
                     self.assertNotIn(f"standards/{other}.md", paths)
+
+    def test_eino_selects_go_and_tools_without_retrieval_or_other_vendors(self) -> None:
+        paths = self.selected("eino")
+        self.assertNotIn("standards/eino.md", self.selected("core"))
+        self.assert_topics(paths, {"eino", "go"},
+                           {"llamaindex", "langchain", "langgraph", "langfuse", "python", "nodejs"})
+        self.assertIn("standards/llm-tools/contracts.md", paths)
+        self.assertIn("standards/llm-tools/execution.md", paths)
+        self.assertNotIn("standards/rag.md", paths)
+        self.assertNotIn("standards/rag/retrieval.md", paths)
+        self.assertEqual(self.selected("eino", "rag"), paths | self.selected("rag"))
+        self.assertFalse(any(path.startswith("docs/") for path in paths))
+
+    def test_vendor_details_and_examples_stay_in_their_selected_profile(self) -> None:
+        profiles = {"eino", "llamaindex", "langchain", "langgraph", "langfuse"}
+        for profile in profiles:
+            with self.subTest(profile=profile):
+                self.assert_topics(self.selected(profile), {profile}, profiles - {profile})
+        for profile in ("rag", "llm-tools"):
+            self.assert_topics(self.selected(profile), set(), profiles)
 
     def test_project_workflows_add_only_task_resources(self) -> None:
         expected = {"standards/project-skills.md",

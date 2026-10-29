@@ -5,30 +5,32 @@ Apply only when Langfuse tracing, prompts or experiments are used, with the
 Read only the relevant section and the shared [evaluation guidance](llm/evaluation.md)
 when choosing datasets, metrics or telemetry acceptance.
 
+## Read by task
+
+| Task touches | Read |
+| --- | --- |
+| SDK/server choice, trace propagation, exporters or Go OTel | [Instrumentation](langfuse/instrumentation.md) |
+| Masking, prompts, datasets or experiments | [Privacy and evaluation](langfuse/privacy-evaluation.md) |
+| A small executable Go trace boundary | [Local OTel fixture](langfuse/examples/otel-go.md) |
+
 ## Integration and compatibility
 
 Langfuse owns observability, prompt versions and evaluation data, not retrieval
-policy or answer correctness. Match SDK/instrumentation to server version
-using the compatibility matrix. Initialize exporters deliberately, propagate trace
-context, avoid duplicate instrumentation, and flush/shut down according to process
-lifetime.
-
-Use compatible Python/JS SDK integrations when selected. Go and other languages
-can emit native OpenTelemetry spans to Langfuse; validate supported attributes,
-authentication and exporter behavior rather than inventing native SDK parity. Other platform features require their supported API contracts.
+policy or answer correctness. The instrumentation topic owns compatibility,
+attribute mapping and lifecycle for the selected SDK or native OTel integration.
+Other platform features require their supported API contracts.
 
 ## Trace privacy and experiments
 
-Minimize logged inputs/outputs and redact before export, including third-party
-spans, metadata, error text and media paths. Confirm which exporter/hook sees each
-field; configuring one masking function does not necessarily protect other
-exporters. Record observable decisions and evidence, not hidden reasoning.
-Local experiment inputs may still be transmitted to the selected Langfuse server; choose retention and access policy accordingly.
+The privacy/evaluation topic owns capture limits, masking coverage, prompt
+provenance and experiment export. Read it when changing what data leaves the
+application or what an experiment result claims.
 
 ## Sources and compatibility
 
 Documentation reviewed on **2026-10-29**. Use the application's actual versions;
-this source review is not a runtime test or interoperability guarantee.
+this source review is not a runtime test or interoperability guarantee. The
+Go fixture verifies local OTel behavior; it does not contact a Langfuse server.
 
 [Langfuse overview](https://langfuse.com/docs),
 [Langfuse compatibility](https://langfuse.com/docs/compatibility),

@@ -9,30 +9,27 @@ Langfuse, LlamaIndex or a retrieval system.
 
 | Task touches | Read |
 | --- | --- |
-| Tool schemas, injected context or results | [Tool contracts](llm-tools/contracts.md) and integration rules below |
+| Python/JS tools, context, streamed calls or structured output | [Models and tools](langchain/models-tools.md), with [tool contracts](llm-tools/contracts.md) |
+| LangChainGo adapter, model/tool integration or runtime | [Go-specific guidance](langchain/go.md) |
 | Database/web/enterprise tools | [Source access](llm-tools/source-access.md) |
 | Tool errors, retry limits or effects | [Execution](llm-tools/execution.md) |
 | Structured routing or answer output | [Workflow transitions](llm-tools/workflows.md) or [answer checks](llm/answers.md) |
 | Quality or framework selection | [Evaluation](llm/evaluation.md) or [language/library choices](llm/libraries.md) |
+| A small executable tool boundary | [JavaScript fixture](langchain/examples/validated-tool.md) or [Go fixture](langchain/examples/go-tool.md), only for that language |
 
 ## Integration
 
 Use its model/tool/retrieval integrations when they reduce concrete adapter work.
-Python tool schemas and ToolRuntime, and JavaScript tool schemas/context, have
-separate APIs. Inject authenticated context outside model-visible arguments; hidden
-context still requires authorization checks in the operation.
-
-Use structured output for routing and answer contracts with the selected model's
-supported strategy. Handle schema failures, tool errors, refusals and incomplete
-outputs explicitly. Schema validation is not factual verification.
-Keep tool result IDs paired with their calls. Avoid mixing old chain/agent examples
-with a different installed major version. LangChainGo follows its own repository
-contracts; select it by required functionality, not by assumed Python/JS parity.
+Read the relevant language topic above for runtime schemas, trusted context,
+execution ownership and result pairing. LangChainGo follows a separate module
+contract; Python/JavaScript examples do not establish its APIs. A tool integration
+does not require a model-directed agent loop.
 
 ## Sources and compatibility
 
 Documentation reviewed on **2026-10-29**. Use the application's actual versions;
-this source review is not a runtime test or interoperability guarantee.
+this source review is not a runtime test or interoperability guarantee. Each
+executable fixture records its own pins and the boundaries it actually checks.
 
 [LangChain Python tools](https://docs.langchain.com/oss/python/langchain/tools),
 [LangChain structured output](https://docs.langchain.com/oss/python/langchain/structured-output),

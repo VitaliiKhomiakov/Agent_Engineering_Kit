@@ -122,7 +122,7 @@ it under this library's policy. Host selection follows the actual task/runtime.
 | Container builds or Compose environments | `docker` |
 | Source-grounded answers or corpus/retrieval work | `rag`; language and storage remain separate choices |
 | Model tools or application workflow orchestration | `llm-tools`; RAG and graph runtimes only when needed |
-| LLM framework or tracing integration | `llamaindex`, `langchain`, `langgraph` or `langfuse` only where used |
+| LLM framework or tracing integration | `llamaindex`, `langchain`, `langgraph`, `langfuse` or Go-specific `eino` only where used |
 
 Dependencies supply shared bases automatically; explicitly selecting the same
 base again does not duplicate its files. Examples retain their stated language
@@ -142,9 +142,11 @@ procedure; a smaller closure is not permission to delete previously managed file
 
 ## RAG and LLM application selections
 
-The six profiles are optional and language-neutral. Select the actual language,
-host and storage independently; no AI profile requires Python, Node.js, Go,
-PostgreSQL or a vector store. No source-file glob can establish RAG or a vendor
+The shared profiles and `llamaindex`, `langchain`, `langgraph`, `langfuse` are
+optional and language-neutral. Select their actual language and host separately.
+The optional `eino` profile is Go-specific and makes `go` available. Storage remains
+independent; none of these profiles selects PostgreSQL or a vector store.
+No source-file glob can establish RAG or a vendor
 integration on its own, so these profiles use their task/stack `when` conditions.
 
 `rag` owns corpus/retrieval rules and `llm-tools` owns tool/workflow rules; either
@@ -154,10 +156,15 @@ another required profile or an instruction to read every topic.
 `llamaindex` makes both profiles available. `langchain` and `langgraph` make
 `llm-tools` available without selecting each other or RAG. `langfuse` adds its own
 integration and shared evaluation only. Dependencies copy policies, not packages.
+`eino` makes `go` and `llm-tools` available without selecting RAG or another vendor.
+Vendor topic files and pinned examples are available resources, not required
+reading for unrelated tasks. Read only the relevant language/API route.
 
 | Example application | Applicable profile selection |
 | --- | --- |
 | Native Go retrieval with ordinary workflow code | `go`, `rag`; add `llm-tools` for tool/workflow work |
+| Eino tool or graph in Go | `eino`; add `rag` when retrieval is part of the task |
+| LangChainGo tool adapter | `go`, `langchain`; read its Go topic, not the Python/JS API topic |
 | Python retrieval through LlamaIndex | `python`, `llamaindex`; read tool topics only when used |
 | Node.js tools with LangChain | `nodejs`, `langchain`; add `typescript` only when used |
 | Stateful LangGraph orchestration without LangChain | `langgraph` plus the actual language/host |

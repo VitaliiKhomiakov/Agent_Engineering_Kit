@@ -128,6 +128,11 @@ dependencies = ["core"]
 [[profiles]]
 id = "llamaindex"
 source = "standards/llamaindex.md"
+resources = [
+  "standards/llamaindex/ingestion-retrieval.md",
+  "standards/llamaindex/tools-synthesis.md",
+  "standards/llamaindex/examples/retrieval.md",
+]
 technologies = ["llamaindex", "llamaindex-ts"]
 activities = ["design", "implementation", "test", "review"]
 when = "Actual LlamaIndex or LlamaIndex.TS integration; select the real language and only relevant retrieval/tool topics."
@@ -136,6 +141,12 @@ dependencies = ["rag", "llm-tools"]
 [[profiles]]
 id = "langchain"
 source = "standards/langchain.md"
+resources = [
+  "standards/langchain/models-tools.md",
+  "standards/langchain/go.md",
+  "standards/langchain/examples/validated-tool.md",
+  "standards/langchain/examples/go-tool.md",
+]
 technologies = ["langchain", "langchaingo"]
 activities = ["design", "implementation", "test", "review"]
 when = "Actual LangChain model/tool integration or separately verified LangChainGo use; language and major-version APIs differ."
@@ -144,6 +155,11 @@ dependencies = ["llm-tools"]
 [[profiles]]
 id = "langgraph"
 source = "standards/langgraph.md"
+resources = [
+  "standards/langgraph/state-execution.md",
+  "standards/langgraph/recovery-streaming.md",
+  "standards/langgraph/examples/resume.md",
+]
 technologies = ["langgraph"]
 activities = ["design", "implementation", "test", "review"]
 when = "Actual LangGraph state, routing, reducers, checkpoints or interrupts; a fixed sequence alone does not require a graph."
@@ -152,11 +168,30 @@ dependencies = ["llm-tools"]
 [[profiles]]
 id = "langfuse"
 source = "standards/langfuse.md"
-resources = ["standards/llm/evaluation.md"]
+resources = [
+  "standards/llm/evaluation.md",
+  "standards/langfuse/instrumentation.md",
+  "standards/langfuse/privacy-evaluation.md",
+  "standards/langfuse/examples/otel-go.md",
+]
 technologies = ["langfuse"]
 activities = ["design", "implementation", "test", "review"]
 when = "Actual Langfuse tracing, prompt or experiment integration, SDK/server compatibility and telemetry privacy; no retrieval or graph framework implied."
 dependencies = ["core"]
+
+[[profiles]]
+id = "eino"
+source = "standards/eino.md"
+resources = [
+  "standards/eino/composition.md",
+  "standards/eino/tools-retrieval.md",
+  "standards/eino/runtime-recovery.md",
+  "standards/eino/examples/tool-graph.md",
+]
+technologies = ["eino"]
+activities = ["design", "implementation", "test", "review"]
+when = "Actual Eino integration in Go: components, tools, Graph/Workflow or ADK; retrieval and other vendors remain separate choices."
+dependencies = ["go", "llm-tools"]
 
 [[profiles]]
 id = "python-fastapi"

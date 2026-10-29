@@ -14,8 +14,9 @@ coding practices, verification, and agent collaboration.
 - **Database and containers:** PostgreSQL, Docker.
 - **RAG and LLM applications:** language-neutral [RAG](standards/rag.md) and
   [tool/workflow rules](standards/llm-tools.md); optional [LlamaIndex](standards/llamaindex.md),
-  [LangChain](standards/langchain.md), [LangGraph](standards/langgraph.md) and
-  [Langfuse](standards/langfuse.md) integration guidance.
+  [Eino for Go](standards/eino.md), [LangChain/LangChainGo](standards/langchain.md),
+  [LangGraph](standards/langgraph.md) and [Langfuse](standards/langfuse.md)
+  integration topics and bounded executable examples.
 - **Game development:** Unreal Engine, including C++ and Blueprints; [Godot](standards/godot.md),
   with GDScript and conditional C#/GDExtension guidance.
 

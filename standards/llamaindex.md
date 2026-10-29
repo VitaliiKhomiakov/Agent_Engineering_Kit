@@ -9,23 +9,17 @@ Library adoption does not choose an agent loop or an additional framework.
 
 | Task touches | Read |
 | --- | --- |
-| Loaders, document identity, updates or embeddings | [Corpus lifecycle](rag/ingestion.md) and integration rules below |
-| Retrieval, postprocessing or response synthesis | [Retrieval](rag/retrieval.md) and integration rules below |
-| Function/query-engine tool adapter | [Tool contracts](llm-tools/contracts.md) and integration rules below |
+| Loaders, identity, updates, embeddings or retrieval output | [Ingestion and retrieval](llamaindex/ingestion-retrieval.md), with affected [corpus](rag/ingestion.md)/[retrieval](rag/retrieval.md) rules |
+| Synthesis, citations or function/query-engine tools | [Tools and synthesis](llamaindex/tools-synthesis.md) |
 | Citation output or quality evaluation | [Answer checks](llm/answers.md) or [evaluation](llm/evaluation.md) |
+| A small executable retrieval boundary | [Retrieval-only fixture](llamaindex/examples/retrieval.md) |
 
 ## Integration
 
 Select LlamaIndex when its loaders, indexing/retrieval or synthesis components
-solve the actual data problem. Keep ingestion transformations and document identity
-explicit; verify docstore/vector-store update behavior for the chosen integration.
-Use retrieval and postprocessing independently when the application already owns
-answer composition, avoiding an accidental additional LLM synthesis step.
-
-Python `FunctionTool` wraps a function and `QueryEngineTool` exposes a query engine.
-Treat their outputs according to whether they contain retrieved evidence or an
-already synthesized answer; retain underlying provenance for final checks. A
-`CitationQueryEngine` helps expose sources but does not certify every claim. Use workflow agents only when that agent loop is the selected owner.
+solve the actual data problem. The topics above distinguish source identity and
+store updates, retrieval-only output, model synthesis and tool/citation adapters.
+Use workflow agents only when that agent loop is the selected owner.
 
 For Node.js, use LlamaIndex.TS's actual package contracts and supported connectors.
 Do not copy Python imports or assume feature parity. No equivalent Go package is
@@ -35,7 +29,8 @@ service API or another framework without depending on LlamaIndex.
 ## Sources and compatibility
 
 Documentation reviewed on **2026-10-29**. Use the application's actual versions;
-this source review is not a runtime test or interoperability guarantee.
+this source review is not a runtime test or interoperability guarantee. The
+retrieval fixture records its own package pin and limited executed coverage.
 
 [LlamaIndex ingestion pipeline](https://developers.llamaindex.ai/python/framework/module_guides/loading/ingestion_pipeline/),
 [LlamaIndex querying](https://developers.llamaindex.ai/python/framework/understanding/rag/querying/),
