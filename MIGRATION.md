@@ -357,6 +357,12 @@ automatic migration or retirement request. Preview affected routes, newly needed
 resources and previously managed paths under [Repeat and update](#repeat-and-update).
 Keep accepted snapshots and local edits; that procedure owns reconciliation.
 
+For RAG and LLM applications, use the catalog's
+[independent AI selections](standards/catalog.md#rag-and-llm-application-selections).
+Select the actual language/host separately; generic tools need not select RAG,
+and tracing need not select a graph. Preserve the application's goal-driven flow
+instead of installing the illustrative sequence as mandatory steps.
+
 ## Prepare and apply
 
 For policy settings, follow the [configuration contract](standards/policy-configuration.md).
@@ -702,6 +708,12 @@ For an existing integration, reconcile new routes and rules through
 and client configuration. Assess whether earlier evidence covers newly adopted
 acceptance criteria; historical clean review alone does not establish that coverage.
 Inline planning alone does not require delegation or model setup.
+
+For a RAG or tool-enabled target, record model/embedding and integration versions,
+source authority/freshness, access boundaries, actual workflow owners and applicable
+output/verification contracts in the passport. Langfuse-only adoption records its
+telemetry/export contract without requiring a retrieval pipeline. Selecting these
+instructions does not install providers, change models or authorize source uploads.
 
 For several projects, also fill the root
 [workspace map](templates/workspace-architecture.md): responsibilities, contracts,

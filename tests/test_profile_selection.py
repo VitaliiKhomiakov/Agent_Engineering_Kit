@@ -84,6 +84,45 @@ class ProfileSelectionChecks(unittest.TestCase):
         self.assert_topics(paths, {"php"}, {"symfony", "doctrine", "go", "gin"})
         self.assertNotIn("standards/php-symfony-doctrine.md", paths)
 
+    def test_ai_profiles_are_optional_and_do_not_choose_a_language_or_store(self) -> None:
+        profiles = {"rag", "llm-tools", "llamaindex", "langchain", "langgraph", "langfuse"}
+        base = self.selected("core")
+        for profile in profiles:
+            with self.subTest(profile=profile):
+                self.assertNotIn(f"standards/{profile}.md", base)
+                paths = self.selected(profile)
+                self.assertIn(f"standards/{profile}.md", paths)
+                self.assert_topics(paths, set(), {"python", "go", "javascript", "typescript",
+                                                 "nodejs", "fastapi", "gin", "postgresql", "docker"})
+                self.assertFalse(any(path.startswith("docs/") for path in paths))
+
+    def test_tools_graphs_and_tracing_do_not_require_retrieval_or_sibling_vendors(self) -> None:
+        for profile in ("llm-tools", "langchain", "langgraph", "langfuse"):
+            with self.subTest(profile=profile):
+                paths = self.selected(profile)
+                for unselected in {"rag", "llamaindex", "langchain", "langgraph", "langfuse"} - {profile}:
+                    self.assertNotIn(f"standards/{unselected}.md", paths)
+                self.assertNotIn("standards/rag/ingestion.md", paths)
+                self.assertIn("standards/llm/evaluation.md", paths)
+                if profile == "langfuse":
+                    self.assertNotIn("standards/llm-tools.md", paths)
+                    self.assertNotIn("standards/llm-tools/execution.md", paths)
+                else:
+                    self.assertIn("standards/llm-tools/contracts.md", paths)
+                    self.assertIn("standards/llm-tools/execution.md", paths)
+
+    def test_ai_guidance_composes_with_the_selected_application_language(self) -> None:
+        for language in ("go", "python", "nodejs"):
+            with self.subTest(language=language):
+                paths = self.selected(language, "rag", "llm-tools")
+                self.assertEqual(paths, self.selected(language) | self.selected("rag") |
+                                 self.selected("llm-tools"))
+                self.assertIn("standards/rag/retrieval.md", paths)
+                self.assertIn("standards/llm-tools/workflows.md", paths)
+                self.assertIn("standards/llm/answers.md", paths)
+                for other in {"go", "python", "nodejs"} - {language}:
+                    self.assertNotIn(f"standards/{other}.md", paths)
+
     def test_project_workflows_add_only_task_resources(self) -> None:
         expected = {"standards/project-skills.md",
                     "templates/skills/aek-design-feature/SKILL.md",

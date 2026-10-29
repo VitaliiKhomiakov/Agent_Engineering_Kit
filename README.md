@@ -12,6 +12,10 @@ coding practices, verification, and agent collaboration.
 - **Go:** Gin.
 - **JavaScript / TypeScript:** Node.js, NestJS, React, Next.js, Angular, NgRx, TypeORM.
 - **Database and containers:** PostgreSQL, Docker.
+- **RAG and LLM applications:** language-neutral [RAG](standards/rag.md) and
+  [tool/workflow rules](standards/llm-tools.md); optional [LlamaIndex](standards/llamaindex.md),
+  [LangChain](standards/langchain.md), [LangGraph](standards/langgraph.md) and
+  [Langfuse](standards/langfuse.md) integration guidance.
 - **Game development:** Unreal Engine, including C++ and Blueprints; [Godot](standards/godot.md),
   with GDScript and conditional C#/GDExtension guidance.
 

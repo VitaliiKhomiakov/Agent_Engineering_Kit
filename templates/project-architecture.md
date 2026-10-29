@@ -133,6 +133,27 @@ preserve from behavior intentionally being corrected.
   interface/Protocol ownership, and remaining legacy gaps>`.
 - Exceptions and legacy size excesses: `<scope, reason, limits>`.
 
+## RAG, LLM tools or observability, when present
+
+Keep only applicable fields. The example answer workflow is not a required
+sequence; record the actual goal and justified stages, whether simpler or more complex.
+
+- Goal and acceptance: `<lookup / document answer / research / action / tracing;
+  required outputs, source support, latency and cost constraints>`.
+- Runtime/integrations: `<language/host, actual packages and versions, model and
+  embedding revisions; storage and Langfuse SDK/server versions only where used>`.
+- Source contract: `<authoritative source per fact type, freshness, corpus languages,
+  identity/version/locator metadata, update/deletion and access-revocation owners>`.
+- Workflow ownership: `<actual stages, state and budget owner, tool executor,
+  clarification/stop conditions; checkpoints and replay only when needed>`.
+- Tool boundary: `<input/output schemas, injected identity/scope, source permissions,
+  cancellation and uncertain-effect/idempotency behavior where applicable>`.
+- Answer contract: `<applicable checks, citation support, conflict/insufficient-evidence
+  outcomes, verified or provisional streaming and delivery semantics>`.
+- Evaluation/observability: `<representative cases and acceptance measures, trace
+  correlation, redaction before export, retention, exporter lifetime and access>`.
+- Rules: `<selected rag/llm-tools/vendor profiles and reachable task routes>`.
+
 ## Unreal Engine, when present
 
 Fill only facts relevant to the project/task; distinguish intended choices from

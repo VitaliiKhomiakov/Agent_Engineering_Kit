@@ -120,6 +120,9 @@ it under this library's policy. Host selection follows the actual task/runtime.
 | Unreal Engine project or plugin | `unreal-engine` |
 | PostgreSQL; optional Python database access | `postgresql`; add `sqlalchemy` and/or `psycopg` when used (`psycopg` depends on `postgresql`) |
 | Container builds or Compose environments | `docker` |
+| Source-grounded answers or corpus/retrieval work | `rag`; language and storage remain separate choices |
+| Model tools or application workflow orchestration | `llm-tools`; RAG and graph runtimes only when needed |
+| LLM framework or tracing integration | `llamaindex`, `langchain`, `langgraph` or `langfuse` only where used |
 
 Dependencies supply shared bases automatically; explicitly selecting the same
 base again does not duplicate its files. Examples retain their stated language
@@ -136,6 +139,35 @@ which also lists its document as a resource.
 Do not reinterpret an old ID as a new narrow selection. A reviewed selection
 change during adoption follows the source library's MIGRATION repeat/update
 procedure; a smaller closure is not permission to delete previously managed files.
+
+## RAG and LLM application selections
+
+The six profiles are optional and language-neutral. Select the actual language,
+host and storage independently; no AI profile requires Python, Node.js, Go,
+PostgreSQL or a vector store. No source-file glob can establish RAG or a vendor
+integration on its own, so these profiles use their task/stack `when` conditions.
+
+`rag` owns corpus/retrieval rules and `llm-tools` owns tool/workflow rules; either
+can be selected alone. Shared `standards/llm/` topics keep architecture, library
+selection, answer checks and evaluation in one place. They are resources, not
+another required profile or an instruction to read every topic.
+`llamaindex` makes both profiles available. `langchain` and `langgraph` make
+`llm-tools` available without selecting each other or RAG. `langfuse` adds its own
+integration and shared evaluation only. Dependencies copy policies, not packages.
+
+| Example application | Applicable profile selection |
+| --- | --- |
+| Native Go retrieval with ordinary workflow code | `go`, `rag`; add `llm-tools` for tool/workflow work |
+| Python retrieval through LlamaIndex | `python`, `llamaindex`; read tool topics only when used |
+| Node.js tools with LangChain | `nodejs`, `langchain`; add `typescript` only when used |
+| Stateful LangGraph orchestration without LangChain | `langgraph` plus the actual language/host |
+| Langfuse tracing for a Go service without RAG | `go`, `langfuse` |
+
+These are examples, not mandatory combinations. A Go implementation may use native
+clients, Eino or the separately maintained LangChainGo; names do not establish
+Python/JavaScript API parity. Select workflow stages and complexity from the goal:
+the example sequence can be shortened, combined, reordered or extended while
+preserving dependencies and required access, evidence and delivery guarantees.
 
 ## Read for the current task
 
@@ -164,6 +196,10 @@ its name or bundled dependencies do not require adding a language or framework.
 | Task | Relevant reading | Not selected merely by the bundle |
 | --- | --- | --- |
 | Python-only fix, without FastAPI or Pydantic | Common rules and Python entry/sections for the affected behavior | FastAPI, Pydantic, SQLAlchemy or database instructions |
+| Corpus update or retrieval change | `rag` entry and affected ingestion/retrieval sections | A graph, model-visible tools or every named framework |
+| A model tool without document retrieval | `llm-tools` entry and relevant contracts/execution sections | RAG, a vector database or a required multi-step workflow |
+| LangGraph pause/resume change | `langgraph`, affected state/recovery and tool execution sections | LangChain, LlamaIndex or an unselected language |
+| Langfuse exporter/privacy change | `langfuse` and relevant observability checks | RAG, LangGraph or the full answer workflow |
 | JavaScript React change, without Next.js or TypeScript | Common rules, shared JavaScript guidance and the `react` entry/topics | TypeScript obligations, Next.js routes or Node.js server guidance |
 | Substantive inline plan with an existing configured session selection | Adopted planning policy, relevant delivery/design rules and the selected skill's adaptations | Delegation and model setup merely because they are dependencies of delivery/Superpowers |
 | Blueprint-only Unreal asset change | `unreal-engine` entry, affected gameplay/assets and verification sections; editor procedure when operating that provider | C++ details, networking or mandatory MCP installation |

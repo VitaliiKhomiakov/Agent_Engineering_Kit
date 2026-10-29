@@ -92,6 +92,73 @@ when = "Explicitly selecting or using optional AEK consumer-project design or re
 dependencies = ["core"]
 
 [[profiles]]
+id = "rag"
+source = "standards/rag.md"
+resources = [
+  "standards/llm/architecture.md",
+  "standards/llm/libraries.md",
+  "standards/llm/answers.md",
+  "standards/llm/evaluation.md",
+  "standards/rag/ingestion.md",
+  "standards/rag/retrieval.md",
+]
+technologies = ["rag"]
+activities = ["design", "implementation", "test", "review"]
+when = "Source-grounded answers, corpus lifecycle, retrieval, evidence or RAG evaluation; independent of language, storage and framework."
+dependencies = ["core"]
+
+[[profiles]]
+id = "llm-tools"
+source = "standards/llm-tools.md"
+resources = [
+  "standards/llm/architecture.md",
+  "standards/llm/libraries.md",
+  "standards/llm/answers.md",
+  "standards/llm/evaluation.md",
+  "standards/llm-tools/contracts.md",
+  "standards/llm-tools/source-access.md",
+  "standards/llm-tools/execution.md",
+  "standards/llm-tools/workflows.md",
+]
+technologies = ["llm-tools"]
+activities = ["design", "implementation", "test", "review"]
+when = "Designing model-visible tools or application-owned tool workflows, routing, effects or delivery; generic tool use does not imply RAG or an agent loop."
+dependencies = ["core"]
+
+[[profiles]]
+id = "llamaindex"
+source = "standards/llamaindex.md"
+technologies = ["llamaindex", "llamaindex-ts"]
+activities = ["design", "implementation", "test", "review"]
+when = "Actual LlamaIndex or LlamaIndex.TS integration; select the real language and only relevant retrieval/tool topics."
+dependencies = ["rag", "llm-tools"]
+
+[[profiles]]
+id = "langchain"
+source = "standards/langchain.md"
+technologies = ["langchain", "langchaingo"]
+activities = ["design", "implementation", "test", "review"]
+when = "Actual LangChain model/tool integration or separately verified LangChainGo use; language and major-version APIs differ."
+dependencies = ["llm-tools"]
+
+[[profiles]]
+id = "langgraph"
+source = "standards/langgraph.md"
+technologies = ["langgraph"]
+activities = ["design", "implementation", "test", "review"]
+when = "Actual LangGraph state, routing, reducers, checkpoints or interrupts; a fixed sequence alone does not require a graph."
+dependencies = ["llm-tools"]
+
+[[profiles]]
+id = "langfuse"
+source = "standards/langfuse.md"
+resources = ["standards/llm/evaluation.md"]
+technologies = ["langfuse"]
+activities = ["design", "implementation", "test", "review"]
+when = "Actual Langfuse tracing, prompt or experiment integration, SDK/server compatibility and telemetry privacy; no retrieval or graph framework implied."
+dependencies = ["core"]
+
+[[profiles]]
 id = "python-fastapi"
 source = "standards/python-fastapi.md"
 technologies = ["python", "fastapi", "pydantic"]
