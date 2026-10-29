@@ -30,6 +30,8 @@ an older application or authorize converting its NgModules or state model.
   synchronize duplicate writable copies with effects.
 - Use strict template checks, typed inputs/outputs and validated external data.
   Client forms, route guards and cached permissions do not enforce server authority.
+- Apply the [SCSS and nested-style policy](angular/styles.md) to authored component
+  and global styles, including its setup, scope and encapsulation requirements.
 
 ## Read by task
 
@@ -42,7 +44,7 @@ an older application or authorize converting its NgModules or state model.
 | Local state, signals, Observable ownership, subscriptions or HTTP races | [Reactivity and state](angular/reactivity.md) |
 | OnPush, zoneless, rendering cost, tracking or lazy views | [Change detection and performance](angular/change-detection.md) |
 | Route state, forms, validation, HTTP contracts or security | [Routes, forms and boundaries](angular/boundaries.md) |
-| Component styles, global tokens, themes or encapsulation | [Styles](angular/styles.md) |
+| SCSS setup, nested component styles, global tokens, themes or encapsulation | [Styles](angular/styles.md) |
 | Builds, tests, SSR, compatibility or performance evidence | [Verification](angular/verification.md) |
 | NgRx is used or explicitly selected | [NgRx entry](ngrx.md), then only the relevant package sections |
 
