@@ -83,6 +83,7 @@ func TestToolGraph(t *testing.T) {
 		if tenant != "tenant-a" {
 			return nil, errors.New("denied")
 		}
+
 		if query != "policy" || limit != 2 {
 			return nil, errors.New("unexpected search")
 		}
@@ -130,6 +131,7 @@ func TestToolGraph(t *testing.T) {
 	if err := json.Unmarshal([]byte(result), &hits); err != nil {
 		t.Fatal(err)
 	}
+
 	if len(hits) != 1 || hits[0].ID != "doc-1:chunk-2" || calls != 1 {
 		t.Fatalf("unexpected result: %s, calls=%d", result, calls)
 	}
@@ -145,6 +147,7 @@ func TestToolGraph(t *testing.T) {
 	if _, err := search.InvokableRun(canceled, `{"query":"policy","limit":2}`); !errors.Is(err, context.Canceled) {
 		t.Fatalf("lost cancellation: %v", err)
 	}
+
 	if calls != 1 {
 		t.Fatalf("invalid/canceled input reached backend: %d", calls)
 	}
@@ -153,6 +156,7 @@ func TestToolGraph(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	if _, err := denied.InvokableRun(ctx, `{"query":"policy","limit":2}`); err == nil {
 		t.Fatal("backend denial was lost")
 	}

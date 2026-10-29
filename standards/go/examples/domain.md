@@ -38,6 +38,7 @@ func (d *Document) Publish() error {
 	if d.status != draft {
 		return ErrInvalidTransition
 	}
+
 	if strings.TrimSpace(d.title) == "" {
 		return ErrEmptyTitle
 	}

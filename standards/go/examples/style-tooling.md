@@ -13,7 +13,8 @@ The checked tuple is Go **1.26.1**, linux/amd64, and the official
 `golang.org/x/tools v0.42.0` (goimports and analysis tooling),
 `honnef.co/go/tools v0.7.0` (Staticcheck/unused),
 `github.com/mgechev/revive v1.15.0`, and
-`github.com/kisielk/errcheck v1.10.0`.
+`github.com/kisielk/errcheck v1.10.0`, plus
+`github.com/bombsimon/wsl/v5 v5.6.0` for spacing checks.
 The bundled govet integration uses the pinned Go/tooling build.
 
 Obtain Go from the [official archive](https://go.dev/dl/) and the linter from
@@ -66,7 +67,15 @@ linters:
     - errcheck
     - unused
     - revive
+    - wsl_v5
   settings:
+    wsl_v5:
+      default: none
+      enable:
+        - if
+        - err
+      allow-first-in-block: false
+      allow-whole-block: false
     errcheck:
       check-blank: true
       disable-default-exclusions: true
@@ -122,6 +131,16 @@ and also assigns error-string and receiver-name diagnostics to Revive by disabli
 ST1005/ST1006. All SA correctness checks remain enabled. Revive's explicit five
 rules prevent its implicit default or all-rule expansion. No line-length linter
 or second formatter is enabled. Review this mapping when changing the pins.
+
+The required spacing gate uses only `wsl_v5`'s `if` and `err` checks:
+standalone guards need separation, and a direct error assignment/check stays
+adjacent. Both block-use allowances are disabled. The pinned `if` check permits
+one directly related preceding assignment, not arbitrary setup merely used later
+in the block. Separate earlier preparation while keeping the operation/error
+check together. Other whitespace checks, including line-count-based return
+spacing and blanket `after-block`, are not enabled. These syntactic checks do not
+infer every meaningful step or recognize every error predicate; purpose-based
+[readability review](../verification.md#readability-acceptance) remains required.
 
 `presets: []` avoids broad issue presets. Errcheck includes blank assignments;
 its built-in exclusions are replaced with eight concrete write methods on
@@ -285,6 +304,19 @@ The action operates on saved content, so enable editor reload after external
 changes and avoid a second save hook with different formatting/import settings.
 Editor-specific integration is conditional; only the command is exercised here.
 
+To repair spacing, first inspect the lint findings, then run this command on the
+selected package in the extracted fixture and review its diff:
+
+```sh
+golangci-lint run --config .golangci.yml --enable-only wsl_v5 --fix ./...
+```
+
+This is an editing action, not the CI gate. It selects only the configured spacing
+linter, but `--fix` can also apply the configured formatter. In an adopting project,
+choose the affected package pattern and inspect all resulting source changes;
+rerun the ordinary gates after accepted fixes. The `fmt` command alone does not
+apply spacing-linter fixes.
+
 ### CI
 
 Run this block after configuration validation. It preserves source and stops on
@@ -321,12 +353,32 @@ package-load, typecheck, configuration, or tool failures are not passing probes.
 | --- | --- | --- |
 | Formatting | Replace `return nil` with `return    nil` in `greeting.go` | Gate fails and diff contains the spacing correction; source stays unchanged |
 | Imports | Add unused `"os"` to the import block | Gate fails and diff removes that import; source stays unchanged |
+| Adjacent independent guards | Remove the blank line before the checked `fmt.Fprintf` block in `greeting.go` | Format gate passes; lint fails with `wsl_v5` at the second `if`; source stays unchanged |
+| Same-input guards | Insert the guard below immediately after the blank-ID guard, without a separating blank line | Format gate passes; lint fails with `wsl_v5` at `if len(userID) > 64`, despite both guards checking `userID` |
+| Detached error check | Rewrite the checked `fmt.Fprintf` as `_, err := fmt.Fprintf(w, "hello, %s\n", userID)` followed by a blank line and `if err != nil` with the existing error return | Format gate passes; lint fails with `wsl_v5`'s `err` check |
 | Naming | Replace every `userID` in `greeting.go` with `userId` | `run` fails with Revive `var-naming` naming `userID` |
 | Ignored error | Replace the checked `fmt.Fprintf` block with a bare `fmt.Fprintf(w, "hello, %s\n", userID)` call | `run` fails with `errcheck` for `fmt.Fprintf` |
 | Discarded writer error | Replace that block with `_, _ = fmt.Fprintf(w, "hello, %s\n", userID)` | `run` still fails with `errcheck`; concrete-method exceptions do not hide writer failures |
 | Invalid Go | Replace `greeting.go` with `package greeting` followed by unfinished `func Broken(` | Gate fails on the parse diagnostic even though raw `fmt --diff` exits 0 |
 | Tool error | Replace `.golangci.yml` with invalid YAML in a fresh copy | Gate preserves the nonzero status and displays the configuration diagnostic |
 | CI stops | Run the CI block via `sh` on the naming variant | Nonzero exit from lint; `go test` is not reached |
+
+For the same-input variant, insert this function-body excerpt without changing
+the existing blank line before the subsequent writer operation:
+
+```go
+if len(userID) > 64 {
+	return errors.New("user ID is too long")
+}
+```
+
+Run the spacing repair command on each spacing variant, then the ordinary CI
+block. Require the intended whitespace-only fix and passing gates. Also check
+positive layouts: separated guards of the same input, an immediately adjacent
+`err != nil` check, and an attached `else if`/`else` chain. Do not interpret a
+lint pass as proof of every semantic grouping: for example, a separated
+`if !errors.Is(err, want)` predicate is not diagnosed by this pinned `err` check
+and still requires review under the style rule.
 
 Then run the editing command in the formatting/import variants; the gate must
 pass afterward. The tiny writer tests prove the clean fixture's own success,
@@ -340,8 +392,10 @@ discarded-writer-error case above; do not suppress whole packages or method name
 
 ## Evidence and limits
 
-The [dated style-evidence record](../../../docs/research/2026-10-13-go-gin-gorm-style-evidence.md)
-contains executed checks and exact versions, separate from source review.
+The [original style-evidence record](../../../docs/research/2026-10-13-go-gin-gorm-style-evidence.md)
+describes the earlier configuration. The
+[spacing follow-up](../../../docs/research/2026-10-29-go-spacing.md) records
+checks of this revised baseline, keeping source review and execution separate.
 This fixture does not prove editor integration, every rule/exception, generated
 code workflows, multiple modules/build tags, or compatibility with other Go/tool
 versions. See the versioned
@@ -350,3 +404,8 @@ versions. See the versioned
 and [formatter command](https://github.com/golangci/golangci-lint/blob/v2.11.3/pkg/commands/fmt.go).
 The [formatter error path](https://github.com/golangci/golangci-lint/blob/v2.11.3/pkg/goformatters/meta_formatter.go)
 explains why the gate checks diagnostics as well as exit status.
+The pinned [WSL checks](https://github.com/bombsimon/wsl/blob/v5.6.0/CHECKS.md)
+define the `if` and `err` behavior; the
+[integration manifest](https://github.com/golangci/golangci-lint/blob/v2.11.3/go.mod)
+pins that analyzer version. These sources do not establish another toolchain's
+compatibility.

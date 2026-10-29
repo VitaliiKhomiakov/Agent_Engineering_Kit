@@ -58,6 +58,7 @@ func (l Lookup) Call(ctx context.Context, input string) (string, error) {
 	if err := ctx.Err(); err != nil {
 		return "", err
 	}
+
 	if l.Tenant == "" || l.Read == nil {
 		return "", errors.New("missing trusted request dependencies")
 	}
@@ -78,6 +79,7 @@ func (l Lookup) Call(ctx context.Context, input string) (string, error) {
 	if err := decoder.Decode(&trailing); err != io.EOF {
 		return "", errors.New("expected exactly one JSON object")
 	}
+
 	if strings.TrimSpace(args.ID) == "" || len(args.ID) > 64 {
 		return "", errors.New("invalid note ID")
 	}
@@ -114,6 +116,7 @@ func TestLookupContract(t *testing.T) {
 	if _, err := lookup.Call(canceled, `{"id":"n1"}`); !errors.Is(err, context.Canceled) {
 		t.Fatalf("lost cancellation: %v", err)
 	}
+
 	if calls != 1 {
 		t.Fatalf("invalid input reached backend: %d", calls)
 	}

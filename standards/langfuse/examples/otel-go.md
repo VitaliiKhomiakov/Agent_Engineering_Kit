@@ -85,6 +85,7 @@ func TestSanitizedChildSpan(t *testing.T) {
 	if toolSpan == nil || rootSpan == nil {
 		t.Fatal("missing expected spans")
 	}
+
 	if toolSpan.Parent.SpanID() != rootSpan.SpanContext.SpanID() ||
 		toolSpan.SpanContext.TraceID() != rootSpan.SpanContext.TraceID() {
 		t.Fatal("lost parent context")

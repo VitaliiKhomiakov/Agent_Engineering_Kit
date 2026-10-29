@@ -20,6 +20,14 @@ Return to the [Go entry](../go.md).
 - Use reproducible editor import/format settings and a separate non-mutating CI
   gate. `golangci-lint run` does not run the formatting gate. A diff/list command's
   success is insufficient: fail on nonempty differences and on tool errors.
+- Require both the formatting gate and a spacing-lint gate before accepting
+  changed Go code. The [tooling baseline](examples/style-tooling.md) enables
+  `wsl_v5`'s `if` and `err` checks; a version-compatible equivalent must demonstrate
+  rejection of adjacent standalone guards (including checks of the same input)
+  and preservation of operation/error-check pairs. Adopt required tooling within
+  the authorized project scope; missing tooling is missing verification, not a
+  passing check. Report it or an explicitly accepted project exception. Formatting
+  alone does not satisfy this requirement.
 - Scope formatting to selected source files and lint/tests to affected packages
   in their module roots, retaining mandatory CI. Review generated/vendor handling
   explicitly; an issue exclusion does not necessarily prevent package loading.
@@ -42,7 +50,11 @@ requirement and examples have one owner:
 
 Identify the changed functions and meaningfully affected surrounding code, and
 determine their steps by purpose using that rule; do not expand a local change into
-a review or reformat of unrelated functions. A concise evidence statement can read:
+a review or reformat of unrelated functions. Confirm separation of consecutive
+standalone guards, including those checking one object, and of independent
+preparation, compilation and validation steps. A clean spacing-lint result covers
+only its enabled syntactic checks; it does not establish all semantic boundaries
+or every error-check form. A concise evidence statement can read:
 `cmd/api/main.go: livenessRouter — creation, configuration, registration and
 final-result groups checked; no violations.` Use actual project paths, and report
 unresolved violations or accepted exceptions. Reuse valid evidence for unchanged or

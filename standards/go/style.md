@@ -48,14 +48,20 @@ when implementing or reviewing changed Go code.
   registration, input preparation/validation, application work and result delivery.
   Sharing a variable or statement type does not by itself make one cohesive step.
 - Keep an operation and its immediate error/result check together. Short setup
-  used only by that operation belongs in the same group: creating and configuring
-  a decoder for the next decode is one step. A component that later phases
+  used only by that operation may share the group where compatible with the
+  required guard checks; separate earlier preparation rather than detaching an
+  error check from its operation. A component that later phases
   configure, register and return, such as the router below, has its own creation
   step. A guard and subsequent statements may also belong together when they
   continue that same phase, as in the configuration below. Separate the next independent step after the completed
   group; a closing brace alone does not establish a boundary.
-- Consecutive guards validating the same input and other small cohesive sequences
-  may stay together. An early error return belongs inside its guard; a final
+- Separate consecutive standalone `if`/guard blocks with one blank line, even
+  when they validate the same input or object. Each completed guard is a separate
+  check; sharing `limits`, `config`, or another value is not an exception. Keep
+  `else if` and `else` attached to their conditional. An assignment and its
+  immediate check are one group, not two standalone guard blocks.
+- Small cohesive sequences without successive guard blocks may stay together.
+  An early error return belongs inside its guard; a final
   return may complete its operation or form a distinct result-delivery phase in
   a multi-step function. Decide by purpose, not by the `return` keyword.
 - Do not insert a blank line after every statement or closing brace, or before
@@ -79,6 +85,23 @@ if err != nil {
 
 return normalize(text), nil
 ```
+
+Successive guards need a separator even when both validate `userID`. This
+function-body excerpt rejects two distinct invalid conditions:
+
+```go
+if userID == "" {
+	return errors.New("user ID is required")
+}
+
+if len(userID) > 64 {
+	return errors.New("user ID is too long")
+}
+```
+
+Removing that separator violates this policy even when `gofmt` accepts the
+result. Keep schema compilation and subsequent document validation, or independent
+configuration-policy checks, visually separate by the same purpose-based rule.
 
 A short cohesive configuration sequence also needs no internal separator:
 
@@ -141,3 +164,5 @@ complete guide to modern Go features. The scope, grouping, and adoption choices
 above are local policy. The optional
 [dated evidence](../../docs/research/2026-10-13-go-gin-gorm-style-evidence.md)
 separates source review from executed checks.
+The [spacing follow-up](../../docs/research/2026-10-29-go-spacing.md) records
+the stricter guard rule and its bounded automated checks separately.
