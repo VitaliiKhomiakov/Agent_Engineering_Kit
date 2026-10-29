@@ -63,6 +63,64 @@ stash to obtain a convenient clean baseline or undo unrelated work. When a task
 requires reverting an agent change, identify that exact change and preserve
 intervening edits. Lack of commits is not permission to lose local work.
 
+## Forced updates and destructive Git operations
+
+These safeguards apply in both direct and autonomous modes, including delegated
+work. Treat a proposed forced update as a signal to investigate the workflow and
+history before proceeding. It may reveal an unintended rewrite, wrong branch or
+missing integration of another contributor's work; a deliberately planned rewrite
+is also possible. Explain the observed cause without assuming misconduct or using
+force as an automatic repair for a rejected push or failed pull.
+
+Require explicit user confirmation for the concrete operation before forcibly
+updating remote history. This includes `git push --force`, `-f`,
+`--force-with-lease`, a refspec prefixed with `+`, mirror pushes that replace or
+delete refs, and equivalent actions through aliases, scripts, APIs or client tools.
+Permission to commit, push, synchronize, treat a repository as authoritative, or
+finish autonomously does not authorize these operations. A backup or a tool's
+execution permission does not substitute for the user's informed confirmation.
+
+Apply the same confirmation requirement to local operations that discard work or
+remove history references: `git reset --hard`, file-overwriting `checkout` or
+`restore`, `git clean` deletion, forced branch/worktree removal, and deleting
+stashes containing work. The operation's effect matters even without a force flag.
+Read-only inspection and dry runs do not require this confirmation. Existing
+prohibitions on discarding unrelated work or bypassing worktree safeguards remain
+binding; confirmation is not a general cleanup permission.
+
+Before requesting confirmation, prepare a concrete, reviewable proposal:
+
+1. Identify the repository, checkout, remote URL when applicable, and exact
+   branches, tags or paths affected. Inspect local changes and the relevant
+   history; obtain the current remote state for a remote update. Explain why the
+   ordinary operation cannot achieve the intended result.
+2. Show the exact command or tool action and its scope. Identify commits that
+   would leave the affected branch history, refs that would be removed, and local
+   tracked, untracked or ignored files that would be overwritten or deleted.
+   State any uncertainty about ownership or impact; do not assume other people's
+   work is disposable or expose sensitive file contents in the preview.
+3. Explain the risk, available alternatives that preserve work/history, and the
+   recovery approach. Preserve affected committed history and local contents
+   before execution within the authorized scope, or include that preservation in
+   the proposal. A backup branch preserves commits, not uncommitted or untracked
+   files; do not promise that reflog can recover deleted file contents.
+4. Ask for approval of that specific operation and wait for an affirmative reply.
+   Reuse an explicit confirmation already given for the same reviewed action,
+   target and state; a generic earlier instruction is insufficient.
+
+After approval, recheck the affected state before executing. If the target, scope,
+local contents or relevant remote tip changed, update the proposal and obtain
+confirmation for the changed operation. For an approved forced branch update,
+prefer a lease bound to the exact reviewed remote ref and expected commit, with an
+explicit destination. `--force-with-lease` reduces concurrent-update risk but still
+requires approval and does not prove that the proposed history preserves all work.
+If the lease fails, stop and investigate; do not refresh the expected commit and
+retry automatically or fall back to unrestricted force. Verify the resulting
+state and report what changed and where the preserved state can be recovered.
+
+These are instruction-level safeguards, not an installed hook or server-side
+branch protection. Their presence alone does not establish runtime enforcement.
+
 ## Explicit opt-in: autonomous worktree execution
 
 Enter this mode only when the user requests a worktree and automatic execution
@@ -92,6 +150,7 @@ Worktree permission alone does not authorize every Git write:
 | Stage/commit changes | Only if the user also permits local commits; otherwise leave changes uncommitted |
 | Merge/cherry-pick/copy changes into another checkout | Requires an agreed integration target and permission to integrate |
 | Push/create a PR/deploy | Requires its own explicit authorization |
+| Force-update history or discard local work | Requires concrete informed confirmation under [Git safeguards](#forced-updates-and-destructive-git-operations); ordinary push or autonomous-mode permission is insufficient |
 | Remove worktree | After the approved merge succeeds, required integration checks pass, and no work would be lost |
 | Delete a branch | Separate authorization; deleting the worktree does not require deleting its branch |
 

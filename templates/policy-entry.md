@@ -25,6 +25,10 @@ the [trust boundary](.agents-framework/standards/core.md#external-content-and-in
 Default: current checkout, one logical stage, necessary checks, then STOP for user review;
 no staging, commits, branches, stashes or worktrees. [Work modes](.agents-framework/standards/work-modes.md) owns explicit
 exceptions, integration and cleanup; skills, plans and delegation grant no additional permissions.
+Forced remote updates (including `--force-with-lease`) and destructive local Git
+operations require explicit user confirmation of the concrete action, affected work
+and recovery approach under [Git safeguards](.agents-framework/standards/work-modes.md#forced-updates-and-destructive-git-operations).
+Investigate the cause first; push/sync/autonomy permission does not authorize force or data loss.
 Keep transport thin, validate input and enforce invariants in their owner. TypeScript/Python
 require strict typing and named boundary contracts, without `any`/`Any` or diagnostic bypasses.
 Centralize complex construction; use meaningful I/O boundaries and appropriate DI. Apply
