@@ -1,5 +1,9 @@
 # Agent Engineering Kit
 
+<p align="center">
+  <img src="docs/assets/agent-engineering-kit-logo.png" alt="Agent Engineering Kit (AEK) logo" width="280">
+</p>
+
 Reusable engineering instructions for AI coding agents in Codex, Claude Code and
 Cursor. The goal is consistent architecture, implementation, testing and review,
 adapted to your project's technologies and local requirements.
