@@ -2,9 +2,9 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agent-engineering-kit-logo-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agent-engineering-kit-logo.png">
-    <img src="docs/assets/agent-engineering-kit-logo.png" alt="Agent Engineering Kit (AEK) logo" width="280">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/agent-engineering-kit-logo-dark-v2.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/agent-engineering-kit-logo-v2.png">
+    <img src="docs/assets/agent-engineering-kit-logo-v2.png" alt="Agent Engineering Kit (AEK) monogram" width="280">
   </picture>
 </p>
 

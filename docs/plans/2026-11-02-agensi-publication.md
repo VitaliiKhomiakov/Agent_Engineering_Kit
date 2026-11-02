@@ -136,3 +136,24 @@ After reviewing the logo update, the user explicitly requested a push. This
 authorizes staging and committing the README, logo and this task record, then
 an ordinary push from the current `main` branch to `origin/main`. It supersedes
 the earlier no-Git-publication scope for these changes only.
+
+## Approved monogram revision — 2026-11-02
+
+The user approved the revised AEK monogram and requested its use in README and
+the existing Agensi listing. The approved design combines the letters with a
+blue crossbar and the full project name; no uniqueness guarantee is asserted.
+
+- Prepared separate opaque light and dark PNG assets through imagegen, inspected
+  both, and saved them as `docs/assets/agent-engineering-kit-logo-v2.png` and
+  `docs/assets/agent-engineering-kit-logo-dark-v2.png`. Original assets are retained.
+- Updated README's theme-specific picture sources and fallback. The initial
+  tracked files were clean at the start of this revision; Git preserves their
+  pre-edit contents. Both new asset paths were absent.
+- README artifact check passed. Image references, PNG integrity, square dimensions,
+  upload size limit and alt text were verified; diff whitespace check passed.
+- Replaced the existing Agensi listing's logo with the light opaque variant and
+  saved through Save Changes. Reopened the editor and confirmed the new stored
+  image loads at 1254 × 1254 pixels. Free pricing remains selected; Creator Studio
+  still shows exactly one listing, Pending Review, with zero live listings.
+- The first Chrome connection timed out awaiting browser permission; the second
+  connection succeeded. No package replacement or duplicate submission was needed.
