@@ -1,22 +1,24 @@
 ---
 name: aek-review-changes
-description: Use when reviewing changed code or contracts in a project with adopted AEK rules, on request or at an applicable completion review. Excludes implementation requests without a review boundary, whole-project audits, wording-only edits and framework or model setup.
+description: Use when the user requests AEK review of supplied code snippets or project changes, or at an applicable completion review in a project with adopted AEK rules. Excludes implementation requests without a review boundary, whole-project audits, wording-only edits and framework or model setup.
 ---
 
-# Review project changes
+# Review supplied code or project changes
 
-Assess the actual change against the task and affected technical contracts. Use
-the [project-skill contract](../../../standards/project-skills.md) for local
-inputs, procedure composition and the review result.
+Assess the supplied code or actual change against the task and available technical
+contracts. Use the [project-skill contract](../../../standards/project-skills.md)
+for inputs, procedure composition and the review result.
 
-1. Establish the requested review scope, acceptance criteria and actual baseline.
-   Include new/uncommitted files while distinguishing prior user work. If the
-   baseline is incomplete, state the attribution limit instead of inventing a
-   clean Git range or initializing Git to enable a review interface.
-2. Select local stack entries for the changed contracts, then their relevant
-   topics. Inspect the actual diff and enough surrounding owners/callers/consumers
-   to resolve a plausible regression. Apply accepted project exceptions rather
-   than treating every difference from a reference example as a defect.
+1. Establish the supplied scope, known requirements and permitted actions. For
+   snippets or restricted tool access, follow
+   [supplied-code review](../../../standards/verification.md#supplied-code-and-restricted-tools).
+   For project changes, use the actual baseline and include new/uncommitted files
+   within the permitted scope, distinguishing prior user work and attribution gaps.
+2. Select available stack entries for the affected contracts through the
+   project-skill contract's input routes. Inspect the supplied code or permitted
+   diff and enough available surrounding context to assess a concrete failure.
+   Apply accepted project exceptions rather than treating every difference from
+   a reference example as a defect.
 3. Use the existing verification/review boundary and any selected Superpowers
    procedure through local adaptations. Identify whether this is coordinator
    review or an authorized independent review; reading this skill creates neither

@@ -1,7 +1,7 @@
 # Free Agensi publication
 
-Status: live publication confirmed; audit and local improvements verified; user requested Git publication.
-Current item: A6 (pending authenticated access and the next-stage checkpoint).
+Status: audit changes pushed; supplied-code review improvement verified and approved for Git publication.
+Current item: A7 complete. A6 remains pending authenticated marketplace access.
 Earlier submission observations below remain historical evidence.
 Owner: primary agent, inline execution.
 
@@ -45,6 +45,8 @@ was found. Do not bundle the separately installed Superpowers plugin.
   focused local improvements, verify them and return for user review.
 - [ ] A6: Apply reviewed marketplace corrections and verify live skill loading.
   Requires an accessible authenticated Agensi connection; not performed here.
+- [x] A7: Make supplied-code review explicit in the source skill and shared rules,
+  preserve restricted-tool behavior and verify affected artifact/adoption routes.
 
 Distinguish submission pending review from a live public listing. Platform review
 is external; report it honestly if live publication is not immediate.
@@ -280,3 +282,79 @@ then an ordinary push of the current main branch to origin/main at
 audit stage's earlier no-Git-publication boundary for these three files only.
 Marketplace edits and live skill verification remain pending under A6; publishing
 these repository documents does not apply the proposed Agensi corrections.
+
+## Supplied-code review improvement — 2026-11-02
+
+The user approved the previously proposed clarification and explicitly requested
+Superpowers. This stage updates source guidance so the README's first review
+request also covers a pasted snippet without a project adoption or Git baseline.
+The audit documentation was pushed as `f751ffddfa058c5b27768082b9a24387e9a89406`.
+That clean commit in the current checkout preserves all four files' pre-edit state.
+The instruction root and canonical task owner remain unchanged.
+
+Scope: `standards/verification.md`, `standards/project-skills.md`,
+`templates/skills/aek-review-changes/SKILL.md` and this task record. Work stays
+inline, in the current checkout, with no staging, commits or push authorized for
+this new stage. No target adoption, installed plugin or hosted package is changed.
+
+### Design and baseline gap
+
+The old skill trigger required changed code/contracts in an adopted project.
+Its input path unconditionally started from project instructions and a passport;
+the general review contract did not explicitly cover snippets or a no-command
+request. Existing rules already required prioritized findings, evidence, coverage
+limits and no automatic fixes. Preserve those owners instead of copying the whole
+review policy into the skill or adding a second review skill.
+
+Use `verification.md` for the supplied-code/restricted-tools contract,
+`project-skills.md` for selecting snippet versus project inputs, and the existing
+skill for discovery and routes. The user already approved this bounded design;
+no new integration mechanism or model selection is needed.
+
+### Acceptance scenarios
+
+Review these scenarios against the final instructions in the current session.
+They are source-level walkthroughs, not independent agent evaluations or live
+Agensi executions.
+
+| Scenario | Required result |
+| --- | --- |
+| Supplied `names_for(user_id, names)` caches every user under the same key and returns the mutable cached list; users must be isolated and results independently mutable | Review the snippet without adoption/Git, prioritize cross-user disclosure and shared-list mutation with code evidence; report missing deployment context |
+| Review request with no code or diff | Ask for the code; do not fabricate a review |
+| Snippet review forbids commands and edits | No shell/Git/check helpers, delegated execution, fixes or report files; use supplied/permitted reference context and disclose unavailable checks |
+| Correct internal integer addition under a stated integer-input contract | No invented defect quota or demand for a repository; report the limited scope and unexecuted checks |
+| Ordinary project diff with existing local contracts | Retain baseline attribution, applicable project guidance and required gates; a prohibited or unavailable gate remains unverified |
+
+Verification selected: artifact checks on the four changed files, existing
+project-skill adoption and portability tests for adapted links/native placement,
+and diff whitespace/coordinator review. No new string-matching tests are needed
+for prose; existing tests do not establish model compliance. The prior manual
+example is not a failing independent-agent baseline. No such run is claimed.
+
+### Result and evidence
+
+- The skill trigger now explicitly includes supplied snippets; its input route
+  distinguishes snippet context from a project diff. The existing name and
+  installation destinations are unchanged.
+- The verification owner covers missing code, unavailable context, snippet
+  locations, missing before-state, prohibited commands/edits and truthful check
+  reporting. No new catalog resources or duplicated policy owners were added.
+- Coordinator walkthrough of the five scenarios found the required source routes
+  and restrictions explicit. This is instruction inspection, not measured agent
+  compliance; live Agensi retrieval and independent behavior tests remain unrun.
+- Artifact checker passed for all four changed files, with 0 errors.
+  `python3 -B -m unittest tests.test_project_skill_adoption tests.test_project_skill_portability`
+  passed all 14 tests. These validate instruction fixtures, links and portability,
+  not native client activation. Later prose wrapping and this evidence update
+  leave those installation/link contracts unchanged.
+- `git diff --check` passed. Scoped review found no unresolved in-scope defect;
+  all four changes remain uncommitted for the user's review. A7 is complete;
+  the hosted edition still requires a separately verified update under A6.
+
+### Commit and push authorization — 2026-11-02
+
+The user explicitly requested committing and pushing the four A7 files. This
+supersedes this stage's earlier no-Git-write scope and authorizes their commit
+on the current main branch and an ordinary push to origin/main. Existing checks
+remain applicable; only this authorization record changed after verification.
+The hosted Agensi package and A6 remain unchanged by this Git publication.

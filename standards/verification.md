@@ -241,6 +241,35 @@ review that found no unresolved issue. At integration, assess the new interactio
 do not re-review every unchanged phase from scratch. Passing tests and a clean
 review are evidence, not a guarantee that all possible bugs are absent.
 
+### Supplied code and restricted tools
+
+A requested review can use a pasted snippet or supplied file without an adopted
+AEK project, repository, Git history or installed native review skill. Treat the
+provided code and known requirements as the scope. If no code is supplied, ask
+for the code or diff; do not invent findings. Missing architecture, callers or
+version information limits the affected conclusions, not every supported finding.
+Ask for additional context when it determines whether a suspected defect exists.
+
+Use only evidence-gathering actions permitted by the request. When commands are
+forbidden, do not run shell reads, Git commands, tests, linters, formatters or
+execution helpers, or delegate those actions to another agent. Use supplied
+content and permitted reference-reading tools. If a required reference is
+unavailable under those restrictions, identify it and limit the dependent claim.
+Existing project gates remain unverified when they cannot be run; this review
+does not certify implementation completion or silently waive those gates.
+
+When file edits are forbidden, return the review in the requested response
+surface without writing fixes, reports or task records. Reading a snippet does
+not authorize installation, model setup or inspection of unrelated project files.
+
+Locate a finding by the supplied filename and line when known; otherwise use a
+labelled snippet with line numbers or an exact code expression. Without a before
+state, describe current defects and risks without claiming they were introduced
+by a change. Separate code-supported facts from assumptions about unseen callers
+or deployment. State missing context and checks not run, with the reason; never
+describe a static reasoning example as an executed test. The ordinary finding
+priority, evidence and no-findings rules above still apply.
+
 ## Codex review entry points
 
 Choose a native review scope deliberately. The CLI's uncommitted preset includes

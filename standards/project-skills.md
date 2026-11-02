@@ -1,8 +1,8 @@
 # Consumer-project task skills
 
-Read when selecting an adopted AEK task skill or resolving its local inputs and
-result boundary. Skills add task entries to existing standards; they do not
-replace project instructions or become new technical-policy owners. Availability
+Read when selecting an AEK task skill for supplied code or an adopted project, or
+resolving its local inputs and result boundary. Skills add task entries to existing
+standards; they do not replace project instructions or become new technical-policy owners. Availability
 comes from the optional `project-workflows` profile under the
 [catalog contract](catalog.md). Installation, update and recovery remain owned by
 the identified source's MIGRATION procedure, not by this task-time guide.
@@ -12,7 +12,7 @@ the identified source's MIGRATION procedure, not by this task-time guide.
 | Entry | Select for | Result | Keep outside this entry |
 | --- | --- | --- | --- |
 | [aek-design-feature](../templates/skills/aek-design-feature/SKILL.md) | Designing a new capability or material architecture/public-contract change in a project using AEK | Technical decisions connected to local owners, contracts, applicable rules and acceptance evidence | Wording-only changes, a routine fix with settled design, review-only work, or restarting an approved design |
-| [aek-review-changes](../templates/skills/aek-review-changes/SKILL.md) | Requested review of changed code/contracts or an applicable completion review | Located consequential findings and explicit coverage/evidence limits | Automatic fixes, whole-project audits, wording-only edits, reviewer dispatch or setup merely because this entry is read |
+| [aek-review-changes](../templates/skills/aek-review-changes/SKILL.md) | Requested AEK review of supplied code snippets, project changes or an applicable completion review | Located consequential findings and explicit coverage/evidence limits | Automatic fixes, whole-project audits, wording-only edits, reviewer dispatch or setup merely because this entry is read |
 
 Both entries are optional. Install only entries the project explicitly selects;
 an installed entry then applies when its task trigger above matches. Implementation uses the ordinary [core task route](core.md#task-scope-and-context)
@@ -30,9 +30,15 @@ the existing review boundary, not an extra cycle because a review entry exists.
 
 ## Resolve local inputs
 
-Start from the affected project's active instructions, architecture/passport and
-canonical task. Reuse supplied context that still matches the project. Establish
-the current owners and interfaces from the affected files; distinguish observed
+For supplied-code review, use the provided code, requirements and context under
+[supplied-code review](verification.md#supplied-code-and-restricted-tools).
+Select relevant guidance from references already supplied or readable through
+permitted tools. A missing project entry or native skill installation does not
+trigger adoption. Report any inaccessible guidance and its effect on coverage.
+
+For project work, start from the affected project's active instructions,
+architecture/passport and canonical task. Reuse supplied context that still matches
+the project. Establish the current owners and interfaces from the affected files; distinguish observed
 behavior from proposed design and accepted exceptions from incidental legacy code.
 
 Use the local entry/passport's selected profile paths and actual stack. Follow
@@ -97,9 +103,9 @@ or additional design, review or reporting cycle is required.
 ## Review result
 
 Use [review boundaries](verification.md#review-boundaries) to determine scope,
-independence and finding disposition. Connect findings to actual project paths
-and the affected contract: consequence, concrete failure scenario, supporting
-evidence and the uncertainty that remains. Rank material findings by consequence;
+independence and finding disposition. Connect findings to supplied-code locations
+or actual project paths and the affected contract: consequence, concrete failure
+scenario, supporting evidence and the uncertainty that remains. Rank material findings by consequence;
 keep optional improvements and incidental pre-existing issues distinct.
 
 Include the baseline/scope reviewed, evidence used and important coverage limits.
