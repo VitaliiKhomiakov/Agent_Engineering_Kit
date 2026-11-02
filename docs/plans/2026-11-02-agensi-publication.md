@@ -1,6 +1,8 @@
 # Free Agensi publication
 
-Status: submitted; awaiting Agensi moderation. Current item: A4 (external).
+Status: live publication confirmed; audit and local improvements verified; user requested Git publication.
+Current item: A6 (pending authenticated access and the next-stage checkpoint).
+Earlier submission observations below remain historical evidence.
 Owner: primary agent, inline execution.
 
 ## Outcome and authorization
@@ -37,8 +39,12 @@ was found. Do not bundle the separately installed Superpowers plugin.
   reference resolution and representative task routing.
 - [x] A3: Upload through the website, set price to Free, complete required fields,
   submit and record the actual moderation/publication outcome and URL.
-- [ ] A4: Confirm the public listing after Agensi approves it. Pending external
-  moderation; the publication is not live yet.
+- [x] A4: Confirm the public listing after Agensi approves it. Confirmed live on
+  2026-11-02 during the follow-up audit below.
+- [x] A5: Audit the live listing against the source and platform contract; prepare
+  focused local improvements, verify them and return for user review.
+- [ ] A6: Apply reviewed marketplace corrections and verify live skill loading.
+  Requires an accessible authenticated Agensi connection; not performed here.
 
 Distinguish submission pending review from a live public listing. Platform review
 is external; report it honestly if live publication is not immediate.
@@ -157,3 +163,120 @@ blue crossbar and the full project name; no uniqueness guarantee is asserted.
   still shows exactly one listing, Pending Review, with zero live listings.
 - The first Chrome connection timed out awaiting browser permission; the second
   connection succeeded. No package replacement or duplicate submission was needed.
+
+## Follow-up publication audit — 2026-11-02
+
+The user requested a Superpowers-assisted study of the library and an assessment
+and improvement of its Agensi publication. The current coherent stage is the
+audit, accurate local navigation and a reviewable marketplace correction draft.
+The source library remains a reusable policy/catalog/template library, with
+Python maintenance tools rather than an application runtime.
+
+Current workspace/instruction root and execution checkout:
+`/home/vitalii/Documents/Local_Projects/Agent_Engineering_Kit`.
+This existing file remains the sole progress owner. The earlier checkout path
+above records the original publication session. Pre-edit state was clean commit
+`2e55382314ba13d3e6ea5bad6fef885219651dbc`; README and this plan are recoverable
+from that commit. `docs/maintenance/agensi-publication.md` was absent.
+Inline execution, no delegation, staging, commits, branches, worktrees or pushes.
+Earlier Git authorization applied to its named logo changes, not this stage.
+
+### Evidence and findings
+
+- **Live status confirmed:** an unauthenticated HTTPS GET of the
+  [public listing](https://www.agensi.io/skills/agent-engineering-kit) returned
+  HTTP 200. The rendered text identifies AEK as Free; public page data has the
+  existing listing ID, `status: live` and version `1.0`. A4 is complete; the
+  original pending-review observations are not rewritten as live evidence.
+- **Architecture and core claims are consistent:** local TOML parsing confirms
+  44 profiles, including required shared policies and compatibility entries.
+  The description correctly separates hosted guidance from source-based
+  persistent adoption, makes tools conditional and excludes bundled Superpowers.
+  The current demo explicitly disclaims repository inspection and execution.
+- **Incorrect unconditional requirements:** the public Requires block adds Python,
+  Git, Node.js, Editor MCP, Tooling MCP, Unreal Engine MCP and Unreal MCP to otherwise
+  accurate requirements. Public `detected_requirements` contains the matching
+  entries. A supplied-code review needs none of those runtimes or specialized MCPs;
+  their presence misrepresents coverage as dependencies. The correction belongs
+  in listing metadata, not in deletion of valid conditional source guidance.
+- **Scan evidence is inconsistent:** rendered text reports a passed security scan,
+  but the same response's scan summary reports three failed checks and two warnings;
+  failure names are Secrets, Network access and Prompt injection. The actual
+  scanner findings, affected files, review resolution and relation to the served
+  version were not available. This is an unresolved platform-reporting observation,
+  not evidence of leaked credentials, an exploit or malicious instructions in AEK.
+- **Release reproducibility is missing in this checkout:** the package, entry,
+  listing JSON and helper paths recorded under `/tmp/aek-agensi-release` are absent.
+  No tracked publication entry or exporter was found. Previous ZIP coverage/hash
+  results remain historical evidence only. This run cannot establish that current
+  hosted files match the source or that grouped references resolve through MCP.
+- **Discovery and first use can be clearer:** README previously exposed only
+  source integration. The card leads with a profile count rather than the result
+  a user can request. The local changes add two entry paths and result-led copy.
+- **Licensing remains unspecified in source:** no tracked LICENSE/COPYING file was
+  found. Keep the factual description "publicly accessible"; do not invent an
+  open-source license or apply one without the owner's choice.
+
+The public response was read without executing its scripts. Temporary evidence:
+`/tmp/aek-agensi-live.html`, `/tmp/aek-agensi-live.txt` and HTTP headers;
+HTML SHA-256 `35b715e349621e2660ee58becdffcbbad0adf552f9eb28d0ccb6275ba5cceb0c`.
+These are session inspection aids, not release artifacts.
+
+Official sources checked: [packaging](https://www.agensi.io/docs/packaging),
+[loading](https://www.agensi.io/docs/how-agents-load-skills),
+[submission](https://www.agensi.io/docs/submit-on-the-website),
+[updates](https://www.agensi.io/docs/updates),
+[creator FAQ](https://www.agensi.io/docs/creator-faq) and
+[tool authentication](https://www.agensi.io/docs/tools).
+The public listing required direct HTTP retrieval after the web reader failed;
+the normal sandbox could not resolve the host, and an approved network read worked.
+
+### Decision and prepared changes
+
+Retain one free hosted-reference listing. A skill pack could improve routing if
+live task evidence warrants it, but splitting all catalog profiles into skills
+would confuse availability with procedures. Replacing the product with an
+installer would conflict with the documented hosted delivery model. Neither
+structural change is needed to correct current presentation defects.
+
+- README now links the live skill, distinguishes task guidance from persistent
+  adoption and supplies a first review request.
+- [Publication maintenance](../maintenance/agensi-publication.md) contains ready
+  summary/description text, exact metadata corrections, retained FAQ guidance and
+  next-release evidence requirements. It is draft copy, not a published update.
+- No catalog resources changed: the new file serves source maintenance only.
+  It is intentionally not included in target bundles.
+
+The browser inventory contains no available browser, no Agensi tools are connected,
+and a Plugin Management search for Agensi returned no matches (the search is not
+an exhaustive plugin directory). Authenticated inspection, remote editing and a
+real `get_skill` run remain unavailable in this session. No remote fields or
+package were changed. The proposed next stage is A6: inspect the actual scan
+report, correct metadata and copy in the existing listing, and exercise live
+reference retrieval. A reproducible package build and license selection are
+separate remaining decisions, not completed work.
+
+### Stage verification
+
+- `python3 tools/check_instruction_artifacts.py README.md docs/maintenance/agensi-publication.md docs/plans/2026-11-02-agensi-publication.md`
+  passed: 3 artifacts, 0 errors, including catalog and policy validation.
+- `git diff --check` passed. The new maintenance document was inspected separately;
+  new/changed files passed whitespace and conflict-marker checks.
+- Proposed summary is 239 characters (platform maximum 300); the retained name
+  is within the 60-character limit. The local catalog contains 44 profiles.
+- Coordinator review covered the actual diff and new file against the source
+  architecture and observed platform contracts. No runtime code or adopted policy
+  changed, so no new unit tests or application-stack builds were warranted.
+- Live package execution, grouped-reference retrieval, scan resolution and remote
+  application remain unverified. A5 is complete for its bounded audit/draft scope;
+  A6 remains open. No claim of a fully verified marketplace package is made.
+
+## Audit changes: Git publication authorization — 2026-11-02
+
+The user requested pushing the prepared changes. This authorizes staging and
+committing README.md, docs/maintenance/agensi-publication.md and this task record,
+then an ordinary push of the current main branch to origin/main at
+`git@github.com:VitaliiKhomiakov/Agent_Engineering_Kit.git`. It supersedes the
+audit stage's earlier no-Git-publication boundary for these three files only.
+Marketplace edits and live skill verification remain pending under A6; publishing
+these repository documents does not apply the proposed Agensi corrections.

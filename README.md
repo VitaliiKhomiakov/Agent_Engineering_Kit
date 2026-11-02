@@ -12,6 +12,27 @@ Reusable engineering instructions for AI coding agents in Codex, Claude Code and
 Cursor. The goal is consistent architecture, implementation, testing and review,
 adapted to your project's technologies and local requirements.
 
+## Choose how to use AEK
+
+| Your goal | Start here | What you get |
+| --- | --- | --- |
+| Try AEK on a design, code review or profile-selection task | [Free Agensi skill](https://www.agensi.io/skills/agent-engineering-kit), through an agent connected to Agensi | Guidance from a dated reference snapshot for the current task |
+| Keep AEK instructions in your project | [Integration](#integration), using this source library | Reviewed, project-specific instructions and an adoption record for later updates |
+
+The Agensi edition loads references on demand through MCP. It does not install
+project rules or keep an existing adoption synchronized with this repository.
+For persistent adoption, obtain this source library separately and use the
+integration wizard below. Superpowers is a separate plugin and is not bundled.
+
+Example first request through Agensi:
+
+```text
+Use Agent Engineering Kit to review the code I provide.
+Identify concrete defects and architecture risks, prioritize the findings,
+and explain the evidence for each. Report missing context and checks you did
+not run. Do not edit files or run commands.
+```
+
 ## Integration
 
 Clone or download this library and open your project in an AI coding client.
