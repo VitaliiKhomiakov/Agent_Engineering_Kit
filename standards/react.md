@@ -23,7 +23,7 @@ SSR/hydration use and selected form, state, query, styling and lint tools. React
 
 | Task touches | Read |
 | --- | --- |
-| Component/hook boundaries, props, module ownership or dependency construction | [Components and boundaries](react/components-boundaries.md) |
+| Component/Hook names and boundaries, props, module ownership or dependency construction | [Components and boundaries](react/components-boundaries.md) |
 | State shape/ownership, keys, reset, reducers, context or external stores | [State and identity](react/state-identity.md) |
 | Effects, subscriptions, reads, races, cancellation or loading boundaries | [Effects and integrations](react/effects-integrations.md) |
 | Forms, commands, validation, mutation outcomes or accessible feedback | [Forms and contracts](react/forms-contracts.md) |

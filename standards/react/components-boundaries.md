@@ -1,7 +1,25 @@
 # React components and dependency boundaries
 
-Read for component decomposition, Hook extraction, props or module ownership.
+Read for component/Hook naming, decomposition, props or module ownership.
 The [entry](../react.md) owns selection; [core](../core.md) owns shared architecture.
+
+## Names and module conventions
+
+Use `PascalCase` identifiers for components referenced in JSX: a lowercase JSX
+name denotes an intrinsic element, not the local component variable. Custom Hook
+names start with `use` followed by a capital letter. Keep ordinary functions in
+the project's normal `camelCase` style; do not add a Hook prefix to a helper that
+does not use Hooks. These React conventions refine the shared JavaScript/TypeScript
+defaults in their actual scope.
+[Component names](https://react.dev/learn/your-first-component),
+[custom Hook names](https://react.dev/learn/reusing-logic-with-custom-hooks).
+
+React itself does not select one application-wide filename, extension or
+default-versus-named-export convention. Use the project's JSX/toolchain and selected
+framework contract, particularly route files and exports. Preserve public prop
+names and external payload keys during cosmetic edits. Apply
+[shared convention resolution](../core.md#language-and-framework-conventions)
+without renaming compatible files solely to match a tutorial.
 
 ## Cohesive owners
 

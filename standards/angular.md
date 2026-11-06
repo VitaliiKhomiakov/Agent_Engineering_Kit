@@ -37,6 +37,7 @@ an older application or authorize converting its NgModules or state model.
 
 | Task touches | Read |
 | --- | --- |
+| Filenames, style-guide selection or language/framework convention differences | [Naming and style scope](angular/architecture.md#naming-and-style-scope) |
 | Folder structure, application sections, nested domains or feature ownership | [Feature ownership](angular/architecture.md#feature-ownership) |
 | Pages, components, layouts or allowed imports | [Presentation roles](angular/architecture.md#pages-components-and-layouts) and [dependency direction](angular/architecture.md#dependency-direction) |
 | Services or provider scope | [Services, stores and DI](angular/architecture.md#services-stores-and-dependency-injection) |

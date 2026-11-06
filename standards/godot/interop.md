@@ -13,6 +13,18 @@ conventions rather than translating GDScript naming mechanically. Separate exist
 independent logic and engine/tree responsibilities at suitable owners; a second
 assembly is justified by a real boundary, not by a desire for smaller files.
 
+Apply [shared convention resolution](../core.md#language-and-framework-conventions)
+to the effective `.editorconfig` and project style. When no style is established,
+AEK adopts the [Godot 4.7 C# guide](https://docs.godotengine.org/en/4.7/tutorials/scripting/c_sharp/c_sharp_style_guide.html):
+four-space indentation, opening braces on their own line, `PascalCase` types and
+public members, `camelCase` parameters/locals and `_camelCase` private fields.
+That contributor guide also recommends its conventions to users; this scoped
+adoption is not a universal C# formatting standard. Keep attached `.cs` filenames
+in `PascalCase`, matching their class, instead of copying GDScript's snake_case.
+[ECMA-334](https://ecma-international.org/publications-and-standards/standards/ecma-334/)
+specifies C# syntax/semantics; a newer guide or language edition does not establish
+support in the selected Godot/.NET toolchain.
+
 Declare `GodotObject`-derived types `partial` (diagnostic GD0001) and name an
 attached script's class after its `.cs` file. Use useful types and explicit
 nullable/dynamic boundaries. Managed garbage
@@ -53,6 +65,15 @@ reverse, and 4.0-targeted extensions do not load in 4.1+; do not promise one bin
 works across all Godot 4.x versions. Custom engine builds may require matching API/binding inputs.
 Use [godot-cpp's contract](https://docs.godotengine.org/en/4.7/tutorials/scripting/cpp/about_godot_cpp.html)
 when that binding is selected; it does not select Unreal guidance.
+
+Use the extension project's established formatting and `.clang-format` when
+present. Preserve required binding/registration signatures and registered names;
+the versioned [GDExtension C++ example](https://docs.godotengine.org/en/4.7/tutorials/scripting/cpp/gdextension_cpp_example.html)
+describes that boundary, not a universal C++ house style. Engine or binding
+contributor rules govern work in those repositories or deliberate local adoption.
+The [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
+are design/style advice, not an ISO language specification. Apply suitable advice
+to ordinary owned C++ without replacing Godot's object lifetime or registered API.
 
 Keep `.gdextension` compatibility bounds and library mappings consistent with the
 actual built libraries and export targets: `compatibility_minimum` is the lowest

@@ -33,6 +33,7 @@ Examples and research are optional, not an instruction to load all links recursi
 
 | Task touches | Read |
 | --- | --- |
+| Layout, naming, style-guide scope or framework convention differences | [Conventions and framework rules](typescript/conventions.md) |
 | Interfaces/type ownership, modules, construction, dependencies or public APIs | [Contracts and structure](typescript/contracts-structure.md) |
 | Unknown input, schemas/narrowing, presence/null, readonly state or invariants | [Validation and state](typescript/validation-state.md) |
 | Generics, unions/exhaustiveness, callbacks, promises or typed integration contracts | [Composition and effects](typescript/composition-effects.md) |

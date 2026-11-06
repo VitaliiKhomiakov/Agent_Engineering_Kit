@@ -21,6 +21,7 @@ data before accepting it. A browser-only script does not require installing Node
 
 | Task touches | Read |
 | --- | --- |
+| Layout, naming, language/host standards or framework style differences | [Standards and conventions](javascript/conventions.md) |
 | Modules/imports, file moves, construction, dependencies, classes or callbacks | [Modules and structure](javascript/modules-structure.md) |
 | JSDoc/data contracts, coercion, null/presence, JSON, mutation or domain invariants | [Values and state](javascript/values-state.md) |
 | Promises, ordering, cancellation, resources, stale results or external effects | [Async operations and effects](javascript/async-effects.md) |

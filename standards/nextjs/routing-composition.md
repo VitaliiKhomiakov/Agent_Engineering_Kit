@@ -1,6 +1,6 @@
 # Next.js routing and application composition
 
-Read for routes, layouts, parameter contracts, navigation or module ownership.
+Read for route filenames/exports, layouts, parameter contracts, navigation or module ownership.
 The [entry](../nextjs-framework.md) selects guidance; [feature structure](../nextjs-feature-structure.md)
 owns the project's compact capability organization and import directions.
 
@@ -21,6 +21,16 @@ Private folders/route groups organize code without implying an application layer
 check URL collisions and root-layout transitions. Use parallel/intercepted routes
 only for a real navigation experience and account for direct loads and slot defaults.
 A filename is a framework adapter, not permission to concentrate all business rules.
+
+Special filenames and recognized exports are behavioral contracts, not ordinary
+JavaScript/TypeScript naming preferences. Preserve `page`/`layout` default component
+exports and named HTTP-method exports such as `GET` in `route` files, using the
+extensions/configuration supported by the selected project. A blanket named-export
+rule or a generic component filename suffix must not remove a route's recognized
+entry point. Scope overrides to the actual router files under
+[shared convention resolution](../core.md#language-and-framework-conventions).
+[Page API](https://nextjs.org/docs/app/api-reference/file-conventions/page),
+[Route API](https://nextjs.org/docs/app/api-reference/file-conventions/route).
 
 Await `params`, `searchParams`, `cookies()` and `headers()` where the installed API
 is asynchronous; React/client consumers use the supported unwrapping mechanism.

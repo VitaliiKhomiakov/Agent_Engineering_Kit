@@ -206,6 +206,7 @@ dependencies = ["python", "pydantic", "fastapi"]
 id = "python"
 source = "standards/python.md"
 resources = [
+  "standards/python/conventions.md",
   "standards/python/structure.md",
   "standards/python/typing-contracts.md",
   "standards/python/execution-resources.md",
@@ -366,6 +367,7 @@ dependencies = ["javascript", "nodejs"]
 id = "javascript"
 source = "standards/javascript.md"
 resources = [
+  "standards/javascript/conventions.md",
   "standards/javascript/modules-structure.md",
   "standards/javascript/values-state.md",
   "standards/javascript/async-effects.md",
@@ -399,6 +401,7 @@ dependencies = ["javascript"]
 id = "typescript"
 source = "standards/typescript.md"
 resources = [
+  "standards/typescript/conventions.md",
   "standards/typescript/contracts-structure.md",
   "standards/typescript/validation-state.md",
   "standards/typescript/composition-effects.md",
@@ -579,6 +582,7 @@ dependencies = ["python", "postgresql"]
 id = "postgresql"
 source = "standards/postgresql.md"
 resources = [
+  "standards/postgresql/conventions.md",
   "standards/postgresql/examples/atomic-reservation.md",
   "standards/postgresql/examples/online-constraint.md",
   "standards/postgresql/migrations-verification.md",

@@ -23,7 +23,7 @@ actual semantics; framework caching is not a business transaction.
 
 | Task touches | Read |
 | --- | --- |
-| Routes/layouts/parameters, navigation, API shape or feature ownership | [Routing and composition](nextjs/routing-composition.md); [feature structure](nextjs-feature-structure.md) only for structure decisions |
+| Route filenames/exports, layouts/parameters, navigation, API shape or feature ownership | [Routing and composition](nextjs/routing-composition.md); [feature structure](nextjs-feature-structure.md) only for structure decisions |
 | Server/Client imports, RSC props, sessions, Actions or trust boundaries | [Server/Client security](nextjs/server-client-security.md) |
 | Server reads, persistence, caches, mutations or revalidation | [Data, cache and mutations](nextjs/data-cache-mutations.md) |
 | Streaming, errors, metadata/assets, host lifecycle or deployment | [Rendering and runtime](nextjs/rendering-runtime.md) |

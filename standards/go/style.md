@@ -7,6 +7,25 @@ repository-wide rewrite. [Verification](verification.md#formatting-and-lint-adop
 owns tooling adoption and checks; the [tooling example](examples/style-tooling.md)
 owns the inactive configuration, version pins, and reproduction commands.
 
+## Source scope and framework conventions
+
+The [Go specification](https://go.dev/ref/spec) defines the language; use the
+version supported by the project's `go.mod` and toolchain. `gofmt`,
+[Effective Go](https://go.dev/doc/effective_go#formatting) and
+[Code Review Comments](https://go.dev/wiki/CodeReviewComments) supply formatting
+and idiomatic guidance. The stronger semantic grouping rules below are AEK
+policy, not additional Go syntax or an automatic `gofmt` guarantee.
+Resolve project/framework differences through the
+[shared convention rule](../core.md#language-and-framework-conventions).
+
+Gin, Eino and other Go frameworks retain Go naming and formatting in ordinary
+code. Their adapter signatures, registered names and serialization tags retain
+the selected integration contract. For example, a Go field may be `UserID` while
+its JSON key remains `user_id`; a style edit must not change the wire format.
+Implement an existing interface such as `net/http.Handler` with its required
+method/signature, rather than renaming it to match a local preference. Sample
+repository layout does not impose a new architecture on every consuming service.
+
 ## Formatting and imports
 
 - Require `gofmt`-compatible output. Prefer `goimports` for format-on-save and

@@ -22,6 +22,16 @@ apply; engine-managed composition follows [gameplay ownership](gameplay-blueprin
 
 Basis: [Epic coding standard](https://dev.epicgames.com/documentation/unreal-engine/epic-cplusplus-coding-standard-for-unreal-engine?application_version=5.8).
 
+Apply [shared convention resolution](../core.md#language-and-framework-conventions)
+to the selected engine/project style. Epic's baseline uses tabs with a display
+width of four and opening braces on their own line, including single-statement
+blocks. Preserve compatible project choices and keep formatting scoped to changed
+code. The [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
+are recommendations, distinct from the ISO language specification and engine
+contracts. Their general naming preferences do not remove Unreal prefixes or
+rename reflected fields. Resource-management advice must respect the
+[ownership rules below](#references-and-ownership).
+
 Choose `FName` for identifiers/comparisons, `FString` for string manipulation and
 `FText` for localizable display text. Preserve identifier case requirements and
 localization intent across conversions; these types are not interchangeable.

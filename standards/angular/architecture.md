@@ -3,6 +3,23 @@
 Use the [Angular entry](../angular.md). Structure follows cohesive product
 capabilities; source folders do not determine service lifetime.
 
+## Naming and style scope
+
+Apply the [Angular 20 style guide](https://v20.angular.dev/style-guide) within
+[shared convention resolution](../core.md#language-and-framework-conventions).
+Its style recommendations complement the TypeScript rules; they are not all
+requirements for Angular code to run. Use descriptive hyphen-separated filenames
+and a common stem for a component's TypeScript, template, styles and `.spec.ts`
+test. Preserve an established suffix such as `.component.ts` and the matching
+asset names; adopting the current guide does not authorize renaming a project.
+The [placement rules below](#pages-components-and-layouts) own colocation.
+
+Keep selector, input/output and template contracts stable while adjusting local
+names. Apply Angular artifact conventions to Angular-owned code, not every plain
+TypeScript module or a Nest backend. The guide's reference to Google's TypeScript
+style does not import that environment's tooling or architecture. Existing
+[SCSS policy](styles.md) and project formatter settings retain their scope.
+
 ## Feature ownership
 
 For new application structure, group code by application section under

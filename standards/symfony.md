@@ -21,6 +21,7 @@ Doctrine is a separate selection, not implied by Symfony.
 | Task touches | Read |
 | --- | --- |
 | Symfony structure, service wiring/configuration, controllers/commands/handlers | [Structure and services](symfony/structure-services.md) |
+| PHP/Symfony style selection or Twig template/variable names | [Coding style and template names](symfony/structure-services.md#coding-style-and-template-names) |
 | Symfony normalizer/denormalizer/serializer roles, transformation services or their naming | [Serializer roles and application transformations](symfony/structure-services.md#serializer-roles-and-application-transformations) |
 | Symfony routes, request mapping, Validator/forms, public output or authorization | [HTTP and validation](symfony/http-validation.md) |
 | Symfony HttpClient, Messenger, kernel events, workers, transaction handoff or caches | [Runtime and effects](symfony/runtime-effects.md) |

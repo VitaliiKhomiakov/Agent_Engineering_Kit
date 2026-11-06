@@ -8,9 +8,11 @@ This topic owns standards selection; it does not introduce application subsystem
 ## Coding style and autoloading
 
 Establish the project's documented style, formatter/linter configuration and
-installed tool versions first. Preserve an existing PSR-12, PER, framework or
-explicit project baseline. A style update does not authorize public API renames,
-an unrelated reformat, tool installation or a PHP/dependency upgrade.
+installed tool versions first. Resolve language/framework differences through
+[shared convention resolution](../core.md#language-and-framework-conventions).
+Preserve an existing PSR-12, PER, framework or explicit project baseline.
+A style update does not authorize public API renames, an unrelated reformat,
+tool installation or a PHP/dependency upgrade.
 
 For new PHP code without an established style, this library selects
 [PSR-1](https://www.php-fig.org/psr/psr-1/) plus a released, versioned

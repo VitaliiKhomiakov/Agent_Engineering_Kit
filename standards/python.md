@@ -23,6 +23,7 @@ task requirements are known, without loading linked files recursively.
 
 | Task touches | Read |
 | --- | --- |
+| Layout, naming, docstrings, standards selection or framework style differences | [Standards and conventions](python/conventions.md) |
 | Modules, imports, construction, patterns, package/dependency boundaries | [Structure and dependencies](python/structure.md) |
 | Signatures, DTOs, input parsing, domain state, errors, strict analyzer settings | [Typing and contracts](python/typing-contracts.md) |
 | Async work, threads/processes, shared state, resources, transactions, external calls | [Execution and resources](python/execution-resources.md) |

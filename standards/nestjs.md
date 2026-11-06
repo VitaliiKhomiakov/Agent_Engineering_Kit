@@ -32,7 +32,7 @@ are not assumed in older projects; upgrades are separate changes.
 
 | Task touches | Read |
 | --- | --- |
-| Feature boundaries, module exports, provider tokens/factories, scopes or cycles | [Modules and providers](nestjs/modules-providers.md) |
+| Artifact names/discovery, feature boundaries, module exports, provider tokens/factories, scopes or cycles | [Modules and providers](nestjs/modules-providers.md) |
 | DTOs/schemas, pipes, guards, filters, transformations or response serialization | [Transport contracts](nestjs/transport-contracts.md) |
 | Use cases, persistence, transactions, external effects, startup or shutdown | [Application and lifecycle](nestjs/application-lifecycle.md) |
 | TypeORM is actually used: rich entities, repositories, transactions or migrations | [TypeORM profile](typeorm.md), then its task-specific sections |

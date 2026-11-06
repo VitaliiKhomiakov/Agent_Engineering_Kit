@@ -1,7 +1,7 @@
 # NestJS modules and providers
 
-Read for feature boundaries, module exports, provider tokens/factories, scopes or
-cycles. Use [application/lifecycle](application-lifecycle.md) when assembly changes
+Read for artifact names, feature boundaries, module exports, provider tokens/factories,
+scopes or cycles. Use [application/lifecycle](application-lifecycle.md) when assembly changes
 resource ownership. The [provider example](examples/provider-lifecycle.md) is optional.
 
 ## Feature modules and components
@@ -21,6 +21,24 @@ resource ownership. The [provider example](examples/provider-lifecycle.md) is op
   orders is not cohesive merely because its content shares a noun or is still small.
 - Treat a dependency cycle first as evidence of a misplaced boundary. Do not add
   `forwardRef` or a general global module by default.
+
+## Naming and discovery
+
+Keep the project's Nest artifact convention, such as `orders.controller.ts`,
+`orders.service.ts` and `orders.module.ts`. A suffix describes the role; controller
+decorators and module registration establish runtime participation. Do not replace
+those contracts with filename assumptions or apply Angular's naming guide to Nest
+merely because both use TypeScript. Use
+[shared convention resolution](../core.md#language-and-framework-conventions).
+
+Check configured discovery/code-generation rules before renaming. When the opt-in
+Swagger CLI plugin is enabled, its default DTO matching uses `.dto.ts` and
+`.entity.ts`, with overrides through `dtoFileNameSuffix`. Preserve the effective
+patterns or update the authorized configuration and verify generated metadata.
+This condition neither installs the plugin nor requires DTO/entity classes where
+the selected runtime boundary does not need them.
+[Controllers](https://docs.nestjs.com/controllers),
+[Swagger CLI plugin](https://docs.nestjs.com/openapi/cli-plugin).
 
 ## Tokens and construction
 

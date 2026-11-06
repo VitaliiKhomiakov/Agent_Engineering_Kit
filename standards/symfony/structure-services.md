@@ -5,6 +5,23 @@ registration, configuration, or framework extension points. Apply the existing
 [PHP structure](../php/structure.md) and [core policy](../core.md). These sections
 use Symfony 7.4 as their checked baseline, not as an instruction to upgrade.
 
+## Coding style and template names
+
+Keep PHP style selection with [PHP-FIG guidance](../php/fig-standards.md) and
+[shared convention resolution](../core.md#language-and-framework-conventions).
+Symfony 7.4's [contribution standard](https://symfony.com/doc/7.4/contributing/code/standards.html)
+uses PSR-12/PSR-4 as a basis for work on Symfony itself. A dependency on Symfony
+does not automatically replace an application's established style or AEK's
+new-project PER choice with every contributor rule. Preserve a deliberately
+adopted compatible Symfony-style project preset.
+
+Apply the framework's [template convention](https://symfony.com/doc/7.4/best_practices.html)
+when choosing new Twig template names, directories and variables: lowercase
+`snake_case`, independently of PHP class/method naming. Keep existing template
+paths and supplied variable names compatible with their callers; a PHP-side rename
+does not silently change the template contract. Serializer-specific naming remains
+with [its owner below](#serializer-roles-and-application-transformations).
+
 ## Application boundaries
 
 Preserve the application's coherent structure. Symfony's default directories are

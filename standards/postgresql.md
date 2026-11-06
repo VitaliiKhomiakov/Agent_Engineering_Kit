@@ -26,6 +26,7 @@ Examples are separate and optional.
 
 | Task condition | Read |
 | --- | --- |
+| Formatting authored SQL/PL/pgSQL, naming identifiers or selecting a dialect contract | [SQL conventions and dialects](postgresql/conventions.md) |
 | Designing tables, durable rules, types or persistence boundaries | [Schema and contracts](postgresql/schema-contracts.md) |
 | Changing writes, isolation, locks, retries or work claiming | [Transactions and concurrency](postgresql/transactions-concurrency.md) |
 | Changing queries, indexes, pagination or a measured performance problem | [Queries and performance](postgresql/queries-performance.md) |

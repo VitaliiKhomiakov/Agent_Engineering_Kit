@@ -2,8 +2,8 @@
 
 Read for changed GDScript and its scoped review. These are AEK conventions for
 the project's supported Godot version, not universal language requirements.
-Reconcile explicitly adopted local conventions during integration rather than
-silently replacing them.
+Resolve explicitly adopted local conventions through
+[shared convention resolution](../core.md#language-and-framework-conventions).
 
 ## Types and warnings
 
@@ -39,7 +39,11 @@ declaration ordering. Prefer lines below 100 characters, with shorter lines wher
 practical; wrap expressions without hiding their structure. Explicit project
 adaptations remain governed by the adopted local style.
 
-GDScript is not Python. A Python formatter/type checker is not a GDScript check.
+The guide is inspired by PEP 8 but describes GDScript conventions, including its
+different indentation and declaration rules. Apply it to `.gd` source; keep C#
+and native code under their [interop owner](interop.md). Preserve engine-recognized
+callbacks, signal names and serialized property/node paths during style changes.
+A Python formatter/type checker is not a GDScript check.
 Select optional mechanical tools through [tooling](tooling-mcp.md#formatting-and-tests),
 checking compatibility with the actual syntax and established layout.
 

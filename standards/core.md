@@ -20,6 +20,7 @@ current decision. This table is a route, not a checklist to load in full.
 | Change boundaries, DTOs, domain construction or I/O | [Responsibilities and data](#responsibilities-and-data) |
 | Choose an abstraction or design pattern | [Practical principles](#practical-solid-dry-kiss-and-yagni), then [patterns](#patterns-when-a-concrete-problem-warrants-them) |
 | Add a branch, guard, fallback or retry | [Simple control flow](#simple-control-flow) |
+| Select a standard or resolve language/framework/project conventions | [Language and framework conventions](#language-and-framework-conventions) |
 | Write or review source code in any language | [Readable code layout](#readable-code-layout), then the selected language/style conventions |
 | Choose an error-reporting owner or change diagnostic context | [Diagnostic error ownership](#diagnostic-error-ownership) |
 | Grow or decompose code | [Size and cohesion](#size-and-cohesion); the affected [function](#small-methods-and-functions) or [module](#splitting-classes-and-modules) guidance |
@@ -241,12 +242,45 @@ or retrofit unrelated legacy code during a bounded change.
   quota of conditions or nesting levels justifies removing necessary protection.
   Explain a non-obvious safeguard by the invariant or failure it protects.
 
+## Language and framework conventions
+
+Identify the actual source language, framework/host, supported versions and the
+nearest applicable project style/tool configuration. Distinguish a language/API
+specification, a style recommendation, a framework discovery/serialization rule
+and instructions for contributing to a vendor's own repository.
+
+- Preserve language/runtime correctness and required integration contracts.
+  Framework-recognized names, exports, signatures, file patterns and serialized
+  identifiers can affect behavior; a general naming preference cannot override them.
+- Within those contracts, follow the project's explicitly adopted conventions
+  and accepted AEK exceptions. Otherwise use the language profile's baseline and
+  applicable framework refinements. A framework-specific convention applies to
+  its owned components/adapters, not every module written in that language.
+- Do not treat a compiler, standard-library or framework contribution guide as
+  a universal application standard. Adopt a useful recommendation deliberately;
+  retain its audience, version and scope. A draft or rolling document does not
+  establish support in the installed toolchain.
+- Keep local names distinct from wire, database, template and reflected names.
+  Use the existing mapping mechanism when appropriate. A cosmetic rename must
+  not silently change a public contract, route, generated schema or stored asset.
+- Resolve a real conflict against the affected contract and effective settings
+  before changing code or configuration. Preserve valid project choices; do not
+  silently switch presets, disable checks, upgrade tools or reformat another
+  framework's files to make a generic guide fit.
+
+When selecting or changing conventions, record the chosen source/version, scope
+and consequential exceptions in the existing project/task record. Reuse that
+decision for routine edits. Run the applicable existing formatter/linter and
+framework checks under [verification](verification.md); recommendations alone
+neither install tools nor prove compliance.
+
 ## Readable code layout
 
 Human-maintained source must be easy to scan, not merely valid or compact. This
 library's policy applies across languages to changed code and its meaningfully
-affected surroundings. Language/profile rules refine the layout; preserve an
-explicitly adopted project convention and the syntax and semantics of the language.
+affected surroundings. Resolve the applicable style through
+[language and framework conventions](#language-and-framework-conventions);
+language/profile rules refine the layout without changing language semantics.
 
 - Use consistent indentation, spacing, brace placement and wrapping from the
   project's configured formatter/style. Where none is established, use the

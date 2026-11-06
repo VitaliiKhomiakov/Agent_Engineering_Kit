@@ -24,6 +24,15 @@ documented reference is UE 5.8. Select checks with [Unreal verification](verific
 Basis: [Modules](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-modules?application_version=5.8),
 [module properties](https://dev.epicgames.com/documentation/unreal-engine/module-properties-in-unreal-engine?application_version=5.8).
 
+Unreal `.Build.cs` and `.Target.cs` files are C# build inputs. Preserve UBT's file,
+class and constructor contracts and use its supported toolchain. Epic's
+[coding standard](https://dev.epicgames.com/documentation/unreal-engine/epic-cplusplus-coding-standard-for-unreal-engine?application_version=5.8)
+also uses tabs for C#; do not import Godot's four-space default into these files.
+Resolve an established project override through
+[shared convention resolution](../core.md#language-and-framework-conventions).
+Check changed build rules through the affected UBT target, not a newly installed
+standalone .NET application workflow.
+
 Include the headers actually needed; keep headers self-sufficient and include the
 matching header first in its implementation. Do not rely on an unrelated unity
 build file or transitive include for correctness. Respect the project's supported
