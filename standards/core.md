@@ -20,6 +20,7 @@ current decision. This table is a route, not a checklist to load in full.
 | Change boundaries, DTOs, domain construction or I/O | [Responsibilities and data](#responsibilities-and-data) |
 | Choose an abstraction or design pattern | [Practical principles](#practical-solid-dry-kiss-and-yagni), then [patterns](#patterns-when-a-concrete-problem-warrants-them) |
 | Add a branch, guard, fallback or retry | [Simple control flow](#simple-control-flow) |
+| Write or review source code in any language | [Readable code layout](#readable-code-layout), then the selected language/style conventions |
 | Choose an error-reporting owner or change diagnostic context | [Diagnostic error ownership](#diagnostic-error-ownership) |
 | Grow or decompose code | [Size and cohesion](#size-and-cohesion); the affected [function](#small-methods-and-functions) or [module](#splitting-classes-and-modules) guidance |
 | Name a component or change its responsibility | [Names and evolving responsibilities](#names-and-evolving-responsibilities) |
@@ -239,6 +240,43 @@ or retrofit unrelated legacy code during a bounded change.
 - Simplify only the affected logic and preserve its required behavior. No numeric
   quota of conditions or nesting levels justifies removing necessary protection.
   Explain a non-obvious safeguard by the invariant or failure it protects.
+
+## Readable code layout
+
+Human-maintained source must be easy to scan, not merely valid or compact. This
+library's policy applies across languages to changed code and its meaningfully
+affected surroundings. Language/profile rules refine the layout; preserve an
+explicitly adopted project convention and the syntax and semantics of the language.
+
+- Use consistent indentation, spacing, brace placement and wrapping from the
+  project's configured formatter/style. Where none is established, use the
+  language profile or official style guide. Do not impose one indentation width,
+  tabs/spaces choice or line-length limit on every language.
+- Separate successive meaningful phases with a blank line where the syntax
+  permits it. Input preparation/validation, computation, persistence and result
+  delivery are examples of different purposes. Keep statements serving one
+  immediate purpose together; sharing a variable alone does not make a group.
+- Keep an operation and its immediate result/error check together, with related
+  cleanup registration where the language/profile permits it. Keep attached
+  `else`/`catch`/`finally` clauses, annotations and declaration comments with their
+  owners. Follow language-specific separators between declarations and blocks.
+- Avoid multiple independent executable statements on one line, compressed
+  multi-step bodies and long compound expressions that hide execution order.
+  Wrap calls, literals, chains and conditions along meaningful boundaries using
+  the chosen style. Short idiomatic expressions and permitted empty bodies need
+  no artificial expansion; name a meaningful intermediate value when it clarifies
+  the operation, not just to satisfy a line count.
+- Avoid a blank line after every statement, arbitrary fixed-size groups and
+  repeated empty lines. One cohesive short operation can remain a single group.
+  Preserve whitespace-sensitive syntax and literal/template contents.
+- Apply formatting to the relevant owned source. Do not hand-reformat generated,
+  minified or vendor output, or expand a local change into unrelated style churn.
+
+Inspect the final layout under [readability acceptance](verification.md#readability-acceptance).
+A formatter can normalize syntax without identifying meaningful phases; its
+success alone does not establish this requirement. Use
+[explanatory comments](#public-contracts-and-explanatory-comments) for information
+the code cannot express, not as a substitute for readable grouping.
 
 ## Diagnostic error ownership
 

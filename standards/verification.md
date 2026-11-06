@@ -162,8 +162,9 @@ Explicitly required fresh project/CI gates and authorized additional reviews rem
 ## Readability acceptance
 
 Applicable mandatory style/readability requirements are acceptance criteria even
-without a runtime failure. Use the selected profile's canonical rules and scoped
-check; do not turn optional preferences or differences from an example into defects.
+without a runtime failure. Use the shared [code layout rules](core.md#readable-code-layout)
+for every language and the selected profile's canonical rules and scoped check;
+do not turn optional preferences or differences from an example into defects.
 
 Apply those rules during implementation and inspect the final changed code after
 formatting, including meaningfully affected surrounding code. Fix in-scope

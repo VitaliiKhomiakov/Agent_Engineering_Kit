@@ -6,6 +6,13 @@ and existing project tools; no new test framework is required for a local move.
 
 ## Proportionate checks
 
+For formatting or PHP-FIG changes, apply the selected
+[style and interoperability contracts](fig-standards.md). Run the project's
+existing style check over affected source and inspect the final layout under
+[shared readability acceptance](../verification.md#readability-acceptance).
+Syntax checks and static analysis do not establish style compliance. Check the
+behavioral contract of an interface only when that integration is affected.
+
 Run syntax checks with the target interpreter and relevant existing behavior
 tests. Linting does not prove autoloading, types, runtime behavior, or extension
 availability. For contracts/state changes, check meaningful valid and rejected

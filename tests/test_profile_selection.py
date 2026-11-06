@@ -43,7 +43,7 @@ TOPICS: dict[str, tuple[str, ...]] = {
                 "styles", "verification", "examples/component-contracts"),
     "ngrx": ("state-architecture", "store-selectors", "effects", "entity-router", "signal-store", "verification",
              "examples/store-view-model", "examples/signal-store-request"),
-    "php": ("structure", "types-contracts", "state-effects", "verification",
+    "php": ("fig-standards", "structure", "types-contracts", "state-effects", "verification",
             "examples/input-domain", "examples/resources"),
     "symfony": ("structure-services", "http-validation", "runtime-effects", "verification",
                 "examples/request-boundary", "examples/http-client"),

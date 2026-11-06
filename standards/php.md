@@ -8,6 +8,8 @@ Symfony and Doctrine have separate profiles, selected only when actually used.
 
 - Establish PHP version, SAPI, extensions, Composer constraints, and actual tools;
   preserve the project's supported range and dependency workflow.
+- Follow the selected [PHP-FIG style and interoperability contracts](php/fig-standards.md);
+  interface standards apply only to relevant integrations.
 - Keep named PSR-4 types in matching, case-correct files. Use typed contracts and
   explicit dependencies; ordinary DTO creation needs no separate factory.
 - Parse external values at their boundary. Scalar strictness, static analysis,
@@ -19,6 +21,7 @@ Symfony and Doctrine have separate profiles, selected only when actually used.
 
 | Task touches | Read |
 | --- | --- |
+| PHP formatting, PSR/PER selection, logger, cache, HTTP, container, event, link or clock interoperability | [PHP-FIG standards](php/fig-standards.md) |
 | Namespaces, PSR-4, packages, object construction, dependencies or patterns | [Structure and dependencies](php/structure.md) |
 | Native/PHPDoc types, arrays, parsing, null/presence, domain rules, errors | [Types and contracts](php/types-contracts.md) |
 | Mutation, readonly/clone, streams, generators, workers, transactions or I/O | [State and effects](php/state-effects.md) |
@@ -32,3 +35,5 @@ including their registration and schema-migration limits.
 - [PHP research](../docs/research/2026-09-21-php-engineering-practices.md) records
   primary sources checked on 2026-09-21, alternatives and version limits; the
   [practice plan](../docs/plans/2026-09-21-engineering-practices.md) records checks.
+- [Layout and PHP-FIG research](../docs/research/2026-11-06-readable-code-and-php-standards.md)
+  records the later standards review and its evidence limits.

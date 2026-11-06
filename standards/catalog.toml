@@ -263,6 +263,7 @@ dependencies = ["php", "symfony", "doctrine"]
 id = "php"
 source = "standards/php.md"
 resources = [
+  "standards/php/fig-standards.md",
   "standards/php/structure.md",
   "standards/php/types-contracts.md",
   "standards/php/state-effects.md",
