@@ -41,6 +41,10 @@ disconnect behavior when that is part of the change.
 
 ## Exposed security boundaries
 
+When changing credential or token verification, apply the shared
+[authentication contract](../security/authentication.md) through the selected
+security dependency/provider.
+
 Authenticate with the project's established scheme, validate credentials, and
 authorize the requested action/object/tenant. `Security` and OAuth2 declarations
 help dependency/OpenAPI integration but do not implement authorization policy.

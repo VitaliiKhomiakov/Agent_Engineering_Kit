@@ -3,6 +3,10 @@
 Read for route registration, middleware order, request gates, recovery, or shared
 response handling. Return to the [Gin entry](../gin.md).
 
+For authentication middleware or token verification, use the shared
+[authentication contract](../security/authentication.md); this topic owns Gin
+registration and terminating response flow.
+
 ## Construct the route tree once
 
 - Assemble dependencies and routes before serving. Pass a use-case function or

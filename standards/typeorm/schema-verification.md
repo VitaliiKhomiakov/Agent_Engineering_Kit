@@ -1,7 +1,24 @@
 # TypeORM schema and verification
 
-Read for migrations, deployment, version changes and evidence selection. Apply
-the [shared verification policy](../verification.md).
+Read for connection settings, migrations, deployment, version changes and evidence
+selection. Apply the [shared verification policy](../verification.md).
+
+## Connection settings
+
+Configure remote DataSources using the installed driver's authentication and TLS
+contract. For certificate-based TLS, this library's policy requires certificate
+chain and hostname verification. Use the deployment's intended trust roots and
+expected host; do not bypass verification to make a deployed connection succeed.
+
+Inspect the effective driver settings after connection URLs and explicit options
+are combined. A successful connection or encrypted transport alone does not prove
+server identity was verified. For Node with `pg`, follow the
+[TypeORM Postgres options](https://typeorm.io/docs/drivers/postgres/),
+[node-postgres TLS settings](https://node-postgres.com/features/ssl) and the
+supported Node version's TLS contract
+([24.13.0 reference](https://nodejs.org/download/release/v24.13.0/docs/api/tls.html#tlsconnectoptions-callback)).
+Other drivers and hosts need their own options; this route does not select Node,
+PostgreSQL or a version upgrade.
 
 ## Migrations and deployment
 
@@ -33,6 +50,7 @@ the [shared verification policy](../verification.md).
 | Mapping or hydration | Save/reload retains identity, values and behavior; precision/nullability round trips |
 | Transaction/concurrency | Rollback and competing writer outcome on the target engine; verify scoped manager |
 | Query scope | Missing ID/tenant filter, explicit NULL and bounded result/relations for affected path |
+| Certificate-based TLS configuration | Intended server accepted; untrusted chain and wrong hostname rejected with the actual driver and effective settings |
 | Migration/artifact | Apply on disposable schema with representative prior state; inspect packaged CLI inputs |
 | Nest wiring | Actual provider token/data-source registration, including related entities |
 

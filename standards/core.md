@@ -16,11 +16,14 @@ current decision. This table is a route, not a checklist to load in full.
 | Establish scope or assess existing code | [Task scope and context](#task-scope-and-context) |
 | Implement an authorized change with settled design | [Task scope and context](#task-scope-and-context), [responsibility placement](#responsibility-placement-before-implementation), affected profile task tables, then [verification](verification.md) |
 | Use fetched documents, tool content, logs or asset metadata | [External content and instruction authority](#external-content-and-instruction-authority) |
+| Change authentication, session validation or token verification | [Authentication and token verification](security/authentication.md) |
 | Change boundaries, DTOs, domain construction or I/O | [Responsibilities and data](#responsibilities-and-data) |
 | Choose an abstraction or design pattern | [Practical principles](#practical-solid-dry-kiss-and-yagni), then [patterns](#patterns-when-a-concrete-problem-warrants-them) |
 | Add a branch, guard, fallback or retry | [Simple control flow](#simple-control-flow) |
+| Choose an error-reporting owner or change diagnostic context | [Diagnostic error ownership](#diagnostic-error-ownership) |
 | Grow or decompose code | [Size and cohesion](#size-and-cohesion); the affected [function](#small-methods-and-functions) or [module](#splitting-classes-and-modules) guidance |
 | Name a component or change its responsibility | [Names and evolving responsibilities](#names-and-evolving-responsibilities) |
+| Document a public/shared contract or explain a non-obvious constraint | [Public contracts and explanatory comments](#public-contracts-and-explanatory-comments) |
 | Resolve a version or API question | [Versions and documentation](#versions-and-documentation) |
 | Select checks or claim completion | [Verification](verification.md), [completion](#sufficient-evidence-and-completion) |
 | Select stages, mode or Git actions | [Delivery](delivery-workflow.md), [work modes](work-modes.md) |
@@ -237,6 +240,26 @@ or retrofit unrelated legacy code during a bounded change.
   quota of conditions or nesting levels justifies removing necessary protection.
   Explain a non-obvious safeguard by the invariant or failure it protects.
 
+## Diagnostic error ownership
+
+When a failure needs diagnostic reporting, choose its owner: for example, a request
+responder, job supervisor or process boundary. Layers passing the same failure
+onward add useful operation context instead of repeatedly emitting its full error
+or stack trace. A layer that handles a failure locally can own its report. Logging
+alone does not satisfy required error handling, propagation or cleanup.
+
+Choose severity and context for the actual outcome; an expected refusal does not
+automatically require an error log or stack trace. Preserve useful causes internally
+and apply the selected profile's redaction/privacy rules before emission. Include
+correlation metadata only from an actual validated execution context; leave
+unavailable correlation fields absent rather than inventing upstream identifiers.
+Use the accepted logging mechanism and runtime context rules.
+
+Distinct failures remain observable. Access logs, required audit records, metrics
+and spans retain their own purposes and contracts even when they describe the
+same operation. Reporting ownership does not replace those records or require
+installing a logging or telemetry stack.
+
 ## Size and cohesion
 
 Resolve the `size.*` thresholds through [policy configuration](policy-configuration.md);
@@ -393,6 +416,25 @@ and rendering can be split around those existing responsibilities. A remaining
 submission coordinator can become `SubmitDocument`, using suitable existing or
 necessary OCR, persistence, and rendering collaborators. Extract only what is
 present and relevant; this example does not require four new layers in a project.
+
+## Public contracts and explanatory comments
+
+Document public or shared contracts where names and types leave callers guessing
+about correct use. Cover relevant constraints such as units, time zones, meaningful
+absence, ordering, failure outcomes, mutation, resource ownership, or cancellation
+and retry effects. These are examples to select for the changed boundary, not
+mandatory fields for every declaration. Use the owner's existing API documentation,
+docstring or equivalent contract location, following project/language conventions.
+
+Keep one authoritative description and link to it from other views. Update affected
+documentation with behavior changes. Preserve language-specific declaration and
+type-documentation requirements; do not repeat an obvious signature or add
+boilerplate to every private helper merely to satisfy this shared rule.
+
+Implementation comments explain a reason, constraint or invariant that the code
+does not make clear. Prefer clear names and control flow over narrating individual
+statements. Preserve necessary explanations during refactoring, and update or
+remove a comment when its assumption changes.
 
 ## Versions and documentation
 

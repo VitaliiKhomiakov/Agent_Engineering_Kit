@@ -22,6 +22,8 @@ plain `tsc` does not prove template compilation or lazy route/provider integrati
 | --- | --- |
 | Pure calculation or validation | Focused unit cases for meaningful inputs/errors |
 | OnPush/signal/Observable UI | Real component/template update after the actual trigger; empty/error/pending states |
+| Component query or projection | Optional absence, removal/recreation, intended view/content boundary and consumer-owned creation |
+| Composed directive | Intended input/output aliases, changed inputs, actual host events and owned resource cleanup after destruction |
 | DI/provider scope | Actual injector resolution, intended sharing/isolation and destruction |
 | Route-driven data | Parameter change on reused component, nested IDs, back/forward and stale response handling |
 | Form command | Invalid/disabled values, reset semantics, duplicate submit and preserved edits on failure |
@@ -34,6 +36,14 @@ manually calling `detectChanges` after every asynchronous update if production
 has no equivalent notification. Test under the configured scheduling mode and
 use the runner's supported async stabilization. Read NgRx's
 [verification section](../ngrx/verification.md) only when those packages are used.
+
+For conditional components, exercise actual opening/closing events and focus
+destinations, including a disappearing queried child. Test projection through a
+consumer template. For a manual listener, distinguish Angular's automatic output
+unsubscription from removal of the listener itself. The optional
+[component/directive fixture](examples/component-contracts.md) supplies one
+bounded example; its [dated record](../../docs/research/2026-11-06-angular-component-contracts.md)
+does not substitute DOM emulation for browser, visual or SSR evidence.
 
 For affected zoneless Reactive Forms, hydrate/reset programmatically and change a
 FormArray or complete async validation. After supported stabilization, assert the

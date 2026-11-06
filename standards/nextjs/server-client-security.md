@@ -36,6 +36,9 @@ where server dependencies must fail a client import; naming alone cannot enforce
 
 ## Authority at the operation
 
+For changes to server session or token verification, apply the shared
+[authentication contract](../security/authentication.md) at the existing auth owner.
+
 Obtain identity from the established server session/auth provider, then check role,
 tenant and resource ownership near the protected operation. Keep session verification
 and minimal DTO projection under a coherent server owner; an existing API may own

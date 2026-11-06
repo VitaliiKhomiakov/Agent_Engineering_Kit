@@ -81,8 +81,9 @@ It uses no Pydantic/FastAPI-specific behavior.
   Do not classify failures by parsing their human-readable message.
 - Subclass `Exception` for application errors. Broad catches belong at deliberate
   reporting/cleanup boundaries; do not catch `BaseException` to convert process
-  exits or cancellation into success. Log a failure with suitable context at its
-  owner, and map public errors without leaking payloads, credentials, or internals.
+  exits or cancellation into success. Use
+  [shared diagnostic ownership](../core.md#diagnostic-error-ownership) for reporting;
+  map public errors without leaking payloads, credentials, or internals.
 - If concurrency introduces `ExceptionGroup`, decide where grouped failures are
   part of the contract and where specific members are handled with `except*`.
   Do not select the first exception and silently discard the rest. Preserve

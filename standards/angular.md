@@ -41,6 +41,8 @@ an older application or authorize converting its NgModules or state model.
 | Pages, components, layouts or allowed imports | [Presentation roles](angular/architecture.md#pages-components-and-layouts) and [dependency direction](angular/architecture.md#dependency-direction) |
 | Services or provider scope | [Services, stores and DI](angular/architecture.md#services-stores-and-dependency-injection) |
 | Standalone or NgModule composition | [Standalone and NgModules](angular/architecture.md#standalone-and-ngmodules) |
+| Component inputs/outputs, child queries, projection, host semantics or focus | [Component contracts](angular/components.md) |
+| Behavioral directives, host composition, exposed aliases or owned DOM effects | [Directives](angular/directives.md) |
 | Local state, signals, Observable ownership, subscriptions or HTTP races | [Reactivity and state](angular/reactivity.md) |
 | OnPush, zoneless, rendering cost, tracking or lazy views | [Change detection and performance](angular/change-detection.md) |
 | Route state, forms, validation, HTTP contracts or security | [Routes, forms and boundaries](angular/boundaries.md) |
@@ -50,6 +52,9 @@ an older application or authorize converting its NgModules or state model.
 
 Optional example: [application structure and state placement](angular/examples/application-structure.md).
 Its NgRx sections apply only when that library is selected.
+For component/directive work, the optional
+[contract fixture](angular/examples/component-contracts.md) covers conditional
+queries, projection, focus and cleanup with an explicit tested toolchain.
 
 ## Basis
 

@@ -181,9 +181,9 @@ each operation or extracting functions solely to manufacture visual separation.
 
 ## Comments and errors
 
-- Document exported declarations and non-obvious contracts. Declaration comments
-  identify the declaration and read as sentences; implementation comments explain
-  reasons, constraints, or invariants. Avoid narrating the statement beneath them.
+- Document exported declarations using the
+  [shared contract and comment guidance](../core.md#public-contracts-and-explanatory-comments).
+  Go declaration comments identify the declaration and read as sentences.
 - Error strings normally begin lowercase and omit terminal punctuation; proper
   names and acronyms can require capitalization. Error wrapping, classification,
   and handling remain owned by [contracts](contracts.md#dependencies-and-errors); a formatter

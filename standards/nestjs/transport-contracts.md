@@ -61,6 +61,11 @@ Do not mix both pipelines blindly or migrate validation libraries during a local
 
 ## Request order, authorization and errors
 
+When connecting authentication guards or token providers, apply the shared
+[authentication contract](../security/authentication.md). Keep verification policy
+in that shared topic; configure the auth provider using it and follow the
+Nest-specific ordering/wiring rules below.
+
 Guards run before pipes in the normal Nest HTTP flow. A guard cannot assume that
 its raw body/params have already passed the controller's validation. Use trusted
 identity and independently validated lookup data for its boundary decision; retain

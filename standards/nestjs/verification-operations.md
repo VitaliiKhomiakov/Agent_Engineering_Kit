@@ -37,15 +37,19 @@ stands in for those boundaries.
 
 Keep secrets and request identity out of singleton mutable fields. Authenticate at
 the actual entry point; enforce resource authorization at the use-case boundary.
+For credential/session or token-verifier changes, use the shared
+[authentication contract and focused evidence](../security/authentication.md).
 Configure CORS, security headers, cookie/CSRF and rate limits for the chosen adapter
 and deployment where required; a guard annotation alone is not a full threat model.
 Trust proxy headers only according to known proxy topology. Limit body/upload/array
 sizes and external-call capacity before expensive validation or business work.
 
 Use the accepted configuration validator, secret source and logger; do not expose
-raw validation targets/values or exception causes in responses. Give tracing and
-metrics bounded buffers/cardinality, redact credentials and validate correlation
-context propagation. The availability of Nest 12 observability integrations does
+raw validation targets/values or exception causes in responses. Apply
+[shared diagnostic ownership](../core.md#diagnostic-error-ownership) when changing
+error reporting. Give tracing and metrics bounded buffers/cardinality, redact
+credentials and validate correlation context propagation. The availability of
+Nest 12 observability integrations does
 not require installing a new SDK or exporting telemetry to an external service.
 
 Measure actual latency, heap, validation cost and pool pressure before introducing

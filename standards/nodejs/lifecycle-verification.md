@@ -44,8 +44,10 @@ known rather than adding a global rejection listener that hides defects.
 
 ## Diagnostics and security
 
-Use existing structured logging and redact secrets/untrusted payloads. Carry a
-correlation context explicitly or use `AsyncLocalStorage.run()` where many async
+Use existing structured logging under the
+[shared diagnostic ownership policy](../core.md#diagnostic-error-ownership) and
+redact secrets/untrusted payloads. Carry correlation context explicitly or use
+`AsyncLocalStorage.run()` where many async
 boundaries warrant it. Prefer that API over hand-built async hooks; keep business
 dependencies explicit rather than turning request context into a hidden service
 locator. Verify context propagation across the actual callback/worker boundary.

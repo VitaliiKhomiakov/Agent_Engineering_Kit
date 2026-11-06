@@ -296,7 +296,7 @@ automated fixture tests and does not establish an executable update engine.
 
 The example Markdown owns its source, manifests and configuration. Select just
 the affected fixture; do not install these stacks in the library. Run this from
-the source root, with `nest`, `react` or `fastapi` as the selector:
+the source root, with `nest`, `react`, `fastapi` or `angular` as the selector:
 
 ```sh
 aek_example_dir=$(mktemp -d /tmp/aek-example-XXXXXX)
@@ -310,6 +310,7 @@ documents = {
     "react": ["standards/react/examples/reservation-form.md",
               "standards/react/examples/latest-result.md"],
     "fastapi": ["standards/fastapi/examples/lifetime.md"],
+    "angular": ["standards/angular/examples/component-contracts.md"],
 }
 destination = Path(sys.argv[1]).resolve()
 pattern = re.compile(
@@ -337,6 +338,7 @@ PY
 | Nest (10 files) | [Pinned manifest, TypeScript/lint configuration and commands](../../standards/nestjs/examples/validated-command.md#setup-and-checks); install and run in the extracted directory | Emitted JavaScript and in-process Fastify request injection; no real backend |
 | React (9 files) | [Shared setup](../../standards/react/examples/reservation-form.md#reproduce-in-a-temporary-directory), then [latest-result commands](../../standards/react/examples/latest-result.md#reproduce) | Type/lint checks and DOM tests under jsdom; no browser or remote service |
 | FastAPI (2 files) | [Lifetime fixture](../../standards/fastapi/examples/lifetime.md) plus the temporary environment below | Strict types and in-memory HTTP transport tests; no real network/backpressure |
+| Angular (8 files) | [Component/directive setup and checks](../../standards/angular/examples/component-contracts.md#setup-and-checks); install and run in the extracted directory | Strict Angular template compilation, bundled emitted code and zoneless TestBed/DOM checks; no application CLI build, real browser or SSR |
 
 For FastAPI, run inside the extracted directory. These pins reproduce the recorded
 fixture scope, not a recommendation to upgrade a consuming project:

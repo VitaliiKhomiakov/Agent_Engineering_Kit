@@ -33,6 +33,7 @@ Read only the task's sections; examples and research are optional.
 | Rich entities, constructors, intent methods, mapping or model placement | [Models and mapping](typeorm/models-mapping.md) |
 | Save, transaction ownership, rollback, locks, retries or external effects | [Transactions and lifetime](typeorm/transactions-lifetime.md) |
 | Queries, null filters, relations, cascades, pagination or projections | [Queries and relations](typeorm/queries-relations.md) |
+| DataSource connection options, remote authentication or TLS | [Connection settings](typeorm/schema-verification.md#connection-settings) |
 | Migrations, schema checks, compatibility or test selection | [Schema and verification](typeorm/schema-verification.md) |
 | Actual NestJS TypeORM registration, injection or CLI data source | [NestJS integration](typeorm/nestjs-integration.md) |
 

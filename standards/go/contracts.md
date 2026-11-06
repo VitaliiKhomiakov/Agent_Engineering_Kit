@@ -42,9 +42,10 @@ permitted transition, and rejection without state mutation.
 
 Expected operational failures use errors. Choose sentinel or typed errors when
 callers need that stable distinction; use `errors.Is`/`errors.As` with wrapped
-errors. Do not parse error strings. Add useful operation context without logging
-the same failure at every layer. Treat wrapping with `%w` as a decision to expose
-the cause; map infrastructure errors where the package promises another contract.
+errors. Do not parse error strings. Use
+[shared diagnostic ownership](../core.md#diagnostic-error-ownership) for reporting.
+Treat wrapping with `%w` as a decision to expose the cause; map infrastructure
+errors where the package promises another contract.
 Use panic only for cases where the package contract justifies it, not ordinary
 invalid input or a failed external request.
 

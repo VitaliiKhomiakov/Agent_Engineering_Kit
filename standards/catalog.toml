@@ -7,6 +7,7 @@ templates = {entry = "templates/policy-entry.md", claude-bridge = "templates/cla
 [[profiles]]
 id = "core"
 source = "standards/core.md"
+resources = ["standards/security/authentication.md"]
 required = true
 activities = ["design", "implementation", "test", "review"]
 when = "Changing behavior, architecture, or code structure; read the relevant sections only."
@@ -449,12 +450,15 @@ id = "angular"
 source = "standards/angular.md"
 resources = [
   "standards/angular/architecture.md",
+  "standards/angular/components.md",
+  "standards/angular/directives.md",
   "standards/angular/reactivity.md",
   "standards/angular/change-detection.md",
   "standards/angular/boundaries.md",
   "standards/angular/styles.md",
   "standards/angular/verification.md",
   "standards/angular/examples/application-structure.md",
+  "standards/angular/examples/component-contracts.md",
 ]
 technologies = ["angular"]
 activities = ["design", "implementation", "test", "review"]

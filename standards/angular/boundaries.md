@@ -43,10 +43,9 @@ subscription calling `markForCheck`. Include status changes for async validation
 `emitEvent: false` needs a separate notification path. Bind subscription lifetime
 to the component as in [reactivity](reactivity.md); keep the existing forms API.
 
-Inputs are data contracts; outputs express user intent. Use typed `input`/`output`
-APIs where supported, while preserving decorator-based components in older code.
-Use `model` only for an intentional two-way control contract, not to expose store
-mutation to children. Required inputs still need meaningful valid runtime values.
+For component inputs, outputs and intentional two-way control APIs, use the
+[component contract owner](components.md#inputs-and-outputs). Query/projection and
+host behavior belong there; the form model and command boundary remain here.
 
 Connect labels, validation messages, pending state and focus management. Suppress
 duplicate submit according to the command's concurrency rule, display server
